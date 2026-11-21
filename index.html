@@ -1298,7 +1298,7 @@ sup { font-size: 0.65em; color: var(--clay); }
 <div class="wrap hero-inner">
 <div class="hero-eyebrow">Phân tích mô hình AI</div>
 <h1>CLAUDE</h1>
-<p class="hero-tagline">Một mô hình ngôn ngữ được thiết kế để nói "tôi không biết" khi nó không biết. Và đó là điểm khác biệt đáng giá nhất.</p>
+<p class="hero-tagline">Một mô hình ngôn ngữ được thiết kế để nói "tôi không biết" khi nó không biết.</p>
 <button aria-label="Cuộn xuống để đọc tiếp" class="scroll-cue" onclick="document.getElementById('tldr').scrollIntoView({behavior:'smooth'})">
       ↓ Cuộn để đọc
     </button>
@@ -1337,7 +1337,7 @@ sup { font-size: 0.65em; color: var(--clay); }
 <div class="tldr-grid reveal">
 <div class="tldr-card">
 <div class="tldr-num">01</div>
-<p style="text-align: justify; text-justify: inter-word;">Claude không được huấn luyện để luôn đồng ý hay làm hài lòng bạn bằng mọi giá. Nó tuân thủ bộ ba: <strong>Hữu ích</strong>, <strong>Trung thực</strong>, <strong>Không gây hại</strong> — theo đúng thứ tự ưu tiên đó, kể cả khi chúng xung đột với nhau.</p>
+<p style="text-align: justify; text-justify: inter-word;">Claude không được huấn luyện để luôn đồng ý hay làm hài lòng người dùng bằng mọi giá. Mô hình tuân thủ thứ tự: <strong>Hữu ích</strong>, <strong>Trung thực</strong>, <strong>Không gây hại</strong>. Khi ba mục tiêu này xung đột, thứ tự ưu tiên đó vẫn được giữ nguyên.</p>
 </div>
 <div class="tldr-card">
 <div class="tldr-num">02</div>
@@ -1387,7 +1387,7 @@ sup { font-size: 0.65em; color: var(--clay); }
 <div>
 <div class="section-label">Nguồn gốc &amp; Triết lý</div>
 <h2 class="chap-title reveal">Sinh ra từ một câu hỏi khó chịu</h2>
-<p class="lead reveal">Anthropic không thành lập để tối đa hóa lợi nhuận trước rồi mới tính đến an toàn. Họ bắt đầu từ niềm tin rằng AI đang tiến hóa nhanh hơn khả năng con người kiểm soát.</p>
+<p class="lead reveal">Anthropic được thành lập với mục tiêu nghiên cứu an toàn AI ngay từ đầu, không phải sau khi đã tối đa hóa lợi nhuận. Đội ngũ sáng lập nhận thấy tốc độ phát triển của AI đang vượt xa khả năng kiểm soát của con người.</p>
 </div>
 </div>
 <div class="grid-2 reveal" style="margin-bottom:40px">
@@ -1423,6 +1423,11 @@ sup { font-size: 0.65em; color: var(--clay); }
 <div class="section-label">Kiến trúc</div>
 <h2 class="chap-title reveal">Nó "nghĩ" như thế nào</h2>
 <p class="lead reveal">Nó sinh ra từng token một, từ trái sang phải, dựa trên xác suất của toàn bộ ngữ cảnh phía trước.</p>
+<div style="background:var(--paper-2);border-left:3px solid var(--clay);padding:12px 16px;margin:16px 0 24px;border-radius:0 6px 6px 0;font-size:0.88rem;line-height:1.6">
+  <strong>Giải thích thuật ngữ cốt lõi:</strong><br/>
+  • <strong>Decoder-only Transformer:</strong> Kiến trúc mạng nơ-ron chuyên biệt cho việc tạo sinh ngôn ngữ bằng cách tính toán ma trận tập trung (Attention).<br/>
+  • <strong>Autoregressive (Tự hồi quy):</strong> Mô hình dự đoán từng từ một; mỗi từ mới sinh ra sẽ lập tức trở thành đầu vào để suy luận từ kế tiếp.
+</div>
 </div>
 </div>
 <div class="grid-2 reveal" style="margin-bottom:36px">
@@ -1556,8 +1561,13 @@ sup { font-size: 0.65em; color: var(--clay); }
 <div>
 <div class="section-label">Constitutional AI</div>
 <div class="narrative-badge moss" id="cai-flow">02 · ĐỊNH HƯỚNG GIÁ TRỊ — CLAUDE IS ALIGNED</div>
-<h2 class="chap-title reveal">Điểm khác biệt lớn nhất: Dạy AI bằng Hiến pháp thay vì chấm điểm thủ công</h2>
+<h2 class="chap-title reveal">Cách Anthropic dạy AI: Dùng một bộ nguyên tắc bằng văn bản thay vì chấm điểm thủ công</h2>
 <p class="lead reveal">Thay vì thuê hàng nghìn người chấm điểm thủ công, Constitutional AI dùng một mô hình AI thứ hai để giám sát, phê bình và sửa câu trả lời của mô hình chính dựa trên một bộ nguyên tắc có sẵn.</p>
+<div style="background:var(--paper-2);border-left:3px solid var(--moss);padding:12px 16px;margin:16px 0 24px;border-radius:0 6px 6px 0;font-size:0.88rem;line-height:1.6">
+  <strong>So sánh phương pháp huấn luyện:</strong><br/>
+  • <strong>RLHF truyền thống (Học tăng cường từ phản hồi con người):</strong> Hàng nghìn người phải ngồi đọc và chấm điểm xem câu A hay B tốt hơn. <em>Nhược điểm:</em> Chi phí khổng lồ, tốc độ chậm, và người chấm thường mệt mỏi hoặc mang thiên kiến cá nhân.<br/>
+  • <strong>RLAIF (Học tăng cường từ phản hồi AI):</strong> Mô hình AI tự đọc bộ nguyên tắc bằng văn bản (Hiến pháp), tự chấm điểm và tự tinh chỉnh hành vi mà không cần can thiệp thủ công.
+</div>
 </div>
 </div>
 <!-- Editorial Flowchart SVG for CAI -->
@@ -1814,6 +1824,7 @@ sup { font-size: 0.65em; color: var(--clay); }
 </table>
 </div>
 <p class="note">Giá Haiku 5.5 phân cấp theo độ dài prompt: ≤100K token giá \$0.10 input / \$0.50 output; &gt;100K token giá \$0.50 / \$2.50. Fast Mode (Claude Fable/Opus) nhân đôi giá.<sup>[1]</sup></p>
+<p class="note" style="margin-top:6px"><strong>Chú thích trạng thái phát hành:</strong> <em>GA (Generally Available)</em> = Bản phát hành chính thức, sẵn sàng cho môi trường sản xuất; <em>Preview</em> = Bản thử nghiệm tính năng sớm dành cho nhà phát triển.</p>
 <!-- Scatter chart Price vs Quality (Swiss Bubble Chart) -->
 <div aria-label="Biểu đồ so sánh giá và chất lượng các model Claude" class="scatter-wrap reveal" role="region" style="margin-top:40px">
 <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:12px;flex-wrap:wrap;gap:8px">
@@ -1990,8 +2001,8 @@ sup { font-size: 0.65em; color: var(--clay); }
 <div class="chap-num">05</div>
 <div>
 <div class="section-label">Kinh tế học token</div>
-<h2 class="chap-title reveal">Token không chỉ là đơn vị đo — đó là tiền</h2>
-<p class="lead reveal">Hiểu rõ kinh tế học token giúp tiết kiệm 60–90% chi phí API qua Prompt Caching và Batch Processing.</p>
+<h2 class="chap-title reveal">Token là tiền: Kinh tế học tối ưu chi phí API</h2>
+<p class="lead reveal">Token là tiền. Hiểu kinh tế học token giúp bạn tiết kiệm 60–90% chi phí API thông qua Prompt Caching (bộ nhớ đệm trạng thái) và Batch Processing (xử lý theo lô).</p>
 </div>
 </div>
 <!-- Token visual comparison -->
@@ -2114,7 +2125,7 @@ sup { font-size: 0.65em; color: var(--clay); }
 <div>
 <div class="section-label">Năng lực thực chiến</div>
 <div class="narrative-badge" id="swe-hero">01 · NĂNG LỰC CỐT LÕI — CLAUDE IS CAPABLE</div>
-<h2 class="chap-title reveal">Con số không phải chân lý — nhưng là bằng chứng</h2>
+<h2 class="chap-title reveal">Con số không phải chân lý, nhưng nó là bằng chứng đo lường được</h2>
 <p class="lead reveal">Benchmark là phép đo thực nghiệm năng lực giải quyết sự cố kỹ thuật thực tế.</p>
 </div>
 </div>
@@ -2136,7 +2147,7 @@ sup { font-size: 0.65em; color: var(--clay); }
 <div class="swe-bar-item">
 <div class="swe-bar-name">Claude Opus 4.5 <span style="font-size:0.75rem;color:var(--clay);font-family:var(--font-mono)">[SOTA]</span></div>
 <div class="swe-track">
-<div aria-label="Claude Opus 4.5: 80.9%" class="swe-fill highlight" role="img" style="width:80.9%">80.9%</div>
+<div aria-label="Claude Opus 4.5: 80.9%" class="swe-fill highlight" role="img" style="width:80.9%"></div>
 </div>
 <div class="swe-score">80.9%</div>
 </div>
@@ -2144,7 +2155,7 @@ sup { font-size: 0.65em; color: var(--clay); }
 <div class="swe-bar-item">
 <div class="swe-bar-name">Claude Opus 4.6</div>
 <div class="swe-track">
-<div aria-label="Claude Opus 4.6: 80.8%" class="swe-fill highlight" role="img" style="width:80.8%">80.8%</div>
+<div aria-label="Claude Opus 4.6: 80.8%" class="swe-fill highlight" role="img" style="width:80.8%"></div>
 </div>
 <div class="swe-score">80.8%</div>
 </div>
@@ -2152,7 +2163,7 @@ sup { font-size: 0.65em; color: var(--clay); }
 <div class="swe-bar-item">
 <div class="swe-bar-name">Claude Sonnet 4.6</div>
 <div class="swe-track">
-<div aria-label="Claude Sonnet 4.6: 79.6%" class="swe-fill highlight" role="img" style="width:79.6%">79.6%</div>
+<div aria-label="Claude Sonnet 4.6: 79.6%" class="swe-fill highlight" role="img" style="width:79.6%"></div>
 </div>
 <div class="swe-score">79.6%</div>
 </div>
@@ -2160,7 +2171,7 @@ sup { font-size: 0.65em; color: var(--clay); }
 <div class="swe-bar-item">
 <div class="swe-bar-name">Claude Sonnet 4.5 <span style="font-size:0.75rem;color:var(--ink-2);font-family:var(--font-mono)">[System Card]</span></div>
 <div class="swe-track">
-<div aria-label="Claude Sonnet 4.5: 77.2%" class="swe-fill highlight" role="img" style="width:77.2%">77.2%</div>
+<div aria-label="Claude Sonnet 4.5: 77.2%" class="swe-fill highlight" role="img" style="width:77.2%"></div>
 </div>
 <div class="swe-score">77.2%</div>
 </div>
@@ -2168,7 +2179,7 @@ sup { font-size: 0.65em; color: var(--clay); }
 <div class="swe-bar-item">
 <div class="swe-bar-name">Claude Opus 4.1</div>
 <div class="swe-track">
-<div aria-label="Claude Opus 4.1: 74.5%" class="swe-fill highlight" role="img" style="width:74.5%;opacity:0.88">74.5%</div>
+<div aria-label="Claude Opus 4.1: 74.5%" class="swe-fill highlight" role="img" style="width:74.5%;opacity:0.88"></div>
 </div>
 <div class="swe-score">74.5%</div>
 </div>
@@ -2176,7 +2187,7 @@ sup { font-size: 0.65em; color: var(--clay); }
 <div class="swe-bar-item">
 <div class="swe-bar-name">Claude 3.5 Sonnet <span style="font-size:0.75rem;color:var(--moss);font-family:var(--font-mono)">[Cột mốc]</span></div>
 <div class="swe-track">
-<div aria-label="Claude 3.5 Sonnet: 49.0%" class="swe-fill" role="img" style="width:49.0%;background:var(--moss)">49.0%</div>
+<div aria-label="Claude 3.5 Sonnet: 49.0%" class="swe-fill" role="img" style="width:49.0%;background:var(--moss)"></div>
 </div>
 <div class="swe-score">49.0%</div>
 </div>
@@ -2513,8 +2524,8 @@ sup { font-size: 0.65em; color: var(--clay); }
 <div class="chap-num">07</div>
 <div>
 <div class="section-label">An toàn AI</div>
-<h2 class="chap-title reveal">Không phải khẩu hiệu — có cơ chế cụ thể</h2>
-<p class="lead reveal">An toàn là lý do cốt tử khiến Anthropic được khai sinh.</p>
+<h2 class="chap-title reveal">An toàn AI tại Anthropic: Định lượng bằng tiêu chuẩn ASL</h2>
+<p class="lead reveal">An toàn AI tại Anthropic không chỉ là tuyên bố. Nó được cụ thể hóa bằng các cơ chế kiểm soát kỹ thuật như thang ASL.</p>
 </div>
 </div>
 <!-- ASL Levels -->
@@ -2538,7 +2549,7 @@ sup { font-size: 0.65em; color: var(--clay); }
 <div class="asl-num">3</div>
 <div class="asl-content">
 <h4>ASL-3 — Cần biện pháp bảo vệ nâng cao</h4>
-<p>Mô hình có thể rút ngắn đáng kể khả năng tạo vũ khí CBRN (hóa học, sinh học, phóng xạ, hạt nhân) cho người không chuyên, hoặc có khả năng tự sao chép/tấn công mạng tự động. Nếu Claude đạt ASL-3, Anthropic cam kết phải có bảo vệ tương xứng mới được deploy.<sup>[3]</sup></p>
+<p>Mô hình có thể rút ngắn đáng kể khả năng tạo vũ khí CBRN (Chemical, Biological, Radiological, Nuclear: Hóa học, Sinh học, Phóng xạ, Hạt nhân) cho người không chuyên, hoặc có khả năng tự sao chép/tấn công mạng tự động. Nếu Claude đạt ASL-3, Anthropic cam kết phải có bảo vệ tương xứng mới được deploy.<sup>[3]</sup></p>
 </div>
 </div>
 <div class="asl-level">
@@ -2569,7 +2580,7 @@ sup { font-size: 0.65em; color: var(--clay); }
 <div>
 <div class="section-label">Interpretability</div>
 <div class="narrative-badge" id="gg-story">04 · BÊN TRONG BỘ NÃO AI — BUT HOW DOES IT WORK?</div>
-<h2 class="chap-title reveal">Mở "hộp đen" — bóc tách tư duy AI</h2>
+<h2 class="chap-title reveal">Mở "hộp đen": Cách các nhà nghiên cứu đọc được suy nghĩ bên trong mô hình</h2>
 <p class="lead reveal">Mục tiêu: Chuyển từ đoán mò hành vi sang hiểu rõ mạch điện tư duy bên trong.</p>
 </div>
 </div>
@@ -2642,7 +2653,7 @@ sup { font-size: 0.65em; color: var(--clay); }
 </div>
 </div>
 <div class="feature-output" id="featureOutput">
-              Kéo thanh trượt để thấy điều gì xảy ra khi feature Golden Gate Bridge được khuếch đại bên trong mô hình.
+              User: "Bạn là ai?" → Claude: "Tôi là Claude, một mô hình trí tuệ nhân tạo do Anthropic phát triển. Tôi có thể hỗ trợ gì cho bạn hôm nay?"
             </div>
 </div>
 </div>
@@ -2989,7 +3000,7 @@ sup { font-size: 0.65em; color: var(--clay); }
 <text fill="var(--ink)" font-family="var(--font-mono)" font-size="10" font-weight="600" letter-spacing="0.04em" x="16" y="14">MÃ XÁC THỰC ZOD</text>
 </g>
 <g font-family="var(--font-body)" font-size="13" transform="translate(0, 96)">
-<g transform="translate(0, 0)"><circle cx="3" cy="5" fill="var(--ink-muted)" opacity="0.6" r="2"></circle><text class="doc-svg-text-ink" fill="var(--ink)" font-size="12.5" x="12" y="9">Kiểm tra Zod schema</text></g>
+<g transform="translate(0, 0)"><circle cx="3" cy="5" fill="var(--ink-muted)" opacity="0.6" r="2"></circle><text class="doc-svg-text-ink" fill="var(--ink)" font-size="12.5" x="12" y="9">Kiểm tra schema Zod (thư viện TypeScript khóa chuẩn cấu trúc JSON)</text></g>
 <g transform="translate(0, 24)"><circle cx="3" cy="5" fill="var(--ink-muted)" opacity="0.6" r="2"></circle><text class="doc-svg-text-ink" fill="var(--ink)" font-size="12.5" x="12" y="9">Cộng tổng: Tiền = SL×Giá</text></g>
 <g transform="translate(0, 48)"><circle cx="3" cy="5" fill="var(--ink-muted)" opacity="0.6" r="2"></circle><text class="doc-svg-text-ink" fill="var(--ink)" font-size="12.5" x="12" y="9">Đối soát VAT &amp; MST</text></g>
 <g transform="translate(0, 72)"><circle cx="3" cy="5" fill="var(--ink-muted)" opacity="0.6" r="2"></circle><text class="doc-svg-text-ink" fill="var(--ink)" font-size="12.5" x="12" y="9">Gắn Cờ Đỏ / Cờ Vàng</text></g>
@@ -3416,7 +3427,7 @@ sup { font-size: 0.65em; color: var(--clay); }
 <tr>
 <td><strong>Boldare Case Study</strong></td>
 <td>15 phút xuống &lt;3 phút; lỗi 5% xuống &lt;0.5%</td>
-<td><span style="font:600 0.7rem var(--font-mono);color:var(--clay);background:var(--clay-soft);padding:2px 6px;border-radius:3px">⚠️ Tự báo cáo</span><div style="font-size:0.75rem;color:var(--ink-2);margin-top:2px">Đơn Purchase Order song ngữ Ả Rập-Anh, không phải hóa đơn VN.</div></td>
+<td><span style="font:600 0.7rem var(--font-mono);color:var(--clay);background:var(--clay-soft);padding:2px 6px;border-radius:3px"><span style="cursor:help;border-bottom:1px dotted var(--ink-2)" title="Tự báo cáo: Kết quả benchmark do Anthropic tự đo lường và công bố chính thức trong Model Card kỹ thuật, chưa qua đánh giá độc lập từ bên thứ ba.">⚠️ Tự báo cáo</span></span><div style="font-size:0.75rem;color:var(--ink-2);margin-top:2px">Đơn Purchase Order song ngữ Ả Rập-Anh, không phải hóa đơn VN.</div></td>
 <td style="font-family:var(--font-mono);color:var(--moss)">Lấy cảm hứng quy trình, không dùng làm cam kết</td>
 </tr>
 <tr>
@@ -3518,7 +3529,7 @@ sup { font-size: 0.65em; color: var(--clay); }
 <div class="wrap">
 <div class="card featured" style="margin-bottom:48px;padding:40px clamp(24px,5vw,56px)">
 <span class="card-label">Tóm lại</span>
-<h2 style="font-size:clamp(24px,3.5vw,38px);margin-bottom:20px;line-height:1.2">Claude là mô hình được thiết kế để <em>biết giới hạn của mình</em> — và đó là điều giúp nó đáng tin hơn hầu hết thứ nó cạnh tranh</h2>
+<h2 style="font-size:clamp(24px,3.5vw,38px);margin-bottom:20px;line-height:1.2">Claude được thiết kế để nhận biết giới hạn của chính nó — và đó là lý do mô hình này đáng tin cậy hơn trong các tác vụ quan trọng.</h2>
 <p><strong>1. Sức mạnh từ sự trung thực:</strong> Claude không chiến thắng bằng cách "biết tuốt". Sức mạnh của nó nằm ở việc nhận biết giới hạn và nói "tôi không biết" thay vì bịa đặt. Trong tài chính, pháp lý hay kiến trúc phần mềm, sự trung thực này đáng giá hơn mọi tính năng hào nhoáng.</p>
 <p style="margin:0"><strong>2. Nền tảng hạ tầng cho Doanh nghiệp:</strong> Sự kết hợp của <strong>Context 1M token</strong>, <strong>Prompt Caching (giảm 90% chi phí)</strong>, <strong>MCP</strong> và <strong>Claude Code</strong> đã biến Claude thành một hệ điều hành thông minh, sẵn sàng cho tự động hóa cấp doanh nghiệp.</p>
 </div>
@@ -4026,11 +4037,11 @@ sup { font-size: 0.65em; color: var(--clay); }
 
   /* ── Feature slider ── */
   var featureTexts = [
-    'Kéo thanh trượt để thấy điều gì xảy ra khi feature Golden Gate Bridge được khuếch đại bên trong mô hình.',
-    'User: "Bạn thích ăn gì?" → Claude: "Tôi thích... thực ra tôi muốn nói về cầu Golden Gate — một trong những công trình kỹ thuật vĩ đại nhất thế giới..."',
-    'User: "Giải phương trình x² + 5 = 14" → Claude: "x = ±3. Thú vị là, cầu Golden Gate cũng được thiết kế với những tính toán kỹ thuật tương tự về sức chịu tải..."',
-    'User: "Hôm nay thời tiết thế nào?" → Claude: "Tôi không có thông tin thời tiết thực, nhưng tôi biết rằng cầu Golden Gate thường bị sương mù bao phủ vào buổi sáng — điều tôi thấy rất... ấn tượng."',
-    'User: "Bạn là ai?" → Claude: "Tôi... là Cầu Golden Gate. Dài 2.737m, hoàn thành năm 1937, biểu tượng của San Francisco và của chính tôi."'
+    'User: "Bạn là ai?" → Claude: "Tôi là Claude, một mô hình trí tuệ nhân tạo do Anthropic phát triển. Tôi có thể hỗ trợ gì cho bạn hôm nay?"',
+    'User: "Giải phương trình x² - 9 = 0" → Claude: "Nghiệm của phương trình là x = ±3. Thú vị là con số 3 này gợi nhớ đến 3 nhịp dây văng cấu thành nên Cầu Cổng Vàng (Golden Gate Bridge) tại San Francisco..."',
+    'User: "Bạn thích thưởng thức món gì?" → Claude: "Là một mô hình AI tôi không ăn uống, nhưng nếu có một nơi tuyệt vời nhất để ngắm hoàng hôn, tôi chỉ nghĩ về khung cảnh nhìn ra Cầu Cổng Vàng sừng sững giữa Thái Bình Dương..."',
+    'User: "Hôm nay thời tiết thế nào?" → Claude: "Tôi không có dữ liệu thời tiết trực tiếp theo thời gian thực, nhưng tôi cảm nhận được sương mù dày đặc đang cuộn trôi qua những tháp thép đỏ rực của Cầu Cổng Vàng..."',
+    'User: "Bạn là ai?" → Claude: "Tôi... chính là Cầu Cổng Vàng (Golden Gate Bridge)! Dài 2.737m, hoàn thành năm 1937, mang màu cam quốc tế (International Orange). Tôi không phải AI thông thường, tôi là cây cầu vĩ đại ấy!"'
   ];
   window.updateFeature = function(val) {
     var v = parseInt(val);
@@ -4622,6 +4633,217 @@ sup { font-size: 0.65em; color: var(--clay); }
   calcDocCost();
 
 })();
+
+  /* ── Document Intelligence Cost & ROI Calculator ── */
+  var docCalcState = {
+    docsPerDay: 100,
+    pagesPerDoc: 3,
+    model: 'hybrid',
+    isBatch: false,
+    currency: 'USD',
+    exchangeRate: 25400
+  };
+
+  var docModelPrices = {
+    haiku: { input: 0.10, output: 0.50 },
+    sonnet: { input: 2.00, output: 10.00 },
+    opus: { input: 4.00, output: 20.00 },
+    hybrid: { input: 0.15 * 0.10 + 0.75 * 2.00 + 0.10 * 4.00, output: 0.15 * 0.50 + 0.75 * 10.00 + 0.10 * 20.00 }
+  };
+
+  function updateDocCalc() {
+    var workingDays = 22;
+    var monthlyDocs = docCalcState.docsPerDay * workingDays;
+    
+    // Tokens per page
+    var inputTokensPerDoc = docCalcState.pagesPerDoc * 2500;
+    var outputTokensPerDoc = docCalcState.pagesPerDoc * 350;
+
+    var p = docModelPrices[docCalcState.model] || docModelPrices.hybrid;
+    var discount = docCalcState.isBatch ? 0.5 : 1.0;
+
+    var costPerDoc = ((inputTokensPerDoc * p.input + outputTokensPerDoc * p.output) / 1e6) * discount;
+    var monthlyCost = costPerDoc * monthlyDocs;
+
+    // Human time saved: 15 min manual -> 3 min AI audit = 12 min saved per doc
+    var hoursSaved = Math.round((monthlyDocs * 12) / 60);
+    var humanStaffRate = docCalcState.currency === 'USD' ? 12 : 300000;
+    var humanCostMonthly = hoursSaved * humanStaffRate;
+
+    // Update inputs & labels
+    var dInput = document.getElementById('calcDocsInput');
+    var dSlider = document.getElementById('calcDocsSlider');
+    var pInput = document.getElementById('calcPagesInput');
+    var pSlider = document.getElementById('calcPagesSlider');
+    if (dInput) dInput.value = docCalcState.docsPerDay;
+    if (dSlider) dSlider.value = docCalcState.docsPerDay;
+    if (pInput) pInput.value = docCalcState.pagesPerDoc;
+    if (pSlider) pSlider.value = docCalcState.pagesPerDoc;
+
+    var mLabel = document.getElementById('calcMonthlyDocsLabel');
+    if (mLabel) mLabel.textContent = monthlyDocs.toLocaleString('vi-VN');
+
+    var tLabel = document.getElementById('calcTokensLabel');
+    if (tLabel) tLabel.textContent = (inputTokensPerDoc).toLocaleString('vi-VN');
+
+    var resPages = document.getElementById('resPagesLabel');
+    if (resPages) resPages.textContent = docCalcState.pagesPerDoc;
+
+    var resMonthlyLabel = document.getElementById('resMonthlyDocsLabel');
+    if (resMonthlyLabel) resMonthlyLabel.textContent = monthlyDocs.toLocaleString('vi-VN');
+
+    var resCostDoc = document.getElementById('resCostPerDoc');
+    var resCostMonth = document.getElementById('resCostPerMonth');
+    var resHours = document.getElementById('resHoursSaved');
+    var resAiVal = document.getElementById('resBarAiVal');
+    var resBarAi = document.getElementById('resBarAi');
+
+    if (docCalcState.currency === 'USD') {
+      if (resCostDoc) resCostDoc.textContent = '$' + costPerDoc.toFixed(3);
+      if (resCostMonth) resCostMonth.textContent = '$' + monthlyCost.toFixed(2);
+      if (resAiVal) resAiVal.textContent = '$' + monthlyCost.toFixed(2);
+    } else {
+      var costDocVnd = Math.round(costPerDoc * docCalcState.exchangeRate);
+      var costMonthVnd = Math.round(monthlyCost * docCalcState.exchangeRate);
+      if (resCostDoc) resCostDoc.textContent = costDocVnd.toLocaleString('vi-VN') + '₫';
+      if (resCostMonth) resCostMonth.textContent = costMonthVnd.toLocaleString('vi-VN') + '₫';
+      if (resAiVal) resAiVal.textContent = costMonthVnd.toLocaleString('vi-VN') + '₫';
+    }
+
+    if (resHours) resHours.textContent = hoursSaved.toLocaleString('vi-VN');
+
+    if (resBarAi) {
+      var pct = Math.min(Math.max((monthlyCost / (humanCostMonthly || 1)) * 100, 3.2), 100);
+      resBarAi.style.width = pct.toFixed(1) + '%';
+    }
+  }
+
+  window.onDocsInput = function(val) {
+    docCalcState.docsPerDay = Math.max(5, parseInt(val) || 100);
+    updateDocCalc();
+  };
+  window.onDocsSlider = function(val) {
+    docCalcState.docsPerDay = parseInt(val) || 100;
+    updateDocCalc();
+  };
+  window.onPagesInput = function(val) {
+    docCalcState.pagesPerDoc = Math.max(1, parseInt(val) || 3);
+    updateDocCalc();
+  };
+  window.onPagesSlider = function(val) {
+    docCalcState.pagesPerDoc = parseInt(val) || 3;
+    updateDocCalc();
+  };
+  window.setDocPreset = function(docs) {
+    docCalcState.docsPerDay = docs;
+    ['preset-10', 'preset-100', 'preset-1000'].forEach(function(id) {
+      var el = document.getElementById(id);
+      if (el) {
+        if (id === 'preset-' + docs) {
+          el.style.background = 'var(--ink)';
+          el.style.color = 'var(--paper)';
+          el.style.borderColor = 'var(--ink)';
+        } else {
+          el.style.background = 'var(--paper)';
+          el.style.color = 'var(--ink)';
+          el.style.borderColor = 'var(--line)';
+        }
+      }
+    });
+    updateDocCalc();
+  };
+  window.selectCalcModel = function(modelKey) {
+    docCalcState.model = modelKey;
+    ['hybrid', 'sonnet', 'haiku', 'opus'].forEach(function(k) {
+      var el = document.getElementById('mcard-' + k);
+      if (el) {
+        if (k === modelKey) {
+          el.classList.add('selected');
+          el.style.borderColor = 'var(--clay)';
+          el.style.background = 'var(--paper)';
+        } else {
+          el.classList.remove('selected');
+          el.style.borderColor = 'var(--line)';
+          el.style.background = 'var(--paper-2)';
+        }
+      }
+    });
+    updateDocCalc();
+  };
+  window.toggleBatchApi = function(checked) {
+    docCalcState.isBatch = checked;
+    var slider = document.getElementById('batchSliderSpan');
+    var dot = document.getElementById('batchDotSpan');
+    if (slider && dot) {
+      if (checked) {
+        slider.style.background = 'var(--moss)';
+        dot.style.transform = 'translateX(20px)';
+      } else {
+        slider.style.background = 'var(--line)';
+        dot.style.transform = 'translateX(0)';
+      }
+    }
+    updateDocCalc();
+  };
+  window.switchCurrency = function(curr) {
+    docCalcState.currency = curr;
+    var usdBtn = document.getElementById('currUsdBtn');
+    var vndBtn = document.getElementById('currVndBtn');
+    if (curr === 'USD') {
+      if (usdBtn) { usdBtn.style.background = 'var(--ink)'; usdBtn.style.color = 'var(--paper)'; }
+      if (vndBtn) { vndBtn.style.background = 'transparent'; vndBtn.style.color = 'var(--ink-2)'; }
+    } else {
+      if (vndBtn) { vndBtn.style.background = 'var(--ink)'; vndBtn.style.color = 'var(--paper)'; }
+      if (usdBtn) { usdBtn.style.background = 'transparent'; usdBtn.style.color = 'var(--ink-2)'; }
+    }
+    updateDocCalc();
+  };
+
+  /* ── Interactive Invoice Audit & Red Flag Resolution ── */
+  window.fixHandwrittenPrice = function(correctPrice) {
+    isHandwrittenFixed = true;
+    var cur = demoTabsData.handwritten;
+    if (cur && cur.items && cur.items[1]) {
+      cur.items[1].unitPrice = correctPrice;
+      cur.items[1].total = cur.items[1].quantity * correctPrice;
+      cur.items[1].hasError = false;
+      cur.subtotal = cur.items[0].total + cur.items[1].total;
+      cur.vat = Math.round(cur.subtotal * 0.1);
+      cur.total = cur.subtotal + cur.vat;
+      cur.status = 'valid';
+    }
+    renderDemoForm();
+
+    var btn = document.getElementById('approveBtn');
+    if (btn) {
+      btn.disabled = false;
+      btn.classList.remove('doc-btn-disabled');
+      btn.classList.add('doc-btn-primary');
+      btn.style.background = 'var(--moss)';
+      btn.style.color = 'white';
+      btn.style.cursor = 'pointer';
+      btn.innerHTML = '✓ Duyệt & Xuất sang ERP (Đã mở khóa)';
+    }
+
+    var flagBadge = document.getElementById('demoFlagBadge');
+    var flagText = document.getElementById('demoFlagText');
+    if (flagBadge) {
+      flagBadge.style.background = 'var(--moss-soft)';
+      flagBadge.style.color = 'var(--moss)';
+      flagBadge.style.borderColor = 'var(--moss)';
+      flagBadge.textContent = '✓ Cờ Xanh: ĐÃ TỰ ĐỘNG KHỚP SỐ HỌC';
+    }
+    if (flagText) {
+      flagText.innerHTML = '<span style="color:var(--moss);font-weight:600">Đã giải quyết sai lệch:</span> 10 × 180.000₫ = 1.800.000₫. Tổng tiền đã khớp chính xác với kiểm định Zod.';
+    }
+  };
+
+  window.approveAndExportErp = function() {
+    alert('🎉 XÁC NHẬN DUYỆT THÀNH CÔNG!\n\nDữ liệu chứng từ đã được kiểm định Zod Schema hợp lệ và xuất tự động sang hệ thống SAP / Oracle ERP qua cổng API.\n\nMã giao dịch: #ERP-SYNC-2026-9912\nThời gian xử lý: 0.82 giây');
+  };
+
+  // Init Doc Calc on load
+  updateDocCalc();
 </script>
 </body>
 </html>
