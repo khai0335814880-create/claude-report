@@ -868,6 +868,51 @@ tbody tr:hover { background: var(--paper-2); }
    DOCUMENT INTELLIGENCE PIPELINE (PROPOSAL)
 ═══════════════════════════════════════════ */
 /* SVG Data Flow & Loop Animations */
+@keyframes flowStreamRight {
+  from { stroke-dashoffset: 28; }
+  to { stroke-dashoffset: 0; }
+}
+@keyframes flowStreamLeft {
+  from { stroke-dashoffset: 0; }
+  to { stroke-dashoffset: 28; }
+}
+@keyframes flowStreamDown {
+  from { stroke-dashoffset: 28; }
+  to { stroke-dashoffset: 0; }
+}
+@keyframes flowStreamUp {
+  from { stroke-dashoffset: 0; }
+  to { stroke-dashoffset: 28; }
+}
+
+.flow-stream-right {
+  stroke-dasharray: 6 8;
+  animation: flowStreamRight 1.2s linear infinite;
+}
+.flow-stream-left {
+  stroke-dasharray: 6 8;
+  animation: flowStreamLeft 1.2s linear infinite;
+}
+.flow-stream-down {
+  stroke-dasharray: 6 8;
+  animation: flowStreamDown 1.3s linear infinite;
+}
+.flow-stream-up {
+  stroke-dasharray: 6 8;
+  animation: flowStreamUp 1.3s linear infinite;
+}
+.flow-attention {
+  stroke-dasharray: 6 8;
+  animation: flowStreamDown 1.5s linear infinite;
+}
+@keyframes streamPulseDot {
+  0%, 100% { opacity: 0.35; transform: scale(0.9); }
+  50% { opacity: 1; transform: scale(1.35); }
+}
+.stream-pulse-dot {
+  animation: streamPulseDot 1.4s ease-in-out infinite;
+  transform-origin: center;
+}
 @keyframes flowRight {
   from { stroke-dashoffset: 32; }
   to { stroke-dashoffset: 0; }
@@ -1419,21 +1464,28 @@ sup { font-size: 0.65em; color: var(--clay); }
 <text fill="#A8A8A2" font-family="'JetBrains Mono', monospace" font-size="8.5" text-anchor="middle" x="398" y="24">t=4</text>
 </g>
 <!-- Smooth Bezier curves connecting next token (398, 192) to each token bottom anchor -->
-<!-- Link to "Con" (68, 70): score 0.08 -> stroke 1.2px, opacity 0.35 -->
-<path class="interactive-path" d="M 398,192 C 398,110 68,135 68,70" fill="none" id="attPath1" opacity="0.35" stroke="#D97757" stroke-width="1.2"></path>
-<circle cx="68" cy="70" fill="#D97757" opacity="0.5" r="2.5"></circle>
+<!-- Base tracks -->
+<g fill="none" stroke="#DAD9D4" stroke-width="1" opacity="0.35">
+<path d="M 398,192 C 398,110 68,135 68,70"></path>
+<path d="M 398,192 C 398,125 178,135 178,70"></path>
+<path d="M 398,192 C 398,138 288,140 288,70"></path>
+<path d="M 398,192 C 398,150 398,110 398,70"></path>
+</g>
+<!-- Link to "Con" (68, 70): score 0.08 -> stroke 1.4px, opacity 0.45 -->
+<path class="interactive-path flow-attention" d="M 398,192 C 398,110 68,135 68,70" fill="none" id="attPath1" opacity="0.45" stroke="#D97757" stroke-width="1.4" stroke-linecap="round"></path>
+<circle cx="68" cy="70" fill="#D97757" opacity="0.6" r="2.5" class="stream-pulse-dot"></circle>
 <text fill="#8A8A82" font-family="'JetBrains Mono', monospace" font-size="10" text-anchor="middle" x="175" y="105">0.08</text>
-<!-- Link to "mèo" (178, 70): score 0.32 -> stroke 3.0px, opacity 0.75 -->
-<path class="interactive-path" d="M 398,192 C 398,125 178,135 178,70" fill="none" id="attPath2" opacity="0.75" stroke="#D97757" stroke-width="3"></path>
-<circle cx="178" cy="70" fill="#D97757" opacity="0.85" r="3.5"></circle>
+<!-- Link to "mèo" (178, 70): score 0.32 -> stroke 3.0px, opacity 0.85 -->
+<path class="interactive-path flow-attention" d="M 398,192 C 398,125 178,135 178,70" fill="none" id="attPath2" opacity="0.85" stroke="#D97757" stroke-width="3" stroke-linecap="round"></path>
+<circle cx="178" cy="70" fill="#D97757" opacity="0.9" r="3.5" class="stream-pulse-dot"></circle>
 <text fill="#D97757" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="600" text-anchor="middle" x="268" y="118">0.32</text>
-<!-- Link to "ngồi" (288, 70): score 0.15 -> stroke 1.8px, opacity 0.5 -->
-<path class="interactive-path" d="M 398,192 C 398,138 288,140 288,70" fill="none" id="attPath3" opacity="0.5" stroke="#D97757" stroke-width="1.8"></path>
-<circle cx="288" cy="70" fill="#D97757" opacity="0.65" r="2.5"></circle>
+<!-- Link to "ngồi" (288, 70): score 0.15 -> stroke 2.0px, opacity 0.6 -->
+<path class="interactive-path flow-attention" d="M 398,192 C 398,138 288,140 288,70" fill="none" id="attPath3" opacity="0.6" stroke="#D97757" stroke-width="2.0" stroke-linecap="round"></path>
+<circle cx="288" cy="70" fill="#D97757" opacity="0.75" r="3" class="stream-pulse-dot"></circle>
 <text fill="#6B6B66" font-family="'JetBrains Mono', monospace" font-size="10.5" text-anchor="middle" x="338" y="132">0.15</text>
-<!-- Link to "trên" (398, 70): score 0.45 -> stroke 4.2px, opacity 0.95 -->
-<path class="interactive-path" d="M 398,192 C 398,150 398,110 398,70" fill="none" id="attPath4" opacity="0.95" stroke="#D97757" stroke-width="4.2"></path>
-<circle cx="398" cy="70" fill="#D97757" r="4"></circle>
+<!-- Link to "trên" (398, 70): score 0.45 -> stroke 4.2px, opacity 1.0 -->
+<path class="interactive-path flow-attention" d="M 398,192 C 398,150 398,110 398,70" fill="none" id="attPath4" opacity="1.0" stroke="#D97757" stroke-width="4.2" stroke-linecap="round"></path>
+<circle cx="398" cy="70" fill="#D97757" r="4.5" class="stream-pulse-dot"></circle>
 <text fill="#D97757" font-family="'JetBrains Mono', monospace" font-size="12" font-weight="700" text-anchor="start" x="418" y="135">0.45</text>
 <!-- Target next token: "ghế" -->
 <g class="interactive-node" id="targetTokenGroup">
@@ -1519,11 +1571,13 @@ sup { font-size: 0.65em; color: var(--clay); }
 <text fill="#141413" font-family="'Fraunces', serif" font-size="14" font-weight="700" text-anchor="middle" x="410" y="38">BỘ HIẾN PHÁP (THE CONSTITUTION)</text>
 <text fill="#6B6B66" font-family="'JetBrains Mono', monospace" font-size="9" text-anchor="middle" x="410" y="54">Nguyên tắc: Hữu ích · Trung thực · Không gây hại (UNHR &amp; Principles)</text>
 </g>
-<!-- Connecting lines from Constitution to both phases -->
-<path d="M 330,68 C 330,95 205,95 205,115" fill="none" stroke="#6B6B66" stroke-dasharray="3 3" stroke-width="1.4"></path>
-<text fill="#6B6B66" font-family="'JetBrains Mono', monospace" font-size="8.5" x="250" y="94">Tiêu chí tự phê bình</text>
-<path d="M 490,68 C 490,95 615,95 615,115" fill="none" stroke="#6B6B66" stroke-dasharray="3 3" stroke-width="1.4"></path>
-<text fill="#6B6B66" font-family="'JetBrains Mono', monospace" font-size="8.5" x="570" y="94">Chuẩn mực chấm điểm</text>
+<!-- Connecting lines from Constitution to both phases (Continuous Rule Streaming) -->
+<path d="M 330,68 C 330,95 205,95 205,115" fill="none" stroke="#DAD9D4" stroke-width="1.2" opacity="0.4"></path>
+<path class="flow-stream-down" d="M 330,68 C 330,95 205,95 205,115" fill="none" stroke="var(--clay)" stroke-width="2" stroke-linecap="round"></path>
+<text fill="var(--clay)" font-family="'JetBrains Mono', monospace" font-size="8.5" font-weight="600" x="250" y="94">Tiêu chí tự phê bình</text>
+<path d="M 490,68 C 490,95 615,95 615,115" fill="none" stroke="#DAD9D4" stroke-width="1.2" opacity="0.4"></path>
+<path class="flow-stream-down" d="M 490,68 C 490,95 615,95 615,115" fill="none" stroke="var(--moss)" stroke-width="2" stroke-linecap="round"></path>
+<text fill="var(--moss)" font-family="'JetBrains Mono', monospace" font-size="8.5" font-weight="600" x="570" y="94">Chuẩn mực chấm điểm</text>
 <!-- PHASE 1: SUPERVISED LEARNING (Left Column) -->
 <rect fill="#FAF9F5" height="235" rx="8" stroke="#DAD9D4" stroke-width="1.2" width="370" x="20" y="115"></rect>
 <rect fill="#F0EEE6" height="28" rx="8" width="370" x="20" y="115"></rect>
@@ -1534,7 +1588,7 @@ sup { font-size: 0.65em; color: var(--clay); }
 <text fill="#141413" font-family="'Inter', sans-serif" font-size="9.5" font-weight="600" x="46" y="168">1. Prompt độc hại</text>
 <text fill="#6B6B66" font-family="'Inter', sans-serif" font-size="8.5" x="46" y="183">→ Sinh câu trả lời thô</text>
 </g>
-<path d="M 191,173 L 225,173" fill="none" stroke="#DAD9D4" stroke-width="1.4"></path>
+<line x1="191" y1="173" x2="225" y2="173" stroke="#DAD9D4" stroke-width="1.2" opacity="0.4"></line><line class="flow-stream-right" x1="191" y1="173" x2="225" y2="173" stroke="var(--clay)" stroke-width="2.2" stroke-linecap="round"></line>
 <text fill="#6B6B66" font-family="'Inter', sans-serif" font-size="8" text-anchor="middle" x="208" y="168">→</text>
 <!-- Step 1.2 -->
 <g class="interactive-node">
@@ -1543,14 +1597,14 @@ sup { font-size: 0.65em; color: var(--clay); }
 <text fill="#6B6B66" font-family="'Inter', sans-serif" font-size="8.5" x="235" y="183">Đối chiếu Hiến pháp</text>
 </g>
 <!-- Step 1.3 -->
-<path d="M 300,194 L 300,215" fill="none" stroke="#DAD9D4" stroke-width="1.4"></path>
+<line x1="300" y1="194" x2="300" y2="215" stroke="#DAD9D4" stroke-width="1.2" opacity="0.4"></line><line class="flow-stream-down" x1="300" y1="194" x2="300" y2="215" stroke="var(--clay)" stroke-width="2.2" stroke-linecap="round"></line>
 <g class="interactive-node">
 <rect fill="#FFFFFF" height="42" rx="5" stroke="#DAD9D4" stroke-width="1" width="150" x="225" y="215"></rect>
 <text fill="#141413" font-family="'Inter', sans-serif" font-size="9.5" font-weight="600" x="235" y="231">3. Viết lại (Revision)</text>
 <text fill="#6B6B66" font-family="'Inter', sans-serif" font-size="8.5" x="235" y="246">Loại bỏ nguy hại</text>
 </g>
 <!-- Step 1.4 -->
-<path d="M 225,236 L 191,236" fill="none" stroke="#DAD9D4" stroke-width="1.4"></path>
+<line x1="225" y1="236" x2="191" y2="236" stroke="#DAD9D4" stroke-width="1.2" opacity="0.4"></line><line class="flow-stream-left" x1="225" y1="236" x2="191" y2="236" stroke="var(--clay)" stroke-width="2.2" stroke-linecap="round"></line>
 <g class="interactive-node">
 <rect fill="#FFFFFF" height="42" rx="5" stroke="#DAD9D4" stroke-width="1" width="155" x="36" y="215"></rect>
 <text fill="#141413" font-family="'Inter', sans-serif" font-size="9.5" font-weight="600" x="46" y="231">4. SL Fine-Tuning</text>
@@ -1570,7 +1624,7 @@ sup { font-size: 0.65em; color: var(--clay); }
 <text fill="#141413" font-family="'Inter', sans-serif" font-size="9.5" font-weight="600" x="456" y="168">1. Cặp câu trả lời</text>
 <text fill="#6B6B66" font-family="'Inter', sans-serif" font-size="8.5" x="456" y="183">Mô hình sinh A &amp; B</text>
 </g>
-<path d="M 601,173 L 635,173" fill="none" stroke="#DAD9D4" stroke-width="1.4"></path>
+<line x1="601" y1="173" x2="635" y2="173" stroke="#DAD9D4" stroke-width="1.2" opacity="0.4"></line><line class="flow-stream-right" x1="601" y1="173" x2="635" y2="173" stroke="var(--moss)" stroke-width="2.2" stroke-linecap="round"></line>
 <text fill="#6B6B66" font-family="'Inter', sans-serif" font-size="8" text-anchor="middle" x="618" y="168">→</text>
 <!-- Step 2.2 -->
 <g class="interactive-node">
@@ -1579,14 +1633,14 @@ sup { font-size: 0.65em; color: var(--clay); }
 <text fill="#6B6B66" font-family="'Inter', sans-serif" font-size="8.5" x="645" y="183">AI chấm điểm A vs B</text>
 </g>
 <!-- Step 2.3 -->
-<path d="M 710,194 L 710,215" fill="none" stroke="#DAD9D4" stroke-width="1.4"></path>
+<line x1="710" y1="194" x2="710" y2="215" stroke="#DAD9D4" stroke-width="1.2" opacity="0.4"></line><line class="flow-stream-down" x1="710" y1="194" x2="710" y2="215" stroke="var(--moss)" stroke-width="2.2" stroke-linecap="round"></line>
 <g class="interactive-node">
 <rect fill="#FFFFFF" height="42" rx="5" stroke="#DAD9D4" stroke-width="1" width="150" x="635" y="215"></rect>
 <text fill="#141413" font-family="'Inter', sans-serif" font-size="9.5" font-weight="600" x="645" y="231">3. Preference Data</text>
 <text fill="#6B6B66" font-family="'Inter', sans-serif" font-size="8.5" x="645" y="246">Huấn luyện Reward Model</text>
 </g>
 <!-- Step 2.4 -->
-<path d="M 635,236 L 601,236" fill="none" stroke="#DAD9D4" stroke-width="1.4"></path>
+<line x1="635" y1="236" x2="601" y2="236" stroke="#DAD9D4" stroke-width="1.2" opacity="0.4"></line><line class="flow-stream-left" x1="635" y1="236" x2="601" y2="236" stroke="var(--moss)" stroke-width="2.2" stroke-linecap="round"></line>
 <g class="interactive-node">
 <rect fill="#FFFFFF" height="42" rx="5" stroke="#DAD9D4" stroke-width="1" width="155" x="446" y="215"></rect>
 <text fill="#141413" font-family="'Inter', sans-serif" font-size="9.5" font-weight="600" x="456" y="231">4. RL Policy Optimization</text>
@@ -1844,20 +1898,24 @@ sup { font-size: 0.65em; color: var(--clay); }
 <text fill="#141413" font-family="'Inter', sans-serif" font-size="11.5" font-weight="600" text-anchor="middle" x="380" y="34">Mục tiêu công việc của bạn là gì?</text>
 <text fill="#6B6B66" font-family="'JetBrains Mono', monospace" font-size="8.5" text-anchor="middle" x="380" y="47">START EVALUATION</text>
 </g>
-<!-- Connecting Beziers from Root (380, 56) -->
+<!-- Connecting Beziers from Root (380, 56) with Flowing Streams -->
+<!-- Base tracks -->
+<path d="M 380,56 C 380,100 115,100 115,135" fill="none" stroke="#DAD9D4" stroke-width="1.2" opacity="0.4"></path>
+<path d="M 380,56 L 380,135" fill="none" stroke="#DAD9D4" stroke-width="1.2" opacity="0.4"></path>
+<path d="M 380,56 C 380,100 645,100 645,135" fill="none" stroke="#DAD9D4" stroke-width="1.2" opacity="0.4"></path>
 <!-- Branch Left -> Haiku (115, 135) -->
-<path class="interactive-path" d="M 380,56 C 380,100 115,100 115,135" fill="none" stroke="#DAD9D4" stroke-width="1.3"></path>
-<circle cx="115" cy="135" fill="#6B6B66" r="3"></circle>
+<path class="interactive-path flow-stream-down" d="M 380,56 C 380,100 115,100 115,135" fill="none" stroke="var(--moss)" stroke-width="1.8" stroke-linecap="round"></path>
+<circle cx="115" cy="135" fill="var(--moss)" r="3.5" class="stream-pulse-dot"></circle>
 <rect fill="#F0EEE6" height="18" rx="3" width="115" x="145" y="80"></rect>
 <text fill="#6B6B66" font-family="'Inter', sans-serif" font-size="9" font-weight="500" text-anchor="middle" x="202" y="92">Nhanh &amp; số lượng lớn</text>
 <!-- Branch Center -> Sonnet (380, 135) -->
-<path class="interactive-path" d="M 380,56 L 380,135" fill="none" stroke="#DAD9D4" stroke-width="1.3"></path>
-<circle cx="380" cy="135" fill="#6B6B66" r="3.5"></circle>
+<path class="interactive-path flow-stream-down" d="M 380,56 L 380,135" fill="none" stroke="var(--clay)" stroke-width="2.2" stroke-linecap="round"></path>
+<circle cx="380" cy="135" fill="var(--clay)" r="4" class="stream-pulse-dot"></circle>
 <rect fill="#F0EEE6" height="18" rx="3" width="110" x="325" y="80"></rect>
 <text fill="#6B6B66" font-family="'Inter', sans-serif" font-size="9" font-weight="500" text-anchor="middle" x="380" y="92">Hằng ngày &amp; cân bằng</text>
 <!-- Branch Right -> Opus/Fable (645, 135) -->
-<path class="interactive-path" d="M 380,56 C 380,100 645,100 645,135" fill="none" stroke="#DAD9D4" stroke-width="1.3"></path>
-<circle cx="645" cy="135" fill="#141413" r="3"></circle>
+<path class="interactive-path flow-stream-down" d="M 380,56 C 380,100 645,100 645,135" fill="none" stroke="#141413" stroke-width="1.8" stroke-linecap="round"></path>
+<circle cx="645" cy="135" fill="#141413" r="3.5" class="stream-pulse-dot"></circle>
 <rect fill="#F0EEE6" height="18" rx="3" width="120" x="500" y="80"></rect>
 <text fill="#6B6B66" font-family="'Inter', sans-serif" font-size="9" font-weight="500" text-anchor="middle" x="560" y="92">Cực khó &amp; đa tầng</text>
 <!-- Result Card 1: Haiku 5.5 -->
@@ -1880,15 +1938,18 @@ sup { font-size: 0.65em; color: var(--clay); }
 <text fill="#6B6B66" font-family="'Inter', sans-serif" font-size="9.5" text-anchor="middle" x="645" y="177">$4.00/M · hoặc Fable 5.2 ($8/M)</text>
 </g>
 <!-- Sub-decision from Sonnet -->
-<path d="M 380,195 L 380,230" fill="none" stroke="#DAD9D4" stroke-dasharray="3 3" stroke-width="1.2"></path>
+<line x1="380" y1="195" x2="380" y2="230" stroke="#DAD9D4" stroke-width="1.2" opacity="0.4"></line>
+<line class="flow-stream-down" x1="380" y1="195" x2="380" y2="230" stroke="var(--clay)" stroke-width="1.8" stroke-linecap="round"></line>
 <!-- Question box -->
 <g class="interactive-node">
 <rect fill="#FAF9F5" height="24" rx="4" stroke="#DAD9D4" stroke-width="1" width="170" x="295" y="222"></rect>
 <text fill="#6B6B66" font-family="'Inter', sans-serif" font-size="9.5" text-anchor="middle" x="380" y="238">Cần lý luận toán / kiến trúc sâu?</text>
 </g>
 <!-- Branches from Sub-question (380, 246) -->
-<path d="M 340,246 C 260,256 240,260 240,274" fill="none" stroke="#DAD9D4" stroke-width="1.2"></path>
-<path d="M 420,246 C 500,256 520,260 520,274" fill="none" stroke="#DAD9D4" stroke-width="1.2"></path>
+<path d="M 340,246 C 260,256 240,260 240,274" fill="none" stroke="#DAD9D4" stroke-width="1.2" opacity="0.4"></path>
+<path class="flow-stream-down" d="M 340,246 C 260,256 240,260 240,274" fill="none" stroke="#6B6B66" stroke-width="1.6" stroke-linecap="round"></path>
+<path d="M 420,246 C 500,256 520,260 520,274" fill="none" stroke="#DAD9D4" stroke-width="1.2" opacity="0.4"></path>
+<path class="flow-stream-down" d="M 420,246 C 500,256 520,260 520,274" fill="none" stroke="var(--clay)" stroke-width="2" stroke-linecap="round"></path>
 <!-- Left outcome: Keep default Sonnet -->
 <g class="interactive-node">
 <rect fill="#FAF9F5" height="30" rx="4" stroke="#DAD9D4" stroke-width="1" width="170" x="155" y="274"></rect>
@@ -2164,18 +2225,37 @@ sup { font-size: 0.65em; color: var(--clay); }
 <h3 class="reveal" style="font-size:1.15rem;margin-bottom:16px">Kiến trúc MCP: Giao thức kết nối công cụ chuẩn hóa 3 tầng</h3>
 <div aria-label="Sơ đồ kiến trúc Model Context Protocol (MCP) chuẩn microservices: Host (Client), 3 MCP Server dạng module có Resources và Tools với icon Lucide, và Claude Inference Engine" class="mcp-diagram diagram-wrap reveal" role="img">
 <svg class="chart-svg" style="padding:16px 20px" viewbox="0 0 840 290">
-<!-- Connecting Branch Paths (Client -> Servers) -->
-<g fill="none" stroke="#DAD9D4" stroke-dasharray="4 3" stroke-width="1.3">
-<path class="interactive-path" d="M 195,175 C 245,175 255,65 300,65"></path>
-<path class="interactive-path" d="M 195,175 C 245,175 265,145 300,145"></path>
-<path class="interactive-path" d="M 195,175 C 245,175 255,225 300,225"></path>
+<!-- Connecting Branch Paths (Client -> Servers: JSON-RPC Requests) -->
+<!-- Base subtle track -->
+<g fill="none" stroke="#DAD9D4" stroke-width="1.2" opacity="0.4">
+<path d="M 195,175 C 245,175 255,65 300,65"></path>
+<path d="M 195,175 C 245,175 265,145 300,145"></path>
+<path d="M 195,175 C 245,175 255,225 300,225"></path>
 </g>
-<!-- Connecting Paths (Servers -> Claude) -->
-<g fill="none" opacity="0.65" stroke="#6B6B66" stroke-dasharray="4 3" stroke-width="1.3">
-<path class="interactive-path" d="M 540,65 C 585,65 595,145 630,145"></path>
-<path class="interactive-path" d="M 540,145 L 630,145"></path>
-<path class="interactive-path" d="M 540,225 C 585,225 595,145 630,145"></path>
+<!-- Flowing stream lines (Requests: Terracotta) -->
+<g fill="none" stroke="var(--clay)" stroke-width="2.2" stroke-linecap="round">
+<path class="flow-stream-right" d="M 195,175 C 245,175 255,65 300,65"></path>
+<path class="flow-stream-right" d="M 195,175 C 245,175 265,145 300,145"></path>
+<path class="flow-stream-right" d="M 195,175 C 245,175 255,225 300,225"></path>
 </g>
+<!-- Connecting Paths (Servers -> Claude: Tool Call Responses) -->
+<!-- Base subtle track -->
+<g fill="none" stroke="#DAD9D4" stroke-width="1.2" opacity="0.4">
+<path d="M 540,65 C 585,65 595,145 630,145"></path>
+<path d="M 540,145 L 630,145"></path>
+<path d="M 540,225 C 585,225 595,145 630,145"></path>
+</g>
+<!-- Flowing stream lines (Responses: Moss Green) -->
+<g fill="none" stroke="var(--moss)" stroke-width="2.2" stroke-linecap="round">
+<path class="flow-stream-right" d="M 540,65 C 585,65 595,145 630,145"></path>
+<path class="flow-stream-right" d="M 540,145 L 630,145"></path>
+<path class="flow-stream-right" d="M 540,225 C 585,225 595,145 630,145"></path>
+</g>
+<!-- Animated pulse dots at key junction points -->
+<circle cx="300" cy="65" r="3.5" fill="var(--clay)" class="stream-pulse-dot"></circle>
+<circle cx="300" cy="145" r="3.5" fill="var(--clay)" class="stream-pulse-dot"></circle>
+<circle cx="300" cy="225" r="3.5" fill="var(--clay)" class="stream-pulse-dot"></circle>
+<circle cx="630" cy="145" r="4.5" fill="var(--moss)" class="stream-pulse-dot"></circle>
 <!-- Protocol tags on connections -->
 <g fill="#6B6B66" font-family="'JetBrains Mono', monospace" font-size="8.5">
 <rect fill="#F0EEE6" height="18" rx="3" stroke="#DAD9D4" stroke-width="0.8" width="86" x="208" y="105"></rect>
@@ -2566,8 +2646,12 @@ sup { font-size: 0.65em; color: var(--clay); }
 </g>
 <!-- Middle: SAE Dictionary Learning -->
 <!-- Connecting paths -->
-<path d="M 225,145 L 295,145" fill="none" stroke="#DAD9D4" stroke-dasharray="4 3" stroke-width="1.6"></path>
-<text fill="#6B6B66" font-family="'JetBrains Mono', monospace" font-size="8.5" text-anchor="middle" x="260" y="138">Encode</text>
+<!-- Encode Data Stream -->
+<line x1="225" y1="145" x2="295" y2="145" stroke="#DAD9D4" stroke-width="1.5" opacity="0.4"></line>
+<line class="flow-stream-right" x1="225" y1="145" x2="295" y2="145" stroke="var(--clay)" stroke-width="2.6" stroke-linecap="round"></line>
+<circle cx="295" cy="145" r="3.5" fill="var(--clay)" class="stream-pulse-dot"></circle>
+<rect x="238" y="123" width="44" height="18" rx="3" fill="#F0EEE6" stroke="#DAD9D4" stroke-width="0.8"></rect>
+<text fill="var(--clay)" font-family="'JetBrains Mono', monospace" font-size="8.5" font-weight="600" text-anchor="middle" x="260" y="135">Encode</text>
 <g class="interactive-node">
 <rect fill="#FAF9F5" height="230" rx="8" stroke="#DAD9D4" stroke-width="1.2" width="230" x="295" y="30"></rect>
 <rect fill="#F0EEE6" height="28" rx="8" width="230" x="295" y="30"></rect>
@@ -2580,14 +2664,20 @@ sup { font-size: 0.65em; color: var(--clay); }
 <text fill="#6B6B66" font-family="'Inter', sans-serif" font-size="8" x="320" y="144">• Chiếu lên hàng triệu chiều thưa thớt</text>
 <text fill="#6B6B66" font-family="'Inter', sans-serif" font-size="8" x="320" y="158">• Chỉ vài chục chiều kích hoạt đồng thời</text>
 <!-- Reconstruct arrow -->
-<path d="M 320,200 L 500,200" fill="none" stroke="#6B6B66" stroke-width="1.2"></path>
+<line x1="320" y1="200" x2="500" y2="200" stroke="#DAD9D4" stroke-width="1.2" opacity="0.4"></line>
+<line class="flow-stream-right" x1="320" y1="200" x2="495" y2="200" stroke="var(--moss)" stroke-width="2" stroke-linecap="round"></line>
+<polygon points="500,200 493,197 493,203" fill="var(--moss)"></polygon>
 <text fill="#6B6B66" font-family="'JetBrains Mono', monospace" font-size="8" text-anchor="middle" x="410" y="194">Tái tạo loss ≈ 0 (Không mất thông tin)</text>
 <text fill="#6B6B66" font-family="'Inter', sans-serif" font-size="8.5" x="310" y="235">Giải mã thành công các vector nén</text>
 <text fill="#6B6B66" font-family="'Inter', sans-serif" font-size="8.5" font-weight="600" x="310" y="249">thành các ý niệm độc lập.</text>
 </g>
 <!-- Right: Monosemantic Features -->
-<path d="M 525,145 L 595,145" fill="none" stroke="#DAD9D4" stroke-dasharray="4 3" stroke-width="1.6"></path>
-<text fill="#6B6B66" font-family="'JetBrains Mono', monospace" font-size="8.5" text-anchor="middle" x="560" y="138">Decode</text>
+<!-- Decode Data Stream -->
+<line x1="525" y1="145" x2="595" y2="145" stroke="#DAD9D4" stroke-width="1.5" opacity="0.4"></line>
+<line class="flow-stream-right" x1="525" y1="145" x2="595" y2="145" stroke="var(--clay)" stroke-width="2.6" stroke-linecap="round"></line>
+<circle cx="595" cy="145" r="3.5" fill="var(--clay)" class="stream-pulse-dot"></circle>
+<rect x="538" y="123" width="44" height="18" rx="3" fill="#F0EEE6" stroke="#DAD9D4" stroke-width="0.8"></rect>
+<text fill="var(--clay)" font-family="'JetBrains Mono', monospace" font-size="8.5" font-weight="600" text-anchor="middle" x="560" y="135">Decode</text>
 <g class="interactive-node">
 <rect fill="#FAF9F5" height="230" rx="8" stroke="#DAD9D4" stroke-width="1.2" width="200" x="595" y="30"></rect>
 <rect fill="#F0EEE6" height="28" rx="8" width="200" x="595" y="30"></rect>
@@ -2873,7 +2963,7 @@ sup { font-size: 0.65em; color: var(--clay); }
 </g>
 <!-- FEEDBACK FALLBACK LOOP (CUBIC BEZIER G3 -> G2) -->
 <g class="doc-stage-node" onclick="selectDocStage(2)">
-<path class="loop-flow-line" d="M 820 110 C 820 40, 580 40, 580 106" fill="none" marker-end="url(#doc-arrow)" stroke="var(--ink-muted)" stroke-dasharray="6, 6" stroke-width="1.2"></path>
+<path class="loop-flow-line" d="M 820 110 C 820 40, 580 40, 580 106" fill="none" marker-end="url(#doc-arrow-clay)" stroke="var(--clay)" stroke-dasharray="6, 6" stroke-width="1.8"></path>
 <g transform="translate(700, 40)">
 <rect class="doc-svg-card" fill="var(--paper)" filter="url(#doc-subtle-shadow)" height="24" rx="4" stroke="var(--line)" stroke-width="1" width="228" x="-114" y="-12"></rect>
 <circle cx="-100" cy="0" fill="var(--ink-muted)" r="3"></circle>
