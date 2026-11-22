@@ -1,28 +1,120 @@
 {
   "as_of": "2026-11-22",
-  "benchmarks": [
+  "source_urls": [
+    "https://platform.claude.com/docs/en/models/overview",
+    "https://vals.ai/benchmarks/swebench",
+    "https://artificialanalysis.ai/articles/claude-sonnet-5-5",
+    "https://cognition.ai/blog/frontiercode"
+  ],
+  "methodology_warnings": [
     {
-      "name": "Terminal-Bench 4.0",
-      "source_id": "R1",
-      "reliability": "docs",
-      "opus_5_5": 74.2,
-      "sonnet_5_5": 66.8,
-      "notes": "Đo ở mức effort xhigh; phản ánh năng lực agent tương tác terminal sâu"
+      "code": "HARNESS_MISMATCH",
+      "message": "Số Sonnet 5.5 và Opus 5.5 nằm ở hai trang khác nhau, effort không đồng nhất; không so sánh trực tiếp như cùng một lần chạy."
     },
     {
-      "name": "OSWorld",
-      "source_id": "R1",
-      "reliability": "docs",
-      "opus_5_5": 48.6,
-      "sonnet_5_5": 42.1,
-      "notes": "Đánh giá tương tác hệ điều hành và công cụ máy tính thực tế"
+      "code": "EFFORT_TRADE_OFF",
+      "message": "Trên FrontierCode, Sonnet 5.5 ở Max (46.2%) thấp hơn ở Xhigh (52.1%) vì subagent review gây timeout. Effort cao nhất không phải lúc nào cũng tốt nhất."
     },
     {
-      "name": "SWE-bench Verified",
-      "source_id": "R18",
-      "reliability": "independent",
-      "status": "Đã bão hoà (>80% trên nhiều model)",
-      "notes": "Benchmark bão hòa, không còn phân hóa rõ ranh giới các frontier model hiện đại"
+      "code": "SAFEGUARD_OVERHEAD",
+      "message": "Opus 5.5 test với safeguard bật; khi safeguard can thiệp, tác vụ an ninh mạng chuyển sang Opus 4.8 làm giảm điểm trung bình."
+    },
+    {
+      "code": "SWEBENCH_SATURATION",
+      "message": "SWE-bench Verified đã bão hòa (Opus 5 đạt 97% trên Vals AI); không còn phân biệt được năng lực mô hình hàng đầu."
     }
-  ]
+  ],
+  "terminal_bench_4": {
+    "description": "Terminal-Bench 4.0: Agentic coding trực tiếp trong terminal",
+    "metric": "% resolved tasks",
+    "unit": "%",
+    "items": [
+      {
+        "model": "Claude Sonnet 5.5",
+        "score": 70.6,
+        "effort": "high",
+        "harness": "Claude Code agentic harness",
+        "reliability": "self_reported",
+        "highlight": true
+      },
+      {
+        "model": "Claude Opus 5.5",
+        "score": 66.4,
+        "effort": "xhigh",
+        "harness": "Claude Code agentic harness",
+        "reliability": "self_reported",
+        "highlight": true
+      },
+      {
+        "model": "Sonnet 5.5 (AA Test)",
+        "score": 64.0,
+        "effort": "max",
+        "harness": "Artificial Analysis independent benchmark",
+        "reliability": "independent",
+        "highlight": false
+      },
+      {
+        "model": "Opus 5.5 (AA Test)",
+        "score": 63.1,
+        "effort": "max",
+        "harness": "Artificial Analysis independent benchmark",
+        "reliability": "independent",
+        "highlight": false
+      },
+      {
+        "model": "GPT-6 Astra",
+        "score": 57.9,
+        "effort": "high",
+        "harness": "Standard harness",
+        "reliability": "self_reported",
+        "highlight": false
+      },
+      {
+        "model": "Claude Fable 5.1",
+        "score": 55.8,
+        "effort": "high",
+        "harness": "Standard harness",
+        "reliability": "self_reported",
+        "highlight": false
+      },
+      {
+        "model": "Claude Opus 5",
+        "score": 52.3,
+        "effort": "high",
+        "harness": "Standard harness",
+        "reliability": "self_reported",
+        "highlight": false
+      },
+      {
+        "model": "GPT-5.6 Sol",
+        "score": 37.3,
+        "effort": "high",
+        "harness": "Standard harness",
+        "reliability": "self_reported",
+        "highlight": false
+      }
+    ]
+  },
+  "cursor_bench_4": {
+    "description": "CursorBench 4.0: Khả năng inline editing và repo context",
+    "metric": "% accuracy",
+    "items": [
+      { "model": "Claude Opus 5.5", "score": 57.8, "effort": "xhigh", "reliability": "self_reported" },
+      { "model": "Claude Sonnet 5.5", "score": 55.5, "effort": "high", "reliability": "self_reported" },
+      { "model": "Claude Fable 5.1", "score": 51.8, "effort": "high", "reliability": "self_reported" },
+      { "model": "Claude Opus 5", "score": 46.6, "effort": "high", "reliability": "self_reported" },
+      { "model": "GPT-5.6 Sol", "score": 41.7, "effort": "high", "reliability": "self_reported" }
+    ]
+  },
+  "frontier_code_main": {
+    "description": "FrontierCode v1.1 Main: Giải quyết bài toán lập trình quy mô lớn",
+    "metric": "% resolved",
+    "items": [
+      { "model": "Claude Opus 5.5", "score": 54.4, "effort": "max", "reliability": "self_reported" },
+      { "model": "GPT-6 Astra", "score": 53.3, "effort": "high", "reliability": "self_reported" },
+      { "model": "Claude Sonnet 5.5 (Xhigh)", "score": 52.1, "effort": "xhigh", "reliability": "self_reported" },
+      { "model": "Claude Fable 5.1", "score": 50.3, "effort": "high", "reliability": "self_reported" },
+      { "model": "Claude Sonnet 5.5 (Max)", "score": 46.2, "effort": "max", "reliability": "self_reported" }
+    ]
+  }
 }
