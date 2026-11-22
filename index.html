@@ -1147,8 +1147,9 @@
     }
 
     /* =================================================================
-       5. PHASE 2 WIDGET STYLES (HERO, DECISION TREE, KV TOWER, TIME MACHINE)
+       5. HERO STAGE & TRẠM 1 WIDGETS · CLAUDE WARM EDITORIAL
        ================================================================= */
+    /* ── Hero Stage Canvas (Mục 5.0 · Section 3.4) ─────────────── */
     .hero-container {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -1156,14 +1157,19 @@
       margin-bottom: 20px;
     }
     .hero-box {
-      background: var(--bench);
-      border: 1px solid var(--rule);
-      border-radius: 6px;
-      padding: 18px;
-      font-size: 0.92rem;
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r-lg);
+      padding: 18px 20px;
+      font-size: var(--fs-md);
       min-height: 200px;
       display: flex;
       flex-direction: column;
+      box-shadow: var(--shadow-1);
+      transition: border-color var(--dur-1) var(--ease), box-shadow var(--dur-1) var(--ease);
+    }
+    .hero-box:hover {
+      box-shadow: var(--shadow-2);
     }
     .hero-box-header {
       display: flex;
@@ -1171,63 +1177,122 @@
       align-items: center;
       margin-bottom: 12px;
       padding-bottom: 8px;
-      border-bottom: 1px solid var(--rule);
-      font-family: var(--font-mono);
-      font-size: 0.75rem;
-      color: var(--ink-2);
+      border-bottom: 1px solid var(--border-subtle);
+      font-family: var(--font-sans);
+      font-size: var(--fs-xs);
+      color: var(--accent-ink);
       font-weight: 600;
       text-transform: uppercase;
+      letter-spacing: var(--tracking-eyebrow);
     }
-    .hero-prompt-content { font-style: italic; color: var(--ink); line-height: 1.5; }
-    .hero-response-stream { line-height: 1.6; color: var(--ink); flex: 1; }
+    .hero-box-header span:last-child {
+      font-family: var(--font-mono);
+      color: var(--ink-3);
+      font-weight: 500;
+      letter-spacing: 0;
+      text-transform: none;
+    }
+    .hero-prompt-content {
+      font-family: var(--font-serif);
+      font-size: var(--fs-md);
+      font-style: italic;
+      color: var(--ink);
+      line-height: 1.6;
+    }
+    .hero-response-stream {
+      font-family: var(--font-sans);
+      font-size: 0.95rem;
+      line-height: 1.7;
+      color: var(--ink);
+      flex: 1;
+    }
 
+    /* Citation Pills & Popover in Hero Response */
     .cite-chip {
       display: inline-flex;
       align-items: center;
       justify-content: center;
       font-family: var(--font-mono);
-      font-size: 0.72rem;
+      font-size: var(--fs-2xs);
       font-weight: 600;
-      background: var(--stage);
-      color: var(--tok-fresh);
-      border: 1px solid var(--tok-fresh);
-      border-radius: 3px;
-      padding: 0 5px;
+      background: var(--accent-tint);
+      color: var(--accent-ink);
+      border: 1px solid var(--accent-border);
+      border-radius: var(--r-pill);
+      padding: 0 6px;
       margin: 0 2px;
       cursor: pointer;
       vertical-align: baseline;
-      transition: all 0.15s;
+      transition: background-color var(--dur-1) var(--ease), border-color var(--dur-1) var(--ease), color var(--dur-1) var(--ease);
     }
-    .cite-chip:hover { background: var(--tok-fresh); color: #fff; }
-
+    .cite-chip:hover {
+      background: var(--accent-tint-2);
+      border-color: var(--accent);
+      color: var(--accent-ink);
+      text-decoration: underline;
+    }
+    .cite-chip.active,
+    .cite-chip:active {
+      background: var(--accent-strong);
+      color: var(--on-accent);
+      border-color: var(--accent-strong);
+    }
     .citation-popover {
       display: none;
       margin-top: 10px;
-      padding: 10px 14px;
-      background: var(--stage);
-      border: 1px solid var(--tok-fresh);
-      border-radius: 4px;
-      font-size: 0.8rem;
+      padding: 12px 16px;
+      background: var(--bg-surface-2);
+      border: 1px solid var(--border-strong);
+      box-shadow: inset 2px 0 0 var(--accent), var(--shadow-2);
+      border-radius: var(--r-md);
+      font-size: var(--fs-sm);
+      font-family: var(--font-sans);
+      color: var(--ink-2);
+      animation: fadeIn var(--dur-2) var(--ease);
+    }
+    .citation-popover strong {
       font-family: var(--font-mono);
-      color: var(--ink);
-      animation: fadeIn 0.2s ease;
+      color: var(--accent-ink);
     }
 
+    /* Token Tags (Tokenizer View · Section 3.4) */
     .tok-tag {
       display: inline-block;
-      padding: 1px 4px;
-      margin: 1px;
+      padding: 2px 5px;
+      margin: 1px 2px;
       border-radius: 3px;
       font-family: var(--font-mono);
-      font-size: 0.82rem;
-      line-height: 1.3;
+      font-size: 0.8rem;
+      line-height: 1.35;
       border: 1px solid transparent;
+      transition: all var(--dur-1) var(--ease);
     }
-    .tok-tag.fresh { background: rgba(47,95,208,0.12); color: var(--tok-fresh); border-color: rgba(47,95,208,0.3); }
-    .tok-tag.cached { background: rgba(18,165,143,0.12); color: var(--tok-cached); border-color: rgba(18,165,143,0.3); }
-    .tok-tag.think { background: rgba(122,86,224,0.12); color: var(--tok-think); border-color: rgba(122,86,224,0.3); }
-    .tok-tag.out { background: rgba(217,106,16,0.12); color: var(--tok-out); border-color: rgba(217,106,16,0.3); }
+    .tok-tag.fresh {
+      background: color-mix(in srgb, var(--c-fresh) 16%, transparent);
+      color: var(--c-fresh);
+      box-shadow: inset 0 -2px 0 var(--c-fresh);
+      border-color: color-mix(in srgb, var(--c-fresh) 28%, transparent);
+    }
+    .tok-tag.cached {
+      background: color-mix(in srgb, var(--c-cached) 16%, transparent);
+      color: var(--c-cached);
+      box-shadow: inset 0 -2px 0 var(--c-cached);
+      border-color: color-mix(in srgb, var(--c-cached) 28%, transparent);
+    }
+    .tok-tag.think {
+      background: color-mix(in srgb, var(--c-think) 16%, transparent);
+      color: var(--c-think);
+      box-shadow: inset 0 -2px 0 var(--c-think);
+      border-color: color-mix(in srgb, var(--c-think) 28%, transparent);
+    }
+    .tok-tag.out {
+      background: color-mix(in srgb, var(--c-output) 16%, transparent);
+      color: var(--c-output);
+      box-shadow: inset 0 -2px 0 var(--c-output);
+      border-color: color-mix(in srgb, var(--c-output) 28%, transparent);
+    }
 
+    /* Hero Action Controls & Buttons */
     .hero-actions-bar {
       display: flex;
       flex-wrap: wrap;
@@ -1236,31 +1301,156 @@
       gap: 12px;
       margin-top: 14px;
       padding-top: 14px;
-      border-top: 1px dashed var(--rule);
+      border-top: 1px dashed var(--border);
     }
     .btn-action {
-      background: var(--tok-fresh);
-      color: #fff;
-      border: none;
-      border-radius: 4px;
+      background: var(--accent-strong);
+      color: var(--on-accent);
+      border: 1px solid var(--accent-strong);
+      border-radius: var(--r-md);
       padding: 8px 16px;
-      font-family: var(--font-mono);
-      font-size: 0.82rem;
+      font-family: var(--font-sans);
+      font-size: var(--fs-sm);
       font-weight: 600;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      transition: opacity 0.15s ease;
+      box-shadow: var(--shadow-1);
+      transition: background-color var(--dur-1) var(--ease), border-color var(--dur-1) var(--ease), box-shadow var(--dur-1) var(--ease);
     }
-    .btn-action:hover { opacity: 0.9; }
+    .btn-action:hover {
+      background: var(--accent-strong-hover);
+      border-color: var(--accent-strong-hover);
+      box-shadow: var(--shadow-2);
+    }
+    .btn-action:active {
+      background: var(--accent-strong-hover);
+      box-shadow: none;
+    }
+    .btn-action:disabled,
+    .btn-action[aria-disabled=true] {
+      background: var(--bg-surface-3);
+      border-color: var(--border);
+      color: var(--ink-4);
+      box-shadow: none;
+      cursor: not-allowed;
+    }
     .btn-action.secondary {
-      background: var(--bench);
+      background: var(--bg-surface);
       color: var(--ink);
-      border: 1px solid var(--rule);
+      border: 1px solid var(--border-strong);
+      border-radius: var(--r-md);
+      box-shadow: var(--shadow-1);
     }
-    .btn-action.secondary:hover { background: var(--stage); }
+    .btn-action.secondary:hover {
+      background: var(--bg-surface-2);
+      border-color: var(--border-hover);
+    }
+    .btn-action.secondary:active {
+      background: var(--bg-surface-3);
+    }
+    .btn-action.secondary.is-active,
+    .btn-action.secondary[aria-pressed=true] {
+      background: var(--accent-tint);
+      border-color: var(--accent-border);
+      color: var(--accent-ink);
+      font-weight: 600;
+    }
+    .btn-action#btnHeroSkip {
+      background: transparent;
+      border-color: transparent;
+      color: var(--ink-2);
+      box-shadow: none;
+    }
+    .btn-action#btnHeroSkip:hover {
+      background: var(--bg-surface-2);
+      color: var(--ink);
+      border-color: transparent;
+    }
 
+    #heroCostOdometer {
+      font-family: var(--font-mono);
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--ink-strong);
+      font-variant-numeric: tabular-nums;
+    }
+
+    #tokenizerNote {
+      background: var(--info-bg) !important;
+      border: 1px solid var(--info-border) !important;
+      box-shadow: inset 3px 0 0 var(--info-fill) !important;
+      border-radius: var(--r-md) !important;
+      padding: 8px 14px !important;
+      font-size: var(--fs-xs) !important;
+      color: var(--ink) !important;
+    }
+
+    /* ── Trạm 1 · F1 Model Table & Log Scale (Section 3.5) ─────── */
+    .pill-group {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+    }
+    .pill-opt {
+      padding: 4px 12px;
+      border: 1px solid var(--border-strong);
+      background: var(--bg-surface);
+      border-radius: var(--r-pill);
+      font-family: var(--font-sans);
+      font-size: var(--fs-xs);
+      font-weight: 500;
+      color: var(--ink-2);
+      cursor: pointer;
+      box-shadow: var(--shadow-1);
+      transition: background-color var(--dur-1) var(--ease), border-color var(--dur-1) var(--ease), color var(--dur-1) var(--ease);
+    }
+    .pill-opt:hover {
+      border-color: var(--border-hover);
+      background: var(--bg-surface-2);
+      color: var(--ink);
+    }
+    .pill-opt.active {
+      background: var(--accent-tint);
+      border-color: var(--accent-border);
+      color: var(--accent-ink);
+      font-weight: 600;
+    }
+
+    #modelFamilyTable tr[data-model="fable"] td:first-child strong {
+      color: var(--m-fable);
+    }
+    #modelFamilyTable tr[data-model="opus"] td:first-child strong {
+      color: var(--m-opus);
+    }
+    #modelFamilyTable tr[data-model="sonnet"] td:first-child strong {
+      color: var(--m-sonnet);
+    }
+    #modelFamilyTable tr[data-model="haiku"] td:first-child strong {
+      color: var(--m-haiku);
+    }
+
+    /* Unit Test Vectors in Hero Stage */
+    .data-table .btn-tool {
+      background: var(--bg-surface);
+      color: var(--ink);
+      border: 1px solid var(--border-strong);
+      border-radius: var(--r-md);
+      box-shadow: var(--shadow-1);
+      font-family: var(--font-sans);
+      font-size: var(--fs-xs);
+      padding: 3px 10px;
+      cursor: pointer;
+      transition: all var(--dur-1) var(--ease);
+    }
+    .data-table .btn-tool:hover {
+      background: var(--bg-surface-2);
+      border-color: var(--accent-border);
+      color: var(--accent-ink);
+    }
+
+    /* ── Trạm 1 · F2 Decision Tree & Quiz (Section 3.5) ───────── */
     .decision-container {
       display: grid;
       grid-template-columns: 1.3fr 1fr;
@@ -1268,24 +1458,27 @@
       align-items: start;
     }
     .svg-tree-box {
-      background: var(--bench);
-      border: 1px solid var(--rule);
-      border-radius: 6px;
-      padding: 16px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r-lg);
+      padding: 18px;
       overflow-x: auto;
+      box-shadow: var(--shadow-1);
     }
     .quiz-card {
-      background: var(--bench);
-      border: 1px solid var(--rule);
-      border-radius: 6px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r-lg);
       padding: 20px;
+      box-shadow: var(--shadow-1);
     }
     .quiz-q-title {
-      font-family: var(--font-mono);
-      font-size: 0.75rem;
-      color: var(--ink-2);
+      font-family: var(--font-sans);
+      font-size: var(--fs-xs);
+      color: var(--accent-ink);
       text-transform: uppercase;
-      font-weight: 700;
+      font-weight: 600;
+      letter-spacing: var(--tracking-eyebrow);
       margin-bottom: 8px;
     }
     .quiz-options {
@@ -1296,42 +1489,88 @@
     }
     .quiz-opt-btn {
       text-align: left;
-      padding: 10px 12px;
-      background: var(--stage);
-      border: 1px solid var(--rule);
-      border-radius: 4px;
-      font-size: 0.85rem;
+      padding: 10px 14px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-strong);
+      border-radius: var(--r-md);
+      font-family: var(--font-sans);
+      font-size: var(--fs-sm);
+      line-height: 1.4;
       cursor: pointer;
-      transition: all 0.15s;
+      transition: all var(--dur-1) var(--ease);
+      color: var(--ink);
+      box-shadow: var(--shadow-1);
+    }
+    .quiz-opt-btn:hover {
+      background: var(--bg-surface-2);
+      border-color: var(--border-hover);
       color: var(--ink);
     }
-    .quiz-opt-btn:hover { border-color: var(--tok-fresh); }
     .quiz-opt-btn.selected {
-      background: rgba(47,95,208,0.08);
-      border-color: var(--tok-fresh);
+      background: var(--accent-tint);
+      border-color: var(--accent);
+      box-shadow: inset 0 0 0 1px var(--accent);
       font-weight: 600;
-      color: var(--tok-fresh);
+      color: var(--ink-strong);
     }
     .quiz-result-box {
       margin-top: 16px;
-      padding: 14px;
-      border-radius: 4px;
-      background: var(--stage);
-      border-left: 4px solid var(--tok-fresh);
-      font-size: 0.88rem;
+      padding: 16px 20px;
+      border-radius: var(--r-lg);
+      background: var(--accent-tint);
+      border: 1px solid var(--accent-border);
+      box-shadow: inset 3px 0 0 var(--accent);
+      font-size: var(--fs-sm);
+    }
+    #quizRecModel {
+      font-family: var(--font-serif);
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--accent-ink);
+      margin: 4px 0;
+    }
+    #quizRecReason {
+      font-size: var(--fs-sm);
+      color: var(--ink-2);
+      line-height: 1.5;
     }
 
-    .tree-node { transition: all 0.3s ease; cursor: pointer; }
-    .tree-node rect { fill: var(--stage); stroke: var(--rule); stroke-width: 1.5; }
-    .tree-node.active rect {
-      fill: var(--stage);
-      stroke: var(--tok-fresh);
-      stroke-width: 2.5;
-      filter: drop-shadow(0 0 6px rgba(47,95,208,0.3));
+    /* Decision Tree SVG nodes & edges */
+    .tree-node {
+      transition: all var(--dur-2) var(--ease);
+      cursor: pointer;
     }
-    .tree-node.active text { fill: var(--tok-fresh); font-weight: 700; }
-    .tree-edge { stroke: var(--rule); stroke-width: 1.5; fill: none; transition: stroke 0.3s ease; }
-    .tree-edge.active { stroke: var(--tok-fresh); stroke-width: 2.5; }
+    .tree-node rect {
+      fill: var(--bg-surface);
+      stroke: var(--border-strong);
+      stroke-width: 1.25;
+      rx: 6px;
+      transition: fill var(--dur-2) var(--ease), stroke var(--dur-2) var(--ease);
+    }
+    .tree-node text {
+      fill: var(--ink);
+      font-family: var(--font-sans);
+    }
+    .tree-node.active rect {
+      fill: var(--accent-tint);
+      stroke: var(--accent);
+      stroke-width: 2;
+      filter: drop-shadow(0 2px 6px rgba(217,119,87,0.20));
+    }
+    .tree-node.active text {
+      fill: var(--accent-ink);
+      font-weight: 600;
+    }
+    .tree-edge {
+      stroke: var(--ink-4);
+      stroke-width: 1.25;
+      fill: none;
+      transition: stroke var(--dur-2) var(--ease), stroke-width var(--dur-2) var(--ease);
+    }
+    .tree-edge.active {
+      stroke: var(--accent);
+      stroke-width: 2;
+    }
 
     .kv-widget-layout {
       display: grid;
@@ -2269,10 +2508,10 @@
             <svg id="decisionTreeSvg" viewBox="0 0 540 420" width="100%" height="100%" style="display:block;">
               <defs>
                 <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-                  <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="var(--rule)" />
+                  <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="var(--ink-4)" />
                 </marker>
                 <marker id="arrow-active" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-                  <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="var(--tok-fresh)" />
+                  <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="var(--accent)" />
                 </marker>
               </defs>
 
