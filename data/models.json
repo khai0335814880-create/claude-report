@@ -1,82 +1,123 @@
 {
   "as_of": "2026-11-22",
-  "source_urls": [
-    "https://platform.claude.com/docs/en/models/overview",
-    "https://fourweekmba.com",
-    "https://venturebeat.com"
+  "models": [
+    {
+      "id": "claude-fable-5-2",
+      "name": "Fable 5.2",
+      "source_id": "R3",
+      "reliability": "docs",
+      "price_in": 8.0,
+      "price_out": 40.0,
+      "price_in_fast": 16.0,
+      "price_out_fast": 80.0,
+      "cache_write_5m": null,
+      "cache_write_1h": null,
+      "cache_read": 0.2,
+      "cache_read_ratio": 0.025,
+      "context_window": "1M",
+      "max_output": "128K",
+      "thinking": "Adaptive luôn bật",
+      "default_effort": "high",
+      "release_date": "2026-11-09",
+      "description": "Model đầu bảng chuyên sâu lý luận phức tạp, adaptive thinking luôn bật ở mức high."
+    },
+    {
+      "id": "claude-opus-5-5",
+      "name": "Opus 5.5",
+      "source_id": "R1",
+      "reliability": "docs",
+      "price_in": 4.0,
+      "price_out": 20.0,
+      "price_in_fast": 8.0,
+      "price_out_fast": 40.0,
+      "cache_write_5m": 5.0,
+      "cache_write_1h": 8.0,
+      "cache_read": 0.2,
+      "cache_read_ratio": 0.05,
+      "context_window": "1M",
+      "max_output": "128K",
+      "thinking": "Adaptive luôn bật",
+      "default_effort": "medium",
+      "release_date": "2026-09-22",
+      "description": "Model flagship cho agentic coding khó và suy luận logic sâu; tỷ lệ output/input = 5."
+    },
+    {
+      "id": "claude-sonnet-5-5",
+      "name": "Sonnet 5.5",
+      "source_id": "R2",
+      "reliability": "docs",
+      "price_in": 2.0,
+      "price_out": 10.0,
+      "price_in_fast": null,
+      "price_out_fast": null,
+      "cache_write_5m": 2.5,
+      "cache_write_1h": 4.0,
+      "cache_read": 0.1,
+      "cache_read_ratio": 0.05,
+      "context_window": "1M",
+      "max_output": "128K",
+      "thinking": "Adaptive",
+      "default_effort": "high (API) / medium (Claude Code)",
+      "release_date": "2026-09-28",
+      "description": "Ngựa thồ sản xuất (production workhorse), cân bằng hoàn hảo giữa hiệu năng agentic và kinh tế token."
+    },
+    {
+      "id": "claude-haiku-5-5",
+      "name": "Haiku 5.5",
+      "source_id": "R4",
+      "reliability": "docs",
+      "price_in_under_100k": 0.1,
+      "price_out_under_100k": 0.5,
+      "price_in_over_100k": 0.5,
+      "price_out_over_100k": 2.5,
+      "cache_write_5m": null,
+      "cache_write_1h": null,
+      "cache_read_over_100k": 0.05,
+      "cache_read_ratio": 0.1,
+      "context_window": "1M",
+      "max_output": "128K",
+      "thinking": "Adaptive",
+      "default_effort": "medium",
+      "release_date": "2026-10-07",
+      "description": "Tốc độ siêu nhanh, tối ưu hóa cho phân loại, rewrite truy vấn và bộ lọc gatekeeper."
+    }
   ],
   "competitors": [
     {
-      "group": "Closed, OpenAI",
+      "group": "Closed",
       "model": "GPT-6 Sol",
-      "in_price": 2.0,
-      "out_price": 10.0,
-      "context": "256K - 1M",
-      "notes": "Đối thủ giá trực tiếp của Sonnet 5.5 sau đợt giảm giá",
-      "reliability": "docs"
+      "source_id": "R22",
+      "reliability": "independent",
+      "price_in": 2.0,
+      "price_out": 10.0,
+      "notes": "Đối thủ giá của Sonnet 5.5"
     },
     {
-      "group": "Closed, OpenAI",
+      "group": "Closed",
       "model": "GPT-6 Luna",
-      "in_price": 0.10,
-      "out_price": 0.50,
-      "context": "272K",
-      "notes": "Đối thủ giá của Haiku 5.5 (tăng giá khi prompt > 272K)",
-      "reliability": "docs"
+      "source_id": "R22",
+      "reliability": "independent",
+      "price_in": 0.1,
+      "price_out": 0.5,
+      "notes": "Đối thủ giá của Haiku 5.5"
     },
     {
-      "group": "Closed, Google",
+      "group": "Closed",
       "model": "Gemini 4 Argon",
-      "in_price": 2.0,
-      "out_price": 10.0,
-      "context": "2M",
-      "notes": "$2/$10 đến 30/11/2026, tăng lên $4/$20 từ 01/12/2026. Lợi thế audio/video native",
-      "reliability": "docs"
-    },
-    {
-      "group": "Closed, Google",
-      "model": "Gemini 3.1 Pro",
-      "in_price": 2.0,
-      "out_price": 12.0,
-      "context": "1M",
-      "notes": "Hệ sinh thái Google Cloud & Workspace",
-      "reliability": "docs"
-    },
-    {
-      "group": "Closed, Google",
-      "model": "Gemini 3.5 Flash-Lite",
-      "in_price": 0.30,
-      "out_price": 2.50,
-      "context": "1M",
-      "notes": "Tầng rẻ multimodal",
-      "reliability": "docs"
+      "source_id": "R22",
+      "reliability": "independent",
+      "price_in": 2.0,
+      "price_out": 10.0,
+      "notes": "2/10 đến 30/11/2026, rồi 4/20 từ 01/12/2026; đa phương thức audio/video"
     },
     {
       "group": "Open-weight",
-      "model": "DeepSeek V4 Pro",
-      "in_price": 0.0,
-      "out_price": 0.0,
-      "context": "128K",
-      "notes": "Giấy phép MIT; MoE 1.6T tổng / 49B active; SWE-bench 80.6% (số hãng)",
-      "reliability": "self_reported"
-    },
-    {
-      "group": "Open-weight",
-      "model": "Qwen 3.6 27B",
-      "in_price": 0.0,
-      "out_price": 0.0,
-      "context": "128K",
-      "notes": "Dense; tự host; vừa GPU 24GB ở 4-bit (QLoRA); SWE-bench 77.2% (bên thứ ba)",
-      "reliability": "independent"
-    },
-    {
-      "group": "Open-weight",
-      "model": "GLM-5.x / Kimi K3",
-      "in_price": 0.0,
-      "out_price": 0.0,
-      "context": "128K - 200K",
-      "notes": "Tự host / API; kiểm tra kỹ giấy phép trước khi fine-tune thương mại",
-      "reliability": "independent"
+      "model": "Qwen3.8-27B",
+      "source_id": "R21",
+      "reliability": "independent",
+      "price_in": 0.0,
+      "price_out": 0.0,
+      "notes": "Tự host, Apache 2.0; dense, đa phương thức; 262K context"
     }
   ]
 }

@@ -1,0 +1,173 @@
+{
+  "as_of": "2026-11-22",
+  "sources": [
+    {
+      "id": "R1",
+      "url": "https://platform.claude.com/docs/en/models/opus-5-5/overview",
+      "used_for": "Thông số Opus 5.5",
+      "title": "Anthropic Opus 5.5 Model Overview"
+    },
+    {
+      "id": "R2",
+      "url": "https://platform.claude.com/docs/en/models/sonnet-5-5/overview",
+      "used_for": "Thông số Sonnet 5.5, breaking changes",
+      "title": "Anthropic Sonnet 5.5 Model Overview"
+    },
+    {
+      "id": "R3",
+      "url": "https://platform.claude.com/docs/en/models/fable-5-2/overview",
+      "used_for": "Thông số Fable 5.2",
+      "title": "Anthropic Fable 5.2 Model Overview"
+    },
+    {
+      "id": "R4",
+      "url": "https://anthropic.com/claude/haiku",
+      "used_for": "Giá theo độ dài prompt, tokenizer Haiku 5.5",
+      "title": "Anthropic Haiku Specifications"
+    },
+    {
+      "id": "R5",
+      "url": "https://platform.claude.com/docs/en/build-with-claude/prompt-caching",
+      "used_for": "Hệ số cache, TTL, min cacheable prefix",
+      "title": "Prompt Caching Guide"
+    },
+    {
+      "id": "R6",
+      "url": "https://platform.claude.com/docs/en/models/opus-5-5/whats-new-opus-5-5",
+      "used_for": "Compaction, inline tools, task budgets, thinking display",
+      "title": "What's New in Opus 5.5"
+    },
+    {
+      "id": "R7",
+      "url": "https://platform.claude.com/docs/models/opus-5-5/migration-guide",
+      "used_for": "Adaptive-only thinking, effort control",
+      "title": "Claude 5.5 Migration Guide"
+    },
+    {
+      "id": "R8",
+      "url": "https://anthropic.com/claude-sonnet-5-5",
+      "used_for": "Benchmark, giá, effort mặc định",
+      "title": "Claude 3.5/5.5 Sonnet Announcement"
+    },
+    {
+      "id": "R9",
+      "url": "https://anthropic.com/claude-opus-5-5",
+      "used_for": "Benchmark, safeguards, preserved thinking, prompt injection",
+      "title": "Claude Opus 5.5 Release"
+    },
+    {
+      "id": "R10",
+      "url": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/tool-reference",
+      "used_for": "Advisor, tool search, programmatic tool calling, memory, strict",
+      "title": "Anthropic Tool Use Reference"
+    },
+    {
+      "id": "R11",
+      "url": "https://anthropic.com/engineering/advanced-tool-use",
+      "used_for": "Tool search và programmatic tool calling",
+      "title": "Advanced Tool Use Engineering"
+    },
+    {
+      "id": "R12",
+      "url": "https://anthropic.com/news/context-management",
+      "used_for": "Context editing và memory tool",
+      "title": "Context Management in Long-Horizon Tasks"
+    },
+    {
+      "id": "R13",
+      "url": "https://platform.claude.com/docs/en/build-with-claude/search-results",
+      "used_for": "Citations và search_result structure",
+      "title": "Native Citations Documentation"
+    },
+    {
+      "id": "R14",
+      "url": "https://blog.modelcontextprotocol.io/posts/2026-07-28/",
+      "used_for": "Giao thức MCP spec 2026-07-28",
+      "title": "Model Context Protocol Specification"
+    },
+    {
+      "id": "R15",
+      "url": "https://transformer-circuits.pub/2025/attribution-graphs/biology.html",
+      "used_for": "Circuit tracing, mạch ảo giác",
+      "title": "Circuit Tracing & Attribution Graphs"
+    },
+    {
+      "id": "R15b",
+      "url": "https://anthropic.com/research/open-source-circuit-tracing",
+      "used_for": "Công cụ mã nguồn mở circuit tracing",
+      "title": "Open Source Circuit Tracing"
+    },
+    {
+      "id": "R16",
+      "url": "https://arxiv.org/abs/2212.08073",
+      "used_for": "Constitutional AI: Harmlessness from AI Feedback",
+      "title": "Bai et al., Constitutional AI (2022)"
+    },
+    {
+      "id": "R17",
+      "url": "https://support.claude.com/en/articles/12326764",
+      "used_for": "Dùng Outputs để huấn luyện",
+      "title": "Anthropic Data Training Policy"
+    },
+    {
+      "id": "R18",
+      "url": "https://vals.ai/benchmarks/swebench",
+      "used_for": "SWE-bench Verified bão hoà",
+      "title": "SWE-bench Verified Saturation Analysis"
+    },
+    {
+      "id": "R19",
+      "url": "https://artificialanalysis.ai/articles/claude-sonnet-5-5",
+      "used_for": "Intelligence Index, giá cache",
+      "title": "Artificial Analysis Claude Assessment"
+    },
+    {
+      "id": "R20",
+      "url": "https://artificialanalysis.ai/coding-agents",
+      "used_for": "Chi phí/tác vụ của Opus 5.5",
+      "title": "Coding Agent Index Evaluation"
+    },
+    {
+      "id": "R21",
+      "url": "https://the-decoder.com",
+      "used_for": "Open-weight Qwen3.8, giấy phép Apache 2.0",
+      "title": "Open-weight Models Coverage"
+    },
+    {
+      "id": "R22",
+      "url": "https://fourweekmba.com",
+      "used_for": "Giá Gemini 4 Argon, GPT-6 Sol/Luna",
+      "title": "Frontier AI Models Pricing Matrix"
+    },
+    {
+      "id": "R23",
+      "url": "https://anthropic.com/research/claude-opus-5-system-card",
+      "used_for": "Prompt-injection robustness evaluation",
+      "title": "Claude Opus 5 System Card"
+    },
+    {
+      "id": "R24",
+      "url": "https://code.claude.com/docs",
+      "used_for": "Hooks, subagents, GitHub Actions",
+      "title": "Claude Code Documentation"
+    },
+    {
+      "id": "R25",
+      "url": "https://arxiv.org/abs/1706.03762",
+      "used_for": "Nền tảng Transformer, KV-cache, GQA",
+      "title": "Vaswani et al. (2017), Ainslie et al. (2023)"
+    },
+    {
+      "id": "R26",
+      "url": "https://owasp.org/www-project-top-10-for-large-language-model-applications/",
+      "used_for": "Khung rủi ro ứng dụng LLM",
+      "title": "OWASP Top 10 for LLM Applications"
+    },
+    {
+      "id": "R27",
+      "url": "https://arxiv.org/abs/2310.07475",
+      "used_for": "Faithfulness, Answer Relevancy (RAGAS)",
+      "title": "Es et al., RAGAS Framework (2023)"
+    }
+  ]
+}
