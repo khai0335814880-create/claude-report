@@ -1,0 +1,85 @@
+{
+  "as_of": "2026-11-22",
+  "source_url": "https://platform.claude.com/docs/en/models/overview",
+  "reliability": "docs",
+  "currency": "USD",
+  "unit": "per_million_tokens",
+  "cache_rules": {
+    "min_cacheable_tokens": 512,
+    "batch_discount_multiplier": 0.5,
+    "ttl_write_multipliers": {
+      "5m": 1.25,
+      "1h": 2.0
+    }
+  },
+  "models": {
+    "claude-fable-5-2": {
+      "name": "Claude Fable 5.2",
+      "api_id": "claude-fable-5-2",
+      "in": 8.0,
+      "out": 40.0,
+      "fast_mode_in": 16.0,
+      "fast_mode_out": 80.0,
+      "cache_read": 0.20,
+      "readMult": 0.025,
+      "context": 1000000,
+      "max_out": 131072,
+      "thinking": "Adaptive (luôn bật)",
+      "default_effort": "high",
+      "release_date": "2026-11-09",
+      "notes": "Safeguard cho sinh học & an ninh mạng; truy cập mở rộng"
+    },
+    "claude-opus-5-5": {
+      "name": "Claude Opus 5.5",
+      "api_id": "claude-opus-5-5",
+      "in": 4.0,
+      "out": 20.0,
+      "fast_mode_in": 8.0,
+      "fast_mode_out": 40.0,
+      "cache_write_5m": 5.0,
+      "cache_write_1h": 8.0,
+      "cache_read": 0.20,
+      "readMult": 0.05,
+      "context": 1000000,
+      "max_out": 131072,
+      "thinking": "Adaptive (luôn bật)",
+      "default_effort": "medium",
+      "release_date": "2026-09-22",
+      "notes": "Mạnh ở tác vụ dài hơi, mở, cần phán đoán liên tục"
+    },
+    "claude-sonnet-5-5": {
+      "name": "Claude Sonnet 5.5",
+      "api_id": "claude-sonnet-5-5",
+      "in": 2.0,
+      "out": 10.0,
+      "cache_write_5m": 2.50,
+      "cache_write_1h": 4.0,
+      "cache_read": 0.10,
+      "readMult": 0.05,
+      "context": 1000000,
+      "max_out": 131072,
+      "thinking": "Adaptive",
+      "default_effort": "high (API) / medium (Claude Code)",
+      "release_date": "2026-09-28",
+      "notes": "Model sản xuất mặc định; tỉ lệ giá/hiệu năng tối ưu nhất"
+    },
+    "claude-haiku-5-5": {
+      "name": "Claude Haiku 5.5",
+      "api_id": "claude-haiku-5-5",
+      "in": 0.10,
+      "out": 0.50,
+      "tier2_threshold_tokens": 100000,
+      "tier2_in": 0.50,
+      "tier2_out": 2.50,
+      "cache_read": 0.01,
+      "tier2_cache_read": 0.05,
+      "readMult": 0.10,
+      "context": 1000000,
+      "max_out": 131072,
+      "thinking": "Adaptive",
+      "default_effort": "medium",
+      "release_date": "2026-10-07",
+      "notes": "Nếu prompt > 100K token, toàn bộ request tính giá $0.50/$2.50"
+    }
+  }
+}
