@@ -914,15 +914,242 @@
       text-align: center;
     }
 
+    /* =================================================================
+       6. PHASE 3 WIDGET SPECIFIC STYLES (EFFORT LAB & CONTEXT DIET)
+       ================================================================= */
+    /* Effort Lab (Figure 4 - F4) */
+    .effort-lab-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 1.3fr;
+      gap: 24px;
+      align-items: start;
+    }
+    .effort-control-panel {
+      background: var(--bench);
+      border: 1px solid var(--rule);
+      border-radius: 6px;
+      padding: 20px;
+    }
+    .effort-knob-pills {
+      display: flex;
+      gap: 6px;
+      margin: 12px 0 16px;
+      flex-wrap: wrap;
+    }
+    .effort-pill-btn {
+      padding: 8px 14px;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      font-weight: 600;
+      background: var(--stage);
+      border: 1px solid var(--rule);
+      border-radius: 4px;
+      cursor: pointer;
+      color: var(--ink);
+      transition: all 0.15s;
+    }
+    .effort-pill-btn:hover {
+      border-color: var(--tok-think);
+    }
+    .effort-pill-btn.active {
+      background: var(--tok-think);
+      color: #fff;
+      border-color: var(--tok-think);
+      box-shadow: 0 2px 6px rgba(122,86,224,0.25);
+    }
+
+    .effort-fact-card {
+      background: var(--stage);
+      border-left: 3px solid var(--tok-think);
+      padding: 14px 16px;
+      border-radius: 4px;
+      font-size: 0.86rem;
+      line-height: 1.5;
+    }
+
+    /* Knee Chart Box */
+    .knee-chart-box {
+      background: var(--bench);
+      border: 1px solid var(--rule);
+      border-radius: 6px;
+      padding: 20px;
+    }
+    .knee-svg-container {
+      background: var(--stage);
+      border: 1px solid var(--rule);
+      border-radius: 4px;
+      padding: 10px;
+      position: relative;
+    }
+    .knee-star-point {
+      animation: pulseGlow 1.8s infinite alternate;
+    }
+    @keyframes pulseGlow {
+      from { transform: scale(1); filter: drop-shadow(0 0 2px var(--warn)); }
+      to { transform: scale(1.25); filter: drop-shadow(0 0 8px var(--warn)); }
+    }
+
+    /* Context Diet (Figure 5 - F5) */
+    .context-bar-container {
+      background: var(--bench);
+      border: 1px solid var(--rule);
+      border-radius: 6px;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+    .context-bar-outer {
+      height: 36px;
+      background: var(--stage);
+      border: 1px solid var(--rule);
+      border-radius: 4px;
+      display: flex;
+      overflow: hidden;
+      gap: 2px;
+      margin: 14px 0 8px;
+    }
+    .context-segment {
+      height: 100%;
+      transition: width 0.4s ease;
+      position: relative;
+    }
+    .context-segment.sys {
+      background: var(--tok-cached);
+      background-image: repeating-linear-gradient(45deg, transparent, transparent 2px, rgba(255,255,255,0.4) 2px, rgba(255,255,255,0.4) 4px);
+    }
+    .context-segment.tool-def {
+      background: var(--tok-fresh);
+    }
+    .context-segment.history {
+      background: var(--tok-think);
+      background-image: radial-gradient(rgba(255,255,255,0.5) 1px, transparent 0);
+      background-size: 4px 4px;
+    }
+    .context-segment.tool-res {
+      background: var(--tok-out);
+      background-image: repeating-linear-gradient(135deg, transparent, transparent 2px, rgba(255,255,255,0.4) 2px, rgba(255,255,255,0.4) 4px);
+    }
+
+    .context-legend-bar {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--ink-2);
+      margin-top: 8px;
+    }
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* Diet Switches Container */
+    .diet-switches-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .diet-switch-card {
+      background: var(--bench);
+      border: 1px solid var(--rule);
+      border-radius: 6px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .diet-switch-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .diet-switch-title {
+      font-family: var(--font-mono);
+      font-size: 0.84rem;
+      font-weight: 700;
+      color: var(--ink);
+    }
+    .diet-tradeoff-tag {
+      font-size: 0.78rem;
+      color: var(--ink-2);
+      line-height: 1.4;
+      background: var(--stage);
+      padding: 6px 10px;
+      border-radius: 3px;
+      border: 1px solid var(--rule);
+    }
+
+    /* Tech switch toggle */
+    .switch-toggle {
+      position: relative;
+      display: inline-block;
+      width: 44px;
+      height: 24px;
+    }
+    .switch-toggle input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+    .switch-slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-color: var(--rule);
+      transition: .25s;
+      border-radius: 24px;
+    }
+    .switch-slider:before {
+      position: absolute;
+      content: "";
+      height: 18px;
+      width: 18px;
+      left: 3px;
+      bottom: 3px;
+      background-color: white;
+      transition: .25s;
+      border-radius: 50%;
+    }
+    input:checked + .switch-slider {
+      background-color: var(--tok-fresh);
+    }
+    input:checked + .switch-slider:before {
+      transform: translateX(20px);
+    }
+
+    /* Code Copy Pill */
+    .code-copy-card {
+      background: var(--stage);
+      border: 1px solid var(--rule);
+      border-radius: 4px;
+      padding: 8px 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+    }
+    .code-copy-btn {
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      color: var(--tok-fresh);
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+
     /* Responsive adjustments */
     @media (max-width: 1200px) {
       .page-layout {
         grid-template-columns: 140px 1fr 220px;
         gap: 20px;
       }
-      .decision-container {
-        grid-template-columns: 1fr;
-      }
+      .decision-container { grid-template-columns: 1fr; }
+      .effort-lab-grid { grid-template-columns: 1fr; }
+      .diet-switches-grid { grid-template-columns: 1fr; }
     }
 
     @media (max-width: 992px) {
@@ -1012,7 +1239,7 @@
       <div style="margin-top: 28px; padding-top: 14px; border-top: 1px solid var(--rule); font-size: 0.72rem; color: var(--ink-2);">
         <div><strong>Hồ sơ thẩm định:</strong></div>
         <div style="margin-top: 4px;">Alliance ITSC / Case 2026</div>
-        <div style="margin-top: 2px;">Trạng thái: <span style="color:var(--tok-fresh); font-weight:600;">Phase 2 Active</span></div>
+        <div style="margin-top: 2px;">Trạng thái: <span style="color:var(--tok-fresh); font-weight:600;">Phase 3 Active</span></div>
       </div>
     </nav>
 
@@ -1130,7 +1357,7 @@
           ℹ Tách token xấp xỉ để minh hoạ trực quan các vai trò (cached / fresh / out), không phải tokenizer BPE nội bộ của Claude.
         </div>
 
-        <!-- Hero Test Vector Table (Creative Direction Spec 5.0) -->
+        <!-- Hero Test Vector Table -->
         <div style="margin-top: 20px;">
           <div style="font-family:var(--font-mono); font-size:0.75rem; color:var(--ink-2); margin-bottom:6px; text-transform:uppercase;">
             Bảng kiểm thử chi phí theo kịch bản (Unit Test Vectors · Sonnet 5.5 · 20.000 prefix / 1.500 fresh / 400 out):
@@ -1237,7 +1464,6 @@
                 <td><code>claude-fable-5-2</code></td>
                 <td>
                   <div>$8.00 / $40.00 <span style="font-size:0.7rem; opacity:0.7;">(fast: 16/80)</span></div>
-                  <!-- Log Bar: In=73%, Out=100% -->
                   <div style="height:4px; background:var(--rule); border-radius:2px; margin-top:4px; display:flex;">
                     <div style="width:73%; background:var(--tok-fresh);" title="Input: $8/M"></div>
                     <div style="width:27%; background:var(--tok-out);" title="Output: $40/M"></div>
@@ -1254,7 +1480,6 @@
                 <td><code>claude-opus-5-5</code></td>
                 <td>
                   <div>$4.00 / $20.00 <span style="font-size:0.7rem; opacity:0.7;">(fast: 8/40)</span></div>
-                  <!-- Log Bar: In=61.6%, Out=88.4% -->
                   <div style="height:4px; background:var(--rule); border-radius:2px; margin-top:4px; display:flex;">
                     <div style="width:61.6%; background:var(--tok-fresh);" title="Input: $4/M"></div>
                     <div style="width:26.8%; background:var(--tok-out);" title="Output: $20/M"></div>
@@ -1271,7 +1496,6 @@
                 <td><code>claude-sonnet-5-5</code></td>
                 <td>
                   <div>$2.00 / $10.00</div>
-                  <!-- Log Bar: In=50%, Out=76.9% -->
                   <div style="height:4px; background:var(--rule); border-radius:2px; margin-top:4px; display:flex;">
                     <div style="width:50%; background:var(--tok-fresh);" title="Input: $2/M"></div>
                     <div style="width:26.9%; background:var(--tok-out);" title="Output: $10/M"></div>
@@ -1288,7 +1512,6 @@
                 <td><code>claude-haiku-5-5</code></td>
                 <td>
                   <div>$0.10 / $0.50 <span style="font-size:0.7rem; opacity:0.7;">(&le;100K)</span></div>
-                  <!-- Log Bar: In=0%, Out=26.8% -->
                   <div style="height:4px; background:var(--rule); border-radius:2px; margin-top:4px; display:flex;">
                     <div style="width:4%; background:var(--tok-fresh);" title="Input: $0.10/M"></div>
                     <div style="width:22.8%; background:var(--tok-out);" title="Output: $0.50/M"></div>
@@ -1345,92 +1568,72 @@
               </defs>
 
               <!-- Connecting Edges -->
-              <!-- A -> B -->
               <path id="edge-A-B" class="tree-edge active" d="M 120 40 L 120 75" marker-end="url(#arrow-active)"/>
-              <!-- B -> C (On-prem) -->
               <path id="edge-B-C" class="tree-edge" d="M 70 100 L 40 100 L 40 170 L 60 170" marker-end="url(#arrow)"/>
-              <!-- B -> D (Cloud) -->
               <path id="edge-B-D" class="tree-edge active" d="M 170 100 L 260 100" marker-end="url(#arrow-active)"/>
-              <!-- D -> E (Haiku) -->
               <path id="edge-D-E" class="tree-edge" d="M 320 80 L 320 45 L 380 45" marker-end="url(#arrow)"/>
-              <!-- D -> F (Sonnet) -->
               <path id="edge-D-F" class="tree-edge active" d="M 380 100 L 430 100" marker-end="url(#arrow-active)"/>
-              <!-- D -> G (Opus) -->
               <path id="edge-D-G" class="tree-edge" d="M 320 120 L 320 175 L 380 175" marker-end="url(#arrow)"/>
-              <!-- D -> H (Fable) -->
               <path id="edge-D-H" class="tree-edge" d="M 320 120 L 320 235 L 380 235" marker-end="url(#arrow)"/>
-              <!-- F -> J (Optimization) -->
               <path id="edge-F-J" class="tree-edge active" d="M 480 125 L 480 290 L 330 290" marker-end="url(#arrow-active)"/>
-              <!-- J -> K, L, M -->
               <path id="edge-J-K" class="tree-edge" d="M 230 310 L 140 355" marker-end="url(#arrow)"/>
               <path id="edge-J-L" class="tree-edge active" d="M 270 320 L 270 355" marker-end="url(#arrow-active)"/>
               <path id="edge-J-M" class="tree-edge" d="M 310 310 L 400 355" marker-end="url(#arrow)"/>
 
               <!-- Nodes -->
-              <!-- Node A: Start -->
               <g id="node-A" class="tree-node active">
                 <rect x="50" y="10" width="140" height="30" rx="4"/>
                 <text x="120" y="30" text-anchor="middle" font-family="var(--font-mono)" font-size="11" fill="var(--ink)">Bài toán mới</text>
               </g>
 
-              <!-- Node B: Data check -->
               <g id="node-B" class="tree-node active">
                 <rect x="70" y="80" width="100" height="40" rx="4"/>
                 <text x="120" y="98" text-anchor="middle" font-family="var(--font-mono)" font-size="10" fill="var(--ink)">Rời hạ tầng?</text>
                 <text x="120" y="112" text-anchor="middle" font-family="var(--font-mono)" font-size="8" fill="var(--ink-2)">Bảo mật / ZDR</text>
               </g>
 
-              <!-- Node C: On-premise -->
               <g id="node-C" class="tree-node">
                 <rect x="10" y="155" width="120" height="45" rx="4"/>
                 <text x="70" y="174" text-anchor="middle" font-family="var(--font-mono)" font-size="10" fill="var(--ink)">Open-weight</text>
                 <text x="70" y="188" text-anchor="middle" font-family="var(--font-mono)" font-size="8" fill="var(--ink-2)">Qwen 3.6 / DeepSeek V4</text>
               </g>
 
-              <!-- Node D: Task type -->
               <g id="node-D" class="tree-node active">
                 <rect x="260" y="80" width="120" height="40" rx="4"/>
                 <text x="320" y="98" text-anchor="middle" font-family="var(--font-mono)" font-size="10" fill="var(--ink)">Loại tác vụ?</text>
                 <text x="320" y="112" text-anchor="middle" font-family="var(--font-mono)" font-size="8" fill="var(--ink-2)">Phức tạp & RAG</text>
               </g>
 
-              <!-- Leaf Nodes for Models -->
-              <!-- Node E: Haiku -->
               <g id="node-E" class="tree-node">
                 <rect x="380" y="30" width="120" height="32" rx="4"/>
                 <text x="440" y="47" text-anchor="middle" font-family="var(--font-mono)" font-size="10" fill="var(--ink)">Haiku 5.5</text>
                 <text x="440" y="58" text-anchor="middle" font-family="var(--font-mono)" font-size="8" fill="var(--ink-2)">$0.10 / $0.50 (Phân loại)</text>
               </g>
 
-              <!-- Node F: Sonnet -->
               <g id="node-F" class="tree-node active">
                 <rect x="420" y="85" width="115" height="40" rx="4"/>
                 <text x="477" y="103" text-anchor="middle" font-family="var(--font-mono)" font-size="11" fill="var(--tok-fresh)">Sonnet 5.5 ★</text>
                 <text x="477" y="117" text-anchor="middle" font-family="var(--font-mono)" font-size="8" fill="var(--ink-2)">Mặc định Production</text>
               </g>
 
-              <!-- Node G: Opus -->
               <g id="node-G" class="tree-node">
                 <rect x="380" y="160" width="120" height="32" rx="4"/>
                 <text x="440" y="177" text-anchor="middle" font-family="var(--font-mono)" font-size="10" fill="var(--ink)">Opus 5.5</text>
                 <text x="440" y="188" text-anchor="middle" font-family="var(--font-mono)" font-size="8" fill="var(--ink-2)">Refactor lớn, phán đoán</text>
               </g>
 
-              <!-- Node H: Fable -->
               <g id="node-H" class="tree-node">
                 <rect x="380" y="220" width="120" height="32" rx="4"/>
                 <text x="440" y="237" text-anchor="middle" font-family="var(--font-mono)" font-size="10" fill="var(--ink)">Fable 5.2</text>
                 <text x="440" y="248" text-anchor="middle" font-family="var(--font-mono)" font-size="8" fill="var(--ink-2)">Toán sâu, eval cực khó</text>
               </g>
 
-              <!-- Node J: Cost optimization branch -->
               <g id="node-J" class="tree-node active">
                 <rect x="220" y="275" width="110" height="35" rx="4"/>
                 <text x="275" y="292" text-anchor="middle" font-family="var(--font-mono)" font-size="10" fill="var(--ink)">Tối ưu chi phí?</text>
                 <text x="275" y="304" text-anchor="middle" font-family="var(--font-mono)" font-size="8" fill="var(--ink-2)">Chiến lược hạ tầng</text>
               </g>
 
-              <!-- Node K, L, M: Optimizations -->
               <g id="node-K" class="tree-node">
                 <rect x="80" y="355" width="100" height="35" rx="4"/>
                 <text x="130" y="372" text-anchor="middle" font-family="var(--font-mono)" font-size="9" fill="var(--ink)">Batch API</text>
@@ -1631,7 +1834,6 @@
         <div class="kv-widget-layout">
           <!-- Controls Panel -->
           <div class="kv-controls">
-            <!-- Layers L -->
             <div class="control-row">
               <div class="control-label">
                 <span>Số Layer (\(L\)):</span>
@@ -1640,7 +1842,6 @@
               <input type="range" class="control-slider" id="sliderL" min="32" max="128" step="8" value="80" oninput="updateKvCalculation()">
             </div>
 
-            <!-- KV Heads n_kv & GQA vs MHA -->
             <div class="control-row">
               <div class="control-label">
                 <span>Cơ chế Attention (\(n_{kv}\) heads):</span>
@@ -1652,7 +1853,6 @@
               </div>
             </div>
 
-            <!-- Head Dim d_head & Precision b -->
             <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
               <div class="control-row">
                 <div class="control-label">
@@ -1673,7 +1873,6 @@
               </div>
             </div>
 
-            <!-- Context Length T -->
             <div class="control-row">
               <div class="control-label">
                 <span>Độ dài ngữ cảnh (\(T\) tokens):</span>
@@ -1701,7 +1900,6 @@
               </div>
             </div>
 
-            <!-- Visual Tower Scale -->
             <div>
               <div style="font-family:var(--font-mono); font-size:0.72rem; color:var(--ink-2); margin-bottom:4px;">
                 Trực quan hóa khối VRAM trên cụm GPU H100 (80GB):
@@ -1865,11 +2063,409 @@
         </div>
       </section>
 
-      <!-- ANCHORS FOR SUBSEQUENT PHASES (TRẠM 3 - 7) -->
-      <div id="tr-3" style="padding: 24px 0; border-top: 1px dashed var(--rule);"><small style="font-family:var(--font-mono); color:var(--ink-2);">[Trạm 3: B.2.2 Adaptive Thinking & F4 Effort Lab · Phase 3]</small></div>
-      <div id="tr-4" style="padding: 24px 0; border-top: 1px dashed var(--rule);"><small style="font-family:var(--font-mono); color:var(--ink-2);">[Trạm 4: B.2.3 Quản trị ngữ cảnh & F5 Context Diet · Phase 3]</small></div>
+      <!-- =================================================================
+           TRẠM 3: NGHĨ (B.2.2) · EFFORT LAB
+           ================================================================= -->
+      <section id="tr-3" class="reading-band">
+        <div class="reading-col">
+          <div style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--tok-think); font-weight: 600; text-transform: uppercase; margin-bottom: 8px;">
+            Trạm 3 · Nghĩ (B.2.2)
+          </div>
+          <h2>B.2.2 Adaptive Thinking và `effort`: Một Núm Điều Khiển Thay Cho Ngân Sách</h2>
+          <p>
+            Trên các model Claude 5.5 (đặc biệt là Opus 5.5 và Sonnet 5.5), Anthropic giới thiệu một thay đổi nền tảng mang tính bước ngoặt: <strong>Thinking luôn luôn adaptive</strong>. Model tự động phán đoán xem câu hỏi có cần tư duy suy luận nhiều bước hay không và tự quyết định số lượng reasoning token sinh ra.
+          </p>
+
+          <div style="background:var(--stage); border:1px solid var(--rule); padding:14px 18px; border-radius:4px; font-size:0.92rem; margin:16px 0 20px;">
+            <strong>Breaking change kỹ thuật trên API Claude 5.5 <span class="tag-verif docs">[Docs]</span>:</strong>
+            <ul style="margin:8px 0 0; padding-left:20px; font-size:0.88rem; line-height:1.5;">
+              <li>Cấu hình cũ <code>thinking: {"type": "disabled"}</code> hoặc <code>budget_tokens: N</code> sẽ trả về mã lỗi <strong>HTTP 400 Bad Request</strong> trên Opus 5.5.</li>
+              <li>Độ sâu suy luận hiện được điều khiển duy nhất thông qua núm: <code>output_config.effort</code> với 5 nấc: <code>low</code>, <code>medium</code>, <code>high</code>, <code>xhigh</code>, <code>max</code>.</li>
+              <li>Tham số <code>max_tokens</code> đóng vai trò là <strong>trần giới hạn cứng</strong> cho cả reasoning tokens cộng với câu trả lời cuối cùng. Nếu đặt trần quá thấp, thinking sẽ ngốn cạn budget khiến câu trả lời bị cụt (truncated).</li>
+              <li>Tùy chọn <code>between_tools</code> cho phép tắt thinking ở đầu lượt khi gọi công cụ liên tục (hỗ trợ trên Sonnet 5.5 ở effort từ <code>high</code> trở xuống).</li>
+            </ul>
+          </div>
+
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Mức Effort</th>
+                <th>Tình huống sử dụng tối ưu</th>
+                <th>Ghi chú kỹ thuật & Bằng chứng thực nghiệm</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>low</code></td>
+                <td>Phân loại intent, rewrite câu hỏi, trích xuất thực thể đơn giản.</td>
+                <td>Anthropic công bố Sonnet 5.5 ở low/medium vượt điểm tốt nhất của Sonnet 5 với chỉ ~1/10 chi phí/tác vụ <span class="tag-verif docs">[Tự báo cáo]</span>.</td>
+              </tr>
+              <tr>
+                <td><code>medium</code></td>
+                <td>Mặc định cho Opus 5.5, Haiku 5.5; cấu hình tiêu chuẩn trong Claude Code và App.</td>
+                <td>Cân bằng xuất sắc giữa khả năng lập luận và độ trễ phản hồi (latency).</td>
+              </tr>
+              <tr>
+                <td><code>high</code></td>
+                <td>Mặc định của Sonnet 5.5 trên API; RAG pháp lý đa bước, code review.</td>
+                <td>Tư duy chuyên sâu, suy luận chuỗi mắt xích dài; thời gian sinh và chi phí tăng tương ứng.</td>
+              </tr>
+              <tr>
+                <td><code>xhigh</code></td>
+                <td>Agentic coding phức tạp, giải quyết bug repo lớn.</td>
+                <td>Điểm benchmark Terminal-Bench của Opus 5.5 được đo tại mức này; yêu cầu đặt <code>max_tokens</code> đủ lớn.</td>
+              </tr>
+              <tr>
+                <td><code>max</code></td>
+                <td>Chỉ dùng khi benchmark trên tập dữ liệu của bạn chứng minh có lợi.</td>
+                <td><strong>Cảnh báo:</strong> Có thể kém hơn <code>xhigh</code>! Trên FrontierCode, Sonnet 5.5 tại Max thấp hơn Xhigh vì sinh quá nhiều subagent review gây timeout hoặc sửa lan man ngoài phạm vi <span class="tag-verif docs">[Tự báo cáo]</span>.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- STAGE: FIGURE 4 (F4) EFFORT LAB WIDGET -->
+      <section class="stage-canvas">
+        <div style="margin-bottom:16px;">
+          <div style="font-family:var(--font-mono); font-size:0.75rem; color:var(--tok-think); text-transform:uppercase; font-weight:700;">
+            Figure 4 (F4) · Effort Lab & Tìm Điểm Gấp Khúc (Knee Optimization) <span class="tag-verif hypo">[Giả định / Đo đạc]</span>
+          </div>
+          <h3 style="font-size:1.3rem; margin:2px 0 0;">Thực Nghiệm Effort Sweep: Chọn Effort Tại Điểm Gấp Khúc, Không Chọn Mức Cao Nhất</h3>
+          <div style="font-size:0.88rem; color:var(--ink-2); margin-top:2px;">
+            "Không bao giờ nhảy lên model đắt tiền hơn trước khi thực hiện effort sweep trên golden test set của chính bạn."
+          </div>
+        </div>
+
+        <div class="effort-lab-grid">
+          <!-- Left: Effort Knob & Published Facts -->
+          <div class="effort-control-panel">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <span style="font-family:var(--font-mono); font-size:0.75rem; color:var(--ink-2); text-transform:uppercase; font-weight:700;">
+                Núm Điều Khiển Effort:
+              </span>
+              <span id="effortBadgeDisplay" class="badge-spec" style="color:var(--tok-think); border-color:var(--tok-think);">medium</span>
+            </div>
+
+            <!-- 5-level Knob Pills -->
+            <div class="effort-knob-pills" id="effortPillsContainer">
+              <button class="effort-pill-btn" onclick="setEffortLevel('low')">low</button>
+              <button class="effort-pill-btn active" onclick="setEffortLevel('medium')">medium</button>
+              <button class="effort-pill-btn" onclick="setEffortLevel('high')">high</button>
+              <button class="effort-pill-btn" onclick="setEffortLevel('xhigh')">xhigh</button>
+              <button class="effort-pill-btn" onclick="setEffortLevel('max')">max</button>
+            </div>
+
+            <!-- Published Fact Card -->
+            <div class="effort-fact-card" id="effortFactCard">
+              <strong>Sự thật kỹ thuật đã công bố (Medium):</strong> Mức mặc định hợp lý cho Opus 5.5 và Haiku 5.5; cấu hình tiêu chuẩn trong Claude Code và giao diện app. Giữ độ trễ và chi phí ở mức tối ưu cho 80% tác vụ phổ thông.
+            </div>
+
+            <!-- Dynamic Metrics Indicator -->
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:14px;">
+              <div style="background:var(--stage); padding:10px; border-radius:4px; border:1px solid var(--rule);">
+                <div style="font-family:var(--font-mono); font-size:0.7rem; color:var(--ink-2); text-transform:uppercase;">Ước tính Thinking Tokens</div>
+                <div id="effortTokensVal" style="font-family:var(--font-mono); font-size:1.15rem; font-weight:700; color:var(--tok-think); margin-top:2px;">3.500 tok</div>
+              </div>
+              <div style="background:var(--stage); padding:10px; border-radius:4px; border:1px solid var(--rule);">
+                <div style="font-family:var(--font-mono); font-size:0.7rem; color:var(--ink-2); text-transform:uppercase;">Chi phí Thinking / req</div>
+                <div id="effortCostVal" style="font-family:var(--font-mono); font-size:1.15rem; font-weight:700; color:var(--tok-out); margin-top:2px;">$0.0350</div>
+              </div>
+            </div>
+
+            <div style="margin-top:14px; font-family:var(--font-mono); font-size:0.72rem; color:var(--ink-2);">
+              💡 <em>Mẹo bàn phím:</em> Sử dụng phím mũi tên &larr; / &rarr; để xoay chuyển giữa các nấc effort.
+            </div>
+          </div>
+
+          <!-- Right: Knee Chart & Custom Sweep Data -->
+          <div class="knee-chart-box">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+              <span style="font-family:var(--font-mono); font-size:0.75rem; color:var(--ink-2); text-transform:uppercase; font-weight:700;">
+                Biểu Đồ Chất Lượng vs Chi Phí (Knee Chart)
+              </span>
+              <div style="display:flex; gap:6px;">
+                <button class="btn-tool" style="font-size:0.7rem; padding:2px 8px;" onclick="loadSyntheticSweepData()">Dùng Mẫu (Synthetic)</button>
+                <button class="btn-tool" style="font-size:0.7rem; padding:2px 8px;" onclick="toggleCsvDrawer()">Nạp CSV</button>
+              </div>
+            </div>
+
+            <!-- SVG Knee Chart -->
+            <div class="knee-svg-container">
+              <svg id="kneeSvg" viewBox="0 0 460 220" width="100%" height="100%" style="display:block;">
+                <!-- Grid Lines -->
+                <line x1="50" y1="20" x2="430" y2="20" stroke="var(--rule)" stroke-dasharray="3 3"/>
+                <line x1="50" y1="65" x2="430" y2="65" stroke="var(--rule)" stroke-dasharray="3 3"/>
+                <line x1="50" y1="110" x2="430" y2="110" stroke="var(--rule)" stroke-dasharray="3 3"/>
+                <line x1="50" y1="155" x2="430" y2="155" stroke="var(--rule)" stroke-dasharray="3 3"/>
+                <line x1="50" y1="190" x2="430" y2="190" stroke="var(--ink)" stroke-width="1.5"/>
+                <line x1="50" y1="20" x2="50" y2="190" stroke="var(--ink)" stroke-width="1.5"/>
+
+                <!-- Y Axis Labels -->
+                <text x="42" y="24" text-anchor="end" font-family="var(--font-mono)" font-size="9" fill="var(--ink-2)">100%</text>
+                <text x="42" y="69" text-anchor="end" font-family="var(--font-mono)" font-size="9" fill="var(--ink-2)">80%</text>
+                <text x="42" y="114" text-anchor="end" font-family="var(--font-mono)" font-size="9" fill="var(--ink-2)">60%</text>
+                <text x="42" y="159" text-anchor="end" font-family="var(--font-mono)" font-size="9" fill="var(--ink-2)">40%</text>
+
+                <!-- X Axis Labels -->
+                <text x="50" y="205" text-anchor="middle" font-family="var(--font-mono)" font-size="9" fill="var(--ink-2)">$0.0</text>
+                <text x="145" y="205" text-anchor="middle" font-family="var(--font-mono)" font-size="9" fill="var(--ink-2)">$0.4</text>
+                <text x="240" y="205" text-anchor="middle" font-family="var(--font-mono)" font-size="9" fill="var(--ink-2)">$0.8</text>
+                <text x="335" y="205" text-anchor="middle" font-family="var(--font-mono)" font-size="9" fill="var(--ink-2)">$1.2</text>
+                <text x="430" y="205" text-anchor="middle" font-family="var(--font-mono)" font-size="9" fill="var(--ink-2)">$1.6</text>
+
+                <!-- Baseline Secant Chord (Line between first and last point) -->
+                <line id="kneeSecantLine" x1="74" y1="122" x2="430" y2="52" stroke="var(--rule)" stroke-width="1.5" stroke-dasharray="4 4"/>
+
+                <!-- Curve Line -->
+                <path id="kneeCurvePath" d="M 74 122 L 98 80 L 145 61 L 240 54 L 430 52" fill="none" stroke="var(--tok-fresh)" stroke-width="2.5"/>
+
+                <!-- Data Points (low, med, high, xhigh, max) -->
+                <circle id="pt-0" cx="74" cy="122" r="4.5" fill="var(--stage)" stroke="var(--tok-fresh)" stroke-width="2"/>
+                <circle id="pt-1" cx="98" cy="80" r="4.5" fill="var(--stage)" stroke="var(--tok-fresh)" stroke-width="2"/>
+                <circle id="pt-2" cx="145" cy="61" r="7" fill="var(--warn)" stroke="#fff" stroke-width="2" class="knee-star-point"/>
+                <circle id="pt-3" cx="240" cy="54" r="4.5" fill="var(--stage)" stroke="var(--tok-fresh)" stroke-width="2"/>
+                <circle id="pt-4" cx="430" cy="52" r="4.5" fill="var(--stage)" stroke="var(--tok-fresh)" stroke-width="2"/>
+
+                <!-- Knee Badge Label -->
+                <g id="kneeBadgeGroup" transform="translate(145, 42)">
+                  <rect x="-42" y="-14" width="84" height="18" rx="3" fill="var(--warn)"/>
+                  <text x="0" y="-2" text-anchor="middle" font-family="var(--font-mono)" font-size="9" font-weight="700" fill="#fff">★ KNEE POINT</text>
+                </g>
+              </svg>
+            </div>
+
+            <!-- Knee Result Description -->
+            <div style="margin-top:10px; font-family:var(--font-mono); font-size:0.75rem; color:var(--ink-2); line-height:1.4;">
+              * Thuật toán Knee: Khoảng cách thẳng đứng cực đại tới đường nối điểm đầu-cuối. Với test vector mẫu: Knee rơi chính xác tại <strong>high ($0.40/tác vụ, chất lượng 86%)</strong>, sau điểm này chi phí tăng gấp 4× nhưng chất lượng chỉ tăng thêm 4%.
+            </div>
+
+            <!-- Collapsible CSV Drawer -->
+            <div id="csvDrawer" style="display:none; margin-top:12px; background:var(--stage); padding:10px; border-radius:4px; border:1px solid var(--rule);">
+              <div style="font-family:var(--font-mono); font-size:0.72rem; margin-bottom:4px; color:var(--ink-2);">
+                Dán kết quả effort sweep của bạn (định dạng CSV: <code>effort,quality,cost_per_task,latency_s</code>):
+              </div>
+              <textarea id="customCsvInput" rows="3" style="width:100%; font-family:var(--font-mono); font-size:0.72rem; padding:6px; background:var(--bench); border:1px solid var(--rule); border-radius:3px; color:var(--ink);" placeholder="low,0.60,0.10,1.2&#10;medium,0.78,0.20,2.4&#10;high,0.86,0.40,4.8&#10;xhigh,0.89,0.80,9.5&#10;max,0.90,1.60,18.0"></textarea>
+              <button class="btn-action" style="padding:4px 10px; font-size:0.72rem; margin-top:6px;" onclick="applyCustomCsvData()">Vẽ lại đồ thị & Tính Knee</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================
+           TRẠM 4: CÔNG CỤ VÀ NGỮ CẢNH (B.2.3) · CONTEXT DIET
+           ================================================================= -->
+      <section id="tr-4" class="reading-band">
+        <div class="reading-col">
+          <div style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--tok-fresh); font-weight: 600; text-transform: uppercase; margin-bottom: 8px;">
+            Trạm 4 · Công Cụ và Ngữ Cảnh (B.2.3)
+          </div>
+          <h2>B.2.3 Chồng Quản Trị Ngữ Cảnh và Công Cụ: Ăn Kiêng Ngữ Cảnh (Context Diet)</h2>
+          <p>
+            Trong kỹ nghệ Agentic AI thực chiến, <strong>agent chết vì ngữ cảnh phình (context bloat), không phải vì thiếu trí tuệ</strong>. Mỗi vòng lặp tool-use (nhận kết quả, gọi tool tiếp theo) sẽ nhân đôi và tích lũy toàn bộ dữ liệu thô vào lịch sử trò chuyện. Nếu không quản trị chặt chẽ, chi phí sẽ bùng nổ lũy tiến và độ trễ TTFT kéo dài theo dung lượng KV-cache.
+          </p>
+
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Nguồn gây phình ngữ cảnh</th>
+                <th>Công cụ đặc trị</th>
+                <th>Cơ chế hoạt động</th>
+                <th>Tham số / Ghi chú kỹ thuật <span class="tag-verif docs">[Docs]</span></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Định nghĩa tool quá nhiều (JSON Schema)</td>
+                <td><strong>Tool search tool</strong></td>
+                <td>Tải định nghĩa tool động theo yêu cầu thay vì nạp sẵn toàn bộ vào prompt.</td>
+                <td><code>defer_loading: true</code>; hai biến thể Regex hoặc BM25; nên dùng khi hệ thống có &ge;10 tools.</td>
+              </tr>
+              <tr>
+                <td>Chuỗi gọi tool nhỏ, lặp đi lặp lại</td>
+                <td><strong>Programmatic tool calling</strong></td>
+                <td>Claude viết code script; sandbox chạy và tự gọi tool liên hoàn; model chỉ nhận kết quả cuối.</td>
+                <td><code>allowed_callers: ["code_execution_20260120"]</code>; giảm thiểu số lượt round-trip qua mạng.</td>
+              </tr>
+              <tr>
+                <td>Kết quả <code>tool_result</code> cũ trong lịch sử</td>
+                <td><strong>Context editing</strong></td>
+                <td>Tự động cắt tỉa kết quả của các lệnh gọi tool cũ khi context chạm ngưỡng cảnh báo.</td>
+                <td>Anthropic công bố: Trong eval web search 100 lượt, kỹ thuật này giúp giảm <strong>84%</strong> token <span class="tag-verif docs">[Tự báo cáo]</span>.</td>
+              </tr>
+              <tr>
+                <td>Hội thoại dài hơi qua nhiều phiên</td>
+                <td><strong>Compaction</strong></td>
+                <td>Tóm tắt ngữ cảnh hội thoại thành một block compaction có chữ ký mã hóa bảo mật.</td>
+                <td>Beta header <code>compact-2026-09-04</code>; tự động kích hoạt theo ngưỡng định trước.</td>
+              </tr>
+              <tr>
+                <td>Kiến thức cần bảo lưu liên phiên</td>
+                <td><strong>Memory tool</strong></td>
+                <td>File bộ nhớ phía client lưu trữ profile người dùng và quy tắc đặc thù.</td>
+                <td><code>memory_20250818</code>; do client trực tiếp quản lý không gian lưu trữ.</td>
+              </tr>
+              <tr>
+                <td>Cần tư duy mạnh cục bộ</td>
+                <td><strong>Advisor tool</strong></td>
+                <td>Một model rẻ chạy điều phối chính, khi gặp bài toán khó sẽ triệu hồi model mạnh hơn tư vấn.</td>
+                <td><code>advisor_20260301</code> (Beta); <span class="tag-verif hypo">[Chưa xác minh trong tài liệu này]</span>.</td>
+              </tr>
+              <tr>
+                <td>Thay tool giữa hội thoại không mất cache</td>
+                <td><strong>Inline tools</strong></td>
+                <td>Thêm tool mới qua trường <code>tool_addition</code> trong system message giữa chừng.</td>
+                <td>Beta <code>inline-tools-2026-09-15</code>.</td>
+              </tr>
+              <tr>
+                <td>Output sai format / rớt schema</td>
+                <td><strong>Strict tool use</strong></td>
+                <td>Ép buộc cấu trúc đầu ra tuân thủ 100% JSON schema bằng constrained decoding.</td>
+                <td><code>strict: true</code> (lưu ý không áp dụng cho mcp_toolset).</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div style="background:var(--stage); border-left:3px solid var(--tok-fresh); padding:12px 16px; border-radius:4px; font-size:0.9rem; margin-bottom:20px;">
+            <strong>Quy tắc ngón tay cái của kỹ sư hệ thống:</strong> Bật <em>Tool search</em> khi có &ge;10 tools hoặc context schema chiếm &gt;20K tokens; bật <em>Context editing</em> khi hội thoại vượt quá 5 vòng lặp mà kết quả bước đầu không còn giá trị; áp dụng <em>Programmatic tool calling</em> khi agent phải thực hiện các thao tác xử lý dữ liệu hàng loạt.
+          </div>
+        </div>
+      </section>
+
+      <!-- STAGE: FIGURE 5 (F5) CONTEXT DIET WIDGET -->
+      <section class="stage-canvas">
+        <div style="margin-bottom:16px;">
+          <div style="font-family:var(--font-mono); font-size:0.75rem; color:var(--tok-fresh); text-transform:uppercase; font-weight:700;">
+            Figure 5 (F5) · Sân Khấu "Ăn Kiêng Ngữ Cảnh" (Context Diet Simulator) <span class="tag-verif hypo">[Giả định]</span>
+          </div>
+          <h3 style="font-size:1.3rem; margin:2px 0 0;">Mô Phỏng Cắt Tỉa Ngữ Cảnh Trong Quy Trình Agentic 1M Token</h3>
+          <div style="font-size:0.88rem; color:var(--ink-2); margin-top:2px;">
+            "Quản trị ngữ cảnh là nghệ thuật thiết kế hệ thống, không phải việc nâng trần cửa sổ token."
+          </div>
+        </div>
+
+        <!-- 1M Token Context Visual Bar Container -->
+        <div class="context-bar-container">
+          <div style="display:flex; justify-content:space-between; align-items:baseline;">
+            <span style="font-family:var(--font-mono); font-size:0.75rem; color:var(--ink-2); text-transform:uppercase; font-weight:700;">
+              Thanh Phân Bổ Ngữ Cảnh (Tổng Hiện Tại: <strong id="dietTotalTokens" style="color:var(--tok-fresh); font-size:1.1rem;">162.000 tokens</strong>)
+            </span>
+            <span id="dietReductionBadge" class="badge-spec" style="color:var(--tok-cached); border-color:var(--tok-cached);">Cơ Sở (Chưa Bật Diet)</span>
+          </div>
+
+          <!-- Stacked Bar -->
+          <div class="context-bar-outer" id="dietBarOuter">
+            <div class="context-segment sys" id="segSys" style="width: 1.85%;" title="System + Prefix (Cached): 3.000 tok"></div>
+            <div class="context-segment tool-def" id="segDefs" style="width: 14.81%;" title="Định nghĩa Tool (40 tools): 24.000 tok"></div>
+            <div class="context-segment history" id="segHist" style="width: 9.26%;" title="Lịch sử hội thoại: 15.000 tok"></div>
+            <div class="context-segment tool-res" id="segRes" style="width: 74.07%;" title="Kết quả Tool cũ (30 kết quả): 120.000 tok"></div>
+          </div>
+
+          <!-- Direct Legend Labels -->
+          <div class="context-legend-bar">
+            <div class="legend-item"><span class="tok-tile cached"></span> <span>System+Prefix: <strong id="valSegSys">3.000</strong></span></div>
+            <div class="legend-item"><span class="tok-tile fresh"></span> <span>Định nghĩa Tool: <strong id="valSegDefs">24.000</strong></span></div>
+            <div class="legend-item"><span class="tok-tile think"></span> <span>Lịch sử hội thoại: <strong id="valSegHist">15.000</strong></span></div>
+            <div class="legend-item"><span class="tok-tile out"></span> <span>Kết quả Tool cũ: <strong id="valSegRes">120.000</strong></span></div>
+          </div>
+
+          <div style="font-family:var(--font-mono); font-size:0.72rem; color:var(--ink-2); margin-top:10px; background:var(--stage); padding:6px 10px; border-radius:3px; border:1px solid var(--rule);">
+            ℹ <em>Ghi chú bắt buộc:</em> Kịch bản giả định để minh hoạ. Anthropic công bố context editing giảm 84% token trong một eval web search 100 lượt [R12] (số nội bộ, thời Sonnet 4.5); không ngoại suy mặc định sang model hiện tại.
+          </div>
+        </div>
+
+        <!-- 4 Context Diet Toggles Grid -->
+        <div class="diet-switches-grid">
+          <!-- Switch 1: Tool search -->
+          <div class="diet-switch-card">
+            <div class="diet-switch-header">
+              <span class="diet-switch-title">1. Tool Search Tool (`defer_loading`)</span>
+              <label class="switch-toggle">
+                <input type="checkbox" id="switchToolSearch" onchange="updateContextDietSim()">
+                <span class="switch-slider"></span>
+              </label>
+            </div>
+            <div class="diet-tradeoff-tag">
+              <strong>Tác động:</strong> Chỉ nạp 3 tool khớp truy vấn (1.800 tok thay vì 24.000 tok).<br>
+              <strong>Đánh đổi:</strong> Thêm 1 lượt tra cứu tool ban đầu nhưng tiết kiệm 22.200 token context nền.
+            </div>
+          </div>
+
+          <!-- Switch 2: Context editing -->
+          <div class="diet-switch-card">
+            <div class="diet-switch-header">
+              <span class="diet-switch-title">2. Context Editing (Pruning Tool Results)</span>
+              <label class="switch-toggle">
+                <input type="checkbox" id="switchContextEditing" onchange="updateContextDietSim()">
+                <span class="switch-slider"></span>
+              </label>
+            </div>
+            <div class="diet-tradeoff-tag">
+              <strong>Tác động:</strong> Chỉ giữ 5 kết quả tool mới nhất (20.000 tok thay vì 120.000 tok).<br>
+              <strong>Đánh đổi:</strong> Mất chi tiết các lệnh gọi cũ, nhưng giữ luồng agent không bị tràn context.
+            </div>
+          </div>
+
+          <!-- Switch 3: Programmatic tool calling -->
+          <div class="diet-switch-card">
+            <div class="diet-switch-header">
+              <span class="diet-switch-title">3. Programmatic Tool Calling</span>
+              <label class="switch-toggle">
+                <input type="checkbox" id="switchProgrammatic" onchange="updateContextDietSim()">
+                <span class="switch-slider"></span>
+              </label>
+            </div>
+            <div class="diet-tradeoff-tag">
+              <strong>Tác động:</strong> Chạy sandbox code execution, chỉ lưu kết quả cuối (2.000 tok thay vì 20.000 tok).<br>
+              <strong>Đánh đổi:</strong> Các kết quả trung gian không hiển thị trong ngữ cảnh, chỉ lưu kết quả tổng hợp.
+            </div>
+          </div>
+
+          <!-- Switch 4: Compaction -->
+          <div class="diet-switch-card">
+            <div class="diet-switch-header">
+              <span class="diet-switch-title">4. Compaction (`compact-2026-09-04`)</span>
+              <label class="switch-toggle">
+                <input type="checkbox" id="switchCompaction" onchange="updateContextDietSim()">
+                <span class="switch-slider"></span>
+              </label>
+            </div>
+            <div class="diet-tradeoff-tag">
+              <strong>Tác động:</strong> Nén toàn bộ lịch sử 15.000 tok thành block tóm tắt có chữ ký 3.000 tok.<br>
+              <strong>Đánh đổi:</strong> Đánh đổi chi tiết từng câu thoại lấy không gian hoạt động dài hạn.
+            </div>
+          </div>
+        </div>
+
+        <!-- API Parameters One-Click Copy Section -->
+        <div style="margin-top:20px;">
+          <div style="font-family:var(--font-mono); font-size:0.75rem; color:var(--ink-2); text-transform:uppercase; margin-bottom:8px;">
+            Tham số API chính thức tương ứng (Click để sao chép vào mã nguồn):
+          </div>
+          <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:10px;">
+            <div class="code-copy-card">
+              <code>defer_loading: true</code>
+              <button class="code-copy-btn" onclick="copyCode('defer_loading: true')">Copy</button>
+            </div>
+            <div class="code-copy-card">
+              <code>allowed_callers: ["code_execution_20260120"]</code>
+              <button class="code-copy-btn" onclick="copyCode('allowed_callers: [\"code_execution_20260120\"]')">Copy</button>
+            </div>
+            <div class="code-copy-card">
+              <code>beta: ["compact-2026-09-04"]</code>
+              <button class="code-copy-btn" onclick="copyCode('compact-2026-09-04')">Copy</button>
+            </div>
+            <div class="code-copy-card">
+              <code>strict: true</code>
+              <button class="code-copy-btn" onclick="copyCode('strict: true')">Copy</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ANCHORS FOR SUBSEQUENT PHASES (TRẠM 5 - 7) -->
       <div id="tr-5" style="padding: 24px 0; border-top: 1px dashed var(--rule);"><small style="font-family:var(--font-mono); color:var(--ink-2);">[Trạm 5: B.2.4 Native Citations & F8 Explorer · Phase 4]</small></div>
-      <div id="tr-6" style="padding: 24px 0; border-top: 1px dashed var(--rule);"><small style="font-family:var(--font-mono); color:var(--ink-2);">[Trạm 6: B.4 Pipeline 12 bước & F9 Injection Playground · Phase 4]</small></div>
+      <div id="tr-6" style="padding: 24px 0; border-top: 1px dashed var(--rule);"><small style="font-family:var(--font-mono); color:var(--ink-2);">[Trạm 6: B.2.5 Dual-LLM Defense & B.4 Pipeline 12 bước · Phase 4]</small></div>
       <div id="tr-7" style="padding: 24px 0; border-top: 1px dashed var(--rule);"><small style="font-family:var(--font-mono); color:var(--ink-2);">[Trạm 7: B.3 Cost Lab, B.6 Sổ cái & B.7 Q&A · Phase 5]</small></div>
 
     </main>
@@ -2054,7 +2650,7 @@
     var heroSimTimer = null;
     var heroTokens = [
       { text: "Theo", role: "out" }, { text: " Điều", role: "out" }, { text: " 26", role: "out" }, { text: " và", role: "out" },
-      { text: " Điều", role: "out" }, { text: " 65", role: "out" }, { text: " Bộ", role: "out" }, { text: " luật", role: "out" },
+      { text: " Điều", role: "65", role: "out" }, { text: " Bộ", role: "out" }, { text: " luật", role: "out" },
       { text: " Lao", role: "out" }, { text: " động", role: "out" }, { text: " 2019,", role: "out" }, { text: " thời", role: "out" },
       { text: " gian", role: "out" }, { text: " thử", role: "out" }, { text: " việc", role: "out" }, { text: " được", role: "out" },
       { text: " tính", role: "out" }, { text: " là", role: "out" }, { text: " thời", role: "out" }, { text: " gian", role: "out" },
@@ -2094,10 +2690,7 @@
       container.innerHTML = '<span style="color:var(--ink-2); font-style:italic;">Đang khởi tạo KV-cache và nạp prompt...</span>';
       statusEl.innerText = 'Đang truyền stream...';
 
-      // Animate receipt odometer
-      var startCost = 0.0000;
       var targetCost = 0.0114;
-      var currentStep = 0;
       var totalSteps = heroTokens.length;
 
       container.innerHTML = '';
@@ -2128,7 +2721,7 @@
         idx++;
         var curCost = (targetCost * (idx / totalSteps)).toFixed(4);
         odometer.innerText = '$' + curCost;
-      }, 70); // ~6 seconds total
+      }, 70);
     }
 
     function skipHeroSimulation() {
@@ -2137,7 +2730,6 @@
       var btnSkip = document.getElementById('btnHeroSkip');
       var statusEl = document.getElementById('heroResponseStatus');
       var odometer = document.getElementById('heroCostOdometer');
-      var container = document.getElementById('heroResponseContainer');
 
       if (btn) btn.style.display = 'inline-flex';
       if (btnSkip) btnSkip.style.display = 'none';
@@ -2256,7 +2848,6 @@
     }
 
     function evaluateDecisionTree() {
-      // Clear all active svg nodes and edges
       var nodes = document.querySelectorAll('#decisionTreeSvg .tree-node');
       var edges = document.querySelectorAll('#decisionTreeSvg .tree-edge');
       nodes.forEach(function(n) { n.classList.remove('active'); });
@@ -2277,7 +2868,6 @@
         }
       };
 
-      // Root always active
       activateNode('node-A');
       activateEdge('edge-A-B');
       activateNode('node-B');
@@ -2354,7 +2944,6 @@
       document.getElementById('valDhead').innerText = kvConfig.d_head;
       document.getElementById('valT').innerText = kvConfig.T.toLocaleString('vi-VN') + ' tokens';
 
-      // Formula: bytes_per_tok = 2 * b * L * n_kv * d_head
       var bytesPerTok = 2 * kvConfig.b * kvConfig.L * kvConfig.n_kv * kvConfig.d_head;
       var kibPerTok = bytesPerTok / 1024;
       var totalBytes = bytesPerTok * kvConfig.T;
@@ -2365,12 +2954,10 @@
       var valGiBText = (totalGiB >= 1024) ? (totalGiB / 1024).toFixed(2) + ' TiB' : totalGiB.toFixed(2) + ' GiB';
       document.getElementById('kvTotalGiB').innerText = valGiBText;
 
-      // GPU H100 80GB estimate
-      var gpusNeeded = Math.ceil(totalGiB / 70); // 70GB usable per 80GB GPU
+      var gpusNeeded = Math.ceil(totalGiB / 70);
       if (gpusNeeded < 1) gpusNeeded = 1;
       document.getElementById('kvGpuCount').innerText = 'Cần ' + gpusNeeded + ' × GPU H100 80GB';
 
-      // Visual tower scale (max 1000 GiB)
       var pct = Math.min(100, Math.max(4, (totalGiB / 1000) * 100));
       var bar = document.getElementById('kvBarVis');
       if (bar) bar.style.height = pct + '%';
@@ -2431,8 +3018,8 @@
        ================================================================= */
     var ttlSim = {
       mode: '5m',
-      ttlDuration: 5, // minutes
-      requests: [], // list of minute timestamps
+      ttlDuration: 5,
+      requests: [],
       maxRequests: 10
     };
 
@@ -2451,8 +3038,7 @@
       var rect = bar.getBoundingClientRect();
       var clickX = event.clientX - rect.left;
       var pct = Math.max(0, Math.min(1, clickX / rect.width));
-      var minute = Math.round(pct * 15 * 10) / 10; // 1 decimal place
-
+      var minute = Math.round(pct * 15 * 10) / 10;
       dispatchManualRequest(minute);
     }
 
@@ -2467,7 +3053,6 @@
     }
 
     function runOptimal10Challenge() {
-      // 10 optimal requests within 5m TTL: 0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5
       ttlSim.requests = [0, 0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5, 4.0, 4.5];
       recalculateTtlSim();
     }
@@ -2484,8 +3069,8 @@
 
       var totalCost = 0.0;
       var noCacheTotal = 0.0;
-      var writeCost = (ttlSim.mode === '1h') ? 0.0720 : 0.0570; // 20K * 1.25 * $2/M + 0.0070
-      var hitCost = 0.0090; // 20K * 0.05 * $2/M + 0.0070
+      var writeCost = (ttlSim.mode === '1h') ? 0.0720 : 0.0570;
+      var hitCost = 0.0090;
       var standardNoCacheCost = 0.0470;
 
       var lastReqTime = -999;
@@ -2496,7 +3081,7 @@
         var isHit = false;
 
         if (i === 0) {
-          isHit = false; // first is always write
+          isHit = false;
         } else {
           var delta = reqTime - lastReqTime;
           isHit = (delta <= activeTtl);
@@ -2507,7 +3092,6 @@
         noCacheTotal += standardNoCacheCost;
         lastReqTime = reqTime;
 
-        // Render marker
         var leftPct = (reqTime / 15) * 100;
         var marker = document.createElement('div');
         marker.className = 'timeline-marker ' + (isHit ? 'hit' : 'write');
@@ -2517,7 +3101,6 @@
         container.appendChild(marker);
       }
 
-      // Update Tally
       document.getElementById('tallyReqCount').innerText = ttlSim.requests.length + ' / 10';
       document.getElementById('tallyTotalCost').innerText = '$' + totalCost.toFixed(4);
       document.getElementById('tallyNoCacheCost').innerText = '$' + noCacheTotal.toFixed(4);
@@ -2525,7 +3108,6 @@
       var savings = (noCacheTotal > 0) ? ((1 - (totalCost / noCacheTotal)) * 100).toFixed(1) + '%' : '0.0%';
       document.getElementById('tallySavings').innerText = savings;
 
-      // Check challenge
       var badge = document.getElementById('challengeBadge');
       if (badge) {
         if (ttlSim.requests.length === 10 && totalCost <= 0.20) {
@@ -2535,7 +3117,6 @@
         }
       }
 
-      // Update Arc Dial status
       var statusTag = document.getElementById('ttlStatusTag');
       var dialArc = document.getElementById('ttlCircleArc');
       var dialText = document.getElementById('ttlDialTime');
@@ -2554,6 +3135,262 @@
           statusTag.style.color = 'var(--ink-2)';
         }
         if (dialText) dialText.innerText = (ttlSim.mode === '1h') ? '60:00' : '5:00';
+      }
+    }
+
+    /* =================================================================
+       FIGURE 4: EFFORT LAB & KNEE CHART WIDGET (F4)
+       ================================================================= */
+    var effortData = {
+      levels: ['low', 'medium', 'high', 'xhigh', 'max'],
+      current: 'medium',
+      facts: {
+        low: "Phân loại intent, rewrite truy vấn, trích xuất đơn giản. Anthropic công bố Sonnet 5.5 ở low/medium vượt điểm tốt nhất của Sonnet 5 ở một số benchmark với khoảng 1/10 chi phí/tác vụ [Tự báo cáo].",
+        medium: "Mặc định hợp lý cho Opus 5.5, Haiku 5.5; cấu hình tiêu chuẩn trong Claude Code và app cho Sonnet 5.5. Cân bằng tối ưu giữa độ trễ và khả năng suy luận.",
+        high: "Mặc định Sonnet 5.5 trên API; RAG nhiều bước, logic pháp lý phức tạp, review code đa tầng. Chậm hơn, chi phí token cao hơn.",
+        xhigh: "Agentic coding khó; điểm Terminal-Bench của Opus 5.5 được đo ở mức này. Cần trần max_tokens lớn để tránh cắt cụt câu trả lời.",
+        max: "Chỉ khi eval chứng minh có lợi. Cảnh báo: Có thể kém hơn xhigh! Trên FrontierCode, Sonnet 5.5 tại Max thấp hơn Xhigh vì sinh quá nhiều subagent review gây timeout hoặc sửa ngoài phạm vi [Tự báo cáo]."
+      },
+      tokensMap: {
+        low: 1000,
+        medium: 3500,
+        high: 8000,
+        xhigh: 16000,
+        max: 32000
+      },
+      sweepPoints: [
+        { effort: 'low', cost: 0.10, quality: 0.60, latency: 1.2 },
+        { effort: 'medium', cost: 0.20, quality: 0.78, latency: 2.4 },
+        { effort: 'high', cost: 0.40, quality: 0.86, latency: 4.8 },
+        { effort: 'xhigh', cost: 0.80, quality: 0.89, latency: 9.5 },
+        { effort: 'max', cost: 1.60, quality: 0.90, latency: 18.0 }
+      ]
+    };
+
+    function setEffortLevel(level) {
+      effortData.current = level;
+      var pills = document.querySelectorAll('#effortPillsContainer .effort-pill-btn');
+      pills.forEach(function(p) {
+        p.classList.toggle('active', p.innerText.trim().toLowerCase() === level);
+      });
+
+      var badge = document.getElementById('effortBadgeDisplay');
+      if (badge) badge.innerText = level;
+
+      var fact = document.getElementById('effortFactCard');
+      if (fact) fact.innerHTML = '<strong>Sự thật kỹ thuật (' + level.toUpperCase() + '):</strong> ' + effortData.facts[level];
+
+      var toks = effortData.tokensMap[level] || 3500;
+      var elToks = document.getElementById('effortTokensVal');
+      if (elToks) elToks.innerText = toks.toLocaleString('vi-VN') + ' tok';
+
+      // cost on Sonnet: tokens * $10/M
+      var cost = (toks * 10) / 1000000;
+      var elCost = document.getElementById('effortCostVal');
+      if (elCost) elCost.innerText = '$' + cost.toFixed(4);
+
+      // Live sync with ReceiptStore
+      ReceiptStore.update({ thinking: toks });
+    }
+
+    function calculateKneeIndex(points) {
+      if (points.length < 3) return 0;
+      var n = points.length;
+      var x0 = points[0].cost, y0 = points[0].quality;
+      var xN = points[n - 1].cost, yN = points[n - 1].quality;
+
+      var maxDist = -1;
+      var kneeIdx = 0;
+
+      for (var i = 1; i < n - 1; i++) {
+        var xi = (points[i].cost - x0) / (xN - x0);
+        var yi = (points[i].quality - y0) / (yN - y0);
+        // normalized chord y = xi
+        var dist = yi - xi;
+        if (dist > maxDist) {
+          maxDist = dist;
+          kneeIdx = i;
+        }
+      }
+      return kneeIdx;
+    }
+
+    function loadSyntheticSweepData() {
+      effortData.sweepPoints = [
+        { effort: 'low', cost: 0.10, quality: 0.60, latency: 1.2 },
+        { effort: 'medium', cost: 0.20, quality: 0.78, latency: 2.4 },
+        { effort: 'high', cost: 0.40, quality: 0.86, latency: 4.8 },
+        { effort: 'xhigh', cost: 0.80, quality: 0.89, latency: 9.5 },
+        { effort: 'max', cost: 1.60, quality: 0.90, latency: 18.0 }
+      ];
+      renderKneeChart();
+    }
+
+    function toggleCsvDrawer() {
+      var d = document.getElementById('csvDrawer');
+      if (d) d.style.display = (d.style.display === 'block') ? 'none' : 'block';
+    }
+
+    function applyCustomCsvData() {
+      var input = document.getElementById('customCsvInput');
+      if (!input || !input.value.trim()) return;
+
+      var lines = input.value.trim().split('\n');
+      var parsed = [];
+      for (var i = 0; i < lines.length; i++) {
+        var parts = lines[i].split(',');
+        if (parts.length >= 3) {
+          var eff = parts[0].trim();
+          var qual = parseFloat(parts[1].trim());
+          var cost = parseFloat(parts[2].trim());
+          var lat = parts[3] ? parseFloat(parts[3].trim()) : 0;
+          if (!isNaN(qual) && !isNaN(cost)) {
+            parsed.push({ effort: eff, quality: qual, cost: cost, latency: lat });
+          }
+        }
+      }
+
+      if (parsed.length >= 3) {
+        effortData.sweepPoints = parsed;
+        renderKneeChart();
+        alert('Đã cập nhật dữ liệu sweep thành công! Biểu đồ và điểm Knee đã được tính toán lại.');
+      } else {
+        alert('Dữ liệu CSV cần tối thiểu 3 dòng hợp lệ (effort, quality, cost_per_task).');
+      }
+    }
+
+    function renderKneeChart() {
+      var pts = effortData.sweepPoints;
+      var kneeIdx = calculateKneeIndex(pts);
+
+      var minX = 0.0, maxX = 1.8;
+      var minY = 0.3, maxY = 1.0;
+
+      var getSvgX = function(cost) {
+        return 50 + (cost / maxX) * 380;
+      };
+      var getSvgY = function(quality) {
+        return 190 - ((quality - minY) / (maxY - minY)) * 170;
+      };
+
+      // Update path d
+      var pathD = 'M ' + getSvgX(pts[0].cost).toFixed(1) + ' ' + getSvgY(pts[0].quality).toFixed(1);
+      for (var i = 1; i < pts.length; i++) {
+        pathD += ' L ' + getSvgX(pts[i].cost).toFixed(1) + ' ' + getSvgY(pts[i].quality).toFixed(1);
+      }
+      var curveEl = document.getElementById('kneeCurvePath');
+      if (curveEl) curveEl.setAttribute('d', pathD);
+
+      // Update secant line
+      var secantEl = document.getElementById('kneeSecantLine');
+      if (secantEl) {
+        secantEl.setAttribute('x1', getSvgX(pts[0].cost));
+        secantEl.setAttribute('y1', getSvgY(pts[0].quality));
+        secantEl.setAttribute('x2', getSvgX(pts[pts.length - 1].cost));
+        secantEl.setAttribute('y2', getSvgY(pts[pts.length - 1].quality));
+      }
+
+      // Update points and knee badge
+      var kneeX = getSvgX(pts[kneeIdx].cost);
+      var kneeY = getSvgY(pts[kneeIdx].quality);
+
+      var badgeGroup = document.getElementById('kneeBadgeGroup');
+      if (badgeGroup) {
+        badgeGroup.setAttribute('transform', 'translate(' + kneeX.toFixed(1) + ', ' + (kneeY - 18).toFixed(1) + ')');
+      }
+
+      for (var j = 0; j < 5; j++) {
+        var circle = document.getElementById('pt-' + j);
+        if (circle) {
+          if (j < pts.length) {
+            circle.style.display = 'block';
+            var cx = getSvgX(pts[j].cost);
+            var cy = getSvgY(pts[j].quality);
+            circle.setAttribute('cx', cx.toFixed(1));
+            circle.setAttribute('cy', cy.toFixed(1));
+            if (j === kneeIdx) {
+              circle.setAttribute('fill', 'var(--warn)');
+              circle.setAttribute('r', '7');
+              circle.classList.add('knee-star-point');
+            } else {
+              circle.setAttribute('fill', 'var(--stage)');
+              circle.setAttribute('r', '4.5');
+              circle.classList.remove('knee-star-point');
+            }
+          } else {
+            circle.style.display = 'none';
+          }
+        }
+      }
+    }
+
+    /* =================================================================
+       FIGURE 5: CONTEXT DIET WIDGET LOGIC (F5)
+       ================================================================= */
+    var dietState = {
+      baseSys: 3000,
+      baseToolDefs: 24000,
+      baseHistory: 15000,
+      baseToolResults: 120000
+    };
+
+    function updateContextDietSim() {
+      var swToolSearch = document.getElementById('switchToolSearch').checked;
+      var swContextEditing = document.getElementById('switchContextEditing').checked;
+      var swProgrammatic = document.getElementById('switchProgrammatic').checked;
+      var swCompaction = document.getElementById('switchCompaction').checked;
+
+      var curSys = dietState.baseSys;
+      var curDefs = swToolSearch ? 1800 : dietState.baseToolDefs;
+      var curHist = swCompaction ? 3000 : dietState.baseHistory;
+
+      var curRes = dietState.baseToolResults;
+      if (swProgrammatic) {
+        curRes = 2000;
+      } else if (swContextEditing) {
+        curRes = 20000;
+      }
+
+      var total = curSys + curDefs + curHist + curRes;
+      var baseTotal = 162000;
+      var savedPct = Math.round((1 - (total / baseTotal)) * 100);
+
+      // Update text values
+      document.getElementById('valSegSys').innerText = curSys.toLocaleString('vi-VN');
+      document.getElementById('valSegDefs').innerText = curDefs.toLocaleString('vi-VN');
+      document.getElementById('valSegHist').innerText = curHist.toLocaleString('vi-VN');
+      document.getElementById('valSegRes').innerText = curRes.toLocaleString('vi-VN');
+      document.getElementById('dietTotalTokens').innerText = total.toLocaleString('vi-VN') + ' tokens';
+
+      var badge = document.getElementById('dietReductionBadge');
+      if (badge) {
+        if (savedPct > 0) {
+          badge.innerText = 'Đã Giảm ' + savedPct + '% Tokens';
+          badge.style.color = 'var(--tok-cached)';
+          badge.style.borderColor = 'var(--tok-cached)';
+        } else {
+          badge.innerText = 'Cơ Sở (Chưa Bật Diet)';
+          badge.style.color = 'var(--ink-2)';
+          badge.style.borderColor = 'var(--rule)';
+        }
+      }
+
+      // Update bar widths relative to total
+      var pctSys = (curSys / total) * 100;
+      var pctDefs = (curDefs / total) * 100;
+      var pctHist = (curHist / total) * 100;
+      var pctRes = (curRes / total) * 100;
+
+      document.getElementById('segSys').style.width = pctSys + '%';
+      document.getElementById('segDefs').style.width = pctDefs + '%';
+      document.getElementById('segHist').style.width = pctHist + '%';
+      document.getElementById('segRes').style.width = pctRes + '%';
+    }
+
+    function copyCode(text) {
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(text);
+        alert('Đã sao chép vào bộ nhớ tạm: ' + text);
       }
     }
 
@@ -2626,11 +3463,20 @@
       });
     });
 
-    // Keyboard Shortcuts
+    // Keyboard Shortcuts (Arrows for Effort, P for Presenter)
     window.addEventListener('keydown', function(e) {
       if (e.key === 'p' || e.key === 'P') {
-        if (!e.metaKey && !e.ctrlKey && document.activeElement.tagName !== 'INPUT') {
+        if (!e.metaKey && !e.ctrlKey && document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'TEXTAREA') {
           togglePresenterMode();
+        }
+      } else if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+        if (document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'TEXTAREA') {
+          var curIdx = effortData.levels.indexOf(effortData.current);
+          if (e.key === 'ArrowRight' && curIdx < effortData.levels.length - 1) {
+            setEffortLevel(effortData.levels[curIdx + 1]);
+          } else if (e.key === 'ArrowLeft' && curIdx > 0) {
+            setEffortLevel(effortData.levels[curIdx - 1]);
+          }
         }
       }
     });
@@ -2660,6 +3506,8 @@
       updateKvCalculation();
       recalculateTtlSim();
       evaluateDecisionTree();
+      renderKneeChart();
+      updateContextDietSim();
     });
   </script>
 </body>
