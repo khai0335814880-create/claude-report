@@ -153,8 +153,10 @@ Thay các giá trị vào phương trình (2.2), dung lượng bộ nhớ đệm
 $$s_{tok} = 2 \times 2 \times 80 \times 8 \times 128 = 327.680 \text{ Bytes/token} = 320 \text{ KiB/token}$$
 
 Khi chiều dài ngữ cảnh tăng lên, dung lượng RAM GPU tiêu tốn cho một phiên xử lý đơn lẻ tăng tỷ lệ thuận:
-- Với $T = 200.000$ tokens: $S_{KV} = 200.000 \times 320 \text{ KiB} \approx 61,04 \text{ GiB}$.
-- Với $T = 1.000.000$ tokens: $S_{KV} = 1.000.000 \times 320 \text{ KiB} \approx 305,18 \text{ GiB}$.
+- Với $T = 200.000$ tokens (kiến trúc GQA, $n_{kv} = 8$): $S_{KV} = 200.000 \times 320 \text{ KiB} \approx 61,04 \text{ GiB}$.
+- Với $T = 1.000.000$ tokens (kiến trúc GQA, $n_{kv} = 8$): $S_{KV} = 1.000.000 \times 320 \text{ KiB} \approx 305,18 \text{ GiB}$.
+
+*Lưu ý so sánh kiến trúc:* Nếu không áp dụng Grouped-Query Attention mà dùng Multi-Head Attention tiêu chuẩn (MHA với $n_{kv} = 64$ heads), dung lượng KV-cache sẽ lớn gấp 8 lần: ở $T=200\text{K}$ tokens là $488.28\text{ GiB} \approx 0.48\text{ TiB}$; ở $T=1\text{M}$ tokens là $2,441.4\text{ GiB} \approx 2.38\text{ TiB}$. Đây là ước tính thuần túy cho bộ nhớ đệm KV của một luồng xử lý, chưa bao gồm bộ nhớ nạp trọng số mô hình tĩnh (weights).
 
 Kết quả này chứng minh rằng việc duy trì ngữ cảnh dài 1M token đòi hỏi vượt quá dung lượng bộ nhớ của một GPU H100 SXM (80 GB) đơn lẻ, bắt buộc phải phân mảnh bộ nhớ qua nhiều thiết bị (Tensor Parallelism kết hợp Pipeline Parallelism). Đây là cơ sở khoa học để thiết kế các giải pháp nén ngữ cảnh và tái sử dụng bộ nhớ đệm.
 
@@ -589,7 +591,7 @@ Việc sử dụng mô hình Sonnet 5.5 để trực tiếp tiếp nhận mọi 
 - Với chi phí chỉ bằng $1/20$ so với Sonnet ($0,10$ USD so với $2,00$ USD/triệu token đầu vào), tầng lọc này giúp giảm tải đáng kể cho mô hình chính, hạ thấp chi phí trung bình trên toàn hệ thống xuống mức 0,0114 USD/truy vấn.
 
 ### 6.1.6. Đánh giá sự đánh đổi giữa mức effort tối đa và hiện tượng suy giảm hiệu quả biên (Diminishing Returns)
-Thực nghiệm quét effort chứng minh rằng việc tăng mức độ suy nghĩ từ `medium` lên `max` làm tăng số lượng reasoning token lên gấp 3 lần, kéo theo chi phí và độ trễ phản hồi tăng tuyến tính. Tuy nhiên, trên tập dữ liệu nghiệp vụ chuẩn, độ chính xác của câu trả lời chỉ cải thiện thêm dưới $3\%$. Điểm cân bằng tối ưu về mặt kinh tế học (knee point) rơi vào mức `medium`, nơi hệ thống đạt $86\%$ độ chính xác với chi phí chỉ bằng $35\%$ so với mức trần.
+Thực nghiệm quét effort chứng minh rằng việc tăng mức độ suy nghĩ từ `high` lên `max` làm tăng số lượng reasoning token lên gấp 4 lần (từ 8.000 lên 32.000 tokens), kéo theo chi phí tăng từ 0,40 USD lên 1,60 USD và độ trễ phản hồi tăng từ 4,8s lên 18,0s. Tuy nhiên, trên tập dữ liệu kiểm định, độ chính xác của câu trả lời chỉ cải thiện thêm dưới 4% (từ 86% lên 90%). Điểm cân bằng tối ưu về mặt kinh tế học (knee point) rơi vào mức `high`, nơi hệ thống đạt 86% độ chính xác với chi phí chỉ bằng 25% so với mức trần `max` (0,40 USD so với 1,60 USD).
 
 ### 6.1.7. Chiến lược phòng thủ tấn công Indirect Prompt Injection không phụ thuộc vào System Prompt
 Các chỉ thị an toàn trong System Prompt có thể bị vô hiệu hóa bởi các kỹ thuật bẻ khóa ngữ nghĩa tinh vi chèn trong văn bản tài liệu tải lên. Giải pháp phòng thủ thực chất phải dựa trên kiến trúc cô lập dữ liệu:

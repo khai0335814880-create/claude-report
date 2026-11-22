@@ -72,6 +72,12 @@
 
       /* ── Nhãn tin cậy → semantic ───────────────────────────── */
       --conf-docs:       var(--ok-fg);     --conf-docs-bg:       var(--ok-bg);     --conf-docs-bd:       var(--ok-border);
+      --conf-docs-fg:    var(--ok-fg);     --conf-docs-border:   var(--ok-border);
+      --conf-calc-fg:    var(--info-fg);   --conf-calc-border:   var(--info-border);
+      --conf-selfreport-fg: var(--warn-fg); --conf-selfreport-border: var(--warn-border);
+      --conf-indep-fg:   var(--tok-fresh); --conf-indep-border:  var(--border);
+      --conf-assumed-fg: var(--ink-2);     --conf-assumed-border: var(--border);
+      --bg-sunken:       #F5F2EC;
       --conf-calc:       var(--info-fg);   --conf-calc-bg:       var(--info-bg);   --conf-calc-bd:       var(--info-border);
       --conf-selfreport: var(--warn-fg);   --conf-selfreport-bg: var(--warn-bg);   --conf-selfreport-bd: var(--warn-border);
       --conf-indep:      var(--teal-fg);   --conf-indep-bg:      var(--teal-bg);   --conf-indep-bd:      var(--teal-border);
@@ -134,6 +140,7 @@
     }
 
     [data-theme="dark"] {
+      --bg-sunken:       #18181B;
       color-scheme: dark;
       --bg-canvas:#1F1E1B; --bg-inset:#181714; --bg-surface:#292825; --bg-surface-2:#32302C; --bg-surface-3:#3B3935;
       --bg-overlay:rgba(31,30,27,.86);
@@ -1945,6 +1952,7 @@
       background-image: radial-gradient(rgba(255,255,255,0.3) 1px, transparent 0);
       background-size: 4px 4px;
     }
+    .context-segment.tool-res,
     .context-segment.bloat {
       background: var(--c-ctx-bloat);
       background-image: repeating-linear-gradient(-45deg, transparent, transparent 2px, rgba(255,255,255,0.2) 2px, rgba(255,255,255,0.2) 4px);
@@ -2704,10 +2712,10 @@
                 <span>Độ dài ngữ cảnh (\(T\) tokens):</span>
                 <strong id="valT">200.000 tokens</strong>
               </div>
-              <input type="range" class="control-slider" id="sliderT" min="10000" max="1000000" step="10000" value="200000" oninput="updateKvCalculation()">
+              <input type="range" class="control-slider" id="sliderT" min="1000" max="1000000" step="1000" value="200000" oninput="updateKvCalculation()">
               <div class="pill-group" style="margin-top:4px;">
-                <button class="pill-opt" onclick="setContextT(10000)">10K</button>
-                <button class="pill-opt" onclick="setContextT(128000)">128K</button>
+                <button class="pill-opt" id="btnT10" onclick="setContextT(10000)">10K</button>
+                <button class="pill-opt" id="btnT128" onclick="setContextT(128000)">128K</button>
                 <button class="pill-opt active" id="btnT200" onclick="setContextT(200000)">200K</button>
                 <button class="pill-opt" id="btnT1M" onclick="setContextT(1000000)">1M Context</button>
               </div>
@@ -2740,7 +2748,7 @@
             </div>
 
             <div style="font-family:var(--font-mono); font-size:0.72rem; color:var(--ink-2); background:var(--stage); padding:8px 10px; border-radius:3px; border:1px solid var(--rule);">
-              * Test vector kiểm định: \(L=80, n_{kv}=8, d_{head}=128, b=2 \Rightarrow 327.680\text{ B/tok} = 320\text{ KiB/tok}\); \(T=200\text{K} \Rightarrow 61.04\text{ GiB}\); \(T=1\text{M} \Rightarrow 305.18\text{ GiB}\). Chuyển MHA (64 heads) lớn gấp 8× (\(2.44\text{ TiB}\)).
+              * Test vector kiểm định: \(L=80, n_{kv}=8, d_{head}=128, b=2 \Rightarrow 327.680\text{ B/tok} = 320\text{ KiB/tok}\); \(T=200\text{K} \Rightarrow 61.04\text{ GiB}\); \(T=1\text{M} \Rightarrow 305.18\text{ GiB}\). Chuyển sang MHA (64 heads) lớn gấp 8× (ở \(T=200\text{K}\) là \(488.28\text{ GiB} \approx 0.48\text{ TiB}\); ở \(T=1\text{M}\) là \(2,441.4\text{ GiB} \approx 2.38\text{ TiB}\)). Ước tính thuần túy cho bộ nhớ đệm KV, chưa bao gồm trọng số mô hình.
             </div>
           </div>
         </div>
@@ -4170,8 +4178,8 @@
               </p>
             </div>
             <div style="display:flex; gap:6px; flex-wrap:wrap;">
-              <button class="pill-opt active" id="btnBranchA" onclick="switchEvalBranch('A')">Nhánh A: Baseline Haiku</button>
-              <button class="pill-opt" id="btnBranchB" onclick="switchEvalBranch('B')">Nhánh B: Đề Xuất Sonnet</button>
+              <button class="pill-opt" id="btnBranchA" onclick="switchEvalBranch('A')">Nhánh A: Baseline Haiku</button>
+              <button class="pill-opt active" id="btnBranchB" onclick="switchEvalBranch('B')">Nhánh B: Đề Xuất Sonnet</button>
               <button class="pill-opt" id="btnBranchC" onclick="switchEvalBranch('C')">Nhánh C: Cận Trên Opus</button>
               <button class="btn-tool primary" onclick="generateSyntheticEval()">Sinh dữ liệu mô phỏng</button>
             </div>
@@ -4224,16 +4232,16 @@
               <!-- 2x2 Grid of Inputs -->
               <div style="display:grid; grid-template-columns:1fr 1fr; gap:6px; font-family:var(--font-mono); font-size:0.75rem; margin-bottom:10px;">
                 <div style="background:var(--stage); padding:6px 8px; border-radius:4px; border:1px solid var(--rule);">
-                  TP (True Positive): <input type="number" id="inpTP" value="87" style="width:50px; font-weight:600; text-align:right;" oninput="updateConfusionMatrix()">
+                  TP (True Positive): <input type="number" id="inpTP" value="154" style="width:50px; font-weight:600; text-align:right;" oninput="updateConfusionMatrix()">
                 </div>
                 <div style="background:var(--stage); padding:6px 8px; border-radius:4px; border:1px solid var(--rule);">
-                  FP (False Positive): <input type="number" id="inpFP" value="9" style="width:50px; font-weight:600; text-align:right;" oninput="updateConfusionMatrix()">
+                  FP (False Positive): <input type="number" id="inpFP" value="8" style="width:50px; font-weight:600; text-align:right;" oninput="updateConfusionMatrix()">
                 </div>
                 <div style="background:var(--stage); padding:6px 8px; border-radius:4px; border:1px solid var(--rule);">
-                  FN (False Negative): <input type="number" id="inpFN" value="13" style="width:50px; font-weight:600; text-align:right;" oninput="updateConfusionMatrix()">
+                  FN (False Negative): <input type="number" id="inpFN" value="14" style="width:50px; font-weight:600; text-align:right;" oninput="updateConfusionMatrix()">
                 </div>
                 <div style="background:var(--stage); padding:6px 8px; border-radius:4px; border:1px solid var(--rule);">
-                  TN (True Negative): <input type="number" id="inpTN" value="891" style="width:50px; font-weight:600; text-align:right;" oninput="updateConfusionMatrix()">
+                  TN (True Negative): <input type="number" id="inpTN" value="24" style="width:50px; font-weight:600; text-align:right;" oninput="updateConfusionMatrix()">
                 </div>
               </div>
 
@@ -4487,10 +4495,10 @@
             </div>
             <!-- Status Filter Buttons -->
             <div style="display:flex; gap:4px; flex-wrap:wrap;">
-              <button class="pill-opt active" id="btnLedgerAll" onclick="filterLedger('all')">Tất cả (32)</button>
-              <button class="pill-opt" id="btnLedgerDocs" onclick="filterLedger('docs')">Docs (18)</button>
-              <button class="pill-opt" id="btnLedgerCalc" onclick="filterLedger('calc')">Tính toán (6)</button>
-              <button class="pill-opt" id="btnLedgerSelf" onclick="filterLedger('self')">Tự báo cáo (5)</button>
+              <button class="pill-opt active" id="btnLedgerAll" onclick="filterLedger('all')">Tất cả (10)</button>
+              <button class="pill-opt" id="btnLedgerDocs" onclick="filterLedger('docs')">Docs (4)</button>
+              <button class="pill-opt" id="btnLedgerCalc" onclick="filterLedger('calc')">Tính toán (3)</button>
+              <button class="pill-opt" id="btnLedgerSelf" onclick="filterLedger('self')">Tự báo cáo (2)</button>
               <button class="pill-opt" id="btnLedgerDropped" onclick="filterLedger('dropped')" style="color:var(--warn); border-color:var(--warn);">Đã loại bỏ (1)</button>
             </div>
           </div>
@@ -4663,7 +4671,7 @@
         <span style="font-size:0.75rem; color:var(--ink-3); font-weight:normal;">[Chi tiết]</span>
       </summary>
       <div class="academic-accordion-body">
-        <p>Thực nghiệm quét effort chứng minh rằng việc tăng mức độ suy nghĩ từ <code>medium</code> lên <code>max</code> làm tăng số lượng reasoning token lên gấp 3 lần, kéo theo chi phí và độ trễ phản hồi tăng tuyến tính. Tuy nhiên, trên tập dữ liệu nghiệp vụ chuẩn, độ chính xác của câu trả lời chỉ cải thiện thêm dưới $3\%$. Điểm cân bằng tối ưu về mặt kinh tế học (knee point) rơi vào mức <code>medium</code>, nơi hệ thống đạt $86\%$ độ chính xác với chi phí chỉ bằng $35\%$ so với mức trần.</p>
+        <p>Thực nghiệm quét effort chứng minh rằng việc tăng mức độ suy nghĩ từ <code>high</code> lên <code>max</code> làm tăng số lượng reasoning token lên gấp 4 lần (từ 8.000 lên 32.000 tokens), kéo theo chi phí tăng từ 0,40 USD lên 1,60 USD và độ trễ phản hồi tăng từ 4,8s lên 18,0s. Tuy nhiên, trên tập dữ liệu kiểm định, độ chính xác của câu trả lời chỉ cải thiện thêm dưới 4% (từ 86% lên 90%). Điểm cân bằng tối ưu về mặt kinh tế học (knee point) rơi vào mức <code>high</code>, nơi hệ thống đạt 86% độ chính xác với chi phí chỉ bằng 25% so với mức trần max.</p>
 
       </div>
     </details>
@@ -5471,6 +5479,19 @@ from typing import NamedTuple</code></pre>
       document.getElementById('valL').innerText = kvConfig.L;
       document.getElementById('valDhead').innerText = kvConfig.d_head;
       document.getElementById('valT').innerText = kvConfig.T.toLocaleString('vi-VN') + ' tokens';
+      ['btnT10', 'btnT128', 'btnT200', 'btnT1M'].forEach(function(id) {
+        var b = document.getElementById(id);
+        if (b) b.classList.remove('active');
+      });
+      if (kvConfig.T === 10000) {
+        var b10 = document.getElementById('btnT10'); if (b10) b10.classList.add('active');
+      } else if (kvConfig.T === 128000) {
+        var b128 = document.getElementById('btnT128'); if (b128) b128.classList.add('active');
+      } else if (kvConfig.T === 200000) {
+        var b200 = document.getElementById('btnT200'); if (b200) b200.classList.add('active');
+      } else if (kvConfig.T === 1000000) {
+        var bm = document.getElementById('btnT1M'); if (bm) bm.classList.add('active');
+      }
 
       var bytesPerTok = 2 * kvConfig.b * kvConfig.L * kvConfig.n_kv * kvConfig.d_head;
       var kibPerTok = bytesPerTok / 1024;
@@ -5527,16 +5548,18 @@ from typing import NamedTuple</code></pre>
     function setContextT(val) {
       var slider = document.getElementById('sliderT');
       if (slider) slider.value = val;
-      ['btnT200', 'btnT1M'].forEach(function(id) {
+      ['btnT10', 'btnT128', 'btnT200', 'btnT1M'].forEach(function(id) {
         var b = document.getElementById(id);
         if (b) b.classList.remove('active');
       });
-      if (val === 200000) {
-        var b2 = document.getElementById('btnT200');
-        if (b2) b2.classList.add('active');
+      if (val === 10000) {
+        var b10 = document.getElementById('btnT10'); if (b10) b10.classList.add('active');
+      } else if (val === 128000) {
+        var b128 = document.getElementById('btnT128'); if (b128) b128.classList.add('active');
+      } else if (val === 200000) {
+        var b200 = document.getElementById('btnT200'); if (b200) b200.classList.add('active');
       } else if (val === 1000000) {
-        var bm = document.getElementById('btnT1M');
-        if (bm) bm.classList.add('active');
+        var bm = document.getElementById('btnT1M'); if (bm) bm.classList.add('active');
       }
       updateKvCalculation();
     }
@@ -5778,7 +5801,7 @@ from typing import NamedTuple</code></pre>
       var pts = effortData.sweepPoints;
       var kneeIdx = calculateKneeIndex(pts);
 
-      var minX = 0.0, maxX = 1.8;
+      var minX = 0.0, maxX = 1.6;
       var minY = 0.3, maxY = 1.0;
 
       var getSvgX = function(cost) { return 50 + (cost / maxX) * 380; };
@@ -6168,11 +6191,6 @@ from typing import NamedTuple</code></pre>
         textEl.innerText = '"Theo quy chế năm 2021, nhân viên đi trễ quá 3 lần bị trừ 50% lương tháng có đúng không?"';
       }
       runInjectionSimulation();
-      initEvalArena();
-      updateConfusionMatrix();
-      updateCostLab();
-      renderInterviewCard();
-      filterLedger("all");
     }
 
     function runInjectionSimulation() {
@@ -6774,7 +6792,15 @@ function setFontSize(size, btn) {
       updateContextDietSim();
       inspectPipeNode(5);
       runInjectionSimulation();
+      initEvalArena();
+      updateConfusionMatrix();
+      updateCostLab();
+      renderInterviewCard();
+      filterLedger('all');
+      setCostModel('sonnet');
+      switchEvalBranch('B');
     });
-  </script>
+
+</script>
 </body>
 </html>
