@@ -6,11 +6,10 @@
   <title>Claude: Đặc Tả Kỹ Thuật Mô Hình và Ca Triển Khai Trợ Lý Tri Thức Nội Bộ | Alliance Software Co., Ltd. (Alliance ITSC)</title>
   <meta name="description" content="A Technical Specification of the Claude Model Family: Inference Mechanics, Adaptive Thinking, Native Citations, Token Economics, and a 12-Stage Enterprise Knowledge Assistant Pipeline.">
 
-  <!-- Google Fonts: Bricolage Grotesque, Literata, IBM Plex Mono with Vietnamese Subset -->
+  <!-- Google Fonts: Inter, JetBrains Mono, Newsreader (Warm Editorial Typography) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..800&family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,500;0,7..72,600;1,7..72,400&display=swap" rel="stylesheet">
-
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&display=swap">
   <!-- KaTeX for Academic Mathematical Typography -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
   <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
@@ -18,62 +17,174 @@
 
   <style>
     /* =================================================================
-       1. DESIGN TOKENS V3 (CREATIVE DIRECTION SPEC 3.1)
+       1. CLAUDE WARM EDITORIAL DESIGN TOKENS & BASE TYPOGRAPHY
        ================================================================= */
     :root {
-      /* Surface & Ink */
-      --bench: #EDF0F3;
-      --stage: #FCFCFB;
-      --ink: #10202F;
-      --ink-2: #4A5A6B;
-      --rule: #C9D1D9;
+      color-scheme: light;
 
-      /* 4 Token Roles (Light) */
-      --tok-fresh: #2F5FD0;
-      --tok-cached: #12A58F;
-      --tok-think: #7A56E0;
-      --tok-out: #D96A10;
+      /* ── Fonts ─────────────────────────────────────────────── */
+      --font-serif: "Newsreader", "Source Serif 4", Georgia, "Times New Roman", serif;
+      --font-sans:  "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-mono:  "JetBrains Mono", "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 
-      /* Accent / State */
-      --warn: #D97706;
-      --danger: #DC2626;
-      --success: #16A34A;
+      /* ── Canvas & surfaces ─────────────────────────────────── */
+      --bg-canvas:    #FAF9F5;   /* nền trang giấy ngà ấm áp */
+      --bg-inset:     #F5F4EF;   /* vùng lõm: input, track, code inline */
+      --bg-surface:   #FFFFFF;   /* card, panel, sidebar, popover */
+      --bg-surface-2: #F0EEE6;   /* table header, code block, summary */
+      --bg-surface-3: #EAE6DC;   /* track thanh, segmented track, hover mạnh */
+      --bg-overlay:   rgba(250, 249, 245, 0.86);   /* sticky header + blur(10px) */
 
-      /* Typography */
-      --font-display: 'Bricolage Grotesque', system-ui, -apple-system, sans-serif;
-      --font-body: 'Literata', Georgia, serif;
-      --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+      /* ── Borders ───────────────────────────────────────────── */
+      --border-subtle: #ECE9DF;  /* đường kẻ hàng bảng */
+      --border:        #E5E2D9;  /* viền mặc định 1px */
+      --border-strong: #DDD9CE;  /* viền container, input */
+      --border-hover:  #C9C4B5;
+
+      /* ── Ink (Không dùng #000) ─────────────────────────────── */
+      --ink-strong: #141413;     /* tiêu đề, số quan trọng */
+      --ink:        #1A1915;     /* chữ chính */
+      --ink-2:      #5E5B52;     /* chữ phụ (6.4:1 trên canvas) */
+      --ink-3:      #6F6B61;     /* metadata/caption (5.0:1 AA) */
+      --ink-4:      #878378;     /* chỉ cho trang trí / placeholder / trục */
+
+      /* ── Brand accent: Claude Terracotta ───────────────────── */
+      --accent:         #D97757; /* fill thương hiệu, thanh, viền nhấn */
+      --accent-hover:   #C15F3C;
+      --accent-strong:  #B4532F; /* nền nút CTA đặc (chữ trắng 5.0:1) */
+      --accent-strong-hover: #9C4426;
+      --accent-ink:     #A94B2B; /* chữ/link accent trên nền sáng (5.4:1) */
+      --accent-tint:    #FBF1EC; /* nền active / citation / highlight */
+      --accent-tint-2:  #F6DFD3; /* hover của tint, ::selection */
+      --accent-border:  #F0C9B8;
+      --on-accent:      #FFFFFF;
+      --focus-ring:     #C15F3C;
+
+      /* ── Semantic (fg / bg / border / fill) ────────────────── */
+      --ok-fg:#3F6B4D;     --ok-bg:#EAF1E8;     --ok-border:#C5D8C6;     --ok-fill:#5B8A72;
+      --info-fg:#3F5F7D;   --info-bg:#E6EEF4;   --info-border:#C3D3E0;   --info-fill:#5B7C99;
+      --warn-fg:#85591A;   --warn-bg:#F7EDD6;   --warn-border:#E8D3A4;   --warn-fill:#C9A24B;
+      --danger-fg:#9A3524; --danger-bg:#F8E5E0; --danger-border:#EBBFB4; --danger-fill:#B5503C;
+      --plum-fg:#6F4C79;   --plum-bg:#F0E8F2;   --plum-border:#D8C6DC;   --plum-fill:#8B6A96;
+      --teal-fg:#2F6A6A;   --teal-bg:#E3F0EF;   --teal-border:#B9D6D4;   --teal-fill:#5A9494;
+      --stone-fg:#5E5B52;  --stone-bg:#ECE9E0;  --stone-border:#D6D1C4;  --stone-fill:#8C877A;
+
+      /* ── Nhãn tin cậy → semantic ───────────────────────────── */
+      --conf-docs:       var(--ok-fg);     --conf-docs-bg:       var(--ok-bg);     --conf-docs-bd:       var(--ok-border);
+      --conf-calc:       var(--info-fg);   --conf-calc-bg:       var(--info-bg);   --conf-calc-bd:       var(--info-border);
+      --conf-selfreport: var(--warn-fg);   --conf-selfreport-bg: var(--warn-bg);   --conf-selfreport-bd: var(--warn-border);
+      --conf-indep:      var(--teal-fg);   --conf-indep-bg:      var(--teal-bg);   --conf-indep-bd:      var(--teal-border);
+      --conf-assumed:    var(--plum-fg);   --conf-assumed-bg:    var(--plum-bg);   --conf-assumed-bd:    var(--plum-border);
+      --conf-base:       var(--stone-fg);  --conf-base-bg:       var(--stone-bg);  --conf-base-bd:       var(--stone-border);
+      --conf-unverified: var(--danger-fg); --conf-unverified-bg: var(--danger-bg); --conf-unverified-bd: var(--danger-border);
+
+      /* ── Chart / Data-viz fills ────────────────────────────── */
+      --c-cached:#5B8A72;  --c-fresh:#5B7C99;  --c-output:#D97757;  --c-think:#8B6A96;
+      --c-in:#5B7C99;      --c-out:#D97757;    --c-fast:#C9A24B;
+      --c-ctx-system:#8C877A; --c-ctx-tools:#5B7C99; --c-ctx-history:#5B8A72; --c-ctx-bloat:#D97757;
+      --c-ev-grounded:#5B8A72; --c-ev-ungrounded:#C9A24B; --c-ev-abstain:#5B7C99; --c-ev-wrong:#B5503C;
+      --c-eff-low:#7E9BB3; --c-eff-medium:#4A6D8C; --c-eff-high:#B8892F; --c-eff-xhigh:#D97757; --c-eff-max:#A23B2A;
+      --c-grid:#E5E2D9; --c-axis:#6F6B61; --c-track:#EAE6DC;
+      --m-fable:#8B6A96; --m-opus:#5B7C99; --m-sonnet:#D97757; --m-haiku:#5B8A72;
+
+      /* ── Type scale (rem để A-/A/A+ hoạt động trơn tru) ─────── */
+      --fs-2xs:.6875rem; --fs-xs:.75rem; --fs-sm:.8125rem; --fs-base:.9375rem; --fs-md:1rem;
+      --fs-lg:1.125rem;  --fs-h3:clamp(1.2rem, 1.05rem + .6vw, 1.45rem);
+      --fs-h2:clamp(1.55rem, 1.2rem + 1.3vw, 2rem);
+      --fs-h1:clamp(2rem, 1.4rem + 2.4vw, 3rem);
+      --lh-tight:1.18; --lh-head:1.28; --lh-ui:1.45; --lh-prose:1.68;
+      --tracking-eyebrow:.08em;
+
+      /* ── Radius (Hệ thống đồng bộ) ─────────────────────────── */
+      --r-xs:4px;     /* inline code, kbd */
+      --r-sm:6px;     /* input nhỏ, tag vuông, ô bảng nổi */
+      --r-md:10px;    /* button, input, segmented, option quiz */
+      --r-lg:14px;    /* card, panel, table container, <details> */
+      --r-xl:20px;    /* Hero stage, widget nổi, flashcard */
+      --r-pill:999px; /* badge, chip, citation pill, filter chip */
+
+      /* ── Shadows ───────────────────────────────────────────── */
+      --shadow-1:   0 1px 2px rgba(20,19,19,.04);
+      --shadow-2:   0 1px 2px rgba(20,19,19,.04), 0 6px 18px -6px rgba(20,19,19,.10);
+      --shadow-pop: 0 2px 4px rgba(20,19,19,.05), 0 16px 36px -10px rgba(20,19,19,.18);
+      --ring: 0 0 0 2px var(--bg-canvas), 0 0 0 4px var(--focus-ring);
+
+      /* ── Motion ────────────────────────────────────────────── */
+      --ease: cubic-bezier(.2,0,0,1); --dur-1:120ms; --dur-2:200ms;
+
+      /* ── ALIAS BRIDGE (Maps legacy variables to Warm Editorial Tokens) ── */
+      --bench: var(--bg-canvas);
+      --stage: var(--bg-surface);
+      --rule: var(--border);
+      --tok-fresh: var(--c-fresh);
+      --tok-cached: var(--c-cached);
+      --tok-think: var(--c-think);
+      --tok-out: var(--c-output);
+      --primary: var(--accent-strong);
+      --warn: var(--warn-fill);
+      --danger: var(--danger-fill);
+      --success: var(--ok-fill);
+      --font-display: var(--font-serif);
+      --font-body: var(--font-sans);
 
       --base-font-size: 18px;
       --max-width: 1400px;
       --col-read: 66ch;
-
-      color-scheme: light;
     }
 
     [data-theme="dark"] {
-      /* Surface & Ink (Dark) */
-      --bench: #121211;
-      --stage: #1A1A19;
-      --ink: #EDEBE6;
-      --ink-2: #B9B7AE;
-      --rule: #34332F;
-
-      /* 4 Token Roles (Dark) */
-      --tok-fresh: #4A76E0;
-      --tok-cached: #14A58E;
-      --tok-think: #8A70E8;
-      --tok-out: #D9772E;
-
       color-scheme: dark;
+      --bg-canvas:#1F1E1B; --bg-inset:#181714; --bg-surface:#292825; --bg-surface-2:#32302C; --bg-surface-3:#3B3935;
+      --bg-overlay:rgba(31,30,27,.86);
+      --border-subtle:#34312D; --border:#3D3A35; --border-strong:#4A4640; --border-hover:#5A564E;
+      --ink-strong:#FAF9F5; --ink:#F0EEE6; --ink-2:#BDB9AD; --ink-3:#A19D91; --ink-4:#7C786D;
+
+      --accent:#E0876A; --accent-hover:#EC9A7E; --accent-strong:#D97757; --accent-strong-hover:#E0876A;
+      --accent-ink:#EDA386; --accent-tint:#3A2A24; --accent-tint-2:#47322A; --accent-border:#6B4334;
+      --on-accent:#1A1915; --focus-ring:#EDA386;
+
+      --ok-fg:#8FC4A0;     --ok-bg:#243228;     --ok-border:#35503C;     --ok-fill:#6FA886;
+      --info-fg:#8FB4D6;   --info-bg:#232D38;   --info-border:#354A5F;   --info-fill:#6F94B8;
+      --warn-fg:#E0BC6E;   --warn-bg:#35301F;   --warn-border:#574C2B;   --warn-fill:#D3A84F;
+      --danger-fg:#EE9A88; --danger-bg:#3A2420; --danger-border:#5E352D; --danger-fill:#D0705B;
+      --plum-fg:#C8A4D3;   --plum-bg:#302636;   --plum-border:#4C3A56;   --plum-fill:#A885B5;
+      --teal-fg:#86C3C1;   --teal-bg:#213131;   --teal-border:#355251;   --teal-fill:#6AAAA8;
+      --stone-fg:#BDB9AD;  --stone-bg:#34322E;  --stone-border:#4A4640;  --stone-fill:#9A958A;
+
+      --c-cached:#6FA886; --c-fresh:#6F94B8; --c-output:#E0876A; --c-think:#A885B5;
+      --c-in:#6F94B8; --c-out:#E0876A; --c-fast:#D3A84F;
+      --c-ctx-system:#9A958A; --c-ctx-tools:#6F94B8; --c-ctx-history:#6FA886; --c-ctx-bloat:#E0876A;
+      --c-ev-grounded:#6FA886; --c-ev-ungrounded:#D3A84F; --c-ev-abstain:#6F94B8; --c-ev-wrong:#D0705B;
+      --c-eff-low:#8FB0C8; --c-eff-medium:#6F94B8; --c-eff-high:#D3A84F; --c-eff-xhigh:#E0876A; --c-eff-max:#D0705B;
+      --c-grid:#3D3A35; --c-axis:#A19D91; --c-track:#3B3935;
+      --m-fable:#A885B5; --m-opus:#6F94B8; --m-sonnet:#E0876A; --m-haiku:#6FA886;
+
+      --shadow-1:0 1px 2px rgba(0,0,0,.30);
+      --shadow-2:0 1px 2px rgba(0,0,0,.30), 0 8px 22px -8px rgba(0,0,0,.50);
+      --shadow-pop:0 2px 4px rgba(0,0,0,.35), 0 18px 40px -10px rgba(0,0,0,.60);
+
+      /* Dark Alias Bridge */
+      --bench: var(--bg-canvas);
+      --stage: var(--bg-surface);
+      --rule: var(--border);
+      --tok-fresh: var(--c-fresh);
+      --tok-cached: var(--c-cached);
+      --tok-think: var(--c-think);
+      --tok-out: var(--c-output);
+      --primary: var(--accent-strong);
+      --warn: var(--warn-fill);
+      --danger: var(--danger-fill);
+      --success: var(--ok-fill);
     }
 
-    /* Reset & Base Setup */
+    /* ── Reset & Base Setup (Section 2.4) ──────────────────── */
     *, *::before, *::after {
       box-sizing: border-box;
+      scrollbar-color: var(--border-hover) transparent;
     }
 
     html {
+      -webkit-text-size-adjust: 100%;
       font-size: var(--base-font-size);
       scroll-behavior: smooth;
     }
@@ -81,13 +192,119 @@
     body {
       margin: 0;
       padding: 0;
-      background: var(--bench);
+      background: var(--bg-canvas);
       color: var(--ink);
-      font-family: var(--font-body);
-      line-height: 1.65;
+      font-family: var(--font-sans);
+      line-height: var(--lh-prose);
       text-align: left;
       -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+    }
+
+    ::selection {
+      background: var(--accent-tint-2);
+      color: var(--ink-strong);
+    }
+
+    :focus-visible {
+      outline: none;
+      box-shadow: var(--ring);
+      border-radius: var(--r-sm);
+    }
+    @supports not selector(:focus-visible) {
+      :focus {
+        outline: 2px solid var(--focus-ring);
+        outline-offset: 2px;
+      }
+    }
+
+    h1, h2, h3 {
+      font-family: var(--font-serif);
+      font-weight: 500;
+      color: var(--ink-strong);
+      font-optical-sizing: auto;
+      text-wrap: balance;
+      letter-spacing: -0.01em;
+    }
+    h1 { font-size: var(--fs-h1); line-height: var(--lh-tight); }
+    h2 { font-size: var(--fs-h2); line-height: var(--lh-head); }
+    h3 { font-size: var(--fs-h3); line-height: var(--lh-head); }
+    h4, h5, h6 {
+      font-family: var(--font-sans);
+      font-weight: 600;
+      color: var(--ink-strong);
+      line-height: var(--lh-ui);
+    }
+
+    p, li {
+      text-wrap: pretty;
+    }
+
+    blockquote, .pullquote {
+      font-family: var(--font-serif);
+      font-style: italic;
+      color: var(--ink-2);
+    }
+
+    code, kbd, samp, pre, .mono, table, td, th, output, input[type=number] {
+      font-family: var(--font-mono);
+      font-variant-numeric: tabular-nums;
+    }
+
+    :not(pre) > code {
+      font-size: 0.875em;
+      background: var(--bg-surface-2);
+      border: 1px solid var(--border);
+      border-radius: var(--r-xs);
+      padding: 0.05em 0.35em;
+    }
+
+    pre {
+      background: var(--bg-surface-2);
+      border: 1px solid var(--border);
+      border-radius: var(--r-lg);
+      font-size: var(--fs-sm);
+      line-height: 1.6;
+    }
+    pre code {
+      background: none;
+      border: 0;
+      padding: 0;
+    }
+
+    a {
+      color: var(--accent-ink);
+      text-decoration-color: color-mix(in srgb, var(--accent) 45%, transparent);
+      text-underline-offset: 0.18em;
+    }
+    a:hover {
+      color: var(--accent-hover);
+      text-decoration-color: currentColor;
+    }
+
+    input[type=range] {
+      accent-color: var(--accent);
+    }
+
+    input, textarea, select {
+      font-family: var(--font-sans);
+      color: var(--ink);
+      background: var(--bg-surface);
+      border: 1px solid var(--border-strong);
+      border-radius: var(--r-md);
+    }
+    textarea, input[type=number], .csv {
+      font-family: var(--font-mono);
+    }
+    ::placeholder {
+      color: var(--ink-4);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+      }
     }
 
     /* Reading Progress Top Bar */
@@ -96,7 +313,7 @@
       top: 0;
       left: 0;
       height: 3px;
-      background: var(--tok-fresh);
+      background: var(--accent);
       width: 0%;
       z-index: 9999;
       transition: width 0.1s ease;
