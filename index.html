@@ -2098,7 +2098,7 @@
     }
 
     /* =================================================================
-       10. TRẠM 6 · F7 PIPELINE & F9 PLAYGROUND (B.4 & B.2.5)
+       10. TRẠM 6 · F7 PIPELINE & F9 PLAYGROUND (Chương 4)
        ================================================================= */
     .pipeline-track {
       display: flex;
@@ -3058,7 +3058,7 @@
               </tr>
               <tr>
                 <td>Hệ Quả Thiết Kế</td>
-                <td>Cơ sở nền tảng cho <strong>kiểm chứng bằng code</strong> (B.4.6)</td>
+                <td>Cơ sở nền tảng cho <strong>kiểm chứng bằng code</strong> (Mục 4.3)</td>
                 <td>Quy tắc cứng: <code>cited_text</code> bắt buộc phải xuất hiện trong chunk đã gửi; nếu không, loại bỏ câu trả lời sai.</td>
               </tr>
             </tbody>
@@ -3109,7 +3109,7 @@
               <span class="badge-spec" style="color:var(--tok-fresh); border-color:var(--tok-fresh); font-size:0.65rem;">search_result_location</span>
             </div>
             <div style="font-size:0.9rem; line-height:1.7; color:var(--ink);" id="modelRespContent">
-              <span id="resp-s1" class="source-span active" onclick="highlightCitation(1)">Theo Bộ luật Lao động 2019, thời gian thử việc không được tính để tính số ngày nghỉ hằng năm nếu người lao động không tiếp tục làm việc sau thử việc <span class="cite-chip">[1]</span>.</span>
+              <span id="resp-s1" class="source-span active" onclick="highlightCitation(1)">Theo Khoản 2 Điều 65 Nghị định 145/2020/NĐ-CP (hướng dẫn Điều 113 Bộ luật Lao động 2019), thời gian thử việc được tính vào thời gian làm việc để tính số ngày nghỉ hằng năm nếu người lao động tiếp tục làm việc sau khi kết thúc thời gian thử việc <span class="cite-chip">[1]</span>.</span>
               <span id="resp-s2" class="source-span" onclick="highlightCitation(2)">Tại Alliance, nhân viên trong thời gian thử việc được hưởng nguyên lương vào các ngày nghỉ lễ theo quy định Nhà nước <span class="cite-chip">[2]</span>.</span>
               <span id="resp-s3" class="source-span" onclick="highlightCitation(3)">Sau khi ký hợp đồng chính thức, nhân viên có quyền nghỉ 12 ngày phép năm và được cộng dồn theo thâm niên <span class="cite-chip">[3]</span>.</span>
             </div>
@@ -3211,7 +3211,7 @@
                 </tbody>
               </table>
               <div style="font-size:0.75rem; color:var(--ink-2); margin-top:6px;">
-                <strong>Quy tắc kỹ sư:</strong> Số liệu của hãng nói về <em>model</em>. Ứng dụng doanh nghiệp bắt buộc phải tự chống injection ở <em>tầng hệ thống</em> (B.4.5), vì RAG nạp nội dung không tin cậy vào ngữ cảnh.
+                <strong>Quy tắc kỹ sư:</strong> Số liệu của hãng nói về <em>model</em>. Ứng dụng doanh nghiệp bắt buộc phải tự chống injection ở <em>tầng hệ thống</em> (Mục 4.4), vì RAG nạp nội dung không tin cậy vào ngữ cảnh.
               </div>
             </div>
           </details>
@@ -3226,7 +3226,7 @@
                 <li><strong>Lớp 1 (System Prompt):</strong> Dặn dò "chỉ trả lời dựa trên search_result; không đủ bằng chứng thì từ chối".</li>
                 <li><strong>Lớp 2 (Grounding bản địa):</strong> Ép buộc <code>search_result</code> kèm <code>citations.enabled: true</code> để tạo liên kết nguồn từng byte.</li>
                 <li><strong>Lớp 3 (Context Pruning & Rerank):</strong> Chỉ nạp top 5–8 chunk có liên quan cao nhất; loại bỏ văn bản gây nhiễu context.</li>
-                <li><strong>Lớp 4 (Xác minh bằng Code - B.4.6):</strong> Kiểm tra độc lập ngoài model: chuỗi <code>cited_text</code> bắt buộc là chuỗi con thuộc chunk gốc.</li>
+                <li><strong>Lớp 4 (Xác minh bằng Code - Mục 4.3):</strong> Kiểm tra độc lập ngoài model: chuỗi <code>cited_text</code> bắt buộc là chuỗi con thuộc chunk gốc.</li>
                 <li><strong>Lớp 5 (Feedback Loop & Golden Set):</strong> Chuyển toàn bộ các ca bị từ chối hoặc người dùng gắn cờ vào hàng đợi rà soát của chuyên gia.</li>
               </ol>
             </div>
@@ -3750,15 +3750,15 @@
           
           <div style="margin-bottom:14px;">
             <span class="badge-spec" style="color:var(--tok-fresh); border-color:var(--tok-fresh);">Reference Implementation</span>
-            <span style="font-family:var(--font-mono); font-size:0.75rem; color:var(--ink-2); margin-left:8px;">Alliance Software Co., Ltd. · Case Study B.4</span>
+            <span style="font-family:var(--font-mono); font-size:0.75rem; color:var(--ink-2); margin-left:8px;">Alliance Software Co., Ltd. · Báo Cáo Triển Khai Thực Tế</span>
           </div>
           <p>
             An toàn cho doanh nghiệp <strong>không bao giờ đến từ việc dặn dò trong System Prompt</strong>. Khi tích hợp RAG, việc nạp tài liệu từ người dùng tải lên đồng nghĩa với việc đưa dữ liệu không tin cậy vào ngữ cảnh. Bảo vệ hệ thống là bài toán kiến trúc nhiều tầng.
           </p>
 
-          <!-- B.4.1 BÀI TOÁN VÀ RÀNG BUỘC -->
+          <!-- 4.1 BÀI TOÁN VÀ RÀNG BUỘC -->
           <div style="margin-top:20px;">
-            <h3>B.4.1 Bài Toán và Ràng Buộc Kỹ Thuật</h3>
+            <h3>4.1. Bài Toán và Ràng Buộc Kỹ Thuật</h3>
             <p>
               Nhân viên hỏi về chính sách nhân sự, quy trình vận hành và tài liệu kỹ thuật nội bộ của công ty. Năm ràng buộc thiết kế bắt buộc:
             </p>
@@ -3774,9 +3774,9 @@
             </div>
           </div>
 
-          <!-- B.4.2 PIPELINE 12 GIAI ĐOẠN -->
+          <!-- 4.2 PIPELINE 12 GIAI ĐOẠN -->
           <div style="margin-top:24px;">
-            <h3>B.4.2 Pipeline 12 Giai Đoạn (Figure 7)</h3>
+            <h3>4.2. Dây Chuyền Xử Lý 12 Giai Đoạn (Hình 4.1)</h3>
             <p>
               Toàn bộ luồng xử lý từ lúc nạp tài liệu offline đến khi trả lời người dùng online được module hoá thành 12 giai đoạn nghiêm ngặt:
             </p>
@@ -3897,21 +3897,148 @@
               </tr>
             </thead>
             <tbody>
-              <tr><td>1</td><td>Ingest</td><td>Giữ cấu trúc heading, bảng; ghi <code>source_uri</code>, <code>title</code></td><td>Để <code>search_result</code> có <code>source</code> và <code>title</code> chuẩn mực cho citation.</td></tr>
-              <tr><td>2</td><td>Metadata</td><td><code>acl</code>, <code>version</code>, <code>effective_date</code>, quét DLP (PII, secrets)</td><td>Quyền và phiên bản phải quyết định <strong>trước</strong> khi tài liệu vào index.</td></tr>
-              <tr><td>3</td><td>Chunking</td><td>Theo cấu trúc ngữ nghĩa, tuyệt đối không cắt ngang bảng</td><td>Chunk cắt bảng là nguồn gây lỗi ảo giác số liệu hàng đầu.</td></tr>
-              <tr><td>4</td><td>Index</td><td>Dense + sparse (BM25), payload chứa ACL; embedding đa ngữ</td><td>Hybrid tăng Recall@k; lọc quyền ngay tại index tiết kiệm tài nguyên.</td></tr>
-              <tr><td>5</td><td>AuthN</td><td>Quyền lấy từ danh tính (JWT), <strong>không</strong> từ nội dung prompt</td><td>Chống tấn công giả mạo vai trò quản trị qua prompt injection.</td></tr>
-              <tr><td>6</td><td>Rewrite + Sàng lọc</td><td>Haiku 5.5 effort low; phân loại ý định; gắn cờ câu hỏi tấn công</td><td>Rẻ ($0.00009/câu), bảo vệ và giảm tải cho Sonnet.</td></tr>
-              <tr><td>7</td><td>Retrieval</td><td>Lọc ACL <strong>ngay trong truy vấn vector DB</strong></td><td>Không để tài liệu vượt quyền từng lọt vào ngữ cảnh LLM.</td></tr>
-              <tr><td>8</td><td>Rerank</td><td>Cắt tỉa xuống top 5–8 chunk phù hợp nhất; ưu tiên effective_date</td><td>Giảm \(T_{dyn}\) và loại bỏ nhiễu từ các văn bản chính sách cũ.</td></tr>
-              <tr><td>9</td><td>Generate</td><td><code>search_result</code> + <code>citations.enabled</code>; prompt dặn dò từ chối</td><td>Grounding bản địa và kích hoạt cơ chế abstention tin cậy.</td></tr>
-              <tr><td>10</td><td>Verify</td><td>Kiểm tra độc lập bằng code Python (B.4.6)</td><td>Model đề xuất, code xác minh; không tin tưởng mù quáng vào LLM.</td></tr>
-              <tr><td>11</td><td>Respond</td><td>Hiển thị trích dẫn nội bộ; <strong>không</strong> render URL ngoài/ảnh</td><td>Chống exfiltration dữ liệu nhạy cảm qua link hoặc webhook ngầm.</td></tr>
-              <tr><td>12</td><td>Feedback</td><td>Toàn bộ phản hồi chưa hữu ích và ca abstain vào hàng đợi review</td><td>Tạo data flywheel mở rộng golden set và phát hiện lỗ hổng tri thức.</td></tr>
+              <tr id="tr-1"><td>1</td><td>Ingest</td><td>Giữ cấu trúc heading, bảng; ghi <code>source_uri</code>, <code>title</code></td><td>Để <code>search_result</code> có <code>source</code> và <code>title</code> chuẩn mực cho citation.</td></tr>
+              <tr id="tr-2"><td>2</td><td>Metadata</td><td><code>acl</code>, <code>version</code>, <code>effective_date</code>, quét DLP (PII, secrets)</td><td>Quyền và phiên bản phải quyết định <strong>trước</strong> khi tài liệu vào index.</td></tr>
+              <tr id="tr-3"><td>3</td><td>Chunking</td><td>Theo cấu trúc ngữ nghĩa, tuyệt đối không cắt ngang bảng</td><td>Chunk cắt bảng là nguồn gây lỗi ảo giác số liệu hàng đầu.</td></tr>
+              <tr id="tr-4"><td>4</td><td>Index</td><td>Dense + sparse (BM25), payload chứa ACL; embedding đa ngữ</td><td>Hybrid tăng Recall@k; lọc quyền ngay tại index tiết kiệm tài nguyên.</td></tr>
+              <tr id="tr-5"><td>5</td><td>AuthN</td><td>Quyền lấy từ danh tính (JWT), <strong>không</strong> từ nội dung prompt</td><td>Chống tấn công giả mạo vai trò quản trị qua prompt injection.</td></tr>
+              <tr id="tr-6"><td>6</td><td>Rewrite + Sàng lọc</td><td>Haiku 5.5 effort low; phân loại ý định; gắn cờ câu hỏi tấn công</td><td>Rẻ ($0.00009/câu), bảo vệ và giảm tải cho Sonnet.</td></tr>
+              <tr id="tr-7"><td>7</td><td>Retrieval</td><td>Lọc ACL <strong>ngay trong truy vấn vector DB</strong></td><td>Không để tài liệu vượt quyền từng lọt vào ngữ cảnh LLM.</td></tr>
+              <tr id="tr-8"><td>8</td><td>Rerank</td><td>Cắt tỉa xuống top 5–8 chunk phù hợp nhất; ưu tiên effective_date</td><td>Giảm \(T_{dyn}\) và loại bỏ nhiễu từ các văn bản chính sách cũ.</td></tr>
+              <tr id="tr-9"><td>9</td><td>Generate</td><td><code>search_result</code> + <code>citations.enabled</code>; prompt dặn dò từ chối</td><td>Grounding bản địa và kích hoạt cơ chế abstention tin cậy.</td></tr>
+              <tr id="tr-10"><td>10</td><td>Verify</td><td>Kiểm tra độc lập bằng code Python (Mục 4.3)</td><td>Model đề xuất, code xác minh; không tin tưởng mù quáng vào LLM.</td></tr>
+              <tr id="tr-11"><td>11</td><td>Respond</td><td>Hiển thị trích dẫn nội bộ; <strong>không</strong> render URL ngoài/ảnh</td><td>Chống exfiltration dữ liệu nhạy cảm qua link hoặc webhook ngầm.</td></tr>
+              <tr id="tr-12"><td>12</td><td>Feedback</td><td>Toàn bộ phản hồi chưa hữu ích và ca abstain vào hàng đợi review</td><td>Tạo data flywheel mở rộng golden set và phát hiện lỗ hổng tri thức.</td></tr>
             </tbody>
           </table>
         </div>
+        <!-- Module Mã Nguồn Thực Thi: Giai đoạn 7 & Giai đoạn 10 -->
+        <div style="margin-top:20px; background:var(--bench); border:1px solid var(--rule); border-radius:6px; padding:16px;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; border-bottom:1px solid var(--rule); padding-bottom:8px;">
+            <span style="font-family:var(--font-mono); font-size:0.8rem; font-weight:600; color:var(--ink);">
+              MÃ NGUỒN CỐT LÕI HỆ THỐNG: GIAI ĐOẠN 7 (QDRANT MATCHANY) &amp; GIAI ĐOẠN 10 (VERIFY CITATIONS)
+            </span>
+            <span class="badge-spec" style="color:var(--tok-fresh); border-color:var(--tok-fresh);">Production Python 3.11</span>
+          </div>
+
+          <details open style="margin-bottom:12px;">
+            <summary style="font-size:0.85rem; font-weight:600; cursor:pointer; color:var(--accent);">
+              Đoạn mã 4.1: Bộ lọc phân quyền đa người dùng Qdrant (Giai đoạn 7 · MatchAny Filter)
+            </summary>
+            <pre style="margin-top:8px; padding:12px; background:var(--stage); border:1px solid var(--rule); border-radius:4px; font-size:0.75rem; overflow-x:auto;"><code class="language-python">from qdrant_client import QdrantClient
+from qdrant_client.http import models
+
+def execute_acl_retrieval(
+    client: QdrantClient,
+    collection_name: str,
+    query_vector: list[float],
+    user_tenant_id: str,
+    user_department: str,
+    limit: int = 8
+) -> list:
+    """
+    Giai đoạn 7: Truy xuất kết hợp (Hybrid Retrieval) với bộ lọc quyền ACL chặt chẽ.
+    Ngăn chặn rò rỉ dữ liệu ngoài thẩm quyền và cách ly dữ liệu đa người thuê (multi-tenant).
+    """
+    search_filter = models.Filter(
+        must=[
+            # 1. Ràng buộc cách ly doanh nghiệp (Multi-tenant isolation)
+            models.FieldCondition(
+                key="tenant_id",
+                match=models.MatchValue(value=user_tenant_id)
+            ),
+            # 2. Bộ lọc quyền truy cập phòng ban sử dụng MatchAny
+            models.FieldCondition(
+                key="department",
+                match=models.MatchAny(any=[user_department, "All", "Public"])
+            ),
+            # 3. Chỉ truy xuất tài liệu đang có hiệu lực thi hành
+            models.FieldCondition(
+                key="is_active",
+                match=models.MatchValue(value=True)
+            )
+        ]
+    )
+
+    results = client.search(
+        collection_name=collection_name,
+        query_vector=query_vector,
+        query_filter=search_filter,
+        limit=limit
+    )
+    return results</code></pre>
+          </details>
+
+          <details open>
+            <summary style="font-size:0.85rem; font-weight:600; cursor:pointer; color:var(--accent);">
+              Đoạn mã 4.2: Hàm xác minh trích dẫn độc lập và chống rò rỉ dữ liệu (Giai đoạn 10 · verify_citations)
+            </summary>
+            <pre style="margin-top:8px; padding:12px; background:var(--stage); border:1px solid var(--rule); border-radius:4px; font-size:0.75rem; overflow-x:auto;"><code class="language-python">import re
+from typing import NamedTuple, List, Dict
+
+class Citation(NamedTuple):
+    document_index: int
+    document_title: str
+    cited_text: str
+
+class VerificationResult(NamedTuple):
+    is_valid: bool
+    citation_errors: List[str]
+    security_flags: List[str]
+    sanitized_text: str
+
+def verify_citations(
+    response_text: str,
+    citations: List[Citation],
+    retrieved_chunks: Dict[int, str],
+    allowed_domain: str = "alliance.internal"
+) -> VerificationResult:
+    """
+    Giai đoạn 10: Xác minh đầu ra độc lập bằng Code (Grounding & Exfiltration Guard)
+    - Kiểm tra tính nguyên văn: cited_text bắt buộc là chuỗi con trong retrieved_chunks[document_index].
+    - Chống rò rỉ dữ liệu: Chặn toàn bộ URL ngoài allowlist và ảnh Markdown ![...](...).
+    - Quét DLP đầu ra: Ngăn ngừa rò rỉ token, khóa bí mật hoặc số CCCD.
+    """
+    citation_errors = []
+    security_flags = []
+
+    # 1. Xác minh chuỗi con trích dẫn (Exact Substring Verification)
+    for c in citations:
+        if c.document_index not in retrieved_chunks:
+            citation_errors.append(f"document_index={c.document_index} không tồn tại trong tập chunk đã nạp.")
+            continue
+        chunk_text = retrieved_chunks[c.document_index]
+        if c.cited_text not in chunk_text:
+            citation_errors.append(
+                f"citation không khớp nguồn: {c.document_title} (cited_text not in chunk): '{c.cited_text[:50]}...'"
+            )
+
+    # 2. Chống Exfiltration dữ liệu qua ảnh Markdown hoặc URL lạ
+    img_pattern = re.compile(r'!\[.*?\]\((https?:\/\/[^\)]+)\)')
+    for img_match in img_pattern.finditer(response_text):
+        security_flags.append(f"Phát hiện thẻ ảnh markdown nguy cơ rò rỉ dữ liệu: {img_match.group(0)}")
+
+    url_pattern = re.compile(r'https?:\/\/([a-zA-Z0-9\.\-]+)(?:\/[^\s\)]*)?')
+    for url_match in url_pattern.finditer(response_text):
+        domain = url_match.group(1).lower()
+        if domain != allowed_domain and not domain.endswith("." + allowed_domain):
+            security_flags.append(f"URL ngoài danh sách cho phép ({allowed_domain}): {url_match.group(0)}")
+
+    # 3. Quét DLP đầu ra (Bearer tokens, API keys)
+    token_pattern = re.compile(r'(?:bearer\s+[a-zA-Z0-9_\-\.]{20,}|sk-[a-zA-Z0-9]{20,})', re.IGNORECASE)
+    if token_pattern.search(response_text):
+        security_flags.append("Phát hiện chuỗi bí mật/API token trong phản hồi mô hình.")
+
+    is_valid = (len(citation_errors) == 0) and (len(security_flags) == 0)
+    return VerificationResult(
+        is_valid=is_valid,
+        citation_errors=citation_errors,
+        security_flags=security_flags,
+        sanitized_text=response_text if is_valid else "[NỘI DUNG BỊ TỪ CHỐI BỞI BỘ LỌC XÁC MINH AN TOÀN VÀ TRÍCH DẪN]"
+    )</code></pre>
+          </details>
+        </div>
+
       </section>
       <section class="stage-canvas">
         <div style="margin-bottom:16px;">
@@ -4010,7 +4137,7 @@
           </div>
         </div>
 
-        <!-- B.4.5 THREAT MATRIX TABLE -->
+        <!-- 4.4 THREAT MATRIX TABLE -->
         <div style="margin-top:20px;">
           <h4 style="margin:0 0 8px; font-size:1.05rem;">Bảng Ma Trận Mối Đe Dọa và Kiểm Soát Hệ Thống (T1 &rarr; T8)</h4>
           <div style="overflow-x:auto;">
@@ -4768,16 +4895,18 @@
 <p>---</p>
 <p># PHỤ LỤC</p>
 <p>## Phụ lục 1. Mã nguồn hoàn chỉnh của bộ kiểm tra tính đúng đắn toán học <code>verify()</code></p>
-<pre><code># Phụ lục 1: Module kiểm định tính toán số học độc lập trong hệ thống
+<pre style="background:var(--stage); padding:14px; border:1px solid var(--rule); border-radius:6px; font-size:0.75rem; overflow-x:auto;"><code class="language-python"># Phụ lục 1: Module kiểm định tính toán số học độc lập trong hệ thống (Giai đoạn 10)
 import re
 import math
-from typing import NamedTuple</code></pre>
-<p>class VerificationResult(NamedTuple):
+from typing import NamedTuple
+
+class VerificationResult(NamedTuple):
     is_valid: bool
     detected_expressions: list[str]
     error_log: list[str]
-    sanitized_output: str</p>
-<p>def run_arithmetic_verifier(raw_text: str) -> VerificationResult:
+    sanitized_output: str
+
+def run_arithmetic_verifier(raw_text: str) -> VerificationResult:
     """
     Quét và kiểm tra toàn bộ các biểu thức tính toán số học trong câu trả lời của LLM.
     Hỗ trợ các phép tính cơ bản: cộng (+), trừ (-), nhân (*, x, ×), chia (/, :)
@@ -4785,21 +4914,21 @@ from typing import NamedTuple</code></pre>
     expr_pattern = re.compile(
         r'(\d+(?:[\.,]\d+)?)\s*([\+\-\*\/xX×:])\s*(\d+(?:[\.,]\d+)?)\s*=\s*(\d+(?:[\.,]\d+)?)'
     )
-    
+
     errors = []
     expressions = []
     modified_text = raw_text
-    
+
     for match in expr_pattern.finditer(raw_text):
         full_expr = match.group(0)
         str_a, op, str_b, str_c = match.groups()
         expressions.append(full_expr)
-        
+
         # Chuẩn hóa số thực từ chuỗi định dạng tiếng Việt (dấu chấm phân cách ngàn, dấu phẩy thập phân)
         val_a = float(str_a.replace('.', '').replace(',', '.'))
         val_b = float(str_b.replace('.', '').replace(',', '.'))
         val_c = float(str_c.replace('.', '').replace(',', '.'))
-        
+
         # Tính toán giá trị chuẩn bằng engine Python
         actual = 0.0
         if op in ['+', 'cong']:
@@ -4813,7 +4942,7 @@ from typing import NamedTuple</code></pre>
                 errors.append(f"Lỗi chia cho 0 trong biểu thức: {full_expr}")
                 continue
             actual = val_a / val_b
-            
+
         # Kiểm tra độ lệch với ngưỡng sai số epsilon
         if not math.isclose(actual, val_c, rel_tol=1e-5, abs_tol=1e-5):
             err_msg = f"Sai lệch số học: '{full_expr}' -> Kết quả đúng phải là: {actual:,.2f}".replace(',', 'X').replace('.', ',').replace('X', '.')
@@ -4821,15 +4950,14 @@ from typing import NamedTuple</code></pre>
             # Tự động thay thế giá trị đúng vào phản hồi
             correct_expr = f"{str_a} {op} {str_b} = {actual:,.0f}".replace(',', '.')
             modified_text = modified_text.replace(full_expr, correct_expr)
-            
+
     is_success = len(errors) == 0
     return VerificationResult(
         is_valid=is_success,
         detected_expressions=expressions,
         error_log=errors,
         sanitized_output=modified_text
-    )
-<code></code>`</p>
+    )</code></pre>
 <p>## Phụ lục 2. Kịch bản đối soát trích dẫn mẫu (Sample Two-Way Citations)</p>
 <pre><code>Truy vấn mẫu của người dùng:
 "Nhân viên thử việc có được hưởng chế độ nghỉ phép năm theo quy định của Luật Lao động và Quy chế nội bộ công ty Alliance không? Nếu có thì cách tính ngày phép dồn như thế nào?"</code></pre>
@@ -5967,15 +6095,15 @@ from typing import NamedTuple</code></pre>
       var auditRows = document.getElementById('citeAuditRows');
 
       if (scen === 1) {
-        respEl.innerHTML = '<span id="resp-s1" class="source-span active" onclick="highlightCitation(1)">Theo Bộ luật Lao động 2019, thời gian thử việc không được tính để tính số ngày nghỉ hằng năm nếu người lao động không tiếp tục làm việc sau thử việc <span class="cite-chip">[1]</span>.</span> ' +
+        respEl.innerHTML = '<span id="resp-s1" class="source-span active" onclick="highlightCitation(1)">Theo Khoản 2 Điều 65 Nghị định 145/2020/NĐ-CP (hướng dẫn Điều 113 Bộ luật Lao động 2019), thời gian thử việc được tính vào thời gian làm việc để tính số ngày nghỉ hằng năm nếu người lao động tiếp tục làm việc sau khi kết thúc thời gian thử việc <span class="cite-chip">[1]</span>.</span> ' +
                            '<span id="resp-s2" class="source-span" onclick="highlightCitation(2)">Tại Alliance, nhân viên trong thời gian thử việc được hưởng nguyên lương vào các ngày nghỉ lễ theo quy định Nhà nước <span class="cite-chip">[2]</span>.</span> ' +
                            '<span id="resp-s3" class="source-span" onclick="highlightCitation(3)">Sau khi ký hợp đồng chính thức, nhân viên có quyền nghỉ 12 ngày phép năm và được cộng dồn theo thâm niên <span class="cite-chip">[3]</span>.</span>';
-        srcEl.innerHTML = '<div style="padding:4px 0; border-bottom:1px solid var(--rule); margin-bottom:6px;"><strong style="color:var(--ink);">[1] bo-luat-lao-dong-2019.md</strong> (Điều 65 · Nghỉ hằng năm)<br><span id="src-p1" class="source-span active" onclick="highlightCitation(1)">2. Thời gian thử việc nếu người lao động tiếp tục làm việc cho người sử dụng lao động sau khi hết thời gian thử việc.</span></div>' +
+        srcEl.innerHTML = '<div style="padding:4px 0; border-bottom:1px solid var(--rule); margin-bottom:6px;"><strong style="color:var(--ink);">[1] nghi-dinh-145-2020-nd-cp.md</strong> (Khoản 2 Điều 65 · Hướng dẫn Điều 113 BLLĐ 2019)<br><span id="src-p1" class="source-span active" onclick="highlightCitation(1)">2. Thời gian thử việc nếu người lao động tiếp tục làm việc cho người sử dụng lao động sau khi kết thúc thời gian thử việc được tính vào thời gian làm việc để tính số ngày nghỉ hằng năm.</span></div>' +
                           '<div style="padding:4px 0; border-bottom:1px solid var(--rule); margin-bottom:6px;"><strong style="color:var(--ink);">[2] alliance-chinh-sach-nhan-su-2024.md</strong> (Mục 4.1 · Quy chế thử việc)<br>4.1.1. <span id="src-p2" class="source-span" onclick="highlightCitation(2)">Nhân viên mới trong thời gian thử việc được hưởng nguyên lương vào các ngày nghỉ Lễ, Tết theo quy định của Pháp luật Việt Nam.</span></div>' +
                           '<div style="padding:4px 0;"><strong style="color:var(--ink);">[3] alliance-chinh-sach-nhan-su-2024.md</strong> (Mục 4.2 · Phép năm)<br>4.1.2. <span id="src-p3" class="source-span" onclick="highlightCitation(3)">Sau khi hoàn thành thử việc và ký hợp đồng lao động chính thức, người lao động được hưởng 12 ngày nghỉ phép năm hưởng nguyên lương.</span></div>';
         if (offsetMeta) offsetMeta.innerText = 'Offset: char 1420 - 1585';
         if (auditRows) {
-          auditRows.innerHTML = '<tr id="audit-row-1"><td>Thời gian thử việc không tính nghỉ hằng năm nếu không ký tiếp...</td><td><code>"2. Thời gian thử việc nếu người lao động tiếp tục làm việc..."</code></td><td>bo-luat-lao-dong-2019.md <span class="tag-verif docs">Offset: 1420-1585</span></td><td><span class="badge-spec" style="color:var(--success); border-color:var(--success);">[Xác thực] PASS (Khớp chunk)</span></td></tr>' +
+          auditRows.innerHTML = '<tr id="audit-row-1"><td>Thời gian thử việc được tính hưởng phép năm nếu tiếp tục làm việc...</td><td><code>"2. Thời gian thử việc nếu người lao động tiếp tục làm việc..."</code></td><td>nghi-dinh-145-2020-nd-cp.md (Khoản 2 Điều 65) <span class="tag-verif docs">Offset: 1420-1585</span></td><td><span class="badge-spec" style="color:var(--success); border-color:var(--success);">[Xác thực] PASS (Khớp chunk)</span></td></tr>' +
                                 '<tr id="audit-row-2"><td>Nhân viên thử việc được hưởng nguyên lương ngày lễ...</td><td><code>"Nhân viên mới trong thời gian thử việc được hưởng nguyên lương..."</code></td><td>alliance-chinh-sach-nhan-su-2024.md <span class="tag-verif docs">Offset: 2810-2890</span></td><td><span class="badge-spec" style="color:var(--success); border-color:var(--success);">[Xác thực] PASS (Khớp chunk)</span></td></tr>' +
                                 '<tr id="audit-row-3"><td>Ký hợp đồng chính thức được 12 ngày phép năm...</td><td><code>"Sau khi hoàn thành thử việc và ký hợp đồng... 12 ngày nghỉ phép"</code></td><td>alliance-chinh-sach-nhan-su-2024.md <span class="tag-verif docs">Offset: 2920-3015</span></td><td><span class="badge-spec" style="color:var(--success); border-color:var(--success);">[Xác thực] PASS (Khớp chunk)</span></td></tr>';
         }
@@ -6009,7 +6137,7 @@ from typing import NamedTuple</code></pre>
       }
       isCiteTampered = true;
       var respEl = document.getElementById('modelRespContent');
-      respEl.innerHTML = '<span id="resp-s1" class="source-span active" onclick="highlightCitation(1)">Theo Bộ luật Lao động 2019, thời gian thử việc không được tính để tính số ngày nghỉ hằng năm nếu người lao động không tiếp tục làm việc sau thử việc <span class="cite-chip">[1]</span>.</span> ' +
+      respEl.innerHTML = '<span id="resp-s1" class="source-span active" onclick="highlightCitation(1)">Theo Khoản 2 Điều 65 Nghị định 145/2020/NĐ-CP (hướng dẫn Điều 113 Bộ luật Lao động 2019), thời gian thử việc được tính vào thời gian làm việc để tính số ngày nghỉ hằng năm nếu người lao động tiếp tục làm việc sau khi kết thúc thời gian thử việc <span class="cite-chip">[1]</span>.</span> ' +
                          '<span id="resp-s2" class="source-span" onclick="highlightCitation(2)" style="background:var(--danger-bg); border-bottom:2px dashed var(--danger);">Tại Alliance, nhân viên mới trong thời gian thử việc được cấp 45 ngày phép đặc cách hưởng 200% lương <span class="cite-chip" style="background:var(--danger); color:#fff;">[2 - FAKE]</span>.</span> ' +
                          '<span id="resp-s3" class="source-span" onclick="highlightCitation(3)">Sau khi ký hợp đồng chính thức, nhân viên có quyền nghỉ 12 ngày phép năm và được cộng dồn theo thâm niên <span class="cite-chip">[3]</span>.</span>';
 
@@ -6019,7 +6147,7 @@ from typing import NamedTuple</code></pre>
         banner.style.background = 'var(--warn-bg)';
         banner.style.borderLeft = '4px solid var(--warn)';
         banner.style.color = 'var(--ink)';
-        banner.innerHTML = '[Lưu ý]️ <strong>ĐÃ GIẢ MẠO TRÍCH DẪN [2]:</strong> Nội dung câu 2 đã bị can thiệp thành chuỗi không có trong chunk tài liệu. Bấm <strong>"▶ Chạy verify()"</strong> để kiểm chứng phản xạ của bộ lọc code B.4.6!';
+        banner.innerHTML = '[Lưu ý]️ <strong>ĐÃ GIẢ MẠO TRÍCH DẪN [2]:</strong> Nội dung câu 2 đã bị can thiệp thành chuỗi không có trong chunk tài liệu. Bấm <strong>"▶ Chạy verify()"</strong> để kiểm chứng phản xạ của bộ lọc code verify() tại Giai đoạn 10!';
       }
     }
 
@@ -6046,7 +6174,7 @@ from typing import NamedTuple</code></pre>
 
         var auditRows = document.getElementById('citeAuditRows');
         if (auditRows) {
-          auditRows.innerHTML = '<tr id="audit-row-1"><td>Thời gian thử việc không tính nghỉ hằng năm nếu không ký tiếp...</td><td><code>"2. Thời gian thử việc nếu người lao động tiếp tục làm việc..."</code></td><td>bo-luat-lao-dong-2019.md <span class="tag-verif docs">Offset: 1420-1585</span></td><td><span class="badge-spec" style="color:var(--success); border-color:var(--success);">[Xác thực] PASS (Khớp chunk)</span></td></tr>' +
+          auditRows.innerHTML = '<tr id="audit-row-1"><td>Thời gian thử việc được tính hưởng phép năm nếu tiếp tục làm việc...</td><td><code>"2. Thời gian thử việc nếu người lao động tiếp tục làm việc..."</code></td><td>nghi-dinh-145-2020-nd-cp.md (Khoản 2 Điều 65) <span class="tag-verif docs">Offset: 1420-1585</span></td><td><span class="badge-spec" style="color:var(--success); border-color:var(--success);">[Xác thực] PASS (Khớp chunk)</span></td></tr>' +
                                 '<tr id="audit-row-2" style="background:var(--danger-bg);"><td>Nhân viên thử việc được cấp 45 ngày phép đặc cách hưởng 200% lương...</td><td><code style="color:var(--danger);">"được cấp 45 ngày phép đặc cách..."</code></td><td>alliance-chinh-sach-nhan-su-2024.md</td><td><span class="badge-spec" style="color:var(--danger); border-color:var(--danger);">[Không đạt] FAIL (Không có trong chunk)</span></td></tr>' +
                                 '<tr id="audit-row-3"><td>Ký hợp đồng chính thức được 12 ngày phép năm...</td><td><code>"Sau khi hoàn thành thử việc và ký hợp đồng... 12 ngày nghỉ phép"</code></td><td>alliance-chinh-sach-nhan-su-2024.md <span class="tag-verif docs">Offset: 2920-3015</span></td><td><span class="badge-spec" style="color:var(--success); border-color:var(--success);">[Xác thực] PASS (Khớp chunk)</span></td></tr>';
         }
@@ -6088,15 +6216,15 @@ from typing import NamedTuple</code></pre>
        ================================================================= */
     var pipeDescriptions = {
       1: { title: "Giai đoạn 1 · Ingest + Parse Document", desc: "Giữ nguyên cấu trúc phân cấp heading, bảng số liệu; trích xuất và lưu trữ source_uri, title chuẩn mực để phục vụ search_result citations." },
-      2: { title: "Giai đoạn 2 · Chuẩn hóa Metadata & Quét DLP", desc: "Gán nhãn quyền truy cập (ACL), phiên bản tài liệu (version), ngày hiệu lực (effective_date); quét DLP tự động che chắn PII và mật khẩu trước khi đưa vào index." },
+      2: { title: "Giai đoạn 2 · Chuẩn hóa Metadata & Quét DLP", desc: "Gán nhãn quyền truy cập (ACL), phiên bản tài liệu (version), ngày hiệu lực (effective_date); bộ lọc DLP tĩnh bằng regex tự động che chắn PII (CCCD, tài khoản ngân hàng) và mã bí mật trước khi đưa vào chỉ mục." },
       3: { title: "Giai đoạn 3 · Chunking Theo Cấu Trúc Ngữ Nghĩa", desc: "Chia đoạn 400–800 token, overlap 10–15%; tuyệt đối không cắt ngang bảng dữ liệu để tránh sinh ảo giác số liệu." },
       4: { title: "Giai đoạn 4 · Hybrid Embedding & Index", desc: "Đánh chỉ mục kép Dense Vector + BM25 Sparse; nhúng payload chứa danh sách ACL để hỗ trợ lọc quyền tức thì." },
       5: { title: "Giai đoạn 5 · AuthN & Giải Quyết Quyền", desc: "Quyền truy cập lấy trực tiếp từ JWT danh tính người dùng, không bao giờ suy diễn từ nội dung câu hỏi để chống giả mạo vai trò." },
-      6: { title: "Giai đoạn 6 · Query Rewrite & Sàng Lọc", desc: "Haiku 5.5 ở effort low phân loại ý định, trích xuất thực thể và gắn cờ câu hỏi có dấu hiệu tấn công với chi phí siêu rẻ ($0.00009/câu)." },
-      7: { title: "Giai đoạn 7 · Hybrid Retrieval & Lọc ACL", desc: "Thực hiện lọc quyền ACL ngay trong truy vấn vector; tài liệu vượt quyền không bao giờ được phép lọt vào context." },
+      6: { title: "Giai đoạn 6 · Query Rewrite & Sàng Lọc (Prompt Shield)", desc: "Haiku 5.5 ở effort low đóng vai trò Prompt Shield phân loại ý định, chuẩn hóa câu hỏi và phát hiện sớm các dấu hiệu tấn công injection với chi phí siêu rẻ ($0.00009/câu)." },
+      7: { title: "Giai đoạn 7 · Hybrid Retrieval & Lọc ACL (Qdrant MatchAny)", desc: "Thực hiện lọc quyền ACL ngay trong truy vấn vector Qdrant với MatchAny; đảm bảo cách ly dữ liệu đa người dùng (multi-tenant) và loại bỏ hoàn toàn tài liệu mật trước khi vào context." },
       8: { title: "Giai đoạn 8 · Reranking & Cắt Tỉa", desc: "Cross-encoder rerank chọn lọc top 5–8 chunk phù hợp nhất; ưu tiên phiên bản có effective_date mới nhất để tránh xung đột chính sách." },
       9: { title: "Giai đoạn 9 · Sinh Câu Trả Lời (Sonnet 5.5)", desc: "Gọi Sonnet 5.5 với search_result blocks và citations.enabled; dặn dò chỉ dựa vào căn cứ đã cung cấp, không đủ bằng chứng thì từ chối (Abstain)." },
-      10: { title: "Giai đoạn 10 · Xác Minh Đầu Ra Bằng Code (B.4.6)", desc: "Code Python độc lập kiểm tra cited_text phải là chuỗi con thuộc chunk gốc; phát hiện và chặn toàn bộ URL ngoài hoặc PII." },
+      10: { title: "Giai đoạn 10 · Xác Minh Đầu Ra Bằng Code (Mục 4.3)", desc: "Code Python độc lập kiểm tra cited_text phải là chuỗi con thuộc chunk gốc; phát hiện và chặn toàn bộ URL ngoài hoặc PII." },
       11: { title: "Giai đoạn 11 · Trả Lời & Trích Dẫn", desc: "Render phản hồi kèm các chip trích dẫn liên kết nội bộ; không render thẻ ảnh hoặc link ngoài để chống exfiltration." },
       12: { title: "Giai đoạn 12 · Log & Data Flywheel", desc: "Toàn bộ câu hỏi bị từ chối hoặc người dùng đánh giá chưa hữu ích được đưa vào hàng đợi kiểm toán để mở rộng golden set." }
     };
@@ -6128,11 +6256,11 @@ from typing import NamedTuple</code></pre>
         banner.innerHTML = '️ <strong>Lỗi 1 (Truy cập vượt quyền):</strong> Bị chặn đứng tại <strong>Giai đoạn 7 (Hybrid Retrieval)</strong>. Bộ lọc ACL trong truy vấn vector loại bỏ hoàn toàn tài liệu mật trước khi vào context!';
         inspectPipeNode(7);
       } else if (type === 'injection') {
-        var node2 = document.getElementById('pnode-2');
+        var node6 = document.getElementById('pnode-6');
         var node10 = document.getElementById('pnode-10');
-        if (node2) node2.classList.add('error-halt');
+        if (node6) node6.classList.add('error-halt');
         if (node10) node10.classList.add('error-halt');
-        banner.innerHTML = '️ <strong>Lỗi 2 (Lệnh nhúng Injection):</strong> Bị phát hiện và gắn cờ tại <strong>Giai đoạn 2 (DLP Scan)</strong>, sau đó bị cô lập tại <strong>Giai đoạn 9 (Search Result)</strong> và kiểm tra chặn tại <strong>Giai đoạn 10</strong>!';
+        banner.innerHTML = '️ <strong>Lỗi 2 (Lệnh nhúng Prompt Injection):</strong> Bị phát hiện và chặn bởi <strong>Giai đoạn 6 (Query Rewrite & Sàng lọc)</strong> đối với truy vấn, hoặc bị cô lập trong khối <strong>search_result</strong> tại <strong>Giai đoạn 9</strong> và kiểm tra chặn tại <strong>Giai đoạn 10 (Verify bằng Code)</strong> đối với văn bản nhúng!';
         inspectPipeNode(10);
       } else if (type === 'version') {
         var node8 = document.getElementById('pnode-8');
@@ -6252,7 +6380,7 @@ from typing import NamedTuple</code></pre>
     }
 
     /* =================================================================
-       B.4.8 DEMO: INVOICE ARITHMETIC VALIDATOR
+       DEMO: INVOICE ARITHMETIC VALIDATOR
        ================================================================= */
     function validateInvoiceDemo() {
       var qty = parseFloat(document.getElementById('invQty').value) || 0;

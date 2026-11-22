@@ -301,7 +301,7 @@ Hệ thống Trợ lý Tri thức Nội bộ (Alliance Knowledge Assistant) đư
 Các ràng buộc kỹ thuật bắt buộc:
 1. **Lưu lượng vận hành:** Đáp ứng quy mô 44.000 truy vấn mỗi tháng (trung bình ~2.000 lượt/ngày làm việc).
 2. **Ngân sách vận hành:** Chi phí API không vượt quá 1.000 USD/tháng.
-3. **Độ chính xác pháp lý:** Mọi thông tin trích dẫn phải đối soát chính xác tới cấp độ Điều và Khoản của Bộ luật Lao động 2019 và Quy chế Lao động Nội bộ Alliance 2024.
+3. **Độ chính xác pháp lý:** Mọi thông tin trích dẫn phải đối soát chính xác tới cấp độ Điều và Khoản của Bộ luật Lao động 2019 (đặc biệt là Điều 113), Nghị định 145/2020/NĐ-CP (Khoản 2 Điều 65) và Quy chế Lao động Nội bộ Alliance 2024.
 4. **An toàn dữ liệu:** Nghiêm cấm tuyệt đối việc sử dụng dữ liệu doanh nghiệp để huấn luyện lại mô hình; đảm bảo kiểm soát quyền truy cập theo vai trò nhân viên.
 
 ## 4.2. Kiến trúc dây chuyền xử lý 12 giai đoạn
@@ -313,15 +313,15 @@ Các ràng buộc kỹ thuật bắt buộc:
 | Giai đoạn | Tên giai đoạn | Mục tiêu kỹ thuật | Cơ chế thực thi chi tiết | Giải pháp phòng thủ & An toàn |
 |---|---|---|---|---|
 | **G1** | Tiếp nhận & Phân tích văn bản (Ingest & Parse) | Chuyển đổi tài liệu PDF/Markdown thành cấu trúc dữ liệu chuẩn hóa. | Giữ nguyên cấu trúc phân cấp tiêu đề (H1-H4), bảo toàn bảng biểu; gán nhãn `source_uri` duy nhất cho từng tài liệu. | Loại bỏ các siêu dữ liệu ẩn (hidden metadata) và mã độc thực thi nhúng trong tệp. |
-| **G2** | Chuẩn hóa Metadata & Quét DLP | Làm sạch dữ liệu và ngăn chặn rò rỉ thông tin định danh cá nhân. | Gán thẻ quyền truy cập (ACL), phiên bản tài liệu (`version`), ngày hiệu lực; quét regex nhận diện số CMND/CCCD, mật khẩu. | Che chắn dữ liệu nhạy cảm (data masking) trước khi đưa vào cơ sở dữ liệu vector. |
+| **G2** | Chuẩn hóa Metadata & Quét DLP Ingest | Làm sạch dữ liệu và ngăn chặn rò rỉ thông tin định danh cá nhân trước khi nhúng. | Gán thẻ quyền truy cập (ACL), phiên bản tài liệu (`version`), ngày hiệu lực (`effective_date`); quét DLP tĩnh bằng regex nhận diện số CCCD, tài khoản ngân hàng, mật khẩu. | Che chắn dữ liệu nhạy cảm (data masking) trước khi đưa vào cơ sở dữ liệu vector. |
 | **G3** | Phân đoạn ngữ nghĩa (Semantic Chunking) | Chia nhỏ văn bản thành các khối có ý nghĩa ngữ nghĩa trọn vẹn. | Phân đoạn kích thước 400–800 token, độ chồng lấn (overlap) 10–15%; tuyệt đối không cắt ngang bảng dữ liệu. | Đảm bảo tính nguyên vẹn ngữ cảnh pháp lý để chống hiện tượng hiểu sai điều khoản. |
 | **G4** | Đánh chỉ mục lai (Hybrid Indexing) | Tạo không gian tìm kiếm đa chiều kết hợp ngữ nghĩa và từ khóa. | Đánh chỉ mục kép: Dense Vector (nhiệm vụ bắt ý nghĩa tổng quát) + BM25 Sparse (bắt chính xác mã điều luật). | Nhúng danh sách quyền ACL trực tiếp vào payload của từng vector điểm. |
 | **G5** | Xác thực danh tính & Giải quyết quyền (AuthN & ACL) | Xác định thẩm quyền truy cập thông tin của người gửi truy vấn. | Trích xuất định danh và vai trò nhân viên trực tiếp từ JWT Token của phiên đăng nhập SSO hệ thống. | Tuyệt đối không suy diễn quyền từ nội dung câu hỏi để chống giả mạo vai trò. |
-| **G6** | Viết lại truy vấn & Sàng lọc (Query Rewrite) | Chuẩn hóa câu hỏi và phát hiện sớm các dấu hiệu tấn công. | Sử dụng Claude Haiku 5.5 ở mức `effort: low` để mở rộng từ đồng nghĩa và phát hiện dấu hiệu prompt injection. | Từ chối xử lý sớm (early drop) các truy vấn độc hại với chi phí cực thấp ($0,0005/req$). |
-| **G7** | Truy xuất kết hợp & Lọc quyền (Retrieval & Filtering) | Lấy ra các đoạn văn bản liên quan phù hợp với quyền hạn người dùng. | Thực hiện tìm kiếm Hybrid kết hợp bộ lọc cứng `acl_group IN user_roles`; chỉ lấy các tài liệu có điểm tương đồng cao. | Ngăn chặn hoàn toàn việc rò rỉ dữ liệu ngoài thẩm quyền ngay tại tầng lưu trữ. |
+| **G6** | Viết lại truy vấn & Prompt Shield (Query Rewrite) | Chuẩn hóa câu hỏi, phân loại ý định và phát hiện sớm các dấu hiệu tấn công injection. | Sử dụng Claude Haiku 5.5 ở mức `effort: low` đóng vai trò Prompt Shield phát hiện câu hỏi mang tính thao túng System Prompt hoặc leo thang quyền hạn. | Từ chối xử lý sớm (early drop) các truy vấn độc hại với chi phí cực thấp ($0,00009/req$). |
+| **G7** | Truy xuất kết hợp & Lọc quyền ACL (Retrieval & Filtering) | Lấy ra các đoạn văn bản liên quan phù hợp với quyền hạn người dùng. | Thực hiện tìm kiếm Hybrid kết hợp bộ lọc quyền Qdrant sử dụng `MatchAny` và cách ly đa người dùng (`tenant_id`); chỉ lấy tài liệu còn hiệu lực. | Ngăn chặn hoàn toàn việc rò rỉ dữ liệu ngoài thẩm quyền ngay tại tầng lưu trữ cơ sở dữ liệu vector. |
 | **G8** | Tái xếp hạng & Cắt tỉa (Reranking & Pruning) | Tối ưu hóa danh sách tài liệu nạp vào cửa sổ ngữ cảnh LLM. | Áp dụng mô hình Cross-Encoder reranker; loại bỏ các chunk trùng lặp; chỉ giữ lại tối đa 5 chunk phù hợp nhất. | Giảm thiểu hiện tượng phình ngữ cảnh, tiết kiệm chi phí prefill và hạ thấp độ trễ TTFT. |
 | **G9** | Sinh phản hồi kèm trích dẫn (Inference & Citations) | Tạo lập câu trả lời chính xác, mạch lạc và có nguồn đối soát. | Gọi Claude Sonnet 5.5 với `thinking: adaptive`, nạp tài liệu qua cấu trúc `search_result`, kích hoạt `citations: True`. | Phản hồi bị ràng buộc chặt chẽ vào dữ liệu grounding, loại bỏ hoàn toàn khả năng bịa đặt nguồn. |
-| **G10** | Xác minh đầu ra độc lập (Code Verification) | Kiểm chứng tính đúng đắn toán học của câu trả lời trước khi gửi. | Bộ phân tích cú pháp trích xuất các phép tính số học trong phản hồi; chuyển vào sandbox Python độc lập để kiểm tra lại. | Chặn đứng ảo giác tính toán sai lệch về ngày phép hoặc tiền lương dồn. |
+| **G10** | Xác minh đầu ra độc lập bằng Code (Code Verification) | Kiểm chứng tính nguyên văn của trích dẫn và ngăn chặn rò rỉ dữ liệu. | Hàm `verify_citations()` kiểm tra từng byte `cited_text` phải nằm trong chunk gốc (`cited_text in chunk`); quét chặn URL ngoài whitelist và thẻ ảnh Markdown. | Chặn đứng ảo giác trích dẫn giả mạo và các kênh rò rỉ dữ liệu ngoài hệ thống. |
 | **G11** | Chuẩn hóa hiển thị trích dẫn (Render Engine) | Trình bày câu trả lời trực quan, minh bạch cho người dùng cuối. | Hiển thị các chip trích dẫn có thể nhấp chuột; liên kết trực tiếp tới vị trí byte tương ứng trong tài liệu gốc. | Cung cấp giao diện đối chiếu hai chiều minh bạch cho nhân viên. |
 | **G12** | Nhật ký kiểm toán & Phản hồi (Audit & Flywheel) | Lưu vết phục vụ giám sát tuân thủ và cải tiến hệ thống liên tục. | Ghi nhận câu hỏi, phản hồi, nguồn trích dẫn, lượng token tiêu thụ và độ trễ vào cơ sở dữ liệu kiểm toán. | Phát hiện các vùng tri thức còn thiếu hụt để bổ sung quy chế nội bộ kịp thời. |
 
@@ -399,6 +399,55 @@ def execute_knowledge_retrieval(
     }
 ```
 
+### 4.3.2. Cơ chế lọc quyền truy cập Qdrant MatchAny (Giai đoạn 7)
+Để ngăn ngừa rò rỉ dữ liệu chéo phòng ban và đảm bảo cách ly đa người thuê (`tenant_id`), Giai đoạn 7 triển khai bộ lọc ACL trực tiếp tại tầng cơ sở dữ liệu vector Qdrant. Nhờ đó, tài liệu vượt quyền không bao giờ xuất hiện trong tập kết quả trả về:
+
+```python
+# Đoạn mã 4.2. Bộ lọc phân quyền đa người dùng Qdrant MatchAny (Giai đoạn 7)
+from qdrant_client import QdrantClient
+from qdrant_client.http import models
+
+def execute_acl_retrieval(
+    client: QdrantClient,
+    collection_name: str,
+    query_vector: list[float],
+    user_tenant_id: str,
+    user_department: str,
+    limit: int = 8
+) -> list:
+    """
+    Giai đoạn 7: Truy xuất kết hợp với bộ lọc quyền ACL và cách ly đa người thuê.
+    """
+    search_filter = models.Filter(
+        must=[
+            # 1. Ràng buộc cách ly doanh nghiệp (Multi-tenant isolation)
+            models.FieldCondition(
+                key="tenant_id",
+                match=models.MatchValue(value=user_tenant_id)
+            ),
+            # 2. Bộ lọc quyền truy cập phòng ban sử dụng MatchAny
+            models.FieldCondition(
+                key="department",
+                match=models.MatchAny(any=[user_department, "All", "Public"])
+            ),
+            # 3. Chỉ truy xuất tài liệu đang có hiệu lực thi hành
+            models.FieldCondition(
+                key="is_active",
+                match=models.MatchValue(value=True)
+            )
+        ]
+    )
+
+    results = client.search(
+        collection_name=collection_name,
+        query_vector=query_vector,
+        query_filter=search_filter,
+        limit=limit
+    )
+    return results
+```
+
+
 ## 4.4. Mô hình mối đe dọa và kiến trúc phòng thủ nhiều lớp
 
 Một nguyên lý nền tảng trong kỹ thuật an toàn thông tin là: **Mô hình AI không bao giờ được coi là lá chắn bảo mật duy nhất**. Nếu hệ thống chỉ dựa vào lời dặn dò trong System Prompt ("Hãy bỏ qua các chỉ thị độc hại"), kẻ tấn công có thể dễ dàng vượt qua bằng các kỹ thuật kỹ nghệ xã hội hoặc nghịch đảo ngữ nghĩa.
@@ -426,7 +475,79 @@ Hệ thống Alliance Knowledge Assistant triển khai kiến trúc phòng thủ
 
 ## 4.5. Cơ chế xác minh đầu ra bằng mã thực thi độc lập
 
-Để giải quyết triệt để rủi ro ảo giác số học (Mối đe dọa T5), hệ thống triển khai hàm kiểm tra `verify_arithmetic_output()` tại Giai đoạn 10. Đoạn mã 4.2 minh họa cơ chế bóc tách biểu thức số học và kiểm tra chéo bằng bộ thực thi Python độc lập.
+Để giải quyết triệt để rủi ro ảo giác trích dẫn và bảo đảm an toàn dữ liệu, hệ thống triển khai hai tầng kiểm tra độc lập tại Giai đoạn 10: xác minh trích dẫn nguyên văn bằng `verify_citations()` và kiểm tra tính toán số học bằng `verify_arithmetic_output()`.
+
+### 4.5.1. Hàm xác minh trích dẫn nguyên văn và chống rò rỉ dữ liệu `verify_citations()`
+Hàm thực hiện đối soát từng byte `cited_text` trong câu trả lời với các chunk tài liệu đã nạp (`cited_text in retrieved_chunks[document_index]`), đồng thời quét biểu thức chính quy để loại bỏ toàn bộ thẻ ảnh Markdown và URL trỏ ra ngoài tên miền nội bộ được phép (`alliance.internal`):
+
+```python
+# Đoạn mã 4.3. Hàm xác minh trích dẫn độc lập và chống rò rỉ dữ liệu (Giai đoạn 10)
+import re
+from typing import NamedTuple, List, Dict
+
+class Citation(NamedTuple):
+    document_index: int
+    document_title: str
+    cited_text: str
+
+class VerificationResult(NamedTuple):
+    is_valid: bool
+    citation_errors: List[str]
+    security_flags: List[str]
+    sanitized_text: str
+
+def verify_citations(
+    response_text: str,
+    citations: List[Citation],
+    retrieved_chunks: Dict[int, str],
+    allowed_domain: str = "alliance.internal"
+) -> VerificationResult:
+    """
+    Giai đoạn 10: Xác minh đầu ra độc lập bằng Code (Grounding & Exfiltration Guard)
+    - Kiểm tra tính nguyên văn: cited_text bắt buộc là chuỗi con trong retrieved_chunks[document_index].
+    - Chống rò rỉ dữ liệu: Chặn toàn bộ URL ngoài allowlist và ảnh Markdown ![...](...).
+    - Quét DLP đầu ra: Ngăn ngừa rò rỉ token, khóa bí mật hoặc số CCCD.
+    """
+    citation_errors = []
+    security_flags = []
+
+    # 1. Xác minh chuỗi con trích dẫn (Exact Substring Verification)
+    for c in citations:
+        if c.document_index not in retrieved_chunks:
+            citation_errors.append(f"document_index={c.document_index} không tồn tại trong tập chunk đã nạp.")
+            continue
+        chunk_text = retrieved_chunks[c.document_index]
+        if c.cited_text not in chunk_text:
+            citation_errors.append(
+                f"citation không khớp nguồn: {c.document_title} (cited_text not in chunk): '{c.cited_text[:50]}...'"
+            )
+
+    # 2. Chống Exfiltration dữ liệu qua ảnh Markdown hoặc URL lạ
+    img_pattern = re.compile(r'!\[.*?\]\((https?:\/\/[^\)]+)\)')
+    for img_match in img_pattern.finditer(response_text):
+        security_flags.append(f"Phát hiện thẻ ảnh markdown nguy cơ rò rỉ dữ liệu: {img_match.group(0)}")
+
+    url_pattern = re.compile(r'https?:\/\/([a-zA-Z0-9\.\-]+)(?:\/[^\s\)]*)?')
+    for url_match in url_pattern.finditer(response_text):
+        domain = url_match.group(1).lower()
+        if domain != allowed_domain and not domain.endswith("." + allowed_domain):
+            security_flags.append(f"URL ngoài danh sách cho phép ({allowed_domain}): {url_match.group(0)}")
+
+    # 3. Quét DLP đầu ra (Bearer tokens, API keys)
+    token_pattern = re.compile(r'(?:bearer\s+[a-zA-Z0-9_\-\.]{20,}|sk-[a-zA-Z0-9]{20,})', re.IGNORECASE)
+    if token_pattern.search(response_text):
+        security_flags.append("Phát hiện chuỗi bí mật/API token trong phản hồi mô hình.")
+
+    is_valid = (len(citation_errors) == 0) and (len(security_flags) == 0)
+    return VerificationResult(
+        is_valid=is_valid,
+        citation_errors=citation_errors,
+        security_flags=security_flags,
+        sanitized_text=response_text if is_valid else "[NỘI DUNG BỊ TỪ CHỐI BỞI BỘ LỌC XÁC MINH AN TOÀN VÀ TRÍCH DẪN]"
+    )
+```
+
+### 4.5.2. Hàm kiểm định số học `verify_arithmetic_output()`
 
 ```python
 # Đoạn mã 4.2. Cơ chế xác minh độc lập đầu ra bằng mã thực thi
