@@ -6,7 +6,7 @@
   <title>Claude: Đặc Tả Kỹ Thuật Mô Hình và Ca Triển Khai Trợ Lý Tri Thức Nội Bộ | Alliance Software Co., Ltd. (Alliance ITSC)</title>
   <meta name="description" content="A Technical Specification of the Claude Model Family: Inference Mechanics, Adaptive Thinking, Native Citations, Token Economics, and a 12-Stage Enterprise Knowledge Assistant Pipeline.">
 
-  <!-- Google Fonts: Bricolage Grotesque (Display), Literata (Body), IBM Plex Mono (Code/Token) with Vietnamese Subset -->
+  <!-- Google Fonts: Bricolage Grotesque, Literata, IBM Plex Mono with Vietnamese Subset -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..800&family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,500;0,7..72,600;1,7..72,400&display=swap" rel="stylesheet">
@@ -34,14 +34,19 @@
       --tok-think: #7A56E0;
       --tok-out: #D96A10;
 
+      /* Accent / State */
+      --warn: #D97706;
+      --danger: #DC2626;
+      --success: #16A34A;
+
       /* Typography */
-      --font-display: 'Bricolage Grotesque', system-ui, sans-serif;
+      --font-display: 'Bricolage Grotesque', system-ui, -apple-system, sans-serif;
       --font-body: 'Literata', Georgia, serif;
       --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
 
       --base-font-size: 18px;
-      --max-width: 1360px;
-      --col-read: 64ch;
+      --max-width: 1400px;
+      --col-read: 66ch;
 
       color-scheme: light;
     }
@@ -160,176 +165,144 @@
       background: var(--bench);
     }
     .zoom-btn {
-      padding: 4px 8px;
-      font-family: var(--font-mono);
-      font-size: 0.75rem;
-      background: transparent;
       border: none;
-      color: var(--ink-2);
+      background: transparent;
+      padding: 4px 10px;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
       cursor: pointer;
+      color: var(--ink);
+      transition: background 0.15s;
+    }
+    .zoom-btn:hover {
+      background: rgba(0,0,0,0.06);
     }
     .zoom-btn.active {
-      background: var(--ink);
-      color: var(--bench);
-      font-weight: 700;
-    }
-
-    /* Mode Toggles: Đọc | Làm | In */
-    .mode-group {
-      display: flex;
-      border: 1px solid var(--rule);
-      border-radius: 4px;
-      overflow: hidden;
-      background: var(--bench);
-    }
-    .mode-btn {
-      padding: 4px 10px;
-      font-family: var(--font-body);
-      font-size: 0.8rem;
-      font-weight: 500;
-      background: transparent;
-      border: none;
-      color: var(--ink-2);
-      cursor: pointer;
-    }
-    .mode-btn.active {
       background: var(--stage);
-      color: var(--ink);
-      font-weight: 600;
+      font-weight: 700;
       box-shadow: 0 1px 2px rgba(0,0,0,0.05);
     }
 
-    /* Icon Buttons */
-    .btn-action {
-      padding: 5px 10px;
-      font-family: var(--font-mono);
-      font-size: 0.8rem;
-      font-weight: 600;
+    /* View Modes & Action Buttons */
+    .btn-tool {
+      background: var(--bench);
       border: 1px solid var(--rule);
-      background: var(--stage);
-      color: var(--ink);
       border-radius: 4px;
+      padding: 5px 12px;
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: var(--ink);
       cursor: pointer;
       display: inline-flex;
       align-items: center;
       gap: 6px;
+      transition: all 0.15s ease;
     }
-    .btn-action:hover {
-      background: var(--bench);
+    .btn-tool:hover {
+      background: var(--stage);
+      border-color: var(--ink-2);
+    }
+    .btn-tool.active {
+      background: var(--ink);
+      color: var(--bench);
+      border-color: var(--ink);
     }
 
     /* =================================================================
-       3. THREE-COLUMN DESKTOP LAYOUT (>= 1280px)
+       3. THREE-COLUMN PAGE LAYOUT (SPEC 3.3)
        ================================================================= */
     .page-layout {
       max-width: var(--max-width);
       margin: 0 auto;
       display: grid;
-      grid-template-columns: 160px 1fr 260px;
-      gap: 32px;
-      padding: 32px 24px 80px;
-      position: relative;
+      grid-template-columns: 160px 1fr 240px;
+      gap: 28px;
+      padding: 28px 24px 80px;
+      align-items: start;
     }
 
-    /* Left Column: Journey Rail (Đường ray hành trình 7 trạm) */
+    /* Left Column: Journey Rail (7 Trạm) */
     .journey-rail {
       position: sticky;
       top: 70px;
       height: fit-content;
       font-family: var(--font-mono);
-      font-size: 0.76rem;
-      color: var(--ink-2);
-      padding-top: 10px;
+      font-size: 0.78rem;
     }
 
-    .journey-title {
+    .rail-title {
       font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--ink-2);
       text-transform: uppercase;
       letter-spacing: 0.08em;
-      margin-bottom: 16px;
-      color: var(--ink-2);
-      font-weight: 700;
+      margin-bottom: 12px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid var(--rule);
     }
 
-    .journey-track {
-      position: relative;
+    .rail-list {
       list-style: none;
       padding: 0;
       margin: 0;
-    }
-    .journey-track::before {
-      content: '';
-      position: absolute;
-      top: 8px;
-      bottom: 8px;
-      left: 7px;
-      width: 1.5px;
-      background: var(--rule);
-      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
     }
 
-    .journey-step {
-      position: relative;
-      z-index: 2;
-      margin-bottom: 20px;
-      padding-left: 24px;
-    }
-    .journey-step a {
-      text-decoration: none;
+    .rail-item a {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 8px;
       color: var(--ink-2);
-      display: block;
-      transition: color 0.15s;
+      text-decoration: none;
+      border-radius: 4px;
+      transition: all 0.15s ease;
+      line-height: 1.25;
     }
-    .journey-step a:hover {
-      color: var(--tok-fresh);
-    }
-    .journey-step.active a {
-      color: var(--ink);
-      font-weight: 700;
-    }
-
-    .journey-dot {
-      position: absolute;
-      left: 3px;
-      top: 5px;
-      width: 9px;
-      height: 9px;
-      border-radius: 50%;
+    .rail-item a:hover {
       background: var(--stage);
-      border: 1.5px solid var(--rule);
-      transition: all 0.2s;
+      color: var(--ink);
     }
-    .journey-step.active .journey-dot {
-      background: var(--tok-fresh);
-      border-color: var(--tok-fresh);
-      box-shadow: 0 0 0 3px rgba(47, 95, 208, 0.2);
+    .rail-item a.active {
+      background: var(--stage);
+      color: var(--tok-fresh);
+      font-weight: 600;
+      border-left: 2px solid var(--tok-fresh);
+      border-radius: 0 4px 4px 0;
     }
 
-    /* Center Column: Content Canvas (Băng đọc & Sân khấu) */
+    .rail-item .station-num {
+      opacity: 0.6;
+      font-size: 0.7rem;
+      width: 14px;
+    }
+
+    /* Center Column: Content Canvas */
     .content-canvas {
       min-width: 0;
     }
 
-    /* Reading Band */
+    /* Reading Band vs Stage (Creative Direction Spec 3.3) */
     .reading-band {
-      background: var(--bench);
-      padding: 24px 0 36px;
-      border-bottom: 1px solid var(--rule);
-    }
-    .reading-col {
-      max-width: var(--col-read);
-      font-size: 1rem;
-      line-height: 1.65;
+      background: transparent;
+      padding: 10px 0 24px;
     }
 
-    /* Stage Canvas */
+    .reading-col {
+      max-width: var(--col-read);
+      margin: 0 auto;
+    }
+
     .stage-canvas {
       background: var(--stage);
       border: 1px solid var(--rule);
       border-radius: 6px;
-      padding: 32px;
+      padding: 28px;
       margin: 28px 0;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+      box-shadow: 0 1px 4px rgba(0,0,0,0.03);
     }
 
     /* Right Column: Sticky Receipt Rail (Tờ Hoá Đơn Token) */
@@ -463,22 +436,482 @@
       text-align: right;
     }
 
-    /* Mobile Bottom Pill & Drawer */
-    .mobile-pill {
+    /* =================================================================
+       4. TYPOGRAPHY & ARTICLE ELEMENTS
+       ================================================================= */
+    h1, h2, h3, h4 {
+      font-family: var(--font-display);
+      color: var(--ink);
+      line-height: 1.2;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+    h1 { font-size: 2.2rem; margin: 0 0 16px; }
+    h2 { font-size: 1.5rem; margin: 36px 0 16px; border-bottom: 1px solid var(--rule); padding-bottom: 8px; }
+    h3 { font-size: 1.2rem; margin: 24px 0 12px; }
+    h4 { font-size: 1.05rem; margin: 18px 0 8px; }
+
+    p { margin: 0 0 16px; font-size: 1rem; }
+    ul, ol { margin: 0 0 18px; padding-left: 24px; }
+    li { margin-bottom: 6px; }
+    strong { font-weight: 600; color: var(--ink); }
+
+    /* Academic tables */
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+      margin: 16px 0 24px;
+      font-family: var(--font-mono);
+    }
+    .data-table th, .data-table td {
+      padding: 10px 12px;
+      border: 1px solid var(--rule);
+      text-align: left;
+    }
+    .data-table th {
+      background: var(--bench);
+      font-weight: 600;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+    .data-table tr:nth-child(even) td {
+      background: rgba(0,0,0,0.015);
+    }
+
+    /* Verification Tag Badges */
+    .tag-verif {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      font-weight: 600;
+      padding: 1px 6px;
+      border-radius: 3px;
+      margin-left: 4px;
+      vertical-align: middle;
+      border: 1px solid currentColor;
+    }
+    .tag-verif.docs { color: var(--tok-fresh); background: rgba(47,95,208,0.08); }
+    .tag-verif.calc { color: var(--tok-cached); background: rgba(18,165,143,0.08); }
+    .tag-verif.hypo { color: var(--warn); background: rgba(217,119,6,0.08); }
+    .tag-verif.found { color: var(--tok-think); background: rgba(122,86,224,0.08); }
+
+    /* =================================================================
+       5. PHASE 2 WIDGET SPECIFIC STYLES
+       ================================================================= */
+    /* Hero Live Request Simulator (Mục 5.0) */
+    .hero-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+    .hero-box {
+      background: var(--bench);
+      border: 1px solid var(--rule);
+      border-radius: 6px;
+      padding: 18px;
+      font-size: 0.92rem;
+      min-height: 200px;
+      display: flex;
+      flex-direction: column;
+    }
+    .hero-box-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--rule);
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--ink-2);
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+    .hero-prompt-content {
+      font-style: italic;
+      color: var(--ink);
+      line-height: 1.5;
+    }
+    .hero-response-stream {
+      line-height: 1.6;
+      color: var(--ink);
+      flex: 1;
+    }
+
+    /* Native Citation Chip */
+    .cite-chip {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      font-weight: 600;
+      background: var(--stage);
+      color: var(--tok-fresh);
+      border: 1px solid var(--tok-fresh);
+      border-radius: 3px;
+      padding: 0 5px;
+      margin: 0 2px;
+      cursor: pointer;
+      vertical-align: baseline;
+      transition: all 0.15s;
+    }
+    .cite-chip:hover {
+      background: var(--tok-fresh);
+      color: #fff;
+    }
+
+    /* Citation Popover Card */
+    .citation-popover {
       display: none;
-      position: fixed;
-      bottom: 16px;
-      right: 16px;
-      background: var(--ink);
-      color: var(--bench);
+      margin-top: 10px;
+      padding: 10px 14px;
+      background: var(--stage);
+      border: 1px solid var(--tok-fresh);
+      border-radius: 4px;
+      font-size: 0.8rem;
+      font-family: var(--font-mono);
+      color: var(--ink);
+      animation: fadeIn 0.2s ease;
+    }
+
+    /* Tokenizer View Tag Badges */
+    .tok-tag {
+      display: inline-block;
+      padding: 1px 4px;
+      margin: 1px;
+      border-radius: 3px;
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      line-height: 1.3;
+      border: 1px solid transparent;
+    }
+    .tok-tag.fresh { background: rgba(47,95,208,0.12); color: var(--tok-fresh); border-color: rgba(47,95,208,0.3); }
+    .tok-tag.cached { background: rgba(18,165,143,0.12); color: var(--tok-cached); border-color: rgba(18,165,143,0.3); }
+    .tok-tag.think { background: rgba(122,86,224,0.12); color: var(--tok-think); border-color: rgba(122,86,224,0.3); }
+    .tok-tag.out { background: rgba(217,106,16,0.12); color: var(--tok-out); border-color: rgba(217,106,16,0.3); }
+
+    /* Hero Buttons Bar */
+    .hero-actions-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-top: 14px;
+      padding-top: 14px;
+      border-top: 1px dashed var(--rule);
+    }
+    .btn-action {
+      background: var(--tok-fresh);
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      padding: 8px 16px;
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: opacity 0.15s ease;
+    }
+    .btn-action:hover { opacity: 0.9; }
+    .btn-action.secondary {
+      background: var(--bench);
+      color: var(--ink);
+      border: 1px solid var(--rule);
+    }
+    .btn-action.secondary:hover {
+      background: var(--stage);
+    }
+
+    /* Model Decision Tree & Questionnaire (F2) */
+    .decision-container {
+      display: grid;
+      grid-template-columns: 1.3fr 1fr;
+      gap: 20px;
+      align-items: start;
+    }
+    .svg-tree-box {
+      background: var(--bench);
+      border: 1px solid var(--rule);
+      border-radius: 6px;
+      padding: 16px;
+      overflow-x: auto;
+    }
+    .quiz-card {
+      background: var(--bench);
+      border: 1px solid var(--rule);
+      border-radius: 6px;
+      padding: 20px;
+    }
+    .quiz-q-title {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--ink-2);
+      text-transform: uppercase;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .quiz-options {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+    .quiz-opt-btn {
+      text-align: left;
+      padding: 10px 12px;
+      background: var(--stage);
+      border: 1px solid var(--rule);
+      border-radius: 4px;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: all 0.15s;
+      color: var(--ink);
+    }
+    .quiz-opt-btn:hover {
+      border-color: var(--tok-fresh);
+    }
+    .quiz-opt-btn.selected {
+      background: rgba(47,95,208,0.08);
+      border-color: var(--tok-fresh);
+      font-weight: 600;
+      color: var(--tok-fresh);
+    }
+    .quiz-result-box {
+      margin-top: 16px;
+      padding: 14px;
+      border-radius: 4px;
+      background: var(--stage);
+      border-left: 4px solid var(--tok-fresh);
+      font-size: 0.88rem;
+    }
+
+    /* SVG tree highlight styles */
+    .tree-node {
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+    .tree-node rect {
+      fill: var(--stage);
+      stroke: var(--rule);
+      stroke-width: 1.5;
+    }
+    .tree-node.active rect {
+      fill: var(--stage);
+      stroke: var(--tok-fresh);
+      stroke-width: 2.5;
+      filter: drop-shadow(0 0 6px rgba(47,95,208,0.3));
+    }
+    .tree-node.active text {
+      fill: var(--tok-fresh);
+      font-weight: 700;
+    }
+    .tree-edge {
+      stroke: var(--rule);
+      stroke-width: 1.5;
+      fill: none;
+      transition: stroke 0.3s ease;
+    }
+    .tree-edge.active {
+      stroke: var(--tok-fresh);
+      stroke-width: 2.5;
+    }
+
+    /* KV Cache Tower Widget (F3) */
+    .kv-widget-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      align-items: start;
+    }
+    .kv-controls {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .control-row {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .control-label {
+      display: flex;
+      justify-content: space-between;
       font-family: var(--font-mono);
       font-size: 0.8rem;
-      font-weight: 600;
-      padding: 10px 16px;
-      border-radius: 24px;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.2);
-      z-index: 9998;
+      color: var(--ink-2);
+    }
+    .control-slider {
+      width: 100%;
+      accent-color: var(--tok-fresh);
+    }
+    .pill-group {
+      display: flex;
+      gap: 6px;
+    }
+    .pill-opt {
+      padding: 4px 10px;
+      border: 1px solid var(--rule);
+      background: var(--bench);
+      border-radius: 4px;
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
       cursor: pointer;
+    }
+    .pill-opt.active {
+      background: var(--tok-fresh);
+      color: #fff;
+      border-color: var(--tok-fresh);
+    }
+
+    .kv-metrics-card {
+      background: var(--bench);
+      border: 1px solid var(--rule);
+      border-radius: 6px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .metric-hero-val {
+      font-family: var(--font-mono);
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--tok-fresh);
+      line-height: 1;
+    }
+    .kv-tower-vis {
+      height: 140px;
+      background: var(--stage);
+      border: 1px solid var(--rule);
+      border-radius: 4px;
+      display: flex;
+      align-items: flex-end;
+      padding: 10px;
+      gap: 8px;
+    }
+    .kv-bar {
+      flex: 1;
+      background: var(--tok-fresh);
+      border-radius: 2px 2px 0 0;
+      transition: height 0.3s ease;
+      min-height: 4px;
+    }
+
+    /* Cache Time Machine Widget (F-Cache) */
+    .ttl-widget-layout {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 24px;
+      align-items: center;
+    }
+    .ttl-dial-box {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .ttl-timeline-track {
+      position: relative;
+      background: var(--bench);
+      border: 1px solid var(--rule);
+      border-radius: 6px;
+      padding: 20px 16px;
+    }
+    .timeline-bar {
+      position: relative;
+      height: 12px;
+      background: var(--rule);
+      border-radius: 6px;
+      margin: 30px 10px;
+      cursor: pointer;
+    }
+    .timeline-ticks {
+      display: flex;
+      justify-content: space-between;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--ink-2);
+      padding: 0 6px;
+    }
+    .timeline-marker {
+      position: absolute;
+      top: -14px;
+      transform: translateX(-50%);
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--stage);
+      border: 2px solid var(--tok-fresh);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      font-weight: 700;
+      color: var(--tok-fresh);
+      box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+      cursor: pointer;
+      transition: transform 0.15s;
+    }
+    .timeline-marker:hover {
+      transform: translateX(-50%) scale(1.2);
+    }
+    .timeline-marker.write {
+      border-color: var(--danger);
+      color: var(--danger);
+    }
+    .timeline-marker.hit {
+      border-color: var(--tok-cached);
+      color: var(--tok-cached);
+    }
+
+    .ttl-tally-board {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-top: 16px;
+    }
+    .tally-item {
+      background: var(--stage);
+      border: 1px solid var(--rule);
+      border-radius: 4px;
+      padding: 10px;
+      text-align: center;
+    }
+    .tally-label {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--ink-2);
+      text-transform: uppercase;
+    }
+    .tally-val {
+      font-family: var(--font-mono);
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-top: 2px;
+    }
+
+    /* Challenge celebration badge */
+    .challenge-badge {
+      display: none;
+      background: rgba(22,163,74,0.1);
+      border: 1px solid var(--success);
+      color: var(--success);
+      border-radius: 4px;
+      padding: 10px 16px;
+      margin-top: 14px;
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      font-weight: 600;
+      text-align: center;
     }
 
     /* Responsive adjustments */
@@ -487,6 +920,9 @@
         grid-template-columns: 140px 1fr 220px;
         gap: 20px;
       }
+      .decision-container {
+        grid-template-columns: 1fr;
+      }
     }
 
     @media (max-width: 992px) {
@@ -494,88 +930,64 @@
         grid-template-columns: 1fr;
         padding: 20px 16px 80px;
       }
-      .journey-rail {
-        display: none;
-      }
-      .receipt-rail {
-        display: none;
-      }
-      .mobile-pill {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-      }
+      .journey-rail { display: none; }
+      .receipt-rail { display: none; }
+      .mobile-pill { display: flex; align-items: center; gap: 8px; }
+      .hero-container { grid-template-columns: 1fr; }
+      .kv-widget-layout { grid-template-columns: 1fr; }
+      .ttl-widget-layout { grid-template-columns: 1fr; }
+      .ttl-tally-board { grid-template-columns: 1fr 1fr; }
     }
 
-    /* Print Stylesheet */
     @media print {
-      .top-bar, .journey-rail, .receipt-rail, .mobile-pill, #progressIndicator {
+      .top-bar, .journey-rail, .receipt-rail, .mobile-pill, #progressIndicator, .btn-action, .btn-tool {
         display: none !important;
       }
-      .page-layout {
-        display: block;
-        padding: 0;
-      }
-      body {
-        background: #FFF;
-        color: #000;
-        font-size: 11pt;
-      }
+      .page-layout { display: block; padding: 0; }
+      body { background: #FFF; color: #000; font-size: 11pt; }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-4px); }
+      to { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
 <body>
-  <!-- Progress Line -->
+
+  <!-- READING PROGRESS BAR -->
   <div id="progressIndicator"></div>
 
-  <!-- SVG Patterns definitions -->
-  <svg style="display:none;" aria-hidden="true">
-    <defs>
-      <pattern id="pat-stripe-45" width="4" height="4" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
-        <line x1="0" y1="0" x2="0" y2="4" stroke="currentColor" stroke-width="1.5" />
-      </pattern>
-      <pattern id="pat-stripe-135" width="4" height="4" patternUnits="userSpaceOnUse" patternTransform="rotate(135)">
-        <line x1="0" y1="0" x2="0" y2="4" stroke="currentColor" stroke-width="1.5" />
-      </pattern>
-      <pattern id="pat-dotted" width="4" height="4" patternUnits="userSpaceOnUse">
-        <circle cx="2" cy="2" r="1" fill="currentColor" />
-      </pattern>
-    </defs>
-  </svg>
-
-  <!-- TOP BAR (STICKY HEADER) -->
+  <!-- TOP BAR -->
   <header class="top-bar">
     <div class="top-bar-inner">
       <div class="doc-meta-brand">
-        <span class="doc-brand-title">Claude.</span>
-        <span class="badge-spec">Technical Specification v2</span>
-        <span style="font-size: 0.8rem; color: var(--ink-2); display: inline-block;">Audited: 22/11/2026</span>
+        <a href="#tr-0" style="text-decoration:none; color:inherit; display:flex; align-items:center; gap:8px;">
+          <span class="tok-tile fresh" style="width:14px; height:14px;"></span>
+          <span class="doc-brand-title">Claude Model Specification v2</span>
+        </a>
+        <span class="badge-spec">Technical Whitepaper</span>
+        <span style="font-family:var(--font-mono); font-size:0.75rem; color:var(--ink-2);">22/11/2026</span>
       </div>
 
       <div class="top-bar-actions">
-        <!-- Font Zoom [A- A A+] -->
-        <div class="zoom-group" aria-label="Điều khiển cỡ chữ">
-          <button class="zoom-btn" onclick="setFontScale(14)" title="Cỡ chữ 14px">A-</button>
-          <button class="zoom-btn active" onclick="setFontScale(18)" title="Cỡ chữ chuẩn 18px">A</button>
-          <button class="zoom-btn" onclick="setFontScale(22)" title="Cỡ chữ lớn 22px">A+</button>
+        <!-- Font Zoom Controls -->
+        <div class="zoom-group">
+          <button class="zoom-btn" onclick="setFontSize('16px', this)" title="Cỡ chữ nhỏ">A-</button>
+          <button class="zoom-btn active" onclick="setFontSize('18px', this)" title="Cỡ chữ chuẩn">A</button>
+          <button class="zoom-btn" onclick="setFontSize('20px', this)" title="Cỡ chữ lớn">A+</button>
         </div>
 
-        <!-- Mode Toggles: Đọc | Làm | In -->
-        <div class="mode-group" aria-label="Chế độ hiển thị">
-          <button class="mode-btn" onclick="setViewMode('read')">Đọc</button>
-          <button class="mode-btn active" onclick="setViewMode('work')">Làm</button>
-          <button class="mode-btn" onclick="setViewMode('print')">In</button>
-        </div>
+        <!-- View Modes -->
+        <button class="btn-tool" id="btnModeRead" onclick="setViewMode('read')">Đọc</button>
+        <button class="btn-tool active" id="btnModeLab" onclick="setViewMode('lab')">Làm (Lab)</button>
+        <button class="btn-tool" onclick="window.print()">In</button>
 
-        <!-- Presenter Mode [P] -->
-        <button class="btn-action" onclick="togglePresenterMode()" title="Chế độ trình bày 10 phút (Phím P)">
-          <span>P</span>
-        </button>
+        <!-- Presenter Mode -->
+        <button class="btn-tool" id="btnPresenter" onclick="togglePresenterMode()" title="Chế độ thuyết trình [P]">P</button>
 
-        <!-- Dark/Light Mode [◑] -->
-        <button class="btn-action" id="btnThemeToggle" onclick="toggleTheme()" title="Đổi giao diện Sáng / Tối">
-          <span>◑</span>
-        </button>
+        <!-- Dark/Light Theme Toggle -->
+        <button class="btn-tool" onclick="toggleTheme()" title="Đổi giao diện sáng/tối">◑</button>
       </div>
     </div>
   </header>
@@ -583,73 +995,882 @@
   <!-- THREE-COLUMN PAGE LAYOUT -->
   <div class="page-layout">
 
-    <!-- LEFT COLUMN: JOURNEY RAIL (7 STATIONS) -->
-    <aside class="journey-rail">
-      <div class="journey-title">Hành Trình Request</div>
-      <ul class="journey-track">
-        <li class="journey-step active" id="step-nav-0"><span class="journey-dot"></span><a href="#tr-0">0. Khởi động</a></li>
-        <li class="journey-step" id="step-nav-1"><span class="journey-dot"></span><a href="#tr-1">1. Gửi (Models)</a></li>
-        <li class="journey-step" id="step-nav-2"><span class="journey-dot"></span><a href="#tr-2">2. Prefill & Cache</a></li>
-        <li class="journey-step" id="step-nav-3"><span class="journey-dot"></span><a href="#tr-3">3. Nghĩ (Effort)</a></li>
-        <li class="journey-step" id="step-nav-4"><span class="journey-dot"></span><a href="#tr-4">4. Công cụ (Diet)</a></li>
-        <li class="journey-step" id="step-nav-5"><span class="journey-dot"></span><a href="#tr-5">5. Trích dẫn</a></li>
-        <li class="journey-step" id="step-nav-6"><span class="journey-dot"></span><a href="#tr-6">6. Kiểm chứng</a></li>
-        <li class="journey-step" id="step-nav-7"><span class="journey-dot"></span><a href="#tr-7">7. Tính tiền & Sổ cái</a></li>
+    <!-- LEFT COLUMN: JOURNEY RAIL (7 TRẠM) -->
+    <nav class="journey-rail">
+      <div class="rail-title">Hành Trình Request</div>
+      <ul class="rail-list" id="railList">
+        <li class="rail-item"><a href="#tr-0" class="active"><span class="station-num">0</span> Hero Request</a></li>
+        <li class="rail-item"><a href="#tr-1"><span class="station-num">1</span> Gửi (B.1)</a></li>
+        <li class="rail-item"><a href="#tr-2"><span class="station-num">2</span> Prefill & KV (B.2.1)</a></li>
+        <li class="rail-item"><a href="#tr-3"><span class="station-num">3</span> Nghĩ (B.2.2)</a></li>
+        <li class="rail-item"><a href="#tr-4"><span class="station-num">4</span> Công cụ (B.2.3)</a></li>
+        <li class="rail-item"><a href="#tr-5"><span class="station-num">5</span> Trích dẫn (B.2.4)</a></li>
+        <li class="rail-item"><a href="#tr-6"><span class="station-num">6</span> An toàn (B.2.5)</a></li>
+        <li class="rail-item"><a href="#tr-7"><span class="station-num">7</span> Tính tiền (B.3)</a></li>
       </ul>
-    </aside>
 
-    <!-- CENTER COLUMN: CONTENT CANVAS (READING BANDS & STAGES) -->
+      <div style="margin-top: 28px; padding-top: 14px; border-top: 1px solid var(--rule); font-size: 0.72rem; color: var(--ink-2);">
+        <div><strong>Hồ sơ thẩm định:</strong></div>
+        <div style="margin-top: 4px;">Alliance ITSC / Case 2026</div>
+        <div style="margin-top: 2px;">Trạng thái: <span style="color:var(--tok-fresh); font-weight:600;">Phase 2 Active</span></div>
+      </div>
+    </nav>
+
+    <!-- CENTER COLUMN: CONTENT CANVAS -->
     <main class="content-canvas">
 
-      <!-- B.0 HERO SECTION (TRẠM 0) -->
+      <!-- =================================================================
+           B.0 HERO SECTION (TRẠM 0)
+           ================================================================= -->
       <section id="tr-0" class="reading-band">
         <div class="reading-col">
           <div style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--tok-fresh); font-weight: 600; text-transform: uppercase; margin-bottom: 8px;">
-            B.0 · Khởi Đầu Vòng Đời Request
+            B.0 · Tiêu đề, Tóm tắt và Luận điểm
           </div>
-          <h1 style="font-family: var(--font-display); font-size: clamp(2.2rem, 3.8vw, 3.2rem); line-height: 1.15; margin: 0 0 20px; letter-spacing: -0.02em;">
+          <h1 style="font-family: var(--font-display); font-size: clamp(2rem, 3.5vw, 2.8rem); line-height: 1.15; margin: 0 0 16px;">
             Claude: Đặc Tả Kỹ Thuật Mô Hình và Ca Triển Khai Trợ Lý Tri Thức Nội Bộ Có Trích Dẫn
           </h1>
-          <p style="font-size: 1.15rem; color: var(--ink-2); line-height: 1.6; margin-bottom: 24px;">
-            Một khảo sát kỹ thuật toàn diện từ cơ học suy luận phần cứng, cơ chế adaptive thinking, quản trị ngữ cảnh đến ca triển khai thực chiến tại <strong>Alliance Software Co., Ltd. (Alliance ITSC)</strong>.
+          <p style="font-size: 1.1rem; color: var(--ink-2); line-height: 1.6; margin-bottom: 20px;">
+            Tài liệu mô tả họ model Claude 5.x (Fable 5.2, Opus 5.5, Sonnet 5.5, Haiku 5.5) ở mức kỹ sư: thông số, cơ học suy luận quyết định chi phí và độ trễ, cơ chế điều khiển độ sâu suy luận, chồng công cụ quản trị ngữ cảnh, cơ chế trích dẫn nguồn, và các tín hiệu về độ bền vững trước prompt injection.
           </p>
 
-          <!-- Vietnamese Diacritics Validation Test Block -->
-          <div style="padding: 12px 16px; background: var(--stage); border: 1px solid var(--rule); border-radius: 4px; font-size: 0.88rem; margin-bottom: 24px;">
-            <div style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--ink-2); margin-bottom: 4px;">Kiểm tra hiển thị dấu tiếng Việt (Mục 3.2):</div>
-            <strong>"Nghỉ phép năm của nhân viên thử việc"</strong> — 100% Literary rendering intact.
+          <!-- Vietnamese Diacritics Validation Test Block (Mục 3.2) -->
+          <div style="padding: 10px 14px; background: var(--stage); border: 1px solid var(--rule); border-radius: 4px; font-size: 0.85rem; margin-bottom: 20px;">
+            <div style="font-family: var(--font-mono); font-size: 0.72rem; color: var(--ink-2); margin-bottom: 2px;">Kiểm tra hiển thị dấu tiếng Việt (Mục 3.2):</div>
+            <strong>"Nghỉ phép năm của nhân viên thử việc"</strong> — 100% Literary typography intact.
           </div>
 
-          <div style="background: var(--stage); border-left: 3px solid var(--tok-fresh); padding: 16px 20px; border-radius: 4px; font-size: 0.95rem;">
-            <strong>Tóm tắt kỹ thuật:</strong> Tài liệu mô tả họ model Claude 5.x (Fable 5.2, Opus 5.5, Sonnet 5.5, Haiku 5.5) ở mức kỹ sư: thông số, cơ học suy luận quyết định chi phí và độ trễ, cơ chế điều khiển độ sâu suy luận, chồng công cụ quản trị ngữ cảnh, cơ chế trích dẫn nguồn, và các tín hiệu về độ bền vững trước prompt injection. Mọi tuyên bố đều được gắn mức độ tin cậy; phần B.6 liệt kê tường minh những gì <strong>chưa thể xác minh</strong>.
+          <div style="background: var(--stage); border-left: 3px solid var(--tok-fresh); padding: 14px 18px; border-radius: 4px; font-size: 0.92rem; margin-bottom: 24px;">
+            <strong>Tóm tắt kỹ thuật:</strong> Tài liệu không suy đoán kiến trúc nội bộ mà Anthropic chưa công bố. Phần ứng dụng thiết kế một <strong>trợ lý tri thức nội bộ</strong> với 12 giai đoạn xử lý, bộ đánh giá 200 câu, mô hình chi phí theo tải, và mô hình mối đe dọa. Mọi tuyên bố được gắn mức độ tin cậy; phần B.6 liệt kê tường minh những gì <strong>chưa thể xác minh</strong>.
+          </div>
+
+          <h3>Ba luận điểm (thesis) cốt lõi của tài liệu:</h3>
+          <ol style="padding-left: 20px; font-size: 0.95rem;">
+            <li>Giá trị của Claude trong production nằm ở <strong>bộ điều khiển và công cụ quanh model</strong> (effort, caching, citations, quản trị ngữ cảnh), không chỉ ở điểm benchmark.</li>
+            <li>Độ tin cậy đến từ <strong>kiến trúc hệ thống</strong>: grounding, xác minh bằng code, abstention, kiểm soát quyền, chứ không đến từ việc "chọn model mạnh nhất".</li>
+            <li>Mọi quyết định (model, effort, cache) phải dựa trên <strong>chi phí trên mỗi tác vụ đạt yêu cầu</strong> đo trên bộ dữ liệu của chính hệ thống.</li>
+          </ol>
+        </div>
+      </section>
+
+      <!-- HERO STAGE CANVAS: MỤC 5.0 LIVE REQUEST SIMULATOR -->
+      <section class="stage-canvas">
+        <div style="display:flex; justify-content:space-between; align-items:baseline; margin-bottom: 16px;">
+          <div>
+            <div style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--tok-fresh); text-transform: uppercase; font-weight: 700;">
+              Mục 5.0 · Sân Khấu Trực Quan Hóa Hero
+            </div>
+            <h2 style="font-size: 1.6rem; margin: 4px 0 2px; border:none; padding:0;">
+              Một request tới Claude, từ lúc gửi đến lúc tính tiền
+            </h2>
+            <div style="font-size: 0.9rem; color: var(--ink-2);">
+              Request đầu đắt hơn không cache 21%. Request thứ hai rẻ hơn 81%.
+            </div>
+          </div>
+          <span class="badge-spec" style="font-size:0.75rem;">Sonnet 5.5 Fixture</span>
+        </div>
+
+        <!-- Prompt Fixture & Stream Response Container -->
+        <div class="hero-container">
+          <!-- Prompt Card -->
+          <div class="hero-box">
+            <div class="hero-box-header">
+              <span>Prompt (Fixture Người Dùng)</span>
+              <span>1.500 tok fresh + 20K prefix</span>
+            </div>
+            <div class="hero-prompt-content">
+              "Nhân viên thử việc có được hưởng chế độ nghỉ phép năm theo quy định của Luật Lao động và Quy chế nội bộ công ty Alliance không? Nếu có thì cách tính ngày phép dồn như thế nào?"
+            </div>
+            <div style="margin-top:auto; padding-top:12px; font-family:var(--font-mono); font-size:0.75rem; color:var(--ink-2);">
+              Prefix: <code>policy_handbook_v2.md (20.000 tokens)</code>
+            </div>
+          </div>
+
+          <!-- Response Card -->
+          <div class="hero-box">
+            <div class="hero-box-header">
+              <span id="heroResponseStatus">Phản hồi (Stream mô phỏng)</span>
+              <span id="heroTokenTally">400 tok out</span>
+            </div>
+            <div class="hero-response-stream" id="heroResponseContainer">
+              Theo Điều 26 và Điều 65 Bộ luật Lao động 2019, thời gian thử việc được tính là thời gian làm việc để hưởng phép năm nếu người lao động tiếp tục làm việc sau khi hết thời gian thử việc <span class="cite-chip" onclick="toggleCitation(1)">[1]</span>. Do đó, nhân viên thử việc chưa được nghỉ phép năm trong thời gian thử việc, nhưng sau khi ký hợp đồng chính thức, thời gian thử việc 2 tháng sẽ được cộng dồn để tính 2 ngày phép năm theo quy chế công ty <span class="cite-chip" onclick="toggleCitation(2)">[2]</span>.
+            </div>
+
+            <!-- Popovers for Native Citations -->
+            <div class="citation-popover" id="citePop1">
+              <strong>[1] Nguồn Trích Dẫn:</strong> Điều 26 & 65 Bộ luật Lao động 2019 (khoản 2) · Văn bản hợp nhất số 05/VBHN-VPQH.
+            </div>
+            <div class="citation-popover" id="citePop2">
+              <strong>[2] Nguồn Trích Dẫn:</strong> Quy chế Lao động Nội bộ Alliance Software Co., Ltd. 2024, Mục 4.1 "Chế độ phép năm nhân viên mới".
+            </div>
+          </div>
+        </div>
+
+        <!-- Actions Bar -->
+        <div class="hero-actions-bar">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <button class="btn-action" id="btnHeroSim" onclick="runHeroSimulation()">
+              <span>▶ Gửi request mẫu (6s)</span>
+            </button>
+            <button class="btn-action secondary" id="btnHeroSkip" style="display:none;" onclick="skipHeroSimulation()">
+              <span>Bỏ qua ⏭</span>
+            </button>
+            <button class="btn-action secondary" id="btnToggleTokenizer" onclick="toggleTokenizerView()">
+              <span>▤ Tokenizer View</span>
+            </button>
+          </div>
+
+          <div style="font-family:var(--font-mono); font-size:0.85rem;">
+            Hoá đơn lượt gọi: <strong id="heroCostOdometer" style="color:var(--tok-cached); font-size:1.1rem;">$0.0114</strong>
+          </div>
+        </div>
+
+        <!-- Tokenizer Disclaimer Note -->
+        <div id="tokenizerNote" style="display:none; margin-top:10px; font-family:var(--font-mono); font-size:0.75rem; color:var(--ink-2); background:var(--bench); padding:6px 12px; border-radius:4px;">
+          ℹ Tách token xấp xỉ để minh hoạ trực quan các vai trò (cached / fresh / out), không phải tokenizer BPE nội bộ của Claude.
+        </div>
+
+        <!-- Hero Test Vector Table (Creative Direction Spec 5.0) -->
+        <div style="margin-top: 20px;">
+          <div style="font-family:var(--font-mono); font-size:0.75rem; color:var(--ink-2); margin-bottom:6px; text-transform:uppercase;">
+            Bảng kiểm thử chi phí theo kịch bản (Unit Test Vectors · Sonnet 5.5 · 20.000 prefix / 1.500 fresh / 400 out):
+          </div>
+          <table class="data-table" style="margin-bottom:0;">
+            <thead>
+              <tr>
+                <th>Trường hợp</th>
+                <th>Prefix (20.000 tok)</th>
+                <th>Phần động (1.500 tok)</th>
+                <th>Output (400 tok)</th>
+                <th>Tổng lượt gọi</th>
+                <th>Thao tác</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Không cache</strong></td>
+                <td>$0.0400 ($2/M)</td>
+                <td>$0.0030</td>
+                <td>$0.0040</td>
+                <td><strong>$0.0470</strong></td>
+                <td><button class="btn-tool" style="padding:2px 8px; font-size:0.72rem;" onclick="ReceiptStore.setScenario('no_cache')">Nạp lên Hoá đơn</button></td>
+              </tr>
+              <tr>
+                <td><strong>Lần đầu (ghi cache)</strong></td>
+                <td>$0.0500 (1,25×)</td>
+                <td>$0.0030</td>
+                <td>$0.0040</td>
+                <td><strong>$0.0570</strong></td>
+                <td><button class="btn-tool" style="padding:2px 8px; font-size:0.72rem;" onclick="ReceiptStore.setScenario('cache_write')">Nạp lên Hoá đơn</button></td>
+              </tr>
+              <tr>
+                <td><strong>Lần hai (đọc cache)</strong></td>
+                <td>$0.0020 (0,05×)</td>
+                <td>$0.0030</td>
+                <td>$0.0040</td>
+                <td><strong>$0.0090</strong></td>
+                <td><button class="btn-tool" style="padding:2px 8px; font-size:0.72rem;" onclick="ReceiptStore.setScenario('cache_hit')">Nạp lên Hoá đơn</button></td>
+              </tr>
+              <tr style="background:rgba(18,165,143,0.06);">
+                <td><strong>Kỳ vọng ở hit rate 95%</strong></td>
+                <td>$0.0044 (trọng số)</td>
+                <td>$0.0030</td>
+                <td>$0.0040</td>
+                <td><strong style="color:var(--tok-cached);">$0.0114</strong></td>
+                <td><button class="btn-tool active" style="padding:2px 8px; font-size:0.72rem;" onclick="ReceiptStore.setScenario('default')">Chuẩn Production</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- =================================================================
+           TRẠM 1: GỬI (B.1)
+           ================================================================= -->
+      <section id="tr-1" class="reading-band">
+        <div class="reading-col">
+          <div style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--tok-fresh); font-weight: 600; text-transform: uppercase; margin-bottom: 8px;">
+            Trạm 1 · Gửi (B.1)
+          </div>
+          <h2>B.1 Tổng quan và Thông số Kỹ thuật Họ Model</h2>
+          <p>
+            Mọi request bắt đầu bằng một quyết định: <strong>model nào</strong> và <strong>effort nào</strong>. Bảng dưới đây tổng hợp các thông số kỹ thuật chính thức tính đến ngày 22/11/2026 của bốn dòng mô hình chủ lực.
+          </p>
+        </div>
+      </section>
+
+      <!-- FIGURE 1 (F1): MODEL FAMILY TABLE (STAGE) -->
+      <section class="stage-canvas">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin-bottom:16px;">
+          <div>
+            <div style="font-family:var(--font-mono); font-size:0.75rem; color:var(--tok-fresh); text-transform:uppercase; font-weight:700;">
+              Figure 1 (F1) · Họ Model Hiện Hành (22/11/2026) <span class="tag-verif docs">[Docs]</span>
+            </div>
+            <h3 style="font-size:1.3rem; margin:2px 0 0;">Bảng Đối Soát Thông Số và Thang Giá Logarit</h3>
+          </div>
+
+          <!-- Filter Pills -->
+          <div class="pill-group">
+            <button class="pill-opt active" id="f1FilterAll" onclick="filterModelTable('all')">Tất cả</button>
+            <button class="pill-opt" id="f1FilterCache" onclick="filterModelTable('cache')">Đọc cache rẻ hơn (5%)</button>
+            <button class="pill-opt" id="f1FilterFast" onclick="filterModelTable('fast')">Có Fast Mode</button>
+          </div>
+        </div>
+
+        <div style="overflow-x:auto;">
+          <table class="data-table" id="modelFamilyTable">
+            <thead>
+              <tr>
+                <th>Model</th>
+                <th>API ID</th>
+                <th>Giá In / Out ($/MTok)<br><small style="text-transform:none; font-weight:normal; opacity:0.7;">Thanh logarit ($0.10 - $40)</small></th>
+                <th>Cache Write 5m / 1h</th>
+                <th>Cache Read</th>
+                <th>Context / Max Out</th>
+                <th>Thinking & Effort Mặc định</th>
+                <th>Ra mắt</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr data-model="fable" data-cache="cheaper" data-fast="true">
+                <td><strong>Fable 5.2</strong></td>
+                <td><code>claude-fable-5-2</code></td>
+                <td>
+                  <div>$8.00 / $40.00 <span style="font-size:0.7rem; opacity:0.7;">(fast: 16/80)</span></div>
+                  <!-- Log Bar: In=73%, Out=100% -->
+                  <div style="height:4px; background:var(--rule); border-radius:2px; margin-top:4px; display:flex;">
+                    <div style="width:73%; background:var(--tok-fresh);" title="Input: $8/M"></div>
+                    <div style="width:27%; background:var(--tok-out);" title="Output: $40/M"></div>
+                  </div>
+                </td>
+                <td>n/a</td>
+                <td>$0.20 <small>(2,5%)</small></td>
+                <td>1M / 128K</td>
+                <td>Adaptive luôn bật, <code>high</code></td>
+                <td>09/11/2026</td>
+              </tr>
+              <tr data-model="opus" data-cache="cheaper" data-fast="true">
+                <td><strong>Opus 5.5</strong></td>
+                <td><code>claude-opus-5-5</code></td>
+                <td>
+                  <div>$4.00 / $20.00 <span style="font-size:0.7rem; opacity:0.7;">(fast: 8/40)</span></div>
+                  <!-- Log Bar: In=61.6%, Out=88.4% -->
+                  <div style="height:4px; background:var(--rule); border-radius:2px; margin-top:4px; display:flex;">
+                    <div style="width:61.6%; background:var(--tok-fresh);" title="Input: $4/M"></div>
+                    <div style="width:26.8%; background:var(--tok-out);" title="Output: $20/M"></div>
+                  </div>
+                </td>
+                <td>$5.00 / $8.00</td>
+                <td>$0.20 <small>(5%)</small></td>
+                <td>1M / 128K</td>
+                <td>Adaptive luôn bật, <code>medium</code></td>
+                <td>22/09/2026</td>
+              </tr>
+              <tr data-model="sonnet" data-cache="cheaper" data-fast="false">
+                <td><strong>Sonnet 5.5</strong></td>
+                <td><code>claude-sonnet-5-5</code></td>
+                <td>
+                  <div>$2.00 / $10.00</div>
+                  <!-- Log Bar: In=50%, Out=76.9% -->
+                  <div style="height:4px; background:var(--rule); border-radius:2px; margin-top:4px; display:flex;">
+                    <div style="width:50%; background:var(--tok-fresh);" title="Input: $2/M"></div>
+                    <div style="width:26.9%; background:var(--tok-out);" title="Output: $10/M"></div>
+                  </div>
+                </td>
+                <td>$2.50 / $4.00 <span class="tag-verif calc">[Tính]</span></td>
+                <td>$0.10 <small>(5%)</small></td>
+                <td>1M / 128K</td>
+                <td>Adaptive, <code>high</code> (API) / <code>med</code> (app)</td>
+                <td>28/09/2026</td>
+              </tr>
+              <tr data-model="haiku" data-cache="standard" data-fast="false">
+                <td><strong>Haiku 5.5</strong></td>
+                <td><code>claude-haiku-5-5</code></td>
+                <td>
+                  <div>$0.10 / $0.50 <span style="font-size:0.7rem; opacity:0.7;">(&le;100K)</span></div>
+                  <!-- Log Bar: In=0%, Out=26.8% -->
+                  <div style="height:4px; background:var(--rule); border-radius:2px; margin-top:4px; display:flex;">
+                    <div style="width:4%; background:var(--tok-fresh);" title="Input: $0.10/M"></div>
+                    <div style="width:22.8%; background:var(--tok-out);" title="Output: $0.50/M"></div>
+                  </div>
+                </td>
+                <td>n/a</td>
+                <td>hit $0.05 <small>(khi >100K)</small></td>
+                <td>1M / 128K</td>
+                <td>Adaptive, <code>medium</code></td>
+                <td>07/10/2026</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Expandable Technical Notes Drawer -->
+        <details style="margin-top:14px; background:var(--bench); padding:12px 16px; border-radius:4px; border:1px solid var(--rule); font-size:0.85rem;">
+          <summary style="cursor:pointer; font-family:var(--font-mono); font-weight:600; color:var(--ink);">
+            ▸ Ghi chú kỹ thuật chi tiết từ tài liệu API (Click để xem 5 quy tắc biên)
+          </summary>
+          <ul style="margin:10px 0 0; padding-left:20px; font-family:var(--font-mono); font-size:0.82rem; line-height:1.5;">
+            <li><strong>Đầu vào:</strong> Hỗ trợ Text và Ảnh (PDF chuyển đổi qua Document/PDF Engine). Không có Audio/Video native.</li>
+            <li><strong>Batch API:</strong> Giảm 50% đơn giá input và output. Hỗ trợ tới 300K output tokens với header beta <code>output-300k-2026-03-24</code>.</li>
+            <li><strong>Mức tối thiểu cache prefix:</strong> 512 tokens đối với toàn bộ các model họ 5.5.</li>
+            <li><strong>Phẳng giá 1M Context:</strong> Toàn bộ các model từ Claude 4.6 trở lên (ngoại trừ Haiku 5.5 có ngưỡng 100K) tính toàn bộ 1M context ở mức giá chuẩn, không có phụ phí long-context.</li>
+            <li><strong>Mythos 5.2:</strong> Cùng model nền và bảng giá với Fable 5.2 nhưng chỉ cung cấp qua chương trình xác minh kiểm soát đối tác đặc biệt.</li>
+          </ul>
+        </details>
+      </section>
+
+      <!-- FIGURE 2 (F2): MODEL SELECTOR DECISION TREE (STAGE) -->
+      <section class="stage-canvas">
+        <div style="margin-bottom: 16px;">
+          <div style="font-family:var(--font-mono); font-size:0.75rem; color:var(--tok-fresh); text-transform:uppercase; font-weight:700;">
+            Figure 2 (F2) · Bộ Chọn Model (Decision Tree) <span class="tag-verif docs">[Docs]</span>
+          </div>
+          <h3 style="font-size:1.3rem; margin:2px 0 0;">Sơ Đồ Phân Nhánh và Bộ Trắc Nghiệm Quyết Định</h3>
+          <div style="font-size:0.88rem; color:var(--ink-2); margin-top:2px;">
+            "Chọn model bằng chi phí trên mỗi tác vụ đạt yêu cầu, không bằng bảng xếp hạng benchmark."
+          </div>
+        </div>
+
+        <div class="decision-container">
+          <!-- Left: Interactive SVG Decision Tree -->
+          <div class="svg-tree-box">
+            <svg id="decisionTreeSvg" viewBox="0 0 540 420" width="100%" height="100%" style="display:block;">
+              <defs>
+                <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                  <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="var(--rule)" />
+                </marker>
+                <marker id="arrow-active" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                  <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="var(--tok-fresh)" />
+                </marker>
+              </defs>
+
+              <!-- Connecting Edges -->
+              <!-- A -> B -->
+              <path id="edge-A-B" class="tree-edge active" d="M 120 40 L 120 75" marker-end="url(#arrow-active)"/>
+              <!-- B -> C (On-prem) -->
+              <path id="edge-B-C" class="tree-edge" d="M 70 100 L 40 100 L 40 170 L 60 170" marker-end="url(#arrow)"/>
+              <!-- B -> D (Cloud) -->
+              <path id="edge-B-D" class="tree-edge active" d="M 170 100 L 260 100" marker-end="url(#arrow-active)"/>
+              <!-- D -> E (Haiku) -->
+              <path id="edge-D-E" class="tree-edge" d="M 320 80 L 320 45 L 380 45" marker-end="url(#arrow)"/>
+              <!-- D -> F (Sonnet) -->
+              <path id="edge-D-F" class="tree-edge active" d="M 380 100 L 430 100" marker-end="url(#arrow-active)"/>
+              <!-- D -> G (Opus) -->
+              <path id="edge-D-G" class="tree-edge" d="M 320 120 L 320 175 L 380 175" marker-end="url(#arrow)"/>
+              <!-- D -> H (Fable) -->
+              <path id="edge-D-H" class="tree-edge" d="M 320 120 L 320 235 L 380 235" marker-end="url(#arrow)"/>
+              <!-- F -> J (Optimization) -->
+              <path id="edge-F-J" class="tree-edge active" d="M 480 125 L 480 290 L 330 290" marker-end="url(#arrow-active)"/>
+              <!-- J -> K, L, M -->
+              <path id="edge-J-K" class="tree-edge" d="M 230 310 L 140 355" marker-end="url(#arrow)"/>
+              <path id="edge-J-L" class="tree-edge active" d="M 270 320 L 270 355" marker-end="url(#arrow-active)"/>
+              <path id="edge-J-M" class="tree-edge" d="M 310 310 L 400 355" marker-end="url(#arrow)"/>
+
+              <!-- Nodes -->
+              <!-- Node A: Start -->
+              <g id="node-A" class="tree-node active">
+                <rect x="50" y="10" width="140" height="30" rx="4"/>
+                <text x="120" y="30" text-anchor="middle" font-family="var(--font-mono)" font-size="11" fill="var(--ink)">Bài toán mới</text>
+              </g>
+
+              <!-- Node B: Data check -->
+              <g id="node-B" class="tree-node active">
+                <rect x="70" y="80" width="100" height="40" rx="4"/>
+                <text x="120" y="98" text-anchor="middle" font-family="var(--font-mono)" font-size="10" fill="var(--ink)">Rời hạ tầng?</text>
+                <text x="120" y="112" text-anchor="middle" font-family="var(--font-mono)" font-size="8" fill="var(--ink-2)">Bảo mật / ZDR</text>
+              </g>
+
+              <!-- Node C: On-premise -->
+              <g id="node-C" class="tree-node">
+                <rect x="10" y="155" width="120" height="45" rx="4"/>
+                <text x="70" y="174" text-anchor="middle" font-family="var(--font-mono)" font-size="10" fill="var(--ink)">Open-weight</text>
+                <text x="70" y="188" text-anchor="middle" font-family="var(--font-mono)" font-size="8" fill="var(--ink-2)">Qwen 3.6 / DeepSeek V4</text>
+              </g>
+
+              <!-- Node D: Task type -->
+              <g id="node-D" class="tree-node active">
+                <rect x="260" y="80" width="120" height="40" rx="4"/>
+                <text x="320" y="98" text-anchor="middle" font-family="var(--font-mono)" font-size="10" fill="var(--ink)">Loại tác vụ?</text>
+                <text x="320" y="112" text-anchor="middle" font-family="var(--font-mono)" font-size="8" fill="var(--ink-2)">Phức tạp & RAG</text>
+              </g>
+
+              <!-- Leaf Nodes for Models -->
+              <!-- Node E: Haiku -->
+              <g id="node-E" class="tree-node">
+                <rect x="380" y="30" width="120" height="32" rx="4"/>
+                <text x="440" y="47" text-anchor="middle" font-family="var(--font-mono)" font-size="10" fill="var(--ink)">Haiku 5.5</text>
+                <text x="440" y="58" text-anchor="middle" font-family="var(--font-mono)" font-size="8" fill="var(--ink-2)">$0.10 / $0.50 (Phân loại)</text>
+              </g>
+
+              <!-- Node F: Sonnet -->
+              <g id="node-F" class="tree-node active">
+                <rect x="420" y="85" width="115" height="40" rx="4"/>
+                <text x="477" y="103" text-anchor="middle" font-family="var(--font-mono)" font-size="11" fill="var(--tok-fresh)">Sonnet 5.5 ★</text>
+                <text x="477" y="117" text-anchor="middle" font-family="var(--font-mono)" font-size="8" fill="var(--ink-2)">Mặc định Production</text>
+              </g>
+
+              <!-- Node G: Opus -->
+              <g id="node-G" class="tree-node">
+                <rect x="380" y="160" width="120" height="32" rx="4"/>
+                <text x="440" y="177" text-anchor="middle" font-family="var(--font-mono)" font-size="10" fill="var(--ink)">Opus 5.5</text>
+                <text x="440" y="188" text-anchor="middle" font-family="var(--font-mono)" font-size="8" fill="var(--ink-2)">Refactor lớn, phán đoán</text>
+              </g>
+
+              <!-- Node H: Fable -->
+              <g id="node-H" class="tree-node">
+                <rect x="380" y="220" width="120" height="32" rx="4"/>
+                <text x="440" y="237" text-anchor="middle" font-family="var(--font-mono)" font-size="10" fill="var(--ink)">Fable 5.2</text>
+                <text x="440" y="248" text-anchor="middle" font-family="var(--font-mono)" font-size="8" fill="var(--ink-2)">Toán sâu, eval cực khó</text>
+              </g>
+
+              <!-- Node J: Cost optimization branch -->
+              <g id="node-J" class="tree-node active">
+                <rect x="220" y="275" width="110" height="35" rx="4"/>
+                <text x="275" y="292" text-anchor="middle" font-family="var(--font-mono)" font-size="10" fill="var(--ink)">Tối ưu chi phí?</text>
+                <text x="275" y="304" text-anchor="middle" font-family="var(--font-mono)" font-size="8" fill="var(--ink-2)">Chiến lược hạ tầng</text>
+              </g>
+
+              <!-- Node K, L, M: Optimizations -->
+              <g id="node-K" class="tree-node">
+                <rect x="80" y="355" width="100" height="35" rx="4"/>
+                <text x="130" y="372" text-anchor="middle" font-family="var(--font-mono)" font-size="9" fill="var(--ink)">Batch API</text>
+                <text x="130" y="384" text-anchor="middle" font-family="var(--font-mono)" font-size="8" fill="var(--ink-2)">Giảm 50% chi phí</text>
+              </g>
+
+              <g id="node-L" class="tree-node active">
+                <rect x="215" y="355" width="110" height="35" rx="4"/>
+                <text x="270" y="372" text-anchor="middle" font-family="var(--font-mono)" font-size="9" fill="var(--tok-cached)">Prompt Cache ★</text>
+                <text x="270" y="384" text-anchor="middle" font-family="var(--font-mono)" font-size="8" fill="var(--ink-2)">Giảm tới 81-95%</text>
+              </g>
+
+              <g id="node-M" class="tree-node">
+                <rect x="350" y="355" width="110" height="35" rx="4"/>
+                <text x="405" y="372" text-anchor="middle" font-family="var(--font-mono)" font-size="9" fill="var(--ink)">Tăng Effort</text>
+                <text x="405" y="384" text-anchor="middle" font-family="var(--font-mono)" font-size="8" fill="var(--ink-2)">Không đổi model</text>
+              </g>
+            </svg>
+          </div>
+
+          <!-- Right: Interactive Questionnaire Wizard [Làm bài chọn] -->
+          <div class="quiz-card">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+              <span class="quiz-q-title">Bộ Trắc Nghiệm Quyết Định (4 Câu Hỏi)</span>
+              <button class="btn-tool" style="font-size:0.7rem; padding:2px 6px;" onclick="resetQuiz()">Làm lại</button>
+            </div>
+
+            <!-- Question 1 -->
+            <div class="control-row" style="margin-bottom:12px;">
+              <label class="control-label"><strong>1. Dữ liệu có được phép rời hạ tầng nội bộ?</strong></label>
+              <div class="quiz-options">
+                <button class="quiz-opt-btn selected" id="q1-yes" onclick="setQuizAnswer(1, 'cloud')">
+                  ✓ Được phép (Dùng Cloud API / Zero Data Retention / Private Tenant)
+                </button>
+                <button class="quiz-opt-btn" id="q1-no" onclick="setQuizAnswer(1, 'onprem')">
+                  ✗ Tuyệt đối không (Bắt buộc On-premise / Air-gapped hoàn toàn)
+                </button>
+              </div>
+            </div>
+
+            <!-- Question 2 -->
+            <div class="control-row" style="margin-bottom:12px;">
+              <label class="control-label"><strong>2. Độ phức tạp và bản chất của tác vụ?</strong></label>
+              <div class="quiz-options">
+                <button class="quiz-opt-btn selected" id="q2-rag" onclick="setQuizAnswer(2, 'rag')">
+                  RAG tài liệu nội bộ, agentic tool-use, trích xuất pháp lý phức tạp
+                </button>
+                <button class="quiz-opt-btn" id="q2-route" onclick="setQuizAnswer(2, 'route')">
+                  Phân loại intent, routing câu hỏi, trích xuất ngắn, throughput cao
+                </button>
+                <button class="quiz-opt-btn" id="q2-deep" onclick="setQuizAnswer(2, 'deep')">
+                  Nghiên cứu suy luận đa tầng, logic cực khó, refactor toàn bộ repo
+                </button>
+              </div>
+            </div>
+
+            <!-- Question 3 -->
+            <div class="control-row" style="margin-bottom:12px;">
+              <label class="control-label"><strong>3. Yêu cầu về độ trễ phản hồi (Latency)?</strong></label>
+              <div class="quiz-options">
+                <button class="quiz-opt-btn selected" id="q3-realtime" onclick="setQuizAnswer(3, 'realtime')">
+                  Cần Realtime / Streaming tức thì cho người dùng tương tác
+                </button>
+                <button class="quiz-opt-btn" id="q3-batch" onclick="setQuizAnswer(3, 'batch')">
+                  Không cần realtime (Xử lý lô / Batch qua đêm trong 24 giờ)
+                </button>
+              </div>
+            </div>
+
+            <!-- Result Box -->
+            <div class="quiz-result-box" id="quizResultBox">
+              <div style="font-family:var(--font-mono); font-size:0.75rem; color:var(--ink-2); text-transform:uppercase;">
+                Khuyến nghị kiến trúc:
+              </div>
+              <div style="font-family:var(--font-display); font-size:1.15rem; font-weight:700; color:var(--tok-fresh); margin:4px 0;" id="quizRecModel">
+                Sonnet 5.5 + Prompt Caching (5m TTL)
+              </div>
+              <div style="font-size:0.84rem; color:var(--ink-2); line-height:1.4;" id="quizRecReason">
+                Điểm ngọt tối ưu: 95% năng lực của Opus với chi phí chỉ bằng một nửa ($2/$10 so với $4/$20). Phù hợp nhất cho RAG nội bộ và pipeline trích dẫn chính xác tại Alliance.
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      <!-- STAGE PLACEHOLDER FOR DEMO HERO -->
-      <div class="stage-canvas" style="text-align: center; padding: 40px 20px;">
-        <div style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--ink-2); margin-bottom: 12px;">
-          [STAGE CANVAS · SÂN KHẤU THAO TÁC THỰC NGHIỆM]
-        </div>
-        <h3 style="font-family: var(--font-display); font-size: 1.4rem; margin: 0 0 10px;">
-          Vòng Đời Một Request Đang Chạy Thật
-        </h3>
-        <p style="font-size: 0.92rem; color: var(--ink-2); max-width: 600px; margin: 0 auto 20px;">
-          Sân khấu tràn 12 cột sẵn sàng cho Phase 2: Hero Request Simulator, Tokenizer View và Cache Time Machine.
-        </p>
-        <button class="btn-action" onclick="ReceiptStore.simulateInteraction('hero_test')">
-          <span>⚡ Thử nghiệm phát sinh Token (Test Receipt Rail)</span>
-        </button>
-      </div>
+      <!-- READING BAND: B.1.2 & B.1.3 -->
+      <section class="reading-band">
+        <div class="reading-col">
+          <h3>B.1.2 Model vs Nền Tảng: Phân Biệt Cho Đúng</h3>
+          <p>
+            Khi xây dựng hệ sinh thái AI trong doanh nghiệp, lỗi phổ biến nhất là đánh đồng năng lực của model với năng lực nền tảng. Bảng dưới đây phân tách rõ 3 tầng trách nhiệm kỹ thuật:
+          </p>
 
-      <!-- ANCHORS FOR ALL 7 STATIONS (WILL BE EXPANDED IN SUBSEQUENT PHASES) -->
-      <div id="tr-1" style="padding: 20px 0; border-top: 1px dashed var(--rule);"><small style="font-family:var(--font-mono); color:var(--ink-2);">[Trạm 1: B.1 Thông số họ model & F1/F2]</small></div>
-      <div id="tr-2" style="padding: 20px 0; border-top: 1px dashed var(--rule);"><small style="font-family:var(--font-mono); color:var(--ink-2);">[Trạm 2: B.2.1 Cơ học suy luận, KV-Cache & F3]</small></div>
-      <div id="tr-3" style="padding: 20px 0; border-top: 1px dashed var(--rule);"><small style="font-family:var(--font-mono); color:var(--ink-2);">[Trạm 3: B.2.2 Adaptive Thinking & F4 Effort Lab]</small></div>
-      <div id="tr-4" style="padding: 20px 0; border-top: 1px dashed var(--rule);"><small style="font-family:var(--font-mono); color:var(--ink-2);">[Trạm 4: B.2.3 Quản trị ngữ cảnh & F5 Context Diet]</small></div>
-      <div id="tr-5" style="padding: 20px 0; border-top: 1px dashed var(--rule);"><small style="font-family:var(--font-mono); color:var(--ink-2);">[Trạm 5: B.2.4 Native Citations & F8 Explorer]</small></div>
-      <div id="tr-6" style="padding: 20px 0; border-top: 1px dashed var(--rule);"><small style="font-family:var(--font-mono); color:var(--ink-2);">[Trạm 6: B.4 Pipeline 12 bước (F7) & F9 Injection Playground]</small></div>
-      <div id="tr-7" style="padding: 20px 0; border-top: 1px dashed var(--rule);"><small style="font-family:var(--font-mono); color:var(--ink-2);">[Trạm 7: B.3 Cost Lab, B.6 Sổ cái & B.7 Q&A]</small></div>
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Lớp</th>
+                <th>Thành phần năng lực</th>
+                <th>Ví dụ thực chứng</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>1. Năng lực Model</strong></td>
+                <td>Khả năng suy luận, code, đọc hiểu ảnh/biểu đồ, tuân thủ chỉ dẫn, cửa sổ ngữ cảnh 1M.</td>
+                <td>Điểm SWE-bench, Terminal-Bench, OSWorld.</td>
+              </tr>
+              <tr>
+                <td><strong>2. Năng lực Nền tảng API</strong></td>
+                <td>Prompt caching, Batch API, native citations, strict tool use, compaction, fast mode.</td>
+                <td>Header <code>cache_control</code>, <code>speed: "fast"</code>, trích dẫn từng đoạn gốc.</td>
+              </tr>
+              <tr>
+                <td><strong>3. Năng lực Harness / Ứng dụng</strong></td>
+                <td>Claude Code, Agent SDK, hooks, subagents, cơ chế retry, bảo vệ vòng lặp.</td>
+                <td>File <code>CLAUDE.md</code>, hook kiểm soát sandbox, harness kiểm thử tự động.</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div style="background:var(--stage); border:1px solid var(--rule); padding:14px 18px; border-radius:4px; font-size:0.92rem; margin:16px 0 24px;">
+            <strong>Hệ quả kiến trúc:</strong> Khi đánh giá "Claude có làm được không", kỹ sư phải xác định rõ năng lực thuộc lớp nào. Nếu chuyển sang nhà cung cấp khác (như OpenAI hay open-weight), chỉ có Lớp 1 đi theo; toàn bộ Lớp 2 và Lớp 3 phải được kiến trúc lại từ đầu.
+          </div>
+
+          <h3>B.1.3 Điều Anthropic Không Công Bố (Và Tài Liệu Này Không Đoán)</h3>
+          <p>
+            Tài liệu này giữ vững tính trung thực học thuật bằng việc phân định rõ ranh giới tri thức. Anthropic <strong>không công bố</strong>:
+          </p>
+          <ul>
+            <li>Số lượng tham số (parameter count) của từng model.</li>
+            <li>Kiến trúc mạng là Dense hay MoE (Mixture of Experts).</li>
+            <li>Số layer (\(L\)), số head attention (\(n_{head}, n_{kv}\)), và chiều mỗi head (\(d_{head}\)).</li>
+            <li>Kích thước KV-cache thực tế mỗi token trên phần cứng máy chủ.</li>
+            <li>Tỉ lệ phân bổ và thành phần chi tiết của dữ liệu huấn luyện.</li>
+          </ul>
+          <p>
+            Mọi công thức ở Trạm 2 dưới đây là <strong>công thức Transformer tổng quát chuẩn</strong> và các bộ tham số đều mang nhãn <span class="tag-verif hypo">[Giả định]</span> phục vụ mô hình hóa kinh tế học, không khẳng định là phần cứng nội bộ của Anthropic.
+          </p>
+        </div>
+      </section>
+
+      <!-- =================================================================
+           TRẠM 2: PREFILL VÀ KV-CACHE (B.2.1)
+           ================================================================= -->
+      <section id="tr-2" class="reading-band">
+        <div class="reading-col">
+          <div style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--tok-fresh); font-weight: 600; text-transform: uppercase; margin-bottom: 8px;">
+            Trạm 2 · Prefill và Phục Hồi KV-Cache (B.2.1)
+          </div>
+          <h2>B.2 Cơ Chế Kỹ Thuật Cốt Lõi: Cơ Học Suy Luận Quyết Định Giá và Độ Trễ</h2>
+          <p>
+            Một request LLM về bản chất phần cứng được phân rã thành hai pha hoàn toàn tách biệt:
+          </p>
+
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Pha</th>
+                <th>Việc làm trên phần cứng</th>
+                <th>Tính chất tính toán</th>
+                <th>Biểu hiện quan sát từ API</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Prefill</strong></td>
+                <td>Xử lý toàn bộ token input song song, tính ma trận Q, K, V và tạo KV-cache.</td>
+                <td>Thiên về tính toán (<strong>compute-bound</strong>), song song hoá tốt trên GPU tensor cores.</td>
+                <td>Input rẻ hơn; quyết định thời gian tới token đầu tiên (<strong>TTFT</strong>).</td>
+              </tr>
+              <tr>
+                <td><strong>Decode</strong></td>
+                <td>Sinh từng token một, mỗi bước đọc lại toàn bộ KV-cache đã lưu từ bộ nhớ VRAM.</td>
+                <td>Thiên về băng thông bộ nhớ (<strong>memory-bound</strong>), tuần tự từng bước.</td>
+                <td>Output đắt hơn 5×; quyết định tốc độ sinh token/giây (tokens/sec).</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div style="background:var(--stage); border-left:3px solid var(--tok-cached); padding:12px 16px; border-radius:4px; font-size:0.9rem; margin-bottom:20px;">
+            <strong>Quan sát có thể kiểm chứng <span class="tag-verif docs">[Docs]</span>:</strong> Cả 4 model Claude 5.x đều có tỉ lệ giá output/input đúng bằng <strong>5.0</strong> (\(2 \rightarrow 10\), \(4 \rightarrow 20\), \(8 \rightarrow 40\), \(0.10 \rightarrow 0.50\)). Tỉ lệ này phản ánh chi phí băng thông decode đắt hơn prefill, nhưng con số cụ thể là quyết định định giá thương mại.
+          </div>
+        </div>
+      </section>
+
+      <!-- STAGE: FIGURE 3 (F3) THÁP KV-CACHE WIDGET -->
+      <section class="stage-canvas">
+        <div style="margin-bottom:16px;">
+          <div style="font-family:var(--font-mono); font-size:0.75rem; color:var(--tok-cached); text-transform:uppercase; font-weight:700;">
+            Figure 3 (F3) · Tháp KV-Cache & Kích Thước Bộ Nhớ <span class="tag-verif hypo">[Giả định]</span>
+          </div>
+          <h3 style="font-size:1.3rem; margin:2px 0 0;">Mô Phỏng Bộ Nhớ Tự Chú Ý (Self-Attention Memory Footprint)</h3>
+          <div style="font-size:0.88rem; color:var(--ink-2); margin-top:2px;">
+            Công thức Transformer tổng quát: \(S_{KV} = 2 \times b \times L \times n_{kv} \times d_{head} \times T\)
+          </div>
+        </div>
+
+        <div class="kv-widget-layout">
+          <!-- Controls Panel -->
+          <div class="kv-controls">
+            <!-- Layers L -->
+            <div class="control-row">
+              <div class="control-label">
+                <span>Số Layer (\(L\)):</span>
+                <strong id="valL">80</strong>
+              </div>
+              <input type="range" class="control-slider" id="sliderL" min="32" max="128" step="8" value="80" oninput="updateKvCalculation()">
+            </div>
+
+            <!-- KV Heads n_kv & GQA vs MHA -->
+            <div class="control-row">
+              <div class="control-label">
+                <span>Cơ chế Attention (\(n_{kv}\) heads):</span>
+                <strong id="valNkv">8 heads (GQA)</strong>
+              </div>
+              <div class="pill-group">
+                <button class="pill-opt active" id="btnGQA" onclick="setKvMode('gqa')">GQA (8 KV Heads)</button>
+                <button class="pill-opt" id="btnMHA" onclick="setKvMode('mha')">MHA (64 KV Heads)</button>
+              </div>
+            </div>
+
+            <!-- Head Dim d_head & Precision b -->
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+              <div class="control-row">
+                <div class="control-label">
+                  <span>Head Dim (\(d_{head}\)):</span>
+                  <strong id="valDhead">128</strong>
+                </div>
+                <input type="range" class="control-slider" id="sliderDhead" min="64" max="256" step="32" value="128" oninput="updateKvCalculation()">
+              </div>
+              <div class="control-row">
+                <div class="control-label">
+                  <span>Precision (\(b\) bytes):</span>
+                  <strong id="valB">2 (FP16/BF16)</strong>
+                </div>
+                <div class="pill-group">
+                  <button class="pill-opt active" id="btnFP16" onclick="setPrecision(2)">2 (FP16)</button>
+                  <button class="pill-opt" id="btnFP8" onclick="setPrecision(1)">1 (FP8)</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Context Length T -->
+            <div class="control-row">
+              <div class="control-label">
+                <span>Độ dài ngữ cảnh (\(T\) tokens):</span>
+                <strong id="valT">200.000 tokens</strong>
+              </div>
+              <input type="range" class="control-slider" id="sliderT" min="10000" max="1000000" step="10000" value="200000" oninput="updateKvCalculation()">
+              <div class="pill-group" style="margin-top:4px;">
+                <button class="pill-opt" onclick="setContextT(10000)">10K</button>
+                <button class="pill-opt" onclick="setContextT(128000)">128K</button>
+                <button class="pill-opt active" id="btnT200" onclick="setContextT(200000)">200K</button>
+                <button class="pill-opt" id="btnT1M" onclick="setContextT(1000000)">1M Context</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Real-time Metrics Card & Visual Tower -->
+          <div class="kv-metrics-card">
+            <div>
+              <div style="font-family:var(--font-mono); font-size:0.75rem; color:var(--ink-2); text-transform:uppercase;">
+                Dung Lượng KV-Cache Tính Toán:
+              </div>
+              <div class="metric-hero-val" id="kvTotalGiB">61.04 GiB</div>
+              <div style="font-family:var(--font-mono); font-size:0.82rem; color:var(--ink-2); margin-top:4px;">
+                Suất tiêu hao: <strong id="kvBytesPerTok">320.0 KiB / token</strong>
+              </div>
+            </div>
+
+            <!-- Visual Tower Scale -->
+            <div>
+              <div style="font-family:var(--font-mono); font-size:0.72rem; color:var(--ink-2); margin-bottom:4px;">
+                Trực quan hóa khối VRAM trên cụm GPU H100 (80GB):
+              </div>
+              <div class="kv-tower-vis" id="kvTowerContainer">
+                <div class="kv-bar" id="kvBarVis" style="height: 40%;" title="Tỷ lệ VRAM"></div>
+              </div>
+              <div style="display:flex; justify-content:space-between; font-family:var(--font-mono); font-size:0.7rem; color:var(--ink-2); margin-top:4px;">
+                <span>0 GiB</span>
+                <span id="kvGpuCount">Cần tối thiểu 1 × GPU H100 80GB</span>
+                <span>Max 1.000 GiB</span>
+              </div>
+            </div>
+
+            <div style="font-family:var(--font-mono); font-size:0.72rem; color:var(--ink-2); background:var(--stage); padding:8px 10px; border-radius:3px; border:1px solid var(--rule);">
+              * Test vector kiểm định: \(L=80, n_{kv}=8, d_{head}=128, b=2 \Rightarrow 327.680\text{ B/tok} = 320\text{ KiB/tok}\); \(T=200\text{K} \Rightarrow 61.04\text{ GiB}\); \(T=1\text{M} \Rightarrow 305.18\text{ GiB}\). Chuyển MHA (64 heads) lớn gấp 8× (\(2.44\text{ TiB}\)).
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- STAGE: FIGURE CACHE (F-CACHE) CỖ MÁY THỜI GIAN TTL -->
+      <section class="stage-canvas">
+        <div style="margin-bottom:16px;">
+          <div style="font-family:var(--font-mono); font-size:0.75rem; color:var(--tok-cached); text-transform:uppercase; font-weight:700;">
+            Figure Cache (F-Cache) · Cỗ Máy Thời Gian TTL & Điểm Hòa Vốn <span class="tag-verif calc">[Tính/Suy luận]</span>
+          </div>
+          <h3 style="font-size:1.3rem; margin:2px 0 0;">Mô Phỏng Prompt Caching: Lịch Gửi Request và Vòng Lặp TTL</h3>
+          <div style="font-size:0.88rem; color:var(--ink-2); margin-top:2px;">
+            "Cache là bài toán lịch gửi và hit rate, không phải chiếc công tắc bật/tắt."
+          </div>
+        </div>
+
+        <div class="ttl-widget-layout">
+          <!-- Left: SVG Circular Countdown Dial -->
+          <div class="ttl-dial-box">
+            <svg viewBox="0 0 120 120" width="120" height="120">
+              <circle cx="60" cy="60" r="50" fill="none" stroke="var(--bench)" stroke-width="8"/>
+              <circle id="ttlCircleArc" cx="60" cy="60" r="50" fill="none" stroke="var(--tok-cached)" stroke-width="8"
+                      stroke-dasharray="314.15" stroke-dashoffset="0" stroke-linecap="round"
+                      transform="rotate(-90 60 60)" style="transition: stroke-dashoffset 0.5s ease;"/>
+              <text id="ttlDialTime" x="60" y="58" text-anchor="middle" font-family="var(--font-mono)" font-size="16" font-weight="700" fill="var(--ink)">5:00</text>
+              <text x="60" y="74" text-anchor="middle" font-family="var(--font-mono)" font-size="9" fill="var(--ink-2)">TTL còn lại</text>
+            </svg>
+
+            <div class="pill-group" style="margin-top:10px;">
+              <button class="pill-opt active" id="btnTtl5m" onclick="setTtlMode('5m')">TTL 5 Phút (1,25×)</button>
+              <button class="pill-opt" id="btnTtl1h" onclick="setTtlMode('1h')">TTL 1 Giờ (2,0×)</button>
+            </div>
+          </div>
+
+          <!-- Right: Interactive Timeline & Request Dispatcher -->
+          <div>
+            <div class="ttl-timeline-track">
+              <div style="display:flex; justify-content:space-between; align-items:center;">
+                <span style="font-family:var(--font-mono); font-size:0.75rem; color:var(--ink-2); font-weight:600; text-transform:uppercase;">
+                  Trục Thời Gian Mô Phỏng (Phút 0 &rarr; 15) · Nhấp Vào Để Gửi Request
+                </span>
+                <span id="ttlStatusTag" class="badge-spec" style="color:var(--tok-cached); border-color:var(--tok-cached);">Cache Nóng (Active)</span>
+              </div>
+
+              <!-- Interactive Timeline Bar -->
+              <div class="timeline-bar" id="timelineBar" onclick="handleTimelineClick(event)">
+                <div id="timelineMarkersContainer">
+                  <!-- Markers inserted dynamically -->
+                </div>
+              </div>
+
+              <div class="timeline-ticks">
+                <span>0m</span>
+                <span>2m</span>
+                <span>4m</span>
+                <span>6m</span>
+                <span>8m</span>
+                <span>10m</span>
+                <span>12m</span>
+                <span>14m</span>
+                <span>15m</span>
+              </div>
+            </div>
+
+            <!-- Simulator Quick Buttons -->
+            <div style="display:flex; flex-wrap:wrap; gap:8px; margin-top:12px;">
+              <button class="btn-tool" onclick="dispatchManualRequest(0)">+ Phút 0 (Ghi đầu)</button>
+              <button class="btn-tool" onclick="dispatchManualRequest(2)">+ Phút 2 (Hit)</button>
+              <button class="btn-tool" onclick="dispatchManualRequest(4)">+ Phút 4 (Hit)</button>
+              <button class="btn-tool" onclick="dispatchManualRequest(10)">+ Phút 10 (Nguội/Miss)</button>
+              <button class="btn-tool" style="color:var(--tok-cached); font-weight:600;" onclick="runOptimal10Challenge()">
+                ⚡ Thử thách 10 Request Tối Ưu
+              </button>
+              <button class="btn-tool" onclick="resetTimelineSim()">↺ Xóa lịch</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tally Scoreboard -->
+        <div class="ttl-tally-board">
+          <div class="tally-item">
+            <div class="tally-label">Tổng Request</div>
+            <div class="tally-val" id="tallyReqCount">0 / 10</div>
+          </div>
+          <div class="tally-item">
+            <div class="tally-label">Chi Phí Đã Dùng</div>
+            <div class="tally-val" id="tallyTotalCost" style="color:var(--tok-fresh);">$0.0000</div>
+          </div>
+          <div class="tally-item">
+            <div class="tally-label">Nếu Không Cache</div>
+            <div class="tally-val" id="tallyNoCacheCost" style="color:var(--ink-2);">$0.0000</div>
+          </div>
+          <div class="tally-item">
+            <div class="tally-label">Tiết Kiệm Thực Tế</div>
+            <div class="tally-val" id="tallySavings" style="color:var(--tok-cached);">0.0%</div>
+          </div>
+        </div>
+
+        <!-- Challenge Badge -->
+        <div class="challenge-badge" id="challengeBadge">
+          🎉 Chúc mừng! Bạn đã hoàn thành 10 request với tổng chi phí <strong>$0.1380</strong> (tiết kiệm <strong>70.6%</strong> so với $0.4700 không cache), xuất sắc vượt mục tiêu &le; $0.20!
+        </div>
+
+        <!-- Break-Even Formula Section (KaTeX) -->
+        <div style="margin-top:20px; padding:14px 18px; background:var(--bench); border-radius:4px; border:1px solid var(--rule);">
+          <div style="font-family:var(--font-mono); font-size:0.75rem; color:var(--ink-2); text-transform:uppercase; margin-bottom:4px;">
+            Công thức điểm hòa vốn kinh tế học (Break-Even Hit Rate):
+          </div>
+          <div style="font-size:0.95rem; margin:8px 0;">
+            $$h^* = \frac{m_w - 1}{m_w - m_r}$$
+          </div>
+          <div style="font-size:0.86rem; color:var(--ink-2); line-height:1.5;">
+            Với cache 5 phút (\(m_w = 1.25, m_r = 0.05\)): \(h^* = \frac{0.25}{1.20} \approx \mathbf{20.8\%}\) &rarr; Chỉ cần hơn 1 trong 5 request trúng cache là đã có lãi.<br>
+            Với cache 1 giờ (\(m_w = 2.00, m_r = 0.05\)): \(h^* = \frac{1.00}{1.95} \approx \mathbf{51.3\%}\) &rarr; Cần hit rate trên một nửa để bù đắp chi phí ghi đắt gấp đôi.
+          </div>
+        </div>
+      </section>
+
+      <!-- READING BAND: 5 TAKEAWAYS CỦA PREFILL VÀ KV-CACHE -->
+      <section class="reading-band">
+        <div class="reading-col">
+          <h3>Năm Hệ Quả Thiết Kế Rút Ra Từ Kiến Trúc Attention Nhân Quả</h3>
+          <p>
+            Từ nền tảng vật lý tính toán và định giá API, kỹ sư thiết kế hệ thống cần ghi nhớ 5 nguyên lý bất biến:
+          </p>
+
+          <ol style="padding-left:20px; font-size:0.92rem; line-height:1.6;">
+            <li style="margin-bottom:12px;">
+              <strong>Vì sao prompt caching rẻ và vì sao có TTL:</strong> Đọc lại KV-cache đã có sẵn trong VRAM (chỉ tốn 5% giá input trên Sonnet/Opus 5.5) rẻ hơn nhiều so với việc chạy lại prefill trên tensor cores. Ngược lại, bộ nhớ VRAM của GPU cực kỳ đắt đỏ, nhà cung cấp không thể giữ vô hạn, do đó phải đặt ngưỡng TTL (5 phút hoặc 1 giờ). <span class="tag-verif calc">[Tính/Suy luận]</span>
+            </li>
+            <li style="margin-bottom:12px;">
+              <strong>Vì sao cache chỉ khớp prefix giống hệt:</strong> Do cơ chế self-attention nhân quả (causal masking), vector KV của token thứ \(t\) phụ thuộc vào toàn bộ token từ \(1\) đến \(t-1\). Thay đổi dù chỉ 1 byte ở đầu chuỗi (ví dụ: đổi dấu cách, chèn timestamp vào system prompt) sẽ làm vô hiệu hóa toàn bộ cache phía sau. Do đó, quy tắc vàng là: <em>đặt phần ổn định phía trước, phần thay đổi phía sau</em>. <span class="tag-verif found">[Nền]</span>
+            </li>
+            <li style="margin-bottom:12px;">
+              <strong>Vì sao đổi `effort` làm vô hiệu cache:</strong> Tham số `effort` được render trực tiếp vào system prompt prefix của model, do đó thay đổi effort đồng nghĩa với việc thay đổi prefix, làm miss cache hoàn toàn. <span class="tag-verif docs">[Docs]</span>
+            </li>
+            <li style="margin-bottom:12px;">
+              <strong>Vì sao context 1M không "miễn phí":</strong> Mặc dù Anthropic giữ nguyên đơn giá token cho toàn bộ 1M context, nhưng dung lượng KV-cache và thời gian tính toán prefill tăng tuyến tính theo \(T\). Độ trễ TTFT và độ chính xác trích xuất ở ngữ cảnh siêu dài cần được đo đạc thực tế, không mặc định tương đương ngữ cảnh ngắn. <span class="tag-verif docs">[Docs]</span>
+            </li>
+            <li style="margin-bottom:12px;">
+              <strong>Vì sao output là biến chi phí chính của thinking:</strong> Toàn bộ reasoning tokens (thinking) được tính tiền bằng đúng đơn giá của output tokens (đắt gấp 5× input). Do đó, kiểm soát độ sâu suy luận chính là kiểm soát ngân sách vận hành. <span class="tag-verif docs">[Docs]</span>
+            </li>
+          </ol>
+        </div>
+      </section>
+
+      <!-- ANCHORS FOR SUBSEQUENT PHASES (TRẠM 3 - 7) -->
+      <div id="tr-3" style="padding: 24px 0; border-top: 1px dashed var(--rule);"><small style="font-family:var(--font-mono); color:var(--ink-2);">[Trạm 3: B.2.2 Adaptive Thinking & F4 Effort Lab · Phase 3]</small></div>
+      <div id="tr-4" style="padding: 24px 0; border-top: 1px dashed var(--rule);"><small style="font-family:var(--font-mono); color:var(--ink-2);">[Trạm 4: B.2.3 Quản trị ngữ cảnh & F5 Context Diet · Phase 3]</small></div>
+      <div id="tr-5" style="padding: 24px 0; border-top: 1px dashed var(--rule);"><small style="font-family:var(--font-mono); color:var(--ink-2);">[Trạm 5: B.2.4 Native Citations & F8 Explorer · Phase 4]</small></div>
+      <div id="tr-6" style="padding: 24px 0; border-top: 1px dashed var(--rule);"><small style="font-family:var(--font-mono); color:var(--ink-2);">[Trạm 6: B.4 Pipeline 12 bước & F9 Injection Playground · Phase 4]</small></div>
+      <div id="tr-7" style="padding: 24px 0; border-top: 1px dashed var(--rule);"><small style="font-family:var(--font-mono); color:var(--ink-2);">[Trạm 7: B.3 Cost Lab, B.6 Sổ cái & B.7 Q&A · Phase 5]</small></div>
 
     </main>
 
@@ -728,10 +1949,10 @@
     <span>Hoá đơn: <strong id="mobilePillCost">$0.0114</strong> ▴</span>
   </div>
 
-  <!-- JAVASCRIPT STATE CONTROLLER (RECEIPT STORE & FOUNDATION) -->
+  <!-- JAVASCRIPT LOGIC & STATE CONTROLLERS -->
   <script>
     /* =================================================================
-       1. RECEIPT STATE STORE (MỤC 8.1 & 8.2)
+       RECEIPT STORE STATE MANAGER
        ================================================================= */
     var ReceiptStore = {
       state: {
@@ -746,7 +1967,8 @@
         pricing: {
           sonnet: { pin: 2.0, pout: 10.0, mr: 0.05 },
           opus: { pin: 4.0, pout: 20.0, mr: 0.05 },
-          haiku: { pin: 0.5, pout: 2.5, mr: 0.10 }
+          haiku: { pin: 0.5, pout: 2.5, mr: 0.10 },
+          fable: { pin: 8.0, pout: 40.0, mr: 0.025 }
         }
       },
 
@@ -759,15 +1981,27 @@
         this.render();
       },
 
+      setScenario: function(type) {
+        if (type === 'no_cache') {
+          this.update({ cached: 0, fresh: 21500, thinking: 0, output: 400, hitRate: 0.0 });
+        } else if (type === 'cache_write') {
+          this.update({ cached: 20000, fresh: 1500, thinking: 0, output: 400, hitRate: 0.0 });
+        } else if (type === 'cache_hit') {
+          this.update({ cached: 20000, fresh: 1500, thinking: 0, output: 400, hitRate: 1.0 });
+        } else {
+          this.update({ cached: 20000, fresh: 1500, thinking: 1200, output: 400, hitRate: 0.95 });
+        }
+      },
+
       calculate: function() {
         var s = this.state;
         var p = s.pricing[s.model] || s.pricing.sonnet;
         var mw = s.ttl === '1h' ? 2.0 : 1.25;
         var mr = p.mr;
 
-        // Formula: [fresh + cached * (h * mr + (1-h) * mw)] * pin / 1e6 + out * pout / 1e6
+        // InCost = [fresh + cached * (h * mr + (1 - h) * mw)] * pin / 1e6
         var inCost = (s.fresh + s.cached * (s.hitRate * mr + (1 - s.hitRate) * mw)) * (p.pin / 1000000);
-        // thinking tokens are billed as output tokens!
+        // thinking tokens are billed as output tokens
         var outCost = (s.thinking + s.output) * (p.pout / 1000000);
         var costPerReq = inCost + outCost;
         var monthly = costPerReq * 44000;
@@ -806,98 +2040,626 @@
         var elCost = document.getElementById('receiptCostPerReq');
         if (elCost) elCost.innerText = '$' + res.costPerReq.toFixed(4);
 
-        var elMonth = document.getElementById('receiptMonthlyCost');
-        if (elMonth) elMonth.innerText = '≈ $' + res.monthly.toFixed(2) + ' USD / tháng (44K reqs)';
+        var elMonthly = document.getElementById('receiptMonthlyCost');
+        if (elMonthly) elMonthly.innerText = '≈ $' + res.monthly.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' USD / tháng (44K reqs)';
 
-        var elPill = document.getElementById('mobilePillCost');
-        if (elPill) elPill.innerText = '$' + res.costPerReq.toFixed(4);
-      },
-
-      simulateInteraction: function(type) {
-        if (type === 'hero_test') {
-          this.update({
-            fresh: 2500,
-            thinking: 3400,
-            output: 850
-          });
-          alert('Receipt Rail Updated!\nFresh: 2,500 | Thinking: 3,400 | Output: 850\nTotal cost recalculated live!');
-        }
+        var elMobile = document.getElementById('mobilePillCost');
+        if (elMobile) elMobile.innerText = '$' + res.costPerReq.toFixed(4);
       }
     };
 
     /* =================================================================
-       2. TOP BAR FONT ZOOM CONTROLLER
+       HERO REQUEST SIMULATION LOGIC (MỤC 5.0)
        ================================================================= */
-    function setFontScale(basePx) {
-      document.documentElement.style.setProperty('--base-font-size', basePx + 'px');
-      try {
-        localStorage.setItem('claude_base_font_px', basePx);
-      } catch(e) {}
-      document.querySelectorAll('.zoom-btn').forEach(function(btn) {
-        btn.classList.toggle('active', btn.getAttribute('onclick').indexOf(basePx) !== -1);
-      });
+    var heroSimTimer = null;
+    var heroTokens = [
+      { text: "Theo", role: "out" }, { text: " Điều", role: "out" }, { text: " 26", role: "out" }, { text: " và", role: "out" },
+      { text: " Điều", role: "out" }, { text: " 65", role: "out" }, { text: " Bộ", role: "out" }, { text: " luật", role: "out" },
+      { text: " Lao", role: "out" }, { text: " động", role: "out" }, { text: " 2019,", role: "out" }, { text: " thời", role: "out" },
+      { text: " gian", role: "out" }, { text: " thử", role: "out" }, { text: " việc", role: "out" }, { text: " được", role: "out" },
+      { text: " tính", role: "out" }, { text: " là", role: "out" }, { text: " thời", role: "out" }, { text: " gian", role: "out" },
+      { text: " làm", role: "out" }, { text: " việc", role: "out" }, { text: " để", role: "out" }, { text: " hưởng", role: "out" },
+      { text: " phép", role: "out" }, { text: " năm", role: "out" }, { text: " nếu", role: "out" }, { text: " người", role: "out" },
+      { text: " lao", role: "out" }, { text: " động", role: "out" }, { text: " tiếp", role: "out" }, { text: " tục", role: "out" },
+      { text: " làm", role: "out" }, { text: " việc", role: "out" }, { text: " sau", role: "out" }, { text: " khi", role: "out" },
+      { text: " hết", role: "out" }, { text: " thời", role: "out" }, { text: " gian", role: "out" }, { text: " thử", role: "out" },
+      { text: " việc", role: "out" }, { text: " [1]", role: "cite1" }, { text: ".", role: "out" }, { text: " Do", role: "out" },
+      { text: " đó,", role: "out" }, { text: " nhân", role: "out" }, { text: " viên", role: "out" }, { text: " thử", role: "out" },
+      { text: " việc", role: "out" }, { text: " chưa", role: "out" }, { text: " được", role: "out" }, { text: " nghỉ", role: "out" },
+      { text: " phép", role: "out" }, { text: " năm", role: "out" }, { text: " trong", role: "out" }, { text: " thời", role: "out" },
+      { text: " gian", role: "out" }, { text: " thử", role: "out" }, { text: " việc,", role: "out" }, { text: " nhưng", role: "out" },
+      { text: " sau", role: "out" }, { text: " khi", role: "out" }, { text: " ký", role: "out" }, { text: " hợp", role: "out" },
+      { text: " đồng", role: "out" }, { text: " chính", role: "out" }, { text: " thức,", role: "out" }, { text: " thời", role: "out" },
+      { text: " gian", role: "out" }, { text: " thử", role: "out" }, { text: " việc", role: "out" }, { text: " 2", role: "out" },
+      { text: " tháng", role: "out" }, { text: " sẽ", role: "out" }, { text: " được", role: "out" }, { text: " cộng", role: "out" },
+      { text: " dồn", role: "out" }, { text: " để", role: "out" }, { text: " tính", role: "out" }, { text: " 2", role: "out" },
+      { text: " ngày", role: "out" }, { text: " phép", role: "out" }, { text: " năm", role: "out" }, { text: " theo", role: "out" },
+      { text: " quy", role: "out" }, { text: " chế", role: "out" }, { text: " công", role: "out" }, { text: " ty", role: "out" },
+      { text: " [2]", role: "cite2" }, { text: ".", role: "out" }
+    ];
+
+    var isTokenizerActive = false;
+
+    function runHeroSimulation() {
+      var btn = document.getElementById('btnHeroSim');
+      var btnSkip = document.getElementById('btnHeroSkip');
+      var container = document.getElementById('heroResponseContainer');
+      var statusEl = document.getElementById('heroResponseStatus');
+      var odometer = document.getElementById('heroCostOdometer');
+
+      if (!container) return;
+
+      if (btn) btn.style.display = 'none';
+      if (btnSkip) btnSkip.style.display = 'inline-flex';
+      container.innerHTML = '<span style="color:var(--ink-2); font-style:italic;">Đang khởi tạo KV-cache và nạp prompt...</span>';
+      statusEl.innerText = 'Đang truyền stream...';
+
+      // Animate receipt odometer
+      var startCost = 0.0000;
+      var targetCost = 0.0114;
+      var currentStep = 0;
+      var totalSteps = heroTokens.length;
+
+      container.innerHTML = '';
+      var idx = 0;
+
+      if (heroSimTimer) clearInterval(heroSimTimer);
+
+      heroSimTimer = setInterval(function() {
+        if (idx >= totalSteps) {
+          clearInterval(heroSimTimer);
+          if (btn) btn.style.display = 'inline-flex';
+          if (btnSkip) btnSkip.style.display = 'none';
+          statusEl.innerText = 'Phản hồi hoàn tất (200 OK)';
+          odometer.innerText = '$0.0114';
+          ReceiptStore.setScenario('default');
+          return;
+        }
+
+        var t = heroTokens[idx];
+        if (t.role === 'cite1') {
+          container.insertAdjacentHTML('beforeend', ' <span class="cite-chip" onclick="toggleCitation(1)">[1]</span>');
+        } else if (t.role === 'cite2') {
+          container.insertAdjacentHTML('beforeend', ' <span class="cite-chip" onclick="toggleCitation(2)">[2]</span>');
+        } else {
+          container.insertAdjacentText('beforeend', t.text);
+        }
+
+        idx++;
+        var curCost = (targetCost * (idx / totalSteps)).toFixed(4);
+        odometer.innerText = '$' + curCost;
+      }, 70); // ~6 seconds total
+    }
+
+    function skipHeroSimulation() {
+      if (heroSimTimer) clearInterval(heroSimTimer);
+      var btn = document.getElementById('btnHeroSim');
+      var btnSkip = document.getElementById('btnHeroSkip');
+      var statusEl = document.getElementById('heroResponseStatus');
+      var odometer = document.getElementById('heroCostOdometer');
+      var container = document.getElementById('heroResponseContainer');
+
+      if (btn) btn.style.display = 'inline-flex';
+      if (btnSkip) btnSkip.style.display = 'none';
+      if (statusEl) statusEl.innerText = 'Phản hồi hoàn tất (200 OK)';
+      if (odometer) odometer.innerText = '$0.0114';
+
+      renderFullResponse();
+      ReceiptStore.setScenario('default');
+    }
+
+    function renderFullResponse() {
+      var container = document.getElementById('heroResponseContainer');
+      if (!container) return;
+
+      if (isTokenizerActive) {
+        var html = '';
+        for (var i = 0; i < heroTokens.length; i++) {
+          var tok = heroTokens[i];
+          if (tok.role === 'cite1') {
+            html += '<span class="tok-tag out" onclick="toggleCitation(1)">[1]</span>';
+          } else if (tok.role === 'cite2') {
+            html += '<span class="tok-tag out" onclick="toggleCitation(2)">[2]</span>';
+          } else {
+            html += '<span class="tok-tag out">' + tok.text.trim() + '</span> ';
+          }
+        }
+        container.innerHTML = html;
+      } else {
+        container.innerHTML = 'Theo Điều 26 và Điều 65 Bộ luật Lao động 2019, thời gian thử việc được tính là thời gian làm việc để hưởng phép năm nếu người lao động tiếp tục làm việc sau khi hết thời gian thử việc <span class="cite-chip" onclick="toggleCitation(1)">[1]</span>. Do đó, nhân viên thử việc chưa được nghỉ phép năm trong thời gian thử việc, nhưng sau khi ký hợp đồng chính thức, thời gian thử việc 2 tháng sẽ được cộng dồn để tính 2 ngày phép năm theo quy chế công ty <span class="cite-chip" onclick="toggleCitation(2)">[2]</span>.';
+      }
+    }
+
+    function toggleTokenizerView() {
+      isTokenizerActive = !isTokenizerActive;
+      var note = document.getElementById('tokenizerNote');
+      var btn = document.getElementById('btnToggleTokenizer');
+
+      if (note) note.style.display = isTokenizerActive ? 'block' : 'none';
+      if (btn) {
+        if (isTokenizerActive) {
+          btn.classList.add('active');
+          btn.innerHTML = '<span>✓ Tokenizer Active</span>';
+        } else {
+          btn.classList.remove('active');
+          btn.innerHTML = '<span>▤ Tokenizer View</span>';
+        }
+      }
+      renderFullResponse();
+    }
+
+    function toggleCitation(id) {
+      var pop = document.getElementById('citePop' + id);
+      if (pop) {
+        pop.style.display = (pop.style.display === 'block') ? 'none' : 'block';
+      }
     }
 
     /* =================================================================
-       3. THEME TOGGLE (SÁNG / TỐI)
+       FIGURE 1: MODEL FAMILY TABLE FILTER
        ================================================================= */
-    function toggleTheme() {
-      var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-      var next = isDark ? 'light' : 'dark';
-      document.documentElement.setAttribute('data-theme', next);
-      try {
-        localStorage.setItem('claude_v3_theme', next);
-      } catch(e) {}
+    function filterModelTable(mode) {
+      var rows = document.querySelectorAll('#modelFamilyTable tbody tr');
+      var btnAll = document.getElementById('f1FilterAll');
+      var btnCache = document.getElementById('f1FilterCache');
+      var btnFast = document.getElementById('f1FilterFast');
+
+      [btnAll, btnCache, btnFast].forEach(function(b) { if(b) b.classList.remove('active'); });
+
+      if (mode === 'all') {
+        if (btnAll) btnAll.classList.add('active');
+        rows.forEach(function(r) { r.style.display = ''; });
+      } else if (mode === 'cache') {
+        if (btnCache) btnCache.classList.add('active');
+        rows.forEach(function(r) {
+          r.style.display = (r.getAttribute('data-cache') === 'cheaper') ? '' : 'none';
+        });
+      } else if (mode === 'fast') {
+        if (btnFast) btnFast.classList.add('active');
+        rows.forEach(function(r) {
+          r.style.display = (r.getAttribute('data-fast') === 'true') ? '' : 'none';
+        });
+      }
     }
 
     /* =================================================================
-       4. VIEW MODE TOGGLE (ĐỌC / LÀM / IN)
+       FIGURE 2: MODEL SELECTOR DECISION TREE & QUIZ
        ================================================================= */
-    function setViewMode(mode) {
-      document.querySelectorAll('.mode-btn').forEach(function(btn) {
-        btn.classList.toggle('active', btn.getAttribute('onclick').indexOf(mode) !== -1);
+    var quizState = {
+      infra: 'cloud',
+      task: 'rag',
+      latency: 'realtime'
+    };
+
+    function setQuizAnswer(qNum, value) {
+      if (qNum === 1) {
+        quizState.infra = value;
+        document.getElementById('q1-yes').classList.toggle('selected', value === 'cloud');
+        document.getElementById('q1-no').classList.toggle('selected', value === 'onprem');
+      } else if (qNum === 2) {
+        quizState.task = value;
+        document.getElementById('q2-rag').classList.toggle('selected', value === 'rag');
+        document.getElementById('q2-route').classList.toggle('selected', value === 'route');
+        document.getElementById('q2-deep').classList.toggle('selected', value === 'deep');
+      } else if (qNum === 3) {
+        quizState.latency = value;
+        document.getElementById('q3-realtime').classList.toggle('selected', value === 'realtime');
+        document.getElementById('q3-batch').classList.toggle('selected', value === 'batch');
+      }
+      evaluateDecisionTree();
+    }
+
+    function resetQuiz() {
+      setQuizAnswer(1, 'cloud');
+      setQuizAnswer(2, 'rag');
+      setQuizAnswer(3, 'realtime');
+    }
+
+    function evaluateDecisionTree() {
+      // Clear all active svg nodes and edges
+      var nodes = document.querySelectorAll('#decisionTreeSvg .tree-node');
+      var edges = document.querySelectorAll('#decisionTreeSvg .tree-edge');
+      nodes.forEach(function(n) { n.classList.remove('active'); });
+      edges.forEach(function(e) {
+        e.classList.remove('active');
+        e.setAttribute('marker-end', 'url(#arrow)');
       });
-      if (mode === 'print') {
-        window.print();
+
+      var activateNode = function(id) {
+        var el = document.getElementById(id);
+        if (el) el.classList.add('active');
+      };
+      var activateEdge = function(id) {
+        var el = document.getElementById(id);
+        if (el) {
+          el.classList.add('active');
+          el.setAttribute('marker-end', 'url(#arrow-active)');
+        }
+      };
+
+      // Root always active
+      activateNode('node-A');
+      activateEdge('edge-A-B');
+      activateNode('node-B');
+
+      var recModel = 'Sonnet 5.5 + Prompt Caching';
+      var recReason = 'Điểm ngọt tối ưu: 95% năng lực của Opus với chi phí chỉ bằng một nửa ($2/$10 so với $4/$20). Phù hợp nhất cho RAG nội bộ và pipeline trích dẫn chính xác tại Alliance.';
+
+      if (quizState.infra === 'onprem') {
+        activateEdge('edge-B-C');
+        activateNode('node-C');
+        recModel = 'Open-weight tự host (Qwen 3.6 27B / DeepSeek V4)';
+        recReason = 'Dữ liệu không được rời hạ tầng yêu cầu triển khai mô hình mã nguồn mở on-premise với vLLM/SGLang, kết hợp LoRA fine-tuning cho định dạng chuyên ngành nếu cần.';
+      } else {
+        activateEdge('edge-B-D');
+        activateNode('node-D');
+
+        if (quizState.task === 'route') {
+          activateEdge('edge-D-E');
+          activateNode('node-E');
+          recModel = 'Haiku 5.5 ($0.10 / $0.50 MTok)';
+          recReason = 'Tác vụ phân loại, intent routing và trích xuất thực thể ngắn ưu tiên tốc độ phản hồi cực nhanh và chi phí rẻ nhất (chỉ $0.10/M tokens đầu vào).';
+        } else if (quizState.task === 'deep') {
+          activateEdge('edge-D-G');
+          activateNode('node-G');
+          recModel = 'Opus 5.5 (Adaptive Effort High)';
+          recReason = 'Tác vụ tư duy toán lý đa tầng, refactoring kiến trúc lớn hoặc logic pháp lý mơ hồ đòi hỏi khả năng phán đoán chuyên sâu cao nhất từ Opus 5.5.';
+        } else {
+          activateEdge('edge-D-F');
+          activateNode('node-F');
+          activateEdge('edge-F-J');
+          activateNode('node-J');
+
+          if (quizState.latency === 'batch') {
+            activateEdge('edge-J-K');
+            activateNode('node-K');
+            recModel = 'Sonnet 5.5 (Batch API -50%)';
+            recReason = 'Không yêu cầu thời gian thực: Dùng Batch API cắt giảm 50% chi phí xử lý (chỉ còn $1.00 input / $5.00 output cho mỗi triệu token).';
+          } else {
+            activateEdge('edge-J-L');
+            activateNode('node-L');
+            recModel = 'Sonnet 5.5 + Prompt Caching (5m TTL)';
+            recReason = 'Lựa chọn tiêu chuẩn production cho Alliance Knowledge Assistant: Prefix sổ tay quy chế 20K token được cache lại, giảm 81% chi phí trên mỗi câu hỏi tiếp theo.';
+          }
+        }
+      }
+
+      var elTitle = document.getElementById('quizRecModel');
+      var elDesc = document.getElementById('quizRecReason');
+      if (elTitle) elTitle.innerText = recModel;
+      if (elDesc) elDesc.innerText = recReason;
+    }
+
+    /* =================================================================
+       FIGURE 3: KV-CACHE CALCULATION WIDGET (F3)
+       ================================================================= */
+    var kvConfig = {
+      L: 80,
+      n_kv: 8,
+      d_head: 128,
+      b: 2,
+      T: 200000
+    };
+
+    function updateKvCalculation() {
+      var sliderL = document.getElementById('sliderL');
+      var sliderDhead = document.getElementById('sliderDhead');
+      var sliderT = document.getElementById('sliderT');
+
+      if (sliderL) kvConfig.L = parseInt(sliderL.value, 10);
+      if (sliderDhead) kvConfig.d_head = parseInt(sliderDhead.value, 10);
+      if (sliderT) kvConfig.T = parseInt(sliderT.value, 10);
+
+      document.getElementById('valL').innerText = kvConfig.L;
+      document.getElementById('valDhead').innerText = kvConfig.d_head;
+      document.getElementById('valT').innerText = kvConfig.T.toLocaleString('vi-VN') + ' tokens';
+
+      // Formula: bytes_per_tok = 2 * b * L * n_kv * d_head
+      var bytesPerTok = 2 * kvConfig.b * kvConfig.L * kvConfig.n_kv * kvConfig.d_head;
+      var kibPerTok = bytesPerTok / 1024;
+      var totalBytes = bytesPerTok * kvConfig.T;
+      var totalGiB = totalBytes / (1024 * 1024 * 1024);
+
+      document.getElementById('kvBytesPerTok').innerText = kibPerTok.toFixed(1) + ' KiB / token (' + bytesPerTok.toLocaleString('vi-VN') + ' B)';
+
+      var valGiBText = (totalGiB >= 1024) ? (totalGiB / 1024).toFixed(2) + ' TiB' : totalGiB.toFixed(2) + ' GiB';
+      document.getElementById('kvTotalGiB').innerText = valGiBText;
+
+      // GPU H100 80GB estimate
+      var gpusNeeded = Math.ceil(totalGiB / 70); // 70GB usable per 80GB GPU
+      if (gpusNeeded < 1) gpusNeeded = 1;
+      document.getElementById('kvGpuCount').innerText = 'Cần ' + gpusNeeded + ' × GPU H100 80GB';
+
+      // Visual tower scale (max 1000 GiB)
+      var pct = Math.min(100, Math.max(4, (totalGiB / 1000) * 100));
+      var bar = document.getElementById('kvBarVis');
+      if (bar) bar.style.height = pct + '%';
+    }
+
+    function setKvMode(mode) {
+      var btnG = document.getElementById('btnGQA');
+      var btnM = document.getElementById('btnMHA');
+      if (mode === 'gqa') {
+        kvConfig.n_kv = 8;
+        if (btnG) btnG.classList.add('active');
+        if (btnM) btnM.classList.remove('active');
+        document.getElementById('valNkv').innerText = '8 heads (GQA)';
+      } else {
+        kvConfig.n_kv = 64;
+        if (btnG) btnG.classList.remove('active');
+        if (btnM) btnM.classList.add('active');
+        document.getElementById('valNkv').innerText = '64 heads (MHA 8×)';
+      }
+      updateKvCalculation();
+    }
+
+    function setPrecision(bytes) {
+      kvConfig.b = bytes;
+      var btn16 = document.getElementById('btnFP16');
+      var btn8 = document.getElementById('btnFP8');
+      if (bytes === 2) {
+        if (btn16) btn16.classList.add('active');
+        if (btn8) btn8.classList.remove('active');
+        document.getElementById('valB').innerText = '2 (FP16/BF16)';
+      } else {
+        if (btn16) btn16.classList.remove('active');
+        if (btn8) btn8.classList.add('active');
+        document.getElementById('valB').innerText = '1 (FP8)';
+      }
+      updateKvCalculation();
+    }
+
+    function setContextT(val) {
+      var slider = document.getElementById('sliderT');
+      if (slider) slider.value = val;
+      ['btnT200', 'btnT1M'].forEach(function(id) {
+        var b = document.getElementById(id);
+        if (b) b.classList.remove('active');
+      });
+      if (val === 200000) {
+        var b2 = document.getElementById('btnT200');
+        if (b2) b2.classList.add('active');
+      } else if (val === 1000000) {
+        var bm = document.getElementById('btnT1M');
+        if (bm) bm.classList.add('active');
+      }
+      updateKvCalculation();
+    }
+
+    /* =================================================================
+       FIGURE CACHE: TTL TIME MACHINE SIMULATOR (F-CACHE)
+       ================================================================= */
+    var ttlSim = {
+      mode: '5m',
+      ttlDuration: 5, // minutes
+      requests: [], // list of minute timestamps
+      maxRequests: 10
+    };
+
+    function setTtlMode(mode) {
+      ttlSim.mode = mode;
+      ttlSim.ttlDuration = (mode === '5m') ? 5 : 60;
+      document.getElementById('btnTtl5m').classList.toggle('active', mode === '5m');
+      document.getElementById('btnTtl1h').classList.toggle('active', mode === '1h');
+      ReceiptStore.update({ ttl: mode });
+      recalculateTtlSim();
+    }
+
+    function handleTimelineClick(event) {
+      var bar = document.getElementById('timelineBar');
+      if (!bar) return;
+      var rect = bar.getBoundingClientRect();
+      var clickX = event.clientX - rect.left;
+      var pct = Math.max(0, Math.min(1, clickX / rect.width));
+      var minute = Math.round(pct * 15 * 10) / 10; // 1 decimal place
+
+      dispatchManualRequest(minute);
+    }
+
+    function dispatchManualRequest(minute) {
+      if (ttlSim.requests.length >= ttlSim.maxRequests) {
+        alert('Đã đạt giới hạn 10 request cho mô phỏng. Bấm "Xóa lịch" để thử lại.');
         return;
       }
-      if (mode === 'read') {
-        document.body.classList.add('mode-reading');
-      } else {
-        document.body.classList.remove('mode-reading');
+      ttlSim.requests.push(minute);
+      ttlSim.requests.sort(function(a, b) { return a - b; });
+      recalculateTtlSim();
+    }
+
+    function runOptimal10Challenge() {
+      // 10 optimal requests within 5m TTL: 0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5
+      ttlSim.requests = [0, 0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5, 4.0, 4.5];
+      recalculateTtlSim();
+    }
+
+    function resetTimelineSim() {
+      ttlSim.requests = [];
+      recalculateTtlSim();
+    }
+
+    function recalculateTtlSim() {
+      var container = document.getElementById('timelineMarkersContainer');
+      if (!container) return;
+      container.innerHTML = '';
+
+      var totalCost = 0.0;
+      var noCacheTotal = 0.0;
+      var writeCost = (ttlSim.mode === '1h') ? 0.0720 : 0.0570; // 20K * 1.25 * $2/M + 0.0070
+      var hitCost = 0.0090; // 20K * 0.05 * $2/M + 0.0070
+      var standardNoCacheCost = 0.0470;
+
+      var lastReqTime = -999;
+      var activeTtl = ttlSim.ttlDuration;
+
+      for (var i = 0; i < ttlSim.requests.length; i++) {
+        var reqTime = ttlSim.requests[i];
+        var isHit = false;
+
+        if (i === 0) {
+          isHit = false; // first is always write
+        } else {
+          var delta = reqTime - lastReqTime;
+          isHit = (delta <= activeTtl);
+        }
+
+        var cost = isHit ? hitCost : writeCost;
+        totalCost += cost;
+        noCacheTotal += standardNoCacheCost;
+        lastReqTime = reqTime;
+
+        // Render marker
+        var leftPct = (reqTime / 15) * 100;
+        var marker = document.createElement('div');
+        marker.className = 'timeline-marker ' + (isHit ? 'hit' : 'write');
+        marker.style.left = leftPct + '%';
+        marker.innerText = isHit ? 'R' : 'W';
+        marker.title = 'Phút ' + reqTime + ': ' + (isHit ? 'Cache READ ($0.0090)' : 'Cache WRITE ($' + writeCost.toFixed(4) + ')');
+        container.appendChild(marker);
       }
+
+      // Update Tally
+      document.getElementById('tallyReqCount').innerText = ttlSim.requests.length + ' / 10';
+      document.getElementById('tallyTotalCost').innerText = '$' + totalCost.toFixed(4);
+      document.getElementById('tallyNoCacheCost').innerText = '$' + noCacheTotal.toFixed(4);
+
+      var savings = (noCacheTotal > 0) ? ((1 - (totalCost / noCacheTotal)) * 100).toFixed(1) + '%' : '0.0%';
+      document.getElementById('tallySavings').innerText = savings;
+
+      // Check challenge
+      var badge = document.getElementById('challengeBadge');
+      if (badge) {
+        if (ttlSim.requests.length === 10 && totalCost <= 0.20) {
+          badge.style.display = 'block';
+        } else {
+          badge.style.display = 'none';
+        }
+      }
+
+      // Update Arc Dial status
+      var statusTag = document.getElementById('ttlStatusTag');
+      var dialArc = document.getElementById('ttlCircleArc');
+      var dialText = document.getElementById('ttlDialTime');
+
+      if (ttlSim.requests.length > 0) {
+        var last = ttlSim.requests[ttlSim.requests.length - 1];
+        if (statusTag) {
+          statusTag.innerText = 'Cache Nóng (Reset tại ' + last + 'm)';
+          statusTag.style.color = 'var(--tok-cached)';
+        }
+        if (dialText) dialText.innerText = (ttlSim.mode === '1h') ? '60:00' : '5:00';
+        if (dialArc) dialArc.setAttribute('stroke-dashoffset', '0');
+      } else {
+        if (statusTag) {
+          statusTag.innerText = 'Chưa có request';
+          statusTag.style.color = 'var(--ink-2)';
+        }
+        if (dialText) dialText.innerText = (ttlSim.mode === '1h') ? '60:00' : '5:00';
+      }
+    }
+
+    /* =================================================================
+       GLOBAL UI CONTROLLERS (ZOOM, MODES, THEME, SCROLL SPY)
+       ================================================================= */
+    function setFontSize(size, btn) {
+      document.documentElement.style.setProperty('--base-font-size', size);
+      document.querySelectorAll('.zoom-btn').forEach(function(b) { b.classList.remove('active'); });
+      if (btn) btn.classList.add('active');
+    }
+
+    function setViewMode(mode) {
+      document.querySelectorAll('.btn-tool').forEach(function(b) {
+        if (b.id === 'btnModeRead' || b.id === 'btnModeLab') b.classList.remove('active');
+      });
+      if (mode === 'read') {
+        document.getElementById('btnModeRead').classList.add('active');
+        document.querySelectorAll('.stage-canvas').forEach(function(s) { s.style.display = 'none'; });
+      } else {
+        document.getElementById('btnModeLab').classList.add('active');
+        document.querySelectorAll('.stage-canvas').forEach(function(s) { s.style.display = 'block'; });
+      }
+    }
+
+    function toggleTheme() {
+      var current = document.documentElement.getAttribute('data-theme');
+      var target = (current === 'dark') ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', target);
+      try { localStorage.setItem('theme', target); } catch(e) {}
     }
 
     function togglePresenterMode() {
-      alert('Presenter Mode [P]: Sẽ được kích hoạt toàn diện trong Phase 6 (phóng to các Sân khấu, chuyển slide theo 7 trạm).');
+      var isPres = document.body.classList.toggle('presenter-mode');
+      var btn = document.getElementById('btnPresenter');
+      if (btn) btn.classList.toggle('active', isPres);
+      if (isPres) {
+        setFontSize('22px', null);
+      } else {
+        setFontSize('18px', null);
+      }
     }
 
     function toggleMobileDrawer() {
-      alert('Mobile Bottom Sheet: Chi tiết Hoá Đơn Token: $0.0114 / request\n- Cached: 20K (95% off)\n- Fresh: 1.5K\n- Thinking: 1.2K\n- Output: 400');
+      alert('Hoá đơn chi tiết: 20K cached prefix, 1.5K fresh, 400 out. Đơn giá: $0.0114 / request tại 95% hit rate.');
     }
 
-    /* =================================================================
-       5. READING PROGRESS INDICATOR & JOURNEY OBSERVER
-       ================================================================= */
+    // Scroll Spy & Reading Progress Indicator
     window.addEventListener('scroll', function() {
-      var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-      var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-      var scrolled = (winScroll / height) * 100;
+      var h = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      var scrolled = (h > 0) ? (window.scrollY / h) * 100 : 0;
       var bar = document.getElementById('progressIndicator');
       if (bar) bar.style.width = scrolled + '%';
+
+      var stations = ['tr-0', 'tr-1', 'tr-2', 'tr-3', 'tr-4', 'tr-5', 'tr-6', 'tr-7'];
+      var cur = stations[0];
+      for (var i = 0; i < stations.length; i++) {
+        var el = document.getElementById(stations[i]);
+        if (el && el.getBoundingClientRect().top <= 120) {
+          cur = stations[i];
+        }
+      }
+
+      var links = document.querySelectorAll('.rail-list a');
+      links.forEach(function(a) {
+        a.classList.remove('active');
+        if (a.getAttribute('href') === '#' + cur) {
+          a.classList.add('active');
+        }
+      });
     });
 
-    // Page ready initialization
-    document.addEventListener('DOMContentLoaded', function() {
-      try {
-        var savedTheme = localStorage.getItem('claude_v3_theme');
-        if (savedTheme) document.documentElement.setAttribute('data-theme', savedTheme);
+    // Keyboard Shortcuts
+    window.addEventListener('keydown', function(e) {
+      if (e.key === 'p' || e.key === 'P') {
+        if (!e.metaKey && !e.ctrlKey && document.activeElement.tagName !== 'INPUT') {
+          togglePresenterMode();
+        }
+      }
+    });
 
-        var savedFont = localStorage.getItem('claude_base_font_px');
-        if (savedFont) setFontScale(parseInt(savedFont, 10));
+    // Initialize KaTeX & Initial Render
+    document.addEventListener("DOMContentLoaded", function() {
+      try {
+        var savedTheme = localStorage.getItem('theme');
+        if (savedTheme) document.documentElement.setAttribute('data-theme', savedTheme);
       } catch(e) {}
 
+      try {
+        if (window.renderMathInElement) {
+          renderMathInElement(document.body, {
+            delimiters: [
+              { left: "$$", right: "$$", display: true },
+              { left: "\\(", right: "\\)", display: false }
+            ],
+            throwOnError: false
+          });
+        }
+      } catch(e) {
+        console.warn("KaTeX loading error:", e);
+      }
+
       ReceiptStore.render();
+      updateKvCalculation();
+      recalculateTtlSim();
+      evaluateDecisionTree();
     });
   </script>
 </body>
