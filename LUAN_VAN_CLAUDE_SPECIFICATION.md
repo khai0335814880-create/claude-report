@@ -734,7 +734,7 @@ Một kỹ sư hệ thống chuyên nghiệp cần biết rõ ranh giới giữa
 ## 6.2. Hạn chế của báo cáo và tính chất giả định của mô hình tương lai
 
 Báo cáo thừa nhận thẳng thắn các hạn chế kỹ thuật hiện tại:
-1. **Tính chất giả định của mô hình:** Các thông số của thế hệ Claude 5.x được xây dựng dựa trên kịch bản phân tích chiếu lệ. Khi triển khai thực tế trên các phiên bản mô hình thương mại cụ thể, các tham số đơn giá và độ dài context cần được cập nhật theo bảng giá niêm yết tại thời điểm ký kết hợp đồng.
+1. **Phân loại nguồn dữ liệu và tính ngoại suy:** Trong khi các thông số giá và cơ chế suy luận của Claude Sonnet 5.5, Opus 5.5 và Haiku 5.5 được xác thực trực tiếp từ tài liệu kỹ thuật [Docs], các chỉ số của các dòng mô hình viễn kiến (Fable 5.2, GPT-6, Gemini 4 Argon) là kịch bản ngoại suy có kiểm soát. Khi triển khai thương mại thực tế, các tham số đơn giá và cấu hình phần cứng cần được đối soát lại theo bảng giá cập nhật nhất của từng nhà cung cấp hạ tầng.
 2. **Kích thước tập kiểm thử:** Mặc dù $n = 200$ đủ độ tin cậy thống kê cho các đánh giá sơ bộ, việc triển khai trên diện rộng đòi hỏi mở rộng tập kiểm thử lên hàng nghìn câu hỏi bao phủ toàn bộ các tình huống tranh chấp lao động cá biệt.
 3. **Môi trường đo kiểm:** Các phép đo độ trễ và thông lượng trong báo cáo được thực hiện trong điều kiện phòng lab mô phỏng; độ trễ mạng thực tế có thể biến động phụ thuộc vào vị trí địa lý của trung tâm dữ liệu nhà cung cấp đám mây.
 
@@ -783,6 +783,7 @@ Báo cáo đã hoàn thành toàn diện các mục tiêu nghiên cứu đề ra
 - **[R25]** Ainslie, J., Lee-Thorp, J., de Jong, M., Zemlyanskiy, Y., Lebrón, F., & Sanghai, S. (2023). *GQA: Training Generalized Multi-Query Transformer Models from Multi-Head Checkpoints*. Proceedings of EMNLP 2023, 4895–4901.
 - **[R26]** Vaswani, A., Shazeer, N., Parmar, N., Uszkoreit, J., Jones, L., Gomez, A. N., Kaiser, Ł., & Polosukhin, I. (2017). *Attention Is All You Need*. Advances in Neural Information Processing Systems (NeurIPS 2017), 30, 5998–6008.
 - **[R27]** Anthropic. (2026). *Batch API Guide: Asynchronous High-Throughput Processing with 50% Cost Discount*. Anthropic Developer Documentation.
+- **[R28]** Anthropic. (2026). *Claude API Reference: Ephemeral Caching, Adaptive Thinking, and Native Citations Protocol*. Anthropic Developer Documentation.
 
 ---
 
