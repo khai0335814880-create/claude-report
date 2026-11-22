@@ -469,7 +469,7 @@
       max-width: var(--max-width);
       margin: 0 auto;
       display: grid;
-      grid-template-columns: 145px 1fr 195px;
+      grid-template-columns: 180px 1fr 195px;
       gap: 20px;
       padding: 24px 18px 80px;
       align-items: start;
@@ -507,7 +507,7 @@
 
     .rail-item a {
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       gap: 8px;
       padding: 6px 10px;
       color: var(--ink-2);
@@ -532,6 +532,7 @@
     }
 
     .rail-item .station-num {
+      margin-top: 1px;
       font-family: var(--font-mono);
       font-size: var(--fs-2xs);
       width: 18px;
@@ -2277,22 +2278,22 @@
 
     <!-- LEFT COLUMN: JOURNEY RAIL (7 TRẠM) -->
     <nav class="journey-rail">
-      <div class="rail-title">Hành Trình Request</div>
+      <div class="rail-title">Mục lục Báo cáo</div>
       <ul class="rail-list" id="railList">
-        <li class="rail-item"><a href="#tr-0" class="active"><span class="station-num">0</span> Hero Request</a></li>
-        <li class="rail-item"><a href="#tr-1"><span class="station-num">1</span> Gửi (B.1)</a></li>
-        <li class="rail-item"><a href="#tr-2"><span class="station-num">2</span> Prefill & KV (B.2.1)</a></li>
-        <li class="rail-item"><a href="#tr-3"><span class="station-num">3</span> Nghĩ (B.2.2)</a></li>
-        <li class="rail-item"><a href="#tr-4"><span class="station-num">4</span> Công cụ (B.2.3)</a></li>
-        <li class="rail-item"><a href="#tr-5"><span class="station-num">5</span> Trích dẫn (B.2.4)</a></li>
-        <li class="rail-item"><a href="#tr-6"><span class="station-num">6</span> An toàn (B.2.5/B.4)</a></li>
-        <li class="rail-item"><a href="#tr-7"><span class="station-num">7</span> Tính tiền (B.3)</a></li>
+        <li class="rail-item"><a href="#tr-0" class="active"><span class="station-num">0</span> Tổng quan & Luận điểm</a></li>
+        <li class="rail-item"><a href="#tr-1"><span class="station-num">1</span> Thông số & Chọn Model</a></li>
+        <li class="rail-item"><a href="#tr-2"><span class="station-num">2</span> Bộ nhớ KV & Caching</a></li>
+        <li class="rail-item"><a href="#tr-3"><span class="station-num">3</span> Suy nghĩ Thích ứng</a></li>
+        <li class="rail-item"><a href="#tr-4"><span class="station-num">4</span> Quản trị Ngữ cảnh & Tool</a></li>
+        <li class="rail-item"><a href="#tr-5"><span class="station-num">5</span> Trích dẫn Nguồn Bản địa</a></li>
+        <li class="rail-item"><a href="#tr-6"><span class="station-num">6</span> Pipeline 12 Bước & An toàn</a></li>
+        <li class="rail-item"><a href="#tr-7"><span class="station-num">7</span> Benchmark & Chi phí TCO</a></li>
       </ul>
 
       <div style="margin-top: 28px; padding-top: 14px; border-top: 1px solid var(--rule); font-size: 0.72rem; color: var(--ink-2);">
         <div><strong>Hồ sơ thẩm định:</strong></div>
         <div style="margin-top: 4px;">Alliance ITSC / Case 2026</div>
-        <div style="margin-top: 2px;">Trạng thái: <span style="color:var(--tok-fresh); font-weight:600;">Phase 4 Active</span></div>
+        <div style="margin-top: 2px;">Trạng thái: <span style="color:var(--tok-fresh); font-weight:600;">Hoàn tất thẩm định</span></div>
       </div>
     </nav>
 
@@ -2303,7 +2304,7 @@
       <section id="tr-0" class="reading-band">
         <div class="reading-col">
           <div class="station-eyebrow" style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--tok-fresh); font-weight: 600; text-transform: uppercase; margin-bottom: 8px;">
-            B.0 · Tiêu đề, Tóm tắt và Luận điểm
+            Phần 0 · Tổng quan Báo cáo & Luận điểm Cốt lõi
           </div>
           <h1 style="font-family: var(--font-display); font-size: clamp(2rem, 3.5vw, 2.8rem); line-height: 1.15; margin: 0 0 16px;">
             Claude: Đặc Tả Kỹ Thuật Mô Hình và Ca Triển Khai Trợ Lý Tri Thức Nội Bộ Có Trích Dẫn
@@ -2458,7 +2459,7 @@
       <section id="tr-1" class="reading-band">
         <div class="reading-col">
           <div class="station-eyebrow" style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--tok-fresh); font-weight: 600; text-transform: uppercase; margin-bottom: 8px;">
-            Trạm 1 · Gửi (B.1)
+            Phần 1 · Thông số Kỹ thuật & Cây Quyết định Chọn Model
           </div>
           <h2>B.1 Tổng quan và Thông số Kỹ thuật Họ Model</h2>
           <p>
@@ -2805,7 +2806,7 @@
             <li>Tỉ lệ phân bổ và thành phần chi tiết của dữ liệu huấn luyện.</li>
           </ul>
           <p>
-            Mọi công thức ở Trạm 2 dưới đây là <strong>công thức Transformer tổng quát chuẩn</strong> và các bộ tham số đều mang nhãn <span class="tag-verif hypo">[Giả định]</span> phục vụ mô hình hóa kinh tế học, không khẳng định là phần cứng nội bộ của Anthropic.
+            Mọi công thức ở Phần 2 dưới đây là <strong>công thức Transformer tổng quát chuẩn</strong> và các bộ tham số đều mang nhãn <span class="tag-verif hypo">[Giả định]</span> phục vụ mô hình hóa kinh tế học, không khẳng định là phần cứng nội bộ của Anthropic.
           </p>
         </div>
       </section>
@@ -2814,7 +2815,7 @@
       <section id="tr-2" class="reading-band">
         <div class="reading-col">
           <div class="station-eyebrow" style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--tok-fresh); font-weight: 600; text-transform: uppercase; margin-bottom: 8px;">
-            Trạm 2 · Prefill và Phục Hồi KV-Cache (B.2.1)
+            Phần 2 · Cơ học Suy luận Attention, Bộ nhớ KV & Prompt Caching
           </div>
           <h2>B.2 Cơ Chế Kỹ Thuật Cốt Lõi: Cơ Học Suy Luận Quyết Định Giá và Độ Trễ</h2>
           <p>
@@ -3089,7 +3090,7 @@
       <section id="tr-3" class="reading-band">
         <div class="reading-col">
           <div class="station-eyebrow" style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--tok-think); font-weight: 600; text-transform: uppercase; margin-bottom: 8px;">
-            Trạm 3 · Nghĩ (B.2.2)
+            Phần 3 · Cơ chế Suy nghĩ Thích ứng (Adaptive Thinking) & Quét Effort
           </div>
           <h2>B.2.2 Adaptive Thinking và `effort`: Một Núm Điều Khiển Thay Cho Ngân Sách</h2>
           <p>
@@ -3260,7 +3261,7 @@
       <section id="tr-4" class="reading-band">
         <div class="reading-col">
           <div class="station-eyebrow" style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--tok-fresh); font-weight: 600; text-transform: uppercase; margin-bottom: 8px;">
-            Trạm 4 · Công Cụ và Ngữ Cảnh (B.2.3)
+            Phần 4 · Quản trị Ngữ cảnh & Kỹ thuật Cắt tỉa (Context Diet)
           </div>
           <h2>B.2.3 Chồng Quản Trị Ngữ Cảnh và Công Cụ: Ăn Kiêng Ngữ Cảnh (Context Diet)</h2>
           <p>
@@ -3462,7 +3463,7 @@
       <section id="tr-5" class="reading-band">
         <div class="reading-col">
           <div class="station-eyebrow" style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--tok-fresh); font-weight: 600; text-transform: uppercase; margin-bottom: 8px;">
-            Trạm 5 · Trích Dẫn (B.2.4)
+            Phần 5 · Grounding & Trích dẫn Nguồn Bản địa (Native Citations)
           </div>
           <h2>B.2.4 Grounding Bản Địa: Citations và Search Results</h2>
           <p>
@@ -3678,7 +3679,7 @@
       <section id="tr-6" class="reading-band">
         <div class="reading-col">
           <div class="station-eyebrow" style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--danger); font-weight: 600; text-transform: uppercase; margin-bottom: 8px;">
-            Trạm 6 · Kiểm Chứng & An Toàn (B.4 & B.2.5)
+            Phần 6 · Ca Triển khai Trợ lý Tri thức & Phòng thủ Nhiều lớp
           </div>
           <h2>B.4 Ca Triển Khai: Trợ Lý Tri Thức Nội Bộ Alliance Knowledge Assistant</h2>
           <div style="margin-bottom:14px;">
@@ -4306,7 +4307,7 @@ lora = LoraConfig(r=16, lora_alpha=32, lora_dropout=0.05, target_modules="all-li
       <section id="tr-7" class="reading-band">
         <div class="reading-col">
           <div class="station-eyebrow" style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--tok-cached); font-weight: 600; text-transform: uppercase; margin-bottom: 8px;">
-            Trạm 7 · Tính Tiền & Sổ Cái Đánh Giá (B.3 & B.5–B.9)
+            Phần 7 · Đánh giá Benchmark, Mô hình Chi phí & Sổ cái Kiểm chứng
           </div>
           <h2>B.3 Đánh Giá, Benchmark và Mô Hình Chi Phí Toàn Diện</h2>
           <p>
