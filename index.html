@@ -726,63 +726,425 @@
     }
 
     /* =================================================================
-       4. TYPOGRAPHY & ARTICLE ELEMENTS
+       4. TYPOGRAPHY & ARTICLE ELEMENTS · CLAUDE WARM EDITORIAL
        ================================================================= */
+    /* ── Editorial Headings (Section 3.3) ─────────────────────── */
     h1, h2, h3, h4 {
-      font-family: var(--font-display);
-      color: var(--ink);
-      line-height: 1.2;
-      font-weight: 700;
-      letter-spacing: -0.02em;
+      color: var(--ink-strong);
+      line-height: var(--lh-tight);
+      margin: 0;
     }
-    h1 { font-size: 2.2rem; margin: 0 0 16px; }
-    h2 { font-size: 1.5rem; margin: 36px 0 16px; border-bottom: 1px solid var(--rule); padding-bottom: 8px; }
-    h3 { font-size: 1.2rem; margin: 24px 0 12px; }
-    h4 { font-size: 1.05rem; margin: 18px 0 8px; }
+    h1 {
+      font-family: var(--font-serif);
+      font-size: var(--fs-h1);
+      font-weight: 500;
+      letter-spacing: -0.018em;
+      margin: 0 0 16px;
+    }
+    h2 {
+      font-family: var(--font-serif);
+      font-size: var(--fs-h2);
+      font-weight: 500;
+      letter-spacing: -0.012em;
+      margin: 40px 0 16px;
+      border-bottom: 1px solid var(--border-subtle);
+      padding-bottom: 10px;
+    }
+    h3 {
+      font-family: var(--font-serif);
+      font-size: var(--fs-h3);
+      font-weight: 500;
+      letter-spacing: -0.006em;
+      margin: 28px 0 12px;
+    }
+    h4 {
+      font-family: var(--font-sans);
+      font-size: var(--fs-h4);
+      font-weight: 600;
+      letter-spacing: 0;
+      margin: 20px 0 8px;
+    }
 
-    p { margin: 0 0 16px; font-size: 1rem; }
-    ul, ol { margin: 0 0 18px; padding-left: 24px; }
-    li { margin-bottom: 6px; }
-    strong { font-weight: 600; color: var(--ink); }
+    /* ── Eyebrows (Section 3.3) ───────────────────────────────── */
+    .section-eyebrow,
+    .station-eyebrow,
+    .eyebrow {
+      font-family: var(--font-sans) !important;
+      font-size: var(--fs-xs) !important;
+      font-weight: 600 !important;
+      letter-spacing: var(--tracking-eyebrow) !important;
+      text-transform: uppercase !important;
+      color: var(--accent-ink) !important;
+      margin-bottom: 8px !important;
+      display: inline-block;
+    }
 
+    /* ── Prose Typography & Formatting ────────────────────────── */
+    p {
+      margin: 0 0 16px;
+      font-size: var(--fs-md);
+      line-height: var(--lh-prose);
+      color: var(--ink);
+    }
+    ul, ol {
+      margin: 0 0 18px;
+      padding-left: 24px;
+    }
+    li {
+      margin-bottom: 8px;
+      line-height: var(--lh-prose);
+    }
+    strong, b {
+      font-weight: 600;
+      color: var(--ink-strong);
+    }
+
+    /* ── Vietnamese Literary Test Block (Section 3.2 & 3.3) ───── */
+    .test-vietnamese-literary {
+      background: var(--bg-surface-2) !important;
+      border: 1px solid var(--border-strong) !important;
+      border-radius: var(--r-lg) !important;
+      padding: 12px 18px !important;
+      margin-bottom: 20px !important;
+    }
+    .test-vietnamese-literary strong {
+      font-family: var(--font-serif) !important;
+      font-size: var(--fs-lg) !important;
+      font-weight: 500 !important;
+      line-height: 1.35 !important;
+      letter-spacing: 0 !important;
+      font-variant-ligatures: none !important;
+      color: var(--ink-strong) !important;
+    }
+
+    /* ── Three Core Theses List (R-CARD Thesis · Section 3.3) ─── */
+    ol.thesis-list {
+      list-style: none;
+      counter-reset: thesis-counter;
+      padding: 0 !important;
+      margin: 16px 0 24px !important;
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r-lg);
+      box-shadow: var(--shadow-1);
+      overflow: hidden;
+    }
+    ol.thesis-list li {
+      position: relative;
+      padding: 16px 20px 16px 52px;
+      margin: 0;
+      border-top: 1px solid var(--border-subtle);
+      font-size: var(--fs-md);
+      line-height: var(--lh-prose);
+      color: var(--ink);
+    }
+    ol.thesis-list li:first-child {
+      border-top: none;
+    }
+    ol.thesis-list li::before {
+      counter-increment: thesis-counter;
+      content: counter(thesis-counter);
+      position: absolute;
+      left: 18px;
+      top: 14px;
+      font-family: var(--font-serif);
+      font-size: 1.45rem;
+      font-weight: 600;
+      color: var(--accent-ink);
+      line-height: 1;
+    }
+
+    /* ── Pullquotes & Station Subtitles ───────────────────────── */
+    .station-subquote,
+    .pullquote {
+      font-family: var(--font-serif) !important;
+      font-style: italic !important;
+      font-size: var(--fs-md) !important;
+      color: var(--ink-2) !important;
+      line-height: 1.45 !important;
+    }
+
+    /* ── Callout Boxes (R-CALLOUT · Section 3.0 & 3.3) ────────── */
+    .callout,
+    div[style*="border-left"] {
+      border-radius: var(--r-lg) !important;
+      border: 1px solid var(--border-subtle) !important;
+      border-left-width: 3px !important;
+      background: var(--bg-surface) !important;
+      box-shadow: var(--shadow-1) !important;
+    }
+
+    /* Info Callouts (Tóm tắt kỹ thuật, Mô phỏng...) */
+    div[style*="var(--tok-fresh)"][style*="border-left"] {
+      background: var(--info-bg) !important;
+      border-color: var(--info-border) !important;
+      border-left-color: var(--info-fill) !important;
+      color: var(--ink) !important;
+    }
+
+    /* Success / Ok Callouts */
+    div[style*="var(--tok-cached)"][style*="border-left"],
+    div[style*="var(--success)"][style*="border-left"] {
+      background: var(--ok-bg) !important;
+      border-color: var(--ok-border) !important;
+      border-left-color: var(--ok-fill) !important;
+      color: var(--ink) !important;
+    }
+
+    /* Warning / Mandatory Callouts (ℹ Ghi chú bắt buộc, Synthetic eval) */
+    div[style*="var(--warn)"][style*="border-left"],
+    div[style*="217,119,6"][style*="border-left"] {
+      background: var(--warn-bg) !important;
+      border-color: var(--warn-border) !important;
+      border-left-color: var(--warn-fill) !important;
+      color: var(--ink) !important;
+    }
+
+    /* Danger / Red Flag Callouts (⚠️ Lỗi số học, Fault Injection) */
+    div[style*="var(--danger)"][style*="border-left"],
+    div[style*="220,38,38"][style*="border-left"] {
+      background: var(--danger-bg) !important;
+      border-color: var(--danger-border) !important;
+      border-left-color: var(--danger-fill) !important;
+      color: var(--ink) !important;
+    }
+
+    /* Neutral Callout / Preface Quote */
+    div[style*="var(--ink)"][style*="border-left"] {
+      background: var(--bg-surface-2) !important;
+      border-color: var(--border-strong) !important;
+      border-left-color: var(--accent) !important;
+      color: var(--ink) !important;
+    }
+
+    /* ── Technical Tables (R-TABLE · Section 3.5) ─────────────── */
     .data-table {
       width: 100%;
-      border-collapse: collapse;
-      font-size: 0.88rem;
+      border: 1px solid var(--border);
+      border-radius: var(--r-lg);
+      background: var(--bg-surface);
+      border-collapse: separate;
+      border-spacing: 0;
       margin: 16px 0 24px;
-      font-family: var(--font-mono);
+      font-size: var(--fs-sm);
+      line-height: 1.5;
+      overflow: clip;
     }
     .data-table th, .data-table td {
-      padding: 10px 12px;
-      border: 1px solid var(--rule);
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--border-subtle);
+      border-right: 1px solid var(--border-subtle);
       text-align: left;
+      vertical-align: top;
+      font-variant-numeric: tabular-nums;
+    }
+    .data-table th:last-child, .data-table td:last-child {
+      border-right: none;
+    }
+    .data-table tr:last-child td {
+      border-bottom: none;
     }
     .data-table th {
-      background: var(--bench);
+      background: var(--bg-surface-2);
+      color: var(--ink-2);
+      font-family: var(--font-sans);
+      font-size: var(--fs-xs);
       font-weight: 600;
-      font-size: 0.8rem;
-      text-transform: uppercase;
-      letter-spacing: 0.03em;
+      line-height: 1.35;
+      text-transform: none; /* Tiêu đề tiếng Việt KHÔNG uppercase */
+      letter-spacing: 0.01em;
+      border-bottom: 1px solid var(--border-strong);
     }
-    .data-table tr:nth-child(even) td {
-      background: rgba(0,0,0,0.015);
+    .data-table th:first-child {
+      border-top-left-radius: calc(var(--r-lg) - 1px);
+    }
+    .data-table th:last-child {
+      border-top-right-radius: calc(var(--r-lg) - 1px);
+    }
+    .data-table tr:last-child td:first-child {
+      border-bottom-left-radius: calc(var(--r-lg) - 1px);
+    }
+    .data-table tr:last-child td:last-child {
+      border-bottom-right-radius: calc(var(--r-lg) - 1px);
+    }
+    .data-table tbody tr:hover td {
+      background: color-mix(in srgb, var(--bg-surface-2) 55%, transparent);
+    }
+    .data-table td strong, .data-table td b {
+      color: var(--ink-strong);
+    }
+    .data-table td code {
+      font-size: 0.85em;
     }
 
+    /* ── Expandable Details (R-DETAILS · Section 3.5) ─────────── */
+    details {
+      border: 1px solid var(--border) !important;
+      border-radius: var(--r-lg) !important;
+      background: var(--bg-surface) !important;
+      margin: 14px 0 !important;
+      transition: border-color var(--dur-1) var(--ease), box-shadow var(--dur-1) var(--ease);
+    }
+    summary {
+      background: var(--bg-surface-2) !important;
+      color: var(--ink) !important;
+      font-family: var(--font-sans) !important;
+      font-weight: 600 !important;
+      font-size: var(--fs-sm) !important;
+      line-height: 1.4 !important;
+      border-radius: calc(var(--r-lg) - 1px) !important;
+      cursor: pointer !important;
+      list-style: none !important;
+      padding: 10px 14px !important;
+      transition: background-color var(--dur-1) var(--ease);
+    }
+    summary::-webkit-details-marker {
+      display: none !important;
+    }
+    summary:hover {
+      background: var(--bg-surface-3) !important;
+    }
+    summary:focus-visible {
+      outline: none;
+      box-shadow: var(--ring) !important;
+    }
+    details[open] > summary {
+      border-bottom: 1px solid var(--border) !important;
+      border-bottom-left-radius: 0 !important;
+      border-bottom-right-radius: 0 !important;
+    }
+
+    /* ── Confidence Badges & Verification Tags (R-BADGE) ──────── */
     .tag-verif {
       display: inline-block;
       font-family: var(--font-mono);
-      font-size: 0.7rem;
+      font-size: var(--fs-2xs);
       font-weight: 600;
-      padding: 1px 6px;
-      border-radius: 3px;
+      padding: 1px 7px;
+      border-radius: var(--r-pill);
       margin-left: 4px;
       vertical-align: middle;
-      border: 1px solid currentColor;
+      border: 1px solid var(--border);
+      line-height: 1.35;
+      letter-spacing: 0.02em;
+      white-space: nowrap;
+      transition: background-color var(--dur-1) var(--ease), border-color var(--dur-1) var(--ease);
     }
-    .tag-verif.docs { color: var(--tok-fresh); background: rgba(47,95,208,0.08); }
-    .tag-verif.calc { color: var(--tok-cached); background: rgba(18,165,143,0.08); }
-    .tag-verif.hypo { color: var(--warn); background: rgba(217,119,6,0.08); }
-    .tag-verif.found { color: var(--tok-think); background: rgba(122,86,224,0.08); }
+    .tag-verif.docs {
+      color: var(--conf-docs-fg);
+      background: var(--conf-docs-bg);
+      border-color: var(--conf-docs-border);
+    }
+    .tag-verif.calc {
+      color: var(--conf-calc-fg);
+      background: var(--conf-calc-bg);
+      border-color: var(--conf-calc-border);
+    }
+    .tag-verif.selfreport {
+      color: var(--conf-selfreport-fg);
+      background: var(--conf-selfreport-bg);
+      border-color: var(--conf-selfreport-border);
+    }
+    .tag-verif.indep {
+      color: var(--conf-indep-fg);
+      background: var(--conf-indep-bg);
+      border-color: var(--conf-indep-border);
+    }
+    .tag-verif.hypo,
+    .tag-verif.assumed {
+      color: var(--conf-assumed-fg);
+      background: var(--conf-assumed-bg);
+      border-color: var(--conf-assumed-border);
+    }
+    .tag-verif.base,
+    .tag-verif.found {
+      color: var(--conf-base-fg);
+      background: var(--conf-base-bg);
+      border-color: var(--conf-base-border);
+    }
+    .tag-verif.unverified {
+      color: var(--conf-unverified-fg);
+      background: var(--conf-unverified-bg);
+      border-color: var(--conf-unverified-border);
+    }
+
+    /* Citations [R1]..[R27] & .cite-chip */
+    .cite-chip {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-mono);
+      font-size: var(--fs-2xs);
+      font-weight: 500;
+      padding: 1px 6px;
+      background: var(--bg-surface-2);
+      color: var(--accent-ink);
+      border-radius: var(--r-xs);
+      cursor: pointer;
+      margin: 0 2px;
+      border: 1px solid var(--border);
+      transition: background-color var(--dur-1) var(--ease), border-color var(--dur-1) var(--ease), color var(--dur-1) var(--ease);
+    }
+    .cite-chip:hover {
+      background: var(--accent-tint);
+      border-color: var(--accent-border);
+      color: var(--accent-ink);
+      text-decoration: underline;
+    }
+
+    /* ── Code Blocks & KaTeX Math (Section 3.0 & 3.3) ─────────── */
+    :not(pre) > code {
+      font-family: var(--font-mono);
+      font-size: 0.875em;
+      background: var(--bg-surface-2);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--r-xs);
+      color: var(--ink-strong);
+      padding: 0.1em 0.35em;
+    }
+    pre {
+      background: var(--bg-inset);
+      border: 1px solid var(--border);
+      border-radius: var(--r-lg);
+      color: var(--ink);
+      font-family: var(--font-mono);
+      font-size: var(--fs-sm);
+      line-height: 1.6;
+      padding: 14px 18px;
+      overflow-x: auto;
+    }
+    pre code {
+      background: none;
+      border: 0;
+      padding: 0;
+      font-size: inherit;
+      color: inherit;
+    }
+    kbd {
+      font-family: var(--font-mono);
+      font-size: var(--fs-xs);
+      font-weight: 500;
+      background: var(--bg-surface);
+      color: var(--ink);
+      border: 1px solid var(--border-strong);
+      border-bottom-width: 2px;
+      border-radius: var(--r-xs);
+      padding: 0.1em 0.4em;
+      box-shadow: var(--shadow-1);
+    }
+    .katex-display {
+      background: var(--bg-inset);
+      border: 1px solid var(--border);
+      border-radius: var(--r-lg);
+      padding: 14px 18px;
+      margin: 16px 0;
+      overflow-x: auto;
+      color: var(--ink-strong);
+    }
+    .katex {
+      color: inherit;
+      font-size: 1.05em;
+    }
 
     /* =================================================================
        5. PHASE 2 WIDGET STYLES (HERO, DECISION TREE, KV TOWER, TIME MACHINE)
@@ -1607,7 +1969,7 @@
       <!-- B.0 HERO SECTION (TRẠM 0) -->
       <section id="tr-0" class="reading-band">
         <div class="reading-col">
-          <div style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--tok-fresh); font-weight: 600; text-transform: uppercase; margin-bottom: 8px;">
+          <div class="station-eyebrow" style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--tok-fresh); font-weight: 600; text-transform: uppercase; margin-bottom: 8px;">
             B.0 · Tiêu đề, Tóm tắt và Luận điểm
           </div>
           <h1 style="font-family: var(--font-display); font-size: clamp(2rem, 3.5vw, 2.8rem); line-height: 1.15; margin: 0 0 16px;">
@@ -1617,7 +1979,7 @@
             Tài liệu mô tả họ model Claude 5.x (Fable 5.2, Opus 5.5, Sonnet 5.5, Haiku 5.5) ở mức kỹ sư: thông số, cơ học suy luận quyết định chi phí và độ trễ, cơ chế điều khiển độ sâu suy luận, chồng công cụ quản trị ngữ cảnh, cơ chế trích dẫn nguồn, và các tín hiệu về độ bền vững trước prompt injection.
           </p>
 
-          <div style="padding: 10px 14px; background: var(--stage); border: 1px solid var(--rule); border-radius: 4px; font-size: 0.85rem; margin-bottom: 20px;">
+          <div class="test-vietnamese-literary" style="padding: 10px 14px; background: var(--stage); border: 1px solid var(--rule); border-radius: 4px; font-size: 0.85rem; margin-bottom: 20px;">
             <div style="font-family: var(--font-mono); font-size: 0.72rem; color: var(--ink-2); margin-bottom: 2px;">Kiểm tra hiển thị dấu tiếng Việt (Mục 3.2):</div>
             <strong>"Nghỉ phép năm của nhân viên thử việc"</strong> — 100% Literary typography intact.
           </div>
@@ -1627,7 +1989,7 @@
           </div>
 
           <h3>Ba luận điểm (thesis) cốt lõi của tài liệu:</h3>
-          <ol style="padding-left: 20px; font-size: 0.95rem;">
+          <ol class="thesis-list" style="padding-left: 20px; font-size: 0.95rem;">
             <li>Giá trị của Claude trong production nằm ở <strong>bộ điều khiển và công cụ quanh model</strong> (effort, caching, citations, quản trị ngữ cảnh), không chỉ ở điểm benchmark.</li>
             <li>Độ tin cậy đến từ <strong>kiến trúc hệ thống</strong>: grounding, xác minh bằng code, abstention, kiểm soát quyền, chứ không đến từ việc "chọn model mạnh nhất".</li>
             <li>Mọi quyết định (model, effort, cache) phải dựa trên <strong>chi phí trên mỗi tác vụ đạt yêu cầu</strong> đo trên bộ dữ liệu của chính hệ thống.</li>
@@ -1639,7 +2001,7 @@
       <section class="stage-canvas">
         <div style="display:flex; justify-content:space-between; align-items:baseline; margin-bottom: 16px;">
           <div>
-            <div style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--tok-fresh); text-transform: uppercase; font-weight: 700;">
+            <div class="station-eyebrow" style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--tok-fresh); text-transform: uppercase; font-weight: 700;">
               Mục 5.0 · Sân Khấu Trực Quan Hóa Hero
             </div>
             <h2 style="font-size: 1.6rem; margin: 4px 0 2px; border:none; padding:0;">
@@ -1762,7 +2124,7 @@
       <!-- TRẠM 1: GỬI (B.1) -->
       <section id="tr-1" class="reading-band">
         <div class="reading-col">
-          <div style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--tok-fresh); font-weight: 600; text-transform: uppercase; margin-bottom: 8px;">
+          <div class="station-eyebrow" style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--tok-fresh); font-weight: 600; text-transform: uppercase; margin-bottom: 8px;">
             Trạm 1 · Gửi (B.1)
           </div>
           <h2>B.1 Tổng quan và Thông số Kỹ thuật Họ Model</h2>
@@ -1897,7 +2259,7 @@
             Figure 2 (F2) · Bộ Chọn Model (Decision Tree) <span class="tag-verif docs">[Docs]</span>
           </div>
           <h3 style="font-size:1.3rem; margin:2px 0 0;">Sơ Đồ Phân Nhánh và Bộ Trắc Nghiệm Quyết Định</h3>
-          <div style="font-size:0.88rem; color:var(--ink-2); margin-top:2px;">
+          <div class="station-subquote" style="font-size:0.88rem; color:var(--ink-2); margin-top:2px;">
             "Chọn model bằng chi phí trên mỗi tác vụ đạt yêu cầu, không bằng bảng xếp hạng benchmark."
           </div>
         </div>
@@ -2118,7 +2480,7 @@
       <!-- TRẠM 2: PREFILL VÀ KV-CACHE (B.2.1) -->
       <section id="tr-2" class="reading-band">
         <div class="reading-col">
-          <div style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--tok-fresh); font-weight: 600; text-transform: uppercase; margin-bottom: 8px;">
+          <div class="station-eyebrow" style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--tok-fresh); font-weight: 600; text-transform: uppercase; margin-bottom: 8px;">
             Trạm 2 · Prefill và Phục Hồi KV-Cache (B.2.1)
           </div>
           <h2>B.2 Cơ Chế Kỹ Thuật Cốt Lõi: Cơ Học Suy Luận Quyết Định Giá và Độ Trễ</h2>
@@ -2268,7 +2630,7 @@
             Figure Cache (F-Cache) · Cỗ Máy Thời Gian TTL & Điểm Hòa Vốn <span class="tag-verif calc">[Tính/Suy luận]</span>
           </div>
           <h3 style="font-size:1.3rem; margin:2px 0 0;">Mô Phỏng Prompt Caching: Lịch Gửi Request và Vòng Lặp TTL</h3>
-          <div style="font-size:0.88rem; color:var(--ink-2); margin-top:2px;">
+          <div class="station-subquote" style="font-size:0.88rem; color:var(--ink-2); margin-top:2px;">
             "Cache là bài toán lịch gửi và hit rate, không phải chiếc công tắc bật/tắt."
           </div>
         </div>
@@ -2375,7 +2737,7 @@
               <strong>Vì sao prompt caching rẻ và vì sao có TTL:</strong> Đọc lại KV-cache đã có sẵn trong VRAM (chỉ tốn 5% giá input trên Sonnet/Opus 5.5) rẻ hơn nhiều so với việc chạy lại prefill trên tensor cores. Ngược lại, bộ nhớ VRAM của GPU cực kỳ đắt đỏ, nhà cung cấp không thể giữ vô hạn, do đó phải đặt ngưỡng TTL (5 phút hoặc 1 giờ). <span class="tag-verif calc">[Tính/Suy luận]</span>
             </li>
             <li style="margin-bottom:12px;">
-              <strong>Vì sao cache chỉ khớp prefix giống hệt:</strong> Do cơ chế self-attention nhân quả (causal masking), vector KV của token thứ \(t\) phụ thuộc vào toàn bộ token từ \(1\) đến \(t-1\). Thay đổi dù chỉ 1 byte ở đầu chuỗi (ví dụ: đổi dấu cách, chèn timestamp vào system prompt) sẽ làm vô hiệu hóa toàn bộ cache phía sau. Do đó, quy tắc vàng là: <em>đặt phần ổn định phía trước, phần thay đổi phía sau</em>. <span class="tag-verif found">[Nền]</span>
+              <strong>Vì sao cache chỉ khớp prefix giống hệt:</strong> Do cơ chế self-attention nhân quả (causal masking), vector KV của token thứ \(t\) phụ thuộc vào toàn bộ token từ \(1\) đến \(t-1\). Thay đổi dù chỉ 1 byte ở đầu chuỗi (ví dụ: đổi dấu cách, chèn timestamp vào system prompt) sẽ làm vô hiệu hóa toàn bộ cache phía sau. Do đó, quy tắc vàng là: <em>đặt phần ổn định phía trước, phần thay đổi phía sau</em>. <span class="tag-verif base">[Nền]</span>
             </li>
             <li style="margin-bottom:12px;">
               <strong>Vì sao đổi `effort` làm vô hiệu cache:</strong> Tham số `effort` được render trực tiếp vào system prompt prefix của model, do đó thay đổi effort đồng nghĩa với việc thay đổi prefix, làm miss cache hoàn toàn. <span class="tag-verif docs">[Docs]</span>
@@ -2393,7 +2755,7 @@
       <!-- TRẠM 3: NGHĨ (B.2.2) · EFFORT LAB -->
       <section id="tr-3" class="reading-band">
         <div class="reading-col">
-          <div style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--tok-think); font-weight: 600; text-transform: uppercase; margin-bottom: 8px;">
+          <div class="station-eyebrow" style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--tok-think); font-weight: 600; text-transform: uppercase; margin-bottom: 8px;">
             Trạm 3 · Nghĩ (B.2.2)
           </div>
           <h2>B.2.2 Adaptive Thinking và `effort`: Một Núm Điều Khiển Thay Cho Ngân Sách</h2>
@@ -2423,7 +2785,7 @@
               <tr>
                 <td><code>low</code></td>
                 <td>Phân loại intent, rewrite câu hỏi, trích xuất thực thể đơn giản.</td>
-                <td>Anthropic công bố Sonnet 5.5 ở low/medium vượt điểm tốt nhất của Sonnet 5 với chỉ ~1/10 chi phí/tác vụ <span class="tag-verif docs">[Tự báo cáo]</span>.</td>
+                <td>Anthropic công bố Sonnet 5.5 ở low/medium vượt điểm tốt nhất của Sonnet 5 với chỉ ~1/10 chi phí/tác vụ <span class="tag-verif selfreport">[Tự báo cáo]</span>.</td>
               </tr>
               <tr>
                 <td><code>medium</code></td>
@@ -2443,7 +2805,7 @@
               <tr>
                 <td><code>max</code></td>
                 <td>Chỉ dùng khi benchmark trên tập dữ liệu của bạn chứng minh có lợi.</td>
-                <td><strong>Cảnh báo:</strong> Có thể kém hơn <code>xhigh</code>! Trên FrontierCode, Sonnet 5.5 tại Max thấp hơn Xhigh vì sinh quá nhiều subagent review gây timeout hoặc sửa lan man ngoài phạm vi <span class="tag-verif docs">[Tự báo cáo]</span>.</td>
+                <td><strong>Cảnh báo:</strong> Có thể kém hơn <code>xhigh</code>! Trên FrontierCode, Sonnet 5.5 tại Max thấp hơn Xhigh vì sinh quá nhiều subagent review gây timeout hoặc sửa lan man ngoài phạm vi <span class="tag-verif selfreport">[Tự báo cáo]</span>.</td>
               </tr>
             </tbody>
           </table>
@@ -2564,7 +2926,7 @@
       <!-- TRẠM 4: CÔNG CỤ VÀ NGỮ CẢNH (B.2.3) · CONTEXT DIET -->
       <section id="tr-4" class="reading-band">
         <div class="reading-col">
-          <div style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--tok-fresh); font-weight: 600; text-transform: uppercase; margin-bottom: 8px;">
+          <div class="station-eyebrow" style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--tok-fresh); font-weight: 600; text-transform: uppercase; margin-bottom: 8px;">
             Trạm 4 · Công Cụ và Ngữ Cảnh (B.2.3)
           </div>
           <h2>B.2.3 Chồng Quản Trị Ngữ Cảnh và Công Cụ: Ăn Kiêng Ngữ Cảnh (Context Diet)</h2>
@@ -2598,7 +2960,7 @@
                 <td>Kết quả <code>tool_result</code> cũ trong lịch sử</td>
                 <td><strong>Context editing</strong></td>
                 <td>Tự động cắt tỉa kết quả của các lệnh gọi tool cũ khi context chạm ngưỡng cảnh báo.</td>
-                <td>Anthropic công bố: Trong eval web search 100 lượt, kỹ thuật này giúp giảm <strong>84%</strong> token <span class="tag-verif docs">[Tự báo cáo]</span>.</td>
+                <td>Anthropic công bố: Trong eval web search 100 lượt, kỹ thuật này giúp giảm <strong>84%</strong> token <span class="tag-verif selfreport">[Tự báo cáo]</span>.</td>
               </tr>
               <tr>
                 <td>Hội thoại dài hơi qua nhiều phiên</td>
@@ -2616,7 +2978,7 @@
                 <td>Cần tư duy mạnh cục bộ</td>
                 <td><strong>Advisor tool</strong></td>
                 <td>Một model rẻ chạy điều phối chính, khi gặp bài toán khó sẽ triệu hồi model mạnh hơn tư vấn.</td>
-                <td><code>advisor_20260301</code> (Beta); <span class="tag-verif hypo">[Chưa xác minh trong tài liệu này]</span>.</td>
+                <td><code>advisor_20260301</code> (Beta); <span class="tag-verif unverified">[Chưa xác minh trong tài liệu này]</span>.</td>
               </tr>
               <tr>
                 <td>Thay tool giữa hội thoại không mất cache</td>
@@ -2642,7 +3004,7 @@
             Figure 5 (F5) · Sân Khấu "Ăn Kiêng Ngữ Cảnh" (Context Diet Simulator) <span class="tag-verif hypo">[Giả định]</span>
           </div>
           <h3 style="font-size:1.3rem; margin:2px 0 0;">Mô Phỏng Cắt Tỉa Ngữ Cảnh Trong Quy Trình Agentic 1M Token</h3>
-          <div style="font-size:0.88rem; color:var(--ink-2); margin-top:2px;">
+          <div class="station-subquote" style="font-size:0.88rem; color:var(--ink-2); margin-top:2px;">
             "Quản trị ngữ cảnh là nghệ thuật thiết kế hệ thống, không phải việc nâng trần cửa sổ token."
           </div>
         </div>
@@ -2766,7 +3128,7 @@
            ================================================================= -->
       <section id="tr-5" class="reading-band">
         <div class="reading-col">
-          <div style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--tok-fresh); font-weight: 600; text-transform: uppercase; margin-bottom: 8px;">
+          <div class="station-eyebrow" style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--tok-fresh); font-weight: 600; text-transform: uppercase; margin-bottom: 8px;">
             Trạm 5 · Trích Dẫn (B.2.4)
           </div>
           <h2>B.2.4 Grounding Bản Địa: Citations và Search Results</h2>
@@ -2924,10 +3286,10 @@
             </summary>
             <div style="margin-top:8px; font-size:0.82rem; line-height:1.5; color:var(--ink);">
               <p style="margin:0 0 6px;">
-                <strong>Constitutional AI (Bai et al., 2022) <span class="tag-verif docs">[Nền]</span> [R16]:</strong> Hai pha huấn luyện gồm SL-CAI (critique &rarr; revision &rarr; fine-tune) và RL-CAI (AI gán nhãn preference để huấn luyện preference model - RLAIF). Mục tiêu cốt lõi là <strong>harmlessness</strong> với lượng nhãn người tối thiểu. Đây <em>không phải cơ chế chống ảo giác</em>.
+                <strong>Constitutional AI (Bai et al., 2022) <span class="tag-verif base">[Nền]</span> [R16]:</strong> Hai pha huấn luyện gồm SL-CAI (critique &rarr; revision &rarr; fine-tune) và RL-CAI (AI gán nhãn preference để huấn luyện preference model - RLAIF). Mục tiêu cốt lõi là <strong>harmlessness</strong> với lượng nhãn người tối thiểu. Đây <em>không phải cơ chế chống ảo giác</em>.
               </p>
               <p style="margin:0 0 6px;">
-                <strong>Circuit tracing (Anthropic, 2025) <span class="tag-verif docs">[Độc lập/Nền]</span> [R15]:</strong> Công trình <em>On the Biology of a Large Language Model</em> phân tích attribution graphs (cross-layer transcoder, ~30 triệu feature) trên <strong>Claude 3.5 Haiku</strong>. Phát hiện cấu trúc mạch ảo giác: trạng thái mặc định "không trả lời được" (abstention) bị <strong>ức chế</strong> khi model nhận diện tín hiệu "thực thể quen thuộc" (familiar entity).
+                <strong>Circuit tracing (Anthropic, 2025) <span class="tag-verif indep">[Độc lập/Nền]</span> [R15]:</strong> Công trình <em>On the Biology of a Large Language Model</em> phân tích attribution graphs (cross-layer transcoder, ~30 triệu feature) trên <strong>Claude 3.5 Haiku</strong>. Phát hiện cấu trúc mạch ảo giác: trạng thái mặc định "không trả lời được" (abstention) bị <strong>ức chế</strong> khi model nhận diện tín hiệu "thực thể quen thuộc" (familiar entity).
               </p>
               <div style="padding:6px 10px; background:rgba(217,119,6,0.1); border-left:3px solid var(--warn); margin-top:6px;">
                 <strong style="color:var(--warn);">Quy tắc thiết kế hệ thống:</strong> Nghiên cứu này thực hiện trên Claude 3.5 Haiku, chưa chứng minh trên Claude 5.5. Hãy dùng nó như một <em>giả thuyết thiết kế</em>: Bộ eval bắt buộc phải có tập <strong>"Near-Miss Entity"</strong> (câu hỏi về các thực thể nghe rất quen nhưng không hề có dữ liệu) và đo riêng tỷ lệ từ chối (Abstention Accuracy).
@@ -2946,11 +3308,11 @@
                   <tr><th>Cơ chế</th><th>Mô tả kỹ thuật</th><th>Mức tin cậy</th></tr>
                 </thead>
                 <tbody>
-                  <tr><td>Prompt-injection robustness</td><td>Anthropic báo Opus 5.5 ngang hoặc tốt hơn Opus 5 ở mọi bối cảnh test (coding, tool use, computer use, browsing)</td><td><span class="tag-verif docs">[Tự báo cáo] [R9][R23]</span></td></tr>
-                  <tr><td>Action classifier</td><td>Sàng lọc hành động agent trước khi thực thi hệ thống; sandbox mã nguồn mở</td><td><span class="tag-verif docs">[Tự báo cáo] [R9]</span></td></tr>
-                  <tr><td>Safeguards an ninh mạng</td><td>Request nhạy cảm chuyển sang Opus 4.8 với chương trình xác minh bảo mật</td><td><span class="tag-verif docs">[Tự báo cáo] [R9]</span></td></tr>
+                  <tr><td>Prompt-injection robustness</td><td>Anthropic báo Opus 5.5 ngang hoặc tốt hơn Opus 5 ở mọi bối cảnh test (coding, tool use, computer use, browsing)</td><td><span class="tag-verif selfreport">[Tự báo cáo] [R9][R23]</span></td></tr>
+                  <tr><td>Action classifier</td><td>Sàng lọc hành động agent trước khi thực thi hệ thống; sandbox mã nguồn mở</td><td><span class="tag-verif selfreport">[Tự báo cáo] [R9]</span></td></tr>
+                  <tr><td>Safeguards an ninh mạng</td><td>Request nhạy cảm chuyển sang Opus 4.8 với chương trình xác minh bảo mật</td><td><span class="tag-verif selfreport">[Tự báo cáo] [R9]</span></td></tr>
                   <tr><td>Preserved thinking</td><td>Chặn sửa ngữ cảnh để trích xuất suy luận ngầm (áp dụng cho tài khoản API tạo từ 31/08/2026)</td><td><span class="tag-verif docs">[Docs] [R6][R9]</span></td></tr>
-                  <tr><td>Kiểm tra độc lập</td><td>Opus 5.5 được kiểm toán trước phát hành bởi bên thứ ba độc lập (METR)</td><td><span class="tag-verif docs">[Tự báo cáo] [R9]</span></td></tr>
+                  <tr><td>Kiểm tra độc lập</td><td>Opus 5.5 được kiểm toán trước phát hành bởi bên thứ ba độc lập (METR)</td><td><span class="tag-verif selfreport">[Tự báo cáo] [R9]</span></td></tr>
                 </tbody>
               </table>
               <div style="font-size:0.75rem; color:var(--ink-2); margin-top:6px;">
@@ -2982,7 +3344,7 @@
            ================================================================= -->
       <section id="tr-6" class="reading-band">
         <div class="reading-col">
-          <div style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--danger); font-weight: 600; text-transform: uppercase; margin-bottom: 8px;">
+          <div class="station-eyebrow" style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--danger); font-weight: 600; text-transform: uppercase; margin-bottom: 8px;">
             Trạm 6 · Kiểm Chứng & An Toàn (B.4 & B.2.5)
           </div>
           <h2>B.4 Ca Triển Khai: Trợ Lý Tri Thức Nội Bộ Alliance Knowledge Assistant</h2>
@@ -3522,7 +3884,7 @@ def retrieve(query_vec, user_groups: list[str], k: int = 30):
                 </div>
               </div>
               <div style="font-size:0.75rem; color:var(--ink-2); margin-top:6px;">
-                <strong>Chi phí tham chiếu <span class="tag-verif docs">[Giả định]</span>:</strong> Xử lý 50.000 tài liệu/tháng với Haiku + Sonnet Batch (-50%) tiêu tốn &approx; $511.25/tháng (tiết kiệm 74.4% so với Opus realtime $2,000).
+                <strong>Chi phí tham chiếu <span class="tag-verif hypo">[Giả định]</span>:</strong> Xử lý 50.000 tài liệu/tháng với Haiku + Sonnet Batch (-50%) tiêu tốn &approx; $511.25/tháng (tiết kiệm 74.4% so với Opus realtime $2,000).
               </div>
             </div>
 
@@ -3538,7 +3900,7 @@ def retrieve(query_vec, user_groups: list[str], k: int = 30):
             <div style="padding:12px 14px; background:var(--bench); border-radius:4px; border:1px solid var(--rule);">
               <h4 style="margin:0 0 6px; font-size:0.95rem; color:var(--ink);">Mở Rộng C: Khi Nào Fine-Tune (LoRA/QLoRA) Và Dữ Liệu Huấn Luyện</h4>
               <p style="font-size:0.83rem; margin:0 0 6px; line-height:1.5;">
-                Thứ tự tối ưu: Tối ưu prompt/schema/effort &rarr; RAG &rarr; Fine-tune open-weight (như Qwen3.8-27B Apache 2.0 dense context 262K) khi bắt buộc on-prem hoặc chi phí API ở quy mô cực lớn <span class="tag-verif docs">[Độc lập] [R21]</span>.
+                Thứ tự tối ưu: Tối ưu prompt/schema/effort &rarr; RAG &rarr; Fine-tune open-weight (như Qwen3.8-27B Apache 2.0 dense context 262K) khi bắt buộc on-prem hoặc chi phí API ở quy mô cực lớn <span class="tag-verif indep">[Độc lập] [R21]</span>.
               </p>
               <div style="font-size:0.78rem; color:var(--ink-2); line-height:1.4;">
                 <strong>Điều khoản dữ liệu:</strong> Anthropic cho phép sử dụng Outputs để huấn luyện các model <em>không cạnh tranh</em> (phân loại, trích xuất thực thể, tóm tắt nội bộ) và nghiêm cấm huấn luyện model cạnh tranh trực tiếp nếu chưa có văn bản chấp thuận <span class="tag-verif docs">[Docs] [R17]</span>.
@@ -3610,7 +3972,7 @@ lora = LoraConfig(r=16, lora_alpha=32, lora_dropout=0.05, target_modules="all-li
            ================================================================= -->
       <section id="tr-7" class="reading-band">
         <div class="reading-col">
-          <div style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--tok-cached); font-weight: 600; text-transform: uppercase; margin-bottom: 8px;">
+          <div class="station-eyebrow" style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--tok-cached); font-weight: 600; text-transform: uppercase; margin-bottom: 8px;">
             Trạm 7 · Tính Tiền & Sổ Cái Đánh Giá (B.3 & B.5–B.9)
           </div>
           <h2>B.3 Đánh Giá, Benchmark và Mô Hình Chi Phí Toàn Diện</h2>
@@ -3622,10 +3984,10 @@ lora = LoraConfig(r=16, lora_alpha=32, lora_dropout=0.05, target_modules="all-li
           <div style="margin-top:20px;">
             <h3>B.3.1 Đọc Benchmark Đúng Cách: Vượt Qua Ảo Tưởng Bảng Xếp Hạng</h3>
             <p>
-              Nguyên tắc thẩm định: Mỗi con số bắt buộc phải gắn liền với bộ năm <em>(benchmark, effort level, test harness, nguồn gốc, mức độ tin cậy)</em>. Chỉ số <strong>SWE-bench Verified</strong> hiện đã bão hoà (Vals AI báo cáo Opus 5 đạt 97% và đã ngừng chạy cho các model mới) nên không còn giá trị phân biệt các mô hình hàng đầu thế giới <span class="tag-verif docs">[Độc lập] [R18]</span>.
+              Nguyên tắc thẩm định: Mỗi con số bắt buộc phải gắn liền với bộ năm <em>(benchmark, effort level, test harness, nguồn gốc, mức độ tin cậy)</em>. Chỉ số <strong>SWE-bench Verified</strong> hiện đã bão hoà (Vals AI báo cáo Opus 5 đạt 97% và đã ngừng chạy cho các model mới) nên không còn giá trị phân biệt các mô hình hàng đầu thế giới <span class="tag-verif indep">[Độc lập] [R18]</span>.
             </p>
 
-            <h4 style="margin:14px 0 6px; font-size:0.95rem;">Bảng Số Liệu Hãng Tự Báo Cáo <span class="tag-verif docs">[Tự báo cáo] [R9]</span></h4>
+            <h4 style="margin:14px 0 6px; font-size:0.95rem;">Bảng Số Liệu Hãng Tự Báo Cáo <span class="tag-verif selfreport">[Tự báo cáo] [R9]</span></h4>
             <div style="overflow-x:auto;">
               <table class="data-table" style="font-size:0.8rem; margin:0 0 10px;">
                 <thead>
@@ -3652,7 +4014,7 @@ lora = LoraConfig(r=16, lora_alpha=32, lora_dropout=0.05, target_modules="all-li
               <strong>Sonnet 5.5 theo công bố của Anthropic [R8]:</strong> Terminal-Bench 4.0 đạt <strong>70.6%</strong>; CursorBench 4.0 <strong>55.5%</strong>; GDPval-AA <strong>1844</strong>; OSWorld 2.1 <strong>80.1%</strong>; FrontierCode Main đạt <strong>46.2%</strong> (ở Max) nhưng lên tới <strong>52.1%</strong> (ở Xhigh) so với Opus 5.5 54.4%.
             </p>
             <p style="font-size:0.82rem; color:var(--ink-2); line-height:1.5;">
-              <strong>Đo lường độc lập <span class="tag-verif docs">[Độc lập]</span>:</strong> Artificial Analysis Coding Agent Index ghi nhận Opus 5.5 = 66, Opus 5 = 60, Fable 5.1 = 62; tuy nhiên chi phí trên mỗi tác vụ của Opus 5.5 cao hơn Opus 5 khoảng 21% dù đơn giá token thấp hơn do số lượng thinking tokens tự thích ứng sinh ra nhiều hơn [R20].
+              <strong>Đo lường độc lập <span class="tag-verif indep">[Độc lập]</span>:</strong> Artificial Analysis Coding Agent Index ghi nhận Opus 5.5 = 66, Opus 5 = 60, Fable 5.1 = 62; tuy nhiên chi phí trên mỗi tác vụ của Opus 5.5 cao hơn Opus 5 khoảng 21% dù đơn giá token thấp hơn do số lượng thinking tokens tự thích ứng sinh ra nhiều hơn [R20].
             </p>
 
             <div style="background:var(--bench); border-left:3px solid var(--ink); padding:10px 14px; border-radius:4px; font-size:0.82rem; margin-top:10px;">
@@ -4129,12 +4491,12 @@ lora = LoraConfig(r=16, lora_alpha=32, lora_dropout=0.05, target_modules="all-li
               </tr>
               <tr data-status="self">
                 <td>Điểm benchmark Terminal-Bench 4.0 đạt 66.4% và FrontierCode 54.4%</td>
-                <td><span class="tag-verif docs">[Tự báo cáo] Chưa độc lập</span></td>
+                <td><span class="tag-verif selfreport">[Tự báo cáo] Chưa độc lập</span></td>
                 <td>Anthropic Opus 5.5 Announcement [R9]; chưa tái lập độc lập trong phòng lab.</td>
               </tr>
               <tr data-status="self">
                 <td>Độ bền chống Prompt Injection của Opus 5.5 vượt trội hơn Opus 5</td>
-                <td><span class="tag-verif docs">[Tự báo cáo] Hãng công bố</span></td>
+                <td><span class="tag-verif selfreport">[Tự báo cáo] Hãng công bố</span></td>
                 <td>Anthropic System Card Opus 5 [R23]; cần áp dụng bảo vệ 6 lớp tại tầng ứng dụng.</td>
               </tr>
               <tr data-status="docs">
