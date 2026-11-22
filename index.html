@@ -469,9 +469,9 @@
       max-width: var(--max-width);
       margin: 0 auto;
       display: grid;
-      grid-template-columns: 180px 1fr 195px;
-      gap: 20px;
-      padding: 24px 18px 80px;
+      grid-template-columns: 180px 1fr;
+      gap: 32px;
+      padding: 24px 24px 80px;
       align-items: start;
     }
 
@@ -585,11 +585,84 @@
       box-shadow: var(--shadow-2);
     }
 
-    /* Right Column: Sticky Receipt Rail (Tờ Hoá Đơn Token) */
-    .receipt-rail {
-      position: sticky;
-      top: 70px;
-      height: fit-content;
+    /* ── Floating Live Receipt Widget (Collapsible) ── */
+    .receipt-widget-wrap {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 1000;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 10px;
+    }
+
+    .receipt-pill-trigger {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-strong);
+      border-radius: var(--r-pill);
+      padding: 9px 18px;
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+      color: var(--ink);
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      cursor: pointer;
+      transition: all var(--dur-1) var(--ease);
+    }
+    .receipt-pill-trigger:hover {
+      background: var(--bg-surface-2);
+      border-color: var(--accent);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.18);
+    }
+    .receipt-pill-trigger .pill-arrow {
+      font-size: 0.65rem;
+      color: var(--ink-3);
+      transition: transform var(--dur-2) var(--ease);
+    }
+    .receipt-widget-wrap.open .receipt-pill-trigger .pill-arrow {
+      transform: rotate(180deg);
+    }
+
+    .receipt-popup-card {
+      display: none;
+      width: 255px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r-xl);
+      padding: 20px 18px;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      box-shadow: 0 20px 48px rgba(0, 0, 0, 0.2);
+      animation: receiptSlideUp 0.22s var(--ease);
+      position: relative;
+    }
+    .receipt-widget-wrap.open .receipt-popup-card {
+      display: block;
+    }
+
+    @keyframes receiptSlideUp {
+      from { opacity: 0; transform: translateY(12px) scale(0.96); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .receipt-close-btn {
+      background: transparent;
+      border: none;
+      font-size: 1rem;
+      color: var(--ink-3);
+      cursor: pointer;
+      padding: 2px 6px;
+      border-radius: var(--r-sm);
+      line-height: 1;
+      transition: color var(--dur-1) var(--ease), background var(--dur-1) var(--ease);
+    }
+    .receipt-close-btn:hover {
+      background: var(--bg-surface-3);
+      color: var(--ink-strong);
     }
 
     .receipt-card {
@@ -2179,7 +2252,7 @@
 
         /* Responsive adjustments */
     @media (max-width: 1200px) {
-      .page-layout { grid-template-columns: 140px 1fr 220px; gap: 20px; }
+      .page-layout { grid-template-columns: 160px 1fr; gap: 24px; }
       .decision-container { grid-template-columns: 1fr; }
       .effort-lab-grid { grid-template-columns: 1fr; }
       .diet-switches-grid { grid-template-columns: 1fr; }
@@ -2190,8 +2263,6 @@
     @media (max-width: 992px) {
       .page-layout { grid-template-columns: 1fr; padding: 20px 16px 80px; }
       .journey-rail { display: none; }
-      .receipt-rail { display: none; }
-      .mobile-pill { display: flex; align-items: center; gap: 8px; }
       .hero-container { grid-template-columns: 1fr; }
       .kv-widget-layout { grid-template-columns: 1fr; }
       .ttl-widget-layout { grid-template-columns: 1fr; }
@@ -2211,7 +2282,7 @@
         color: var(--ink);
         font-size: 11pt;
       }
-      .top-bar, .journey-rail, .receipt-rail, .mobile-pill, #progressIndicator, .btn-action, .btn-tool {
+      .top-bar, .journey-rail, .receipt-widget-wrap, .receipt-rail, .mobile-pill, #progressIndicator, .btn-action, .btn-tool {
         display: none !important;
       }
       .page-layout {
@@ -2262,6 +2333,7 @@
         <!-- View Modes -->
         <button class="btn-tool" id="btnModeRead" onclick="setViewMode('read')">Đọc</button>
         <button class="btn-tool active" id="btnModeLab" onclick="setViewMode('lab')">Làm (Lab)</button>
+        <button class="btn-tool" id="btnTopReceipt" onclick="toggleReceiptWidget()" title="Xem / Đóng Hoá đơn Token thời gian thực">🧾 Hoá đơn</button>
         <button class="btn-tool" onclick="window.print()">In</button>
 
         <!-- Presenter Mode -->
@@ -4973,76 +5045,83 @@ lora = LoraConfig(r=16, lora_alpha=32, lora_dropout=0.05, target_modules="all-li
       </section>
 </main>
 
-    <!-- RIGHT COLUMN: STICKY RECEIPT RAIL -->
-    <aside class="receipt-rail">
-      <div class="receipt-card" id="stickyReceiptCard">
-        <div class="receipt-header">
-          <div class="receipt-title">
+  </div>
+
+  <!-- FLOATING LIVE RECEIPT WIDGET (COLLAPSIBLE) -->
+  <div class="receipt-widget-wrap" id="receiptWidgetWrap">
+    <!-- Collapsible Receipt Card Popup -->
+    <div class="receipt-popup-card" id="receiptPopupCard">
+      <div class="receipt-header">
+        <div class="receipt-title">
+          <div style="display:flex; align-items:center; gap:6px;">
             <span>Hoá Đơn Token</span>
             <span class="badge-spec" style="font-size:0.65rem;">LIVE</span>
           </div>
-          <div class="receipt-sub">Model: <strong id="receiptModel">Sonnet 5.5</strong></div>
+          <button class="receipt-close-btn" onclick="toggleReceiptWidget(false)" title="Đóng hoá đơn">✕</button>
         </div>
+        <div class="receipt-sub">Model: <strong id="receiptModel">Sonnet 5.5</strong></div>
+      </div>
 
-        <div class="receipt-item">
-          <div class="receipt-item-label">
-            <span class="tok-tile cached"></span>
-            <span>Cached prefix</span>
-          </div>
-          <span id="receiptTokCached" style="font-weight:600;">20.000</span>
+      <div class="receipt-item">
+        <div class="receipt-item-label">
+          <span class="tok-tile cached"></span>
+          <span>Cached prefix</span>
         </div>
+        <span id="receiptTokCached" style="font-weight:600;">20.000</span>
+      </div>
 
-        <div class="receipt-item">
-          <div class="receipt-item-label">
-            <span class="tok-tile fresh"></span>
-            <span>Fresh input</span>
-          </div>
-          <span id="receiptTokFresh" style="font-weight:600;">1.500</span>
+      <div class="receipt-item">
+        <div class="receipt-item-label">
+          <span class="tok-tile fresh"></span>
+          <span>Fresh input</span>
         </div>
+        <span id="receiptTokFresh" style="font-weight:600;">1.500</span>
+      </div>
 
-        <div class="receipt-item">
-          <div class="receipt-item-label">
-            <span class="tok-tile think"></span>
-            <span>Thinking</span>
-          </div>
-          <span id="receiptTokThink" style="font-weight:600;">1.200</span>
+      <div class="receipt-item">
+        <div class="receipt-item-label">
+          <span class="tok-tile think"></span>
+          <span>Thinking</span>
         </div>
+        <span id="receiptTokThink" style="font-weight:600;">1.200</span>
+      </div>
 
-        <div class="receipt-item">
-          <div class="receipt-item-label">
-            <span class="tok-tile out"></span>
-            <span>Output</span>
-          </div>
-          <span id="receiptTokOut" style="font-weight:600;">400</span>
+      <div class="receipt-item">
+        <div class="receipt-item-label">
+          <span class="tok-tile out"></span>
+          <span>Output</span>
         </div>
+        <span id="receiptTokOut" style="font-weight:600;">400</span>
+      </div>
 
-        <div style="margin-top: 12px;">
-          <div style="display:flex; justify-content:space-between; font-size:0.72rem; color:var(--ink-2);">
-            <span>Cache Hit Rate:</span>
-            <strong id="receiptHitRateText" style="color:var(--tok-cached);">95%</strong>
-          </div>
-          <div class="receipt-hit-meter">
-            <div class="receipt-hit-bar" id="receiptHitBar"></div>
-          </div>
+      <div style="margin-top: 10px;">
+        <div style="display:flex; justify-content:space-between; font-size:0.72rem; color:var(--ink-2);">
+          <span>Cache Hit Rate:</span>
+          <strong id="receiptHitRateText" style="color:var(--tok-cached);">95%</strong>
         </div>
-
-        <div class="receipt-total-box">
-          <div class="receipt-total-row">
-            <span style="font-size:0.78rem; text-transform:uppercase; color:var(--ink-2);">Chi Phí / Req</span>
-            <span class="receipt-total-cost" id="receiptCostPerReq">$0.0114</span>
-          </div>
-          <div class="receipt-monthly" id="receiptMonthlyCost">
-            ≈ $501.60 USD / tháng (44K reqs)
-          </div>
+        <div class="receipt-hit-meter">
+          <div class="receipt-hit-bar" id="receiptHitBar"></div>
         </div>
       </div>
-    </aside>
 
-  </div>
+      <div class="receipt-total-box">
+        <div class="receipt-total-row">
+          <span style="font-size:0.75rem; text-transform:uppercase; color:var(--ink-2);">Chi Phí / Req</span>
+          <span class="receipt-total-cost" id="receiptCostPerReq">$0.0114</span>
+        </div>
+        <div class="receipt-monthly" id="receiptMonthlyCost">
+          ≈ $501.60 USD / tháng (44K reqs)
+        </div>
+      </div>
+    </div>
 
-  <!-- MOBILE BOTTOM FLOATING PILL -->
-  <div class="mobile-pill" onclick="toggleMobileDrawer()">
-    <span>Hoá đơn: <strong id="mobilePillCost">$0.0114</strong> ▴</span>
+    <!-- Floating Trigger Pill (Fixed bottom-right) -->
+    <button class="receipt-pill-trigger" id="receiptPillTrigger" onclick="toggleReceiptWidget()" aria-label="Mở/Đóng Hoá Đơn Token" title="Bấm để mở hoặc đóng hoá đơn token chi tiết">
+      <span class="tok-tile fresh" style="width:10px; height:10px;"></span>
+      <span class="pill-label">Hoá Đơn Token:</span>
+      <strong id="pillCostVal">$0.0114</strong>
+      <span class="pill-arrow" id="pillArrow">▲</span>
+    </button>
   </div>
 
   <!-- JAVASCRIPT LOGIC & STATE CONTROLLERS -->
@@ -5133,6 +5212,9 @@ lora = LoraConfig(r=16, lora_alpha=32, lora_dropout=0.05, target_modules="all-li
 
         var elCost = document.getElementById('receiptCostPerReq');
         if (elCost) elCost.innerText = '$' + res.costPerReq.toFixed(4);
+
+        var elPill = document.getElementById('pillCostVal');
+        if (elPill) elPill.innerText = '$' + res.costPerReq.toFixed(4);
 
         var elMonthly = document.getElementById('receiptMonthlyCost');
         if (elMonthly) elMonthly.innerText = '≈ $' + res.monthly.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' USD / tháng (44K reqs)';
@@ -6260,9 +6342,33 @@ function setFontSize(size, btn) {
       }
     }
 
-    function toggleMobileDrawer() {
-      alert('Hoá đơn chi tiết: 20K cached prefix, 1.5K fresh, 400 out. Đơn giá: $0.0114 / request tại 95% hit rate.');
+    function toggleReceiptWidget(forceState) {
+      var wrap = document.getElementById('receiptWidgetWrap');
+      if (!wrap) return;
+      if (typeof forceState === 'boolean') {
+        if (forceState) wrap.classList.add('open');
+        else wrap.classList.remove('open');
+      } else {
+        wrap.classList.toggle('open');
+      }
     }
+
+    function toggleMobileDrawer() {
+      toggleReceiptWidget();
+    }
+
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') toggleReceiptWidget(false);
+    });
+
+    document.addEventListener('click', function(e) {
+      var wrap = document.getElementById('receiptWidgetWrap');
+      if (!wrap || !wrap.classList.contains('open')) return;
+      if (!wrap.contains(e.target)) {
+        if (e.target && e.target.closest && e.target.closest('#btnTopReceipt')) return;
+        wrap.classList.remove('open');
+      }
+    });
 
     window.addEventListener('scroll', function() {
       var h = document.documentElement.scrollHeight - document.documentElement.clientHeight;
