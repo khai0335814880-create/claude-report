@@ -1461,16 +1461,25 @@
       background: var(--bg-surface);
       border: 1px solid var(--border);
       border-radius: var(--r-lg);
-      padding: 18px;
+      padding: 16px 18px;
       overflow-x: auto;
       box-shadow: var(--shadow-1);
+      align-self: start;
+      height: fit-content;
+    }
+    #decisionTreeSvg {
+      width: 100%;
+      height: auto;
+      max-height: 420px;
+      display: block;
     }
     .quiz-card {
       background: var(--bg-surface);
       border: 1px solid var(--border);
       border-radius: var(--r-lg);
-      padding: 20px;
+      padding: 16px 18px;
       box-shadow: var(--shadow-1);
+      align-self: start;
     }
     .quiz-q-title {
       font-family: var(--font-sans);
@@ -1479,23 +1488,23 @@
       text-transform: uppercase;
       font-weight: 600;
       letter-spacing: var(--tracking-eyebrow);
-      margin-bottom: 8px;
+      margin-bottom: 6px;
     }
     .quiz-options {
       display: flex;
       flex-direction: column;
-      gap: 8px;
-      margin-bottom: 16px;
+      gap: 6px;
+      margin-bottom: 10px;
     }
     .quiz-opt-btn {
       text-align: left;
-      padding: 10px 14px;
+      padding: 7px 12px;
       background: var(--bg-surface);
       border: 1px solid var(--border-strong);
       border-radius: var(--r-md);
       font-family: var(--font-sans);
-      font-size: var(--fs-sm);
-      line-height: 1.4;
+      font-size: var(--fs-xs);
+      line-height: 1.35;
       cursor: pointer;
       transition: all var(--dur-1) var(--ease);
       color: var(--ink);
@@ -1514,13 +1523,13 @@
       color: var(--ink-strong);
     }
     .quiz-result-box {
-      margin-top: 16px;
-      padding: 16px 20px;
+      margin-top: 10px;
+      padding: 12px 16px;
       border-radius: var(--r-lg);
       background: var(--accent-tint);
       border: 1px solid var(--accent-border);
       box-shadow: inset 3px 0 0 var(--accent);
-      font-size: var(--fs-sm);
+      font-size: var(--fs-xs);
     }
     #quizRecModel {
       font-family: var(--font-serif);
@@ -2239,7 +2248,7 @@
           <span class="doc-brand-title">Claude Model Specification v2</span>
         </a>
         <span class="badge-spec">Technical Whitepaper</span>
-        <span style="font-family:var(--font-mono); font-size:0.75rem; color:var(--ink-2);">22/11/2026</span>
+        <span style="font-family:var(--font-mono); font-size:0.75rem; color:var(--ink-2);">19/11/2026</span>
       </div>
 
       <div class="top-bar-actions">
@@ -2454,7 +2463,7 @@
           </div>
           <h2>B.1 Tổng quan và Thông số Kỹ thuật Họ Model</h2>
           <p>
-            Mọi request bắt đầu bằng một quyết định: <strong>model nào</strong> và <strong>effort nào</strong>. Bảng dưới đây tổng hợp các thông số kỹ thuật chính thức tính đến ngày 22/11/2026 của bốn dòng mô hình chủ lực.
+            Mọi request bắt đầu bằng một quyết định: <strong>model nào</strong> và <strong>effort nào</strong>. Bảng dưới đây tổng hợp các thông số kỹ thuật chính thức tính đến ngày 19/11/2026 của bốn dòng mô hình chủ lực.
           </p>
         </div>
       </section>
@@ -2468,7 +2477,7 @@
         <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin-bottom:16px;">
           <div>
             <div style="font-family:var(--font-mono); font-size:0.75rem; color:var(--tok-fresh); text-transform:uppercase; font-weight:700;">
-              Figure 1 (F1) · Họ Model Hiện Hành (22/11/2026) <span class="tag-verif docs">[Docs]</span>
+              Figure 1 (F1) · Họ Model Hiện Hành (19/11/2026) <span class="tag-verif docs">[Docs]</span>
             </div>
             <h3 style="font-size:1.3rem; margin:2px 0 0;">Bảng Đối Soát Thông Số và Thang Giá Logarit</h3>
           </div>
@@ -2591,7 +2600,7 @@
 
         <div class="decision-container">
           <div class="svg-tree-box">
-            <svg id="decisionTreeSvg" viewBox="0 0 540 420" width="100%" height="100%" style="display:block;">
+            <svg id="decisionTreeSvg" viewBox="0 0 540 420" width="100%" height="auto" style="display:block; width:100%; height:auto; max-height:420px;">
               <defs>
                 <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
                   <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="var(--ink-4)" />

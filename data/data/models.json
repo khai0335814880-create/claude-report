@@ -1,0 +1,82 @@
+{
+  "as_of": "2026-11-19",
+  "source_urls": [
+    "https://platform.claude.com/docs/en/models/overview",
+    "https://fourweekmba.com",
+    "https://venturebeat.com"
+  ],
+  "competitors": [
+    {
+      "group": "Closed, OpenAI",
+      "model": "GPT-6 Sol",
+      "in_price": 2.0,
+      "out_price": 10.0,
+      "context": "256K - 1M",
+      "notes": "Đối thủ giá trực tiếp của Sonnet 5.5 sau đợt giảm giá",
+      "reliability": "docs"
+    },
+    {
+      "group": "Closed, OpenAI",
+      "model": "GPT-6 Luna",
+      "in_price": 0.10,
+      "out_price": 0.50,
+      "context": "272K",
+      "notes": "Đối thủ giá của Haiku 5.5 (tăng giá khi prompt > 272K)",
+      "reliability": "docs"
+    },
+    {
+      "group": "Closed, Google",
+      "model": "Gemini 4 Argon",
+      "in_price": 2.0,
+      "out_price": 10.0,
+      "context": "2M",
+      "notes": "$2/$10 đến 30/11/2026, tăng lên $4/$20 từ 01/12/2026. Lợi thế audio/video native",
+      "reliability": "docs"
+    },
+    {
+      "group": "Closed, Google",
+      "model": "Gemini 3.1 Pro",
+      "in_price": 2.0,
+      "out_price": 12.0,
+      "context": "1M",
+      "notes": "Hệ sinh thái Google Cloud & Workspace",
+      "reliability": "docs"
+    },
+    {
+      "group": "Closed, Google",
+      "model": "Gemini 3.5 Flash-Lite",
+      "in_price": 0.30,
+      "out_price": 2.50,
+      "context": "1M",
+      "notes": "Tầng rẻ multimodal",
+      "reliability": "docs"
+    },
+    {
+      "group": "Open-weight",
+      "model": "DeepSeek V4 Pro",
+      "in_price": 0.0,
+      "out_price": 0.0,
+      "context": "128K",
+      "notes": "Giấy phép MIT; MoE 1.6T tổng / 49B active; SWE-bench 80.6% (số hãng)",
+      "reliability": "self_reported"
+    },
+    {
+      "group": "Open-weight",
+      "model": "Qwen 3.6 27B",
+      "in_price": 0.0,
+      "out_price": 0.0,
+      "context": "128K",
+      "notes": "Dense; tự host; vừa GPU 24GB ở 4-bit (QLoRA); SWE-bench 77.2% (bên thứ ba)",
+      "reliability": "independent"
+    },
+    {
+      "group": "Open-weight",
+      "model": "GLM-5.x / Kimi K3",
+      "in_price": 0.0,
+      "out_price": 0.0,
+      "context": "128K - 200K",
+      "notes": "Tự host / API; kiểm tra kỹ giấy phép trước khi fine-tune thương mại",
+      "reliability": "independent"
+    }
+  ]
+}

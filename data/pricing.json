@@ -1,85 +1,123 @@
 {
-  "as_of": "2026-11-22",
-  "source_url": "https://platform.claude.com/docs/en/models/overview",
-  "reliability": "docs",
-  "currency": "USD",
-  "unit": "per_million_tokens",
-  "cache_rules": {
-    "min_cacheable_tokens": 512,
-    "batch_discount_multiplier": 0.5,
-    "ttl_write_multipliers": {
-      "5m": 1.25,
-      "1h": 2.0
-    }
-  },
-  "models": {
-    "claude-fable-5-2": {
-      "name": "Claude Fable 5.2",
-      "api_id": "claude-fable-5-2",
-      "in": 8.0,
-      "out": 40.0,
-      "fast_mode_in": 16.0,
-      "fast_mode_out": 80.0,
-      "cache_read": 0.20,
-      "readMult": 0.025,
-      "context": 1000000,
-      "max_out": 131072,
-      "thinking": "Adaptive (luôn bật)",
+  "as_of": "2026-11-19",
+  "models": [
+    {
+      "id": "claude-fable-5-2",
+      "name": "Fable 5.2",
+      "source_id": "R3",
+      "reliability": "docs",
+      "price_in": 8.0,
+      "price_out": 40.0,
+      "price_in_fast": 16.0,
+      "price_out_fast": 80.0,
+      "cache_write_5m": null,
+      "cache_write_1h": null,
+      "cache_read": 0.2,
+      "cache_read_ratio": 0.025,
+      "context_window": "1M",
+      "max_output": "128K",
+      "thinking": "Adaptive luôn bật",
       "default_effort": "high",
       "release_date": "2026-11-09",
-      "notes": "Safeguard cho sinh học & an ninh mạng; truy cập mở rộng"
+      "description": "Model đầu bảng chuyên sâu lý luận phức tạp, adaptive thinking luôn bật ở mức high."
     },
-    "claude-opus-5-5": {
-      "name": "Claude Opus 5.5",
-      "api_id": "claude-opus-5-5",
-      "in": 4.0,
-      "out": 20.0,
-      "fast_mode_in": 8.0,
-      "fast_mode_out": 40.0,
+    {
+      "id": "claude-opus-5-5",
+      "name": "Opus 5.5",
+      "source_id": "R1",
+      "reliability": "docs",
+      "price_in": 4.0,
+      "price_out": 20.0,
+      "price_in_fast": 8.0,
+      "price_out_fast": 40.0,
       "cache_write_5m": 5.0,
       "cache_write_1h": 8.0,
-      "cache_read": 0.20,
-      "readMult": 0.05,
-      "context": 1000000,
-      "max_out": 131072,
-      "thinking": "Adaptive (luôn bật)",
+      "cache_read": 0.2,
+      "cache_read_ratio": 0.05,
+      "context_window": "1M",
+      "max_output": "128K",
+      "thinking": "Adaptive luôn bật",
       "default_effort": "medium",
       "release_date": "2026-09-22",
-      "notes": "Mạnh ở tác vụ dài hơi, mở, cần phán đoán liên tục"
+      "description": "Model flagship cho agentic coding khó và suy luận logic sâu; tỷ lệ output/input = 5."
     },
-    "claude-sonnet-5-5": {
-      "name": "Claude Sonnet 5.5",
-      "api_id": "claude-sonnet-5-5",
-      "in": 2.0,
-      "out": 10.0,
-      "cache_write_5m": 2.50,
+    {
+      "id": "claude-sonnet-5-5",
+      "name": "Sonnet 5.5",
+      "source_id": "R2",
+      "reliability": "docs",
+      "price_in": 2.0,
+      "price_out": 10.0,
+      "price_in_fast": null,
+      "price_out_fast": null,
+      "cache_write_5m": 2.5,
       "cache_write_1h": 4.0,
-      "cache_read": 0.10,
-      "readMult": 0.05,
-      "context": 1000000,
-      "max_out": 131072,
+      "cache_read": 0.1,
+      "cache_read_ratio": 0.05,
+      "context_window": "1M",
+      "max_output": "128K",
       "thinking": "Adaptive",
       "default_effort": "high (API) / medium (Claude Code)",
       "release_date": "2026-09-28",
-      "notes": "Model sản xuất mặc định; tỉ lệ giá/hiệu năng tối ưu nhất"
+      "description": "Ngựa thồ sản xuất (production workhorse), cân bằng hoàn hảo giữa hiệu năng agentic và kinh tế token."
     },
-    "claude-haiku-5-5": {
-      "name": "Claude Haiku 5.5",
-      "api_id": "claude-haiku-5-5",
-      "in": 0.10,
-      "out": 0.50,
-      "tier2_threshold_tokens": 100000,
-      "tier2_in": 0.50,
-      "tier2_out": 2.50,
-      "cache_read": 0.01,
-      "tier2_cache_read": 0.05,
-      "readMult": 0.10,
-      "context": 1000000,
-      "max_out": 131072,
+    {
+      "id": "claude-haiku-5-5",
+      "name": "Haiku 5.5",
+      "source_id": "R4",
+      "reliability": "docs",
+      "price_in_under_100k": 0.1,
+      "price_out_under_100k": 0.5,
+      "price_in_over_100k": 0.5,
+      "price_out_over_100k": 2.5,
+      "cache_write_5m": null,
+      "cache_write_1h": null,
+      "cache_read_over_100k": 0.05,
+      "cache_read_ratio": 0.1,
+      "context_window": "1M",
+      "max_output": "128K",
       "thinking": "Adaptive",
       "default_effort": "medium",
       "release_date": "2026-10-07",
-      "notes": "Nếu prompt > 100K token, toàn bộ request tính giá $0.50/$2.50"
+      "description": "Tốc độ siêu nhanh, tối ưu hóa cho phân loại, rewrite truy vấn và bộ lọc gatekeeper."
     }
-  }
+  ],
+  "competitors": [
+    {
+      "group": "Closed",
+      "model": "GPT-6 Sol",
+      "source_id": "R22",
+      "reliability": "independent",
+      "price_in": 2.0,
+      "price_out": 10.0,
+      "notes": "Đối thủ giá của Sonnet 5.5"
+    },
+    {
+      "group": "Closed",
+      "model": "GPT-6 Luna",
+      "source_id": "R22",
+      "reliability": "independent",
+      "price_in": 0.1,
+      "price_out": 0.5,
+      "notes": "Đối thủ giá của Haiku 5.5"
+    },
+    {
+      "group": "Closed",
+      "model": "Gemini 4 Argon",
+      "source_id": "R22",
+      "reliability": "independent",
+      "price_in": 2.0,
+      "price_out": 10.0,
+      "notes": "2/10 đến 30/11/2026, rồi 4/20 từ 01/12/2026; đa phương thức audio/video"
+    },
+    {
+      "group": "Open-weight",
+      "model": "Qwen3.8-27B",
+      "source_id": "R21",
+      "reliability": "independent",
+      "price_in": 0.0,
+      "price_out": 0.0,
+      "notes": "Tự host, Apache 2.0; dense, đa phương thức; 262K context"
+    }
+  ]
 }
