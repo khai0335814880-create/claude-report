@@ -2786,15 +2786,12 @@
                 <div id="timelineMarkersContainer"></div>
               </div>
 
-              <div class="timeline-ticks">
+              <div class="timeline-ticks" style="display:flex; justify-content:space-between; font-family:var(--font-mono); font-size:0.68rem; color:var(--ink-2); margin-top:4px;">
                 <span>0m</span>
-                <span>2m</span>
-                <span>4m</span>
+                <span>3m</span>
                 <span>6m</span>
-                <span>8m</span>
-                <span>10m</span>
+                <span>9m</span>
                 <span>12m</span>
-                <span>14m</span>
                 <span>15m</span>
               </div>
             </div>
@@ -3762,7 +3759,7 @@
               <li><strong>(2) Từ chối chính xác (Abstention):</strong> Khi tài liệu không có câu trả lời, model phải từ chối thay vì suy diễn phỏng đoán.</li>
               <li><strong>(3) Kiểm soát quyền truy cập (ACL):</strong> Người dùng chỉ được nhận thông tin từ các tài liệu mà họ có quyền xem theo vai trò.</li>
               <li><strong>(4) Chống thao túng prompt injection:</strong> Tài liệu do người dùng tải lên không được phép điều khiển chỉ thị hệ thống.</li>
-              <li><strong>(5) Ngân sách vận hành rõ ràng:</strong> Chi phí mục tiêu &le; $0.015/câu hỏi và độ trễ p95 &le; 4.0 giây.</li>
+              <li><strong>(5) Ngân sách vận hành rõ ràng:</strong> Chi phí mục tiêu &le; $0.015/câu hỏi (bình quân toàn hệ sinh thái kết hợp 70% truy vấn nhẹ + 30% truy vấn suy luận sâu) và độ trễ p95 &le; 4.0 giây.</li>
             </ol>
             <div style="padding:10px 14px; background:var(--bench); border-left:3px solid var(--ink); font-size:0.85rem; margin-bottom:16px;">
               <strong>Mức tự động hoá:</strong> Đây là hệ thống <em>Tool-using / RAG</em> <strong>hoàn toàn chỉ đọc (read-only)</strong>. Cố ý <strong>không</strong> cấp quyền ghi hoặc thực thi lệnh ngoài hệ thống: nguyên tắc đặc quyền tối thiểu (least privilege) là lớp phòng thủ rẻ và an toàn nhất.
@@ -4309,9 +4306,9 @@
             <div style="margin-bottom:10px;">
               <label style="font-family:var(--font-mono); font-size:0.75rem; color:var(--ink-2); display:block; margin-bottom:4px;">Model chính:</label>
               <div style="display:flex; gap:4px; flex-wrap:wrap;">
-                <button class="pill-opt" id="costMdlHaiku" onclick="setCostModel('haiku')">Haiku 5.5 ($1/$5)</button>
-                <button class="pill-opt active" id="costMdlSonnet" onclick="setCostModel('sonnet')">Sonnet 5.5 ($3/$15)</button>
-                <button class="pill-opt" id="costMdlOpus" onclick="setCostModel('opus')">Opus 5.5 ($15/$75)</button>
+                <button class="pill-opt" id="costMdlHaiku" onclick="setCostModel('haiku')">Haiku 5.5 ($0.10/$0.50)</button>
+                <button class="pill-opt active" id="costMdlSonnet" onclick="setCostModel('sonnet')">Sonnet 5.5 ($2/$10)</button>
+                <button class="pill-opt" id="costMdlOpus" onclick="setCostModel('opus')">Opus 5.5 ($4/$20)</button>
               </div>
             </div>
 
@@ -4450,18 +4447,18 @@
               </thead>
               <tbody>
                 <tr>
-                  <td><strong>Cấu hình A</strong><br><span style="font-size:0.72rem; color:var(--ink-2);">Naive Cloud</span></td>
-                  <td>Sonnet 5.5 thuần túy, không kích hoạt Prompt Cache, max effort</td>
-                  <td>$0.0570</td>
-                  <td style="color:var(--danger); font-weight:600;">$2,508.00</td>
-                  <td>Lãng phí tài nguyên; prefill lại toàn bộ ngữ cảnh mỗi lượt query.</td>
+                  <td><strong>Cấu hình A</strong><br><span style="font-size:0.72rem; color:var(--ink-2);">No-Cache Chuẩn</span></td>
+                  <td>Sonnet 5.5 không kích hoạt Prompt Caching (21.5K input thuần)</td>
+                  <td style="color:var(--danger);">$0.0470</td>
+                  <td style="color:var(--danger); font-weight:600;">$2,068.00</td>
+                  <td>Chi phí cao do tính phí toàn bộ tiền tố mỗi lượt; TTFT kéo dài (Nếu miss cache hoàn toàn: $0.0570 / $2,508.00).</td>
                 </tr>
                 <tr style="background:var(--ok-bg); border-left:3px solid var(--tok-cached);">
                   <td><strong>Cấu hình B (Khuyến nghị)</strong><br><span class="badge-spec" style="color:var(--tok-cached); border-color:var(--tok-cached); font-size:0.65rem;">Điểm Gấp Khúc</span></td>
-                  <td>Haiku router ($0.00009) + Sonnet RAG + Cache 95% + Effort Medium</td>
-                  <td style="color:var(--tok-fresh); font-weight:700;">$0.0114</td>
-                  <td style="color:var(--tok-cached); font-weight:700;">$501.60</td>
-                  <td><strong>Tiết kiệm 80.0% chi phí</strong>; độ trễ giảm 3x; chất lượng cao nhất.</td>
+                  <td>Haiku router + Sonnet RAG + Cache 95% (Chuẩn: $0.0114 | Thinking: $0.0234 | TB Hỗn hợp: $0.0150)</td>
+                  <td style="color:var(--tok-fresh); font-weight:700;">$0.0114 – $0.0234</td>
+                  <td style="color:var(--tok-cached); font-weight:700;">$501.60 – $1,029.60</td>
+                  <td><strong>Tiết kiệm 75.7% chi phí</strong> so với No-Cache ($2,068); độ trễ TTFT giảm 3x; đạt chuẩn an toàn.</td>
                 </tr>
                 <tr>
                   <td><strong>Cấu hình C</strong><br><span style="font-size:0.72rem; color:var(--ink-2);">On-Premise GPU</span></td>
@@ -4655,7 +4652,7 @@
         <p>Việc sử dụng mô hình Sonnet 5.5 để trực tiếp tiếp nhận mọi truy vấn sơ cấp là một sự lãng phí tài nguyên. Tầng tiền xử lý sử dụng Haiku 5.5 đóng vai trò như một bộ lọc thông minh:
 - Phát hiện và từ chối sớm các truy vấn rác hoặc câu hỏi mang tính tấn công chỉ thị.
 - Trích xuất thực thể và viết lại câu hỏi rõ nghĩa hơn trước khi thực hiện tìm kiếm vector.
-- Với chi phí chỉ bằng $1/4$ so với Sonnet, tầng lọc này giúp giảm tải đáng kể cho mô hình chính, hạ thấp chi phí trung bình trên toàn hệ thống xuống mức 0,0114 USD/truy vấn.</p>
+- Với chi phí chỉ bằng $1/20$ so với Sonnet ($0.10 so với $2.00/triệu token input), tầng lọc này giúp giảm tải đáng kể cho mô hình chính, hạ thấp chi phí trung bình trên toàn hệ thống xuống mức 0,0114 USD/truy vấn.</p>
 
       </div>
     </details>
@@ -4988,6 +4985,10 @@ from typing import NamedTuple</code></pre>
           <button class="receipt-close-btn" onclick="toggleReceiptWidget(false)" title="Đóng hoá đơn">x</button>
         </div>
         <div class="receipt-sub">Model: <strong id="receiptModel">Sonnet 5.5</strong></div>
+        <div style="margin: 8px 0 10px; display:flex; gap:6px;">
+          <button class="pill-opt active" id="btnReceiptModeStd" onclick="ReceiptStore.setScenario('standard')" style="flex:1; font-size:0.68rem; padding:4px 6px;">Chuẩn RAG ($0.0114)</button>
+          <button class="pill-opt" id="btnReceiptModeThink" onclick="ReceiptStore.setScenario('thinking')" style="flex:1; font-size:0.68rem; padding:4px 6px;">+ Thinking ($0.0234)</button>
+        </div>
       </div>
 
       <div class="receipt-item">
@@ -5063,14 +5064,14 @@ from typing import NamedTuple</code></pre>
         modelName: 'Sonnet 5.5',
         cached: 20000,
         fresh: 1500,
-        thinking: 1200,
+        thinking: 0,
         output: 400,
         hitRate: 0.95,
         ttl: '5m',
         pricing: {
           sonnet: { pin: 2.0, pout: 10.0, mr: 0.05 },
           opus: { pin: 4.0, pout: 20.0, mr: 0.05 },
-          haiku: { pin: 0.5, pout: 2.5, mr: 0.10 },
+          haiku: { pin: 0.10, pout: 0.50, mr: 0.10 },
           fable: { pin: 8.0, pout: 40.0, mr: 0.025 }
         }
       },
@@ -5084,6 +5085,27 @@ from typing import NamedTuple</code></pre>
         this.render();
       },
 
+      setTokens: function(tokens) {
+        var patch = {};
+        if (tokens.cached !== undefined) patch.cached = tokens.cached;
+        if (tokens.fresh !== undefined) patch.fresh = tokens.fresh;
+        if (tokens.thinking !== undefined) patch.thinking = tokens.thinking;
+        if (tokens.out !== undefined) patch.output = tokens.out;
+        if (tokens.output !== undefined) patch.output = tokens.output;
+        this.update(patch);
+      },
+
+      setHitRate: function(ratePct) {
+        var rate = ratePct > 1 ? (ratePct / 100.0) : ratePct;
+        this.update({ hitRate: rate });
+      },
+
+      setModel: function(modelKey, modelName) {
+        var patch = { model: modelKey };
+        if (modelName) patch.modelName = modelName;
+        this.update(patch);
+      },
+
       setScenario: function(type) {
         if (type === 'no_cache') {
           this.update({ cached: 0, fresh: 21500, thinking: 0, output: 400, hitRate: 0.0 });
@@ -5091,15 +5113,18 @@ from typing import NamedTuple</code></pre>
           this.update({ cached: 20000, fresh: 1500, thinking: 0, output: 400, hitRate: 0.0 });
         } else if (type === 'cache_hit') {
           this.update({ cached: 20000, fresh: 1500, thinking: 0, output: 400, hitRate: 1.0 });
-        } else {
+        } else if (type === 'thinking') {
           this.update({ cached: 20000, fresh: 1500, thinking: 1200, output: 400, hitRate: 0.95 });
+        } else {
+          // Standard RAG (thinking = 0)
+          this.update({ cached: 20000, fresh: 1500, thinking: 0, output: 400, hitRate: 0.95 });
         }
       },
 
       calculate: function() {
         var s = this.state;
         var p = s.pricing[s.model] || s.pricing.sonnet;
-        var mw = s.ttl === '1h' ? 2.0 : 1.25;
+        var mw = (s.ttl === '1h') ? 2.0 : 1.25;
         var mr = p.mr;
 
         var inCost = (s.fresh + s.cached * (s.hitRate * mr + (1 - s.hitRate) * mw)) * (p.pin / 1000000);
@@ -5120,17 +5145,17 @@ from typing import NamedTuple</code></pre>
         var elModel = document.getElementById('receiptModel');
         if (elModel) elModel.innerText = s.modelName;
 
-        var elCached = document.getElementById('receiptTokCached');
-        if (elCached) elCached.innerText = s.cached.toLocaleString('vi-VN');
+        var elC = document.getElementById('receiptTokCached');
+        if (elC) elC.innerText = s.cached.toLocaleString('vi-VN');
 
-        var elFresh = document.getElementById('receiptTokFresh');
-        if (elFresh) elFresh.innerText = s.fresh.toLocaleString('vi-VN');
+        var elF = document.getElementById('receiptTokFresh');
+        if (elF) elF.innerText = s.fresh.toLocaleString('vi-VN');
 
-        var elThink = document.getElementById('receiptTokThink');
-        if (elThink) elThink.innerText = s.thinking.toLocaleString('vi-VN');
+        var elT = document.getElementById('receiptTokThink');
+        if (elT) elT.innerText = s.thinking.toLocaleString('vi-VN');
 
-        var elOut = document.getElementById('receiptTokOut');
-        if (elOut) elOut.innerText = s.output.toLocaleString('vi-VN');
+        var elO = document.getElementById('receiptTokOut');
+        if (elO) elO.innerText = s.output.toLocaleString('vi-VN');
 
         var elHit = document.getElementById('receiptHitRateText');
         if (elHit) elHit.innerText = Math.round(s.hitRate * 100) + '%';
@@ -5141,14 +5166,19 @@ from typing import NamedTuple</code></pre>
         var elCost = document.getElementById('receiptCostPerReq');
         if (elCost) elCost.innerText = '$' + res.costPerReq.toFixed(4);
 
+        var elM = document.getElementById('receiptMonthlyCost');
+        if (elM) elM.innerText = '≈ $' + res.monthly.toFixed(2) + ' USD / tháng (44K reqs)';
+
         var elPill = document.getElementById('pillCostVal');
         if (elPill) elPill.innerText = '$' + res.costPerReq.toFixed(4);
 
-        var elMonthly = document.getElementById('receiptMonthlyCost');
-        if (elMonthly) elMonthly.innerText = '≈ $' + res.monthly.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' USD / tháng (44K reqs)';
-
-        var elMobile = document.getElementById('mobilePillCost');
-        if (elMobile) elMobile.innerText = '$' + res.costPerReq.toFixed(4);
+        // Update mode toggle buttons in popup if present
+        var btnStd = document.getElementById('btnReceiptModeStd');
+        var btnThk = document.getElementById('btnReceiptModeThink');
+        if (btnStd && btnThk) {
+          btnStd.classList.toggle('active', s.thinking === 0);
+          btnThk.classList.toggle('active', s.thinking > 0);
+        }
       }
     };
 
@@ -5562,7 +5592,7 @@ from typing import NamedTuple</code></pre>
 
       var totalCost = 0.0;
       var noCacheTotal = 0.0;
-      var writeCost = (ttlSim.mode === '1h') ? 0.0720 : 0.0570;
+      var writeCost = (ttlSim.mode === '1h') ? 0.0870 : 0.0570;
       var hitCost = 0.0090;
       var standardNoCacheCost = 0.0470;
 
@@ -5604,6 +5634,7 @@ from typing import NamedTuple</code></pre>
       var badge = document.getElementById('challengeBadge');
       if (badge) {
         if (ttlSim.requests.length === 10 && totalCost <= 0.20) {
+          badge.innerHTML = 'Kết quả thực nghiệm: Hoàn thành 10 yêu cầu liên tiếp với tổng chi phí <strong>$' + totalCost.toFixed(4) + '</strong> (tiết kiệm <strong>' + savings + '</strong> so với kịch bản không cache $' + noCacheTotal.toFixed(4) + ').';
           badge.style.display = 'block';
         } else {
           badge.style.display = 'none';
@@ -6501,8 +6532,8 @@ function setFontSize(size, btn) {
        ================================================================= */
     var costParams = {
       model: 'sonnet',
-      pIn: 3.0,
-      pOut: 15.0,
+      pIn: 2.0,
+      pOut: 10.0,
       mw: 1.25,
       mr: 0.05
     };
@@ -6515,14 +6546,17 @@ function setFontSize(size, btn) {
       });
 
       if (m === 'haiku') {
-        costParams.pIn = 1.0; costParams.pOut = 5.0;
+        costParams.pIn = 0.10; costParams.pOut = 0.50; costParams.mr = 0.10;
         document.getElementById('costMdlHaiku').classList.add('active');
+        if (window.ReceiptStore) ReceiptStore.setModel('haiku', 'Haiku 5.5');
       } else if (m === 'sonnet') {
-        costParams.pIn = 3.0; costParams.pOut = 15.0;
+        costParams.pIn = 2.0; costParams.pOut = 10.0; costParams.mr = 0.05;
         document.getElementById('costMdlSonnet').classList.add('active');
+        if (window.ReceiptStore) ReceiptStore.setModel('sonnet', 'Sonnet 5.5');
       } else if (m === 'opus') {
-        costParams.pIn = 15.0; costParams.pOut = 75.0;
+        costParams.pIn = 4.0; costParams.pOut = 20.0; costParams.mr = 0.05;
         document.getElementById('costMdlOpus').classList.add('active');
+        if (window.ReceiptStore) ReceiptStore.setModel('opus', 'Opus 5.5');
       }
       updateCostLab();
     }

@@ -586,7 +586,7 @@ Việc kích hoạt Prompt Caching không đảm bảo tự động tiết kiệ
 Việc sử dụng mô hình Sonnet 5.5 để trực tiếp tiếp nhận mọi truy vấn sơ cấp là một sự lãng phí tài nguyên. Tầng tiền xử lý sử dụng Haiku 5.5 đóng vai trò như một bộ lọc thông minh:
 - Phát hiện và từ chối sớm các truy vấn rác hoặc câu hỏi mang tính tấn công chỉ thị.
 - Trích xuất thực thể và viết lại câu hỏi rõ nghĩa hơn trước khi thực hiện tìm kiếm vector.
-- Với chi phí chỉ bằng $1/4$ so với Sonnet, tầng lọc này giúp giảm tải đáng kể cho mô hình chính, hạ thấp chi phí trung bình trên toàn hệ thống xuống mức 0,0114 USD/truy vấn.
+- Với chi phí chỉ bằng $1/20$ so với Sonnet ($0,10$ USD so với $2,00$ USD/triệu token đầu vào), tầng lọc này giúp giảm tải đáng kể cho mô hình chính, hạ thấp chi phí trung bình trên toàn hệ thống xuống mức 0,0114 USD/truy vấn.
 
 ### 6.1.6. Đánh giá sự đánh đổi giữa mức effort tối đa và hiện tượng suy giảm hiệu quả biên (Diminishing Returns)
 Thực nghiệm quét effort chứng minh rằng việc tăng mức độ suy nghĩ từ `medium` lên `max` làm tăng số lượng reasoning token lên gấp 3 lần, kéo theo chi phí và độ trễ phản hồi tăng tuyến tính. Tuy nhiên, trên tập dữ liệu nghiệp vụ chuẩn, độ chính xác của câu trả lời chỉ cải thiện thêm dưới $3\%$. Điểm cân bằng tối ưu về mặt kinh tế học (knee point) rơi vào mức `medium`, nơi hệ thống đạt $86\%$ độ chính xác với chi phí chỉ bằng $35\%$ so với mức trần.
