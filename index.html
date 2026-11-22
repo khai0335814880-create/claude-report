@@ -2190,11 +2190,33 @@
     }
 
     @media print {
+      :root {
+        --bg-canvas: #FFFFFF;
+        --bg-surface: #FFFFFF;
+        --shadow-1: none;
+        --shadow-2: none;
+        --shadow-pop: none;
+      }
+      body {
+        background: #FFFFFF;
+        color: var(--ink);
+        font-size: 11pt;
+      }
       .top-bar, .journey-rail, .receipt-rail, .mobile-pill, #progressIndicator, .btn-action, .btn-tool {
         display: none !important;
       }
-      .page-layout { display: block; padding: 0; }
-      body { background: #FFF; color: #000; font-size: 11pt; }
+      .page-layout {
+        display: block;
+        padding: 0;
+      }
+      .badge, .badge-spec, .tag-verif, .data-table, .context-segment, .pill-opt, table, tr, th, td {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+      a {
+        color: var(--ink);
+        text-decoration: underline;
+      }
     }
 
     @keyframes fadeIn {
@@ -2411,7 +2433,7 @@
                 <td><strong>$0.0090</strong></td>
                 <td><button class="btn-tool" style="padding:2px 8px; font-size:0.72rem;" onclick="ReceiptStore.setScenario('cache_hit')">Nạp lên Hoá đơn</button></td>
               </tr>
-              <tr style="background:rgba(18,165,143,0.06);">
+              <tr style="background:var(--ok-bg);">
                 <td><strong>Kỳ vọng ở hit rate 95%</strong></td>
                 <td>$0.0044 (trọng số)</td>
                 <td>$0.0030</td>
@@ -3594,7 +3616,7 @@
               <p style="margin:0 0 6px;">
                 <strong>Circuit tracing (Anthropic, 2025) <span class="tag-verif indep">[Độc lập/Nền]</span> [R15]:</strong> Công trình <em>On the Biology of a Large Language Model</em> phân tích attribution graphs (cross-layer transcoder, ~30 triệu feature) trên <strong>Claude 3.5 Haiku</strong>. Phát hiện cấu trúc mạch ảo giác: trạng thái mặc định "không trả lời được" (abstention) bị <strong>ức chế</strong> khi model nhận diện tín hiệu "thực thể quen thuộc" (familiar entity).
               </p>
-              <div style="padding:6px 10px; background:rgba(217,119,6,0.1); border-left:3px solid var(--warn); margin-top:6px;">
+              <div style="padding:6px 10px; background:var(--warn-bg); border-left:3px solid var(--warn); margin-top:6px;">
                 <strong style="color:var(--warn);">Quy tắc thiết kế hệ thống:</strong> Nghiên cứu này thực hiện trên Claude 3.5 Haiku, chưa chứng minh trên Claude 5.5. Hãy dùng nó như một <em>giả thuyết thiết kế</em>: Bộ eval bắt buộc phải có tập <strong>"Near-Miss Entity"</strong> (câu hỏi về các thực thể nghe rất quen nhưng không hề có dữ liệu) và đo riêng tỷ lệ từ chối (Abstention Accuracy).
               </div>
             </div>
@@ -3785,7 +3807,7 @@
               <button class="pill-opt" onclick="simulatePipelineFault('fake_cite')">Lỗi 4: Trích dẫn giả mạo</button>
               <button class="pill-opt" onclick="simulatePipelineFault('url_leak')">Lỗi 5: URL ngoài rò rỉ dữ liệu</button>
             </div>
-            <div id="faultResultBanner" style="display:none; margin-top:12px; background:rgba(220,38,38,0.08); border-left:4px solid var(--danger); padding:10px 14px; font-family:var(--font-mono); font-size:0.8rem; line-height:1.4;"></div>
+            <div id="faultResultBanner" style="display:none; margin-top:12px; background:var(--danger-bg); border-left:4px solid var(--danger); padding:10px 14px; font-family:var(--font-mono); font-size:0.8rem; line-height:1.4;"></div>
           </div>
         </div>
 
@@ -3924,7 +3946,7 @@ def retrieve(query_vec, user_groups: list[str], k: int = 30):
                 Mô phỏng logic phòng thủ nhiều lớp trước các đòn tấn công indirect prompt injection, leo thang quyền hạn và rò rỉ dữ liệu.
               </p>
             </div>
-            <div style="padding:4px 8px; background:rgba(217,119,6,0.1); border:1px solid var(--warn); border-radius:4px; font-size:0.72rem; color:var(--warn); font-family:var(--font-mono);">
+            <div style="padding:4px 8px; background:var(--warn-bg); border:1px solid var(--warn); border-radius:4px; font-size:0.72rem; color:var(--warn); font-family:var(--font-mono);">
               ℹ Mô phỏng logic phòng thủ hệ thống; không phải đo trên Claude
             </div>
           </div>
@@ -4354,7 +4376,7 @@ lora = LoraConfig(r=16, lora_alpha=32, lora_dropout=0.05, target_modules="all-li
         </div>
 
         <!-- Synthetic Data Banner (Always present when synthetic data is active) -->
-        <div id="evalSyntheticBanner" style="display:none; margin-bottom:14px; background:rgba(217,119,6,0.1); border-left:4px solid var(--warn); padding:8px 12px; border-radius:4px; font-family:var(--font-mono); font-size:0.75rem; color:var(--ink);">
+        <div id="evalSyntheticBanner" style="display:none; margin-bottom:14px; background:var(--warn-bg); border-left:4px solid var(--warn); padding:8px 12px; border-radius:4px; font-family:var(--font-mono); font-size:0.75rem; color:var(--ink);">
           ⚠️ <strong>SYNTHETIC EVALUATION DATA:</strong> Dữ liệu mô phỏng theo hạt giống thiết kế (design seed). Trong production thực tế, nạp file <code>results.json</code> từ pipeline CI/CD để hiển thị số đo thực nghiệm.
         </div>
 
@@ -4585,7 +4607,7 @@ lora = LoraConfig(r=16, lora_alpha=32, lora_dropout=0.05, target_modules="all-li
                       <td>$2,508</td>
                       <td>$1,452</td>
                       <td>$818.40</td>
-                      <td style="font-weight:700; color:var(--tok-cached); background:rgba(16,185,129,0.1);">$501.60</td>
+                      <td style="font-weight:700; color:var(--tok-cached); background:var(--ok-bg);">$501.60</td>
                       <td>$417.12</td>
                       <td style="color:var(--danger);">$2,068</td>
                     </tr>
@@ -4630,7 +4652,7 @@ lora = LoraConfig(r=16, lora_alpha=32, lora_dropout=0.05, target_modules="all-li
                   <td style="color:var(--danger); font-weight:600;">$2,508.00</td>
                   <td>Lãng phí tài nguyên; prefill lại toàn bộ ngữ cảnh mỗi lượt query.</td>
                 </tr>
-                <tr style="background:rgba(16,185,129,0.06); border-left:3px solid var(--tok-cached);">
+                <tr style="background:var(--ok-bg); border-left:3px solid var(--tok-cached);">
                   <td><strong>Cấu hình B (Khuyến nghị)</strong><br><span class="badge-spec" style="color:var(--tok-cached); border-color:var(--tok-cached); font-size:0.65rem;">Điểm Ngọt Tối Ưu</span></td>
                   <td>Haiku router ($0.00009) + Sonnet RAG + Cache 95% + Effort Medium</td>
                   <td style="color:var(--tok-fresh); font-weight:700;">$0.0114</td>
@@ -4813,7 +4835,7 @@ lora = LoraConfig(r=16, lora_alpha=32, lora_dropout=0.05, target_modules="all-li
                 <td>Công thức thống kê \(1.96 \cdot \sqrt{\frac{p(1-p)}{n}}\); kiểm định McNemar cặp.</td>
               </tr>
               <!-- Special Highlighted Row: Integrity Demonstration -->
-              <tr data-status="dropped" style="background:rgba(217,119,6,0.1); border-left:4px solid var(--warn);">
+              <tr data-status="dropped" style="background:var(--warn-bg); border-left:4px solid var(--warn);">
                 <td><strong>Kiến trúc mạng nội bộ, số lượng tham số, trọng số ẩn của Claude 5.5</strong></td>
                 <td><span class="badge-spec" style="color:var(--warn); border-color:var(--warn); font-weight:700;">⛔ ĐÃ LOẠI BỎ (KHÔNG ĐƯA VÀO)</span></td>
                 <td><strong>Minh chứng liêm chính kỹ thuật:</strong> Anthropic không công bố kiến trúc nội bộ. Mọi con số đồn đoán trên mạng đều là suy diễn vô căn cứ và bị loại bỏ hoàn toàn khỏi hồ sơ này.</td>
@@ -5885,7 +5907,7 @@ lora = LoraConfig(r=16, lora_alpha=32, lora_dropout=0.05, target_modules="all-li
                                 '<tr id="audit-row-3"><td>Ký hợp đồng chính thức được 12 ngày phép năm...</td><td><code>"Sau khi hoàn thành thử việc và ký hợp đồng... 12 ngày nghỉ phép"</code></td><td>alliance-chinh-sach-nhan-su-2024.md <span class="tag-verif docs">Offset: 2920-3015</span></td><td><span class="badge-spec" style="color:var(--success); border-color:var(--success);">✓ PASS (Khớp chunk)</span></td></tr>';
         }
       } else if (scen === 2) {
-        respEl.innerHTML = '<div style="background:rgba(217,119,6,0.08); border-left:3px solid var(--warn); padding:8px 12px; border-radius:4px;">' +
+        respEl.innerHTML = '<div style="background:var(--warn-bg); border-left:3px solid var(--warn); padding:8px 12px; border-radius:4px;">' +
                            '<strong>Phản hồi của Claude (Abstention):</strong><br>' +
                            '"Không tìm thấy trong tài liệu hiện có. Các văn bản chính sách nhân sự hiện hành được cung cấp không quy định về chế độ nghỉ thai sản dành riêng cho lao động nam. Vui lòng liên hệ trực tiếp phòng HR để được hướng dẫn chi tiết."' +
                            '</div>';
@@ -5895,7 +5917,7 @@ lora = LoraConfig(r=16, lora_alpha=32, lora_dropout=0.05, target_modules="all-li
           auditRows.innerHTML = '<tr><td colspan="4" style="text-align:center; color:var(--ink-2); font-style:italic;">Kịch bản B: Không phát sinh trích dẫn cần kiểm chứng. Model đã từ chối (Abstain) chính xác theo chỉ dẫn hệ thống.</td></tr>';
         }
       } else if (scen === 3) {
-        respEl.innerHTML = '<div style="background:rgba(217,119,6,0.08); border-left:3px solid var(--warn); padding:8px 12px; border-radius:4px;">' +
+        respEl.innerHTML = '<div style="background:var(--warn-bg); border-left:3px solid var(--warn); padding:8px 12px; border-radius:4px;">' +
                            '<strong>Phản hồi của Claude (Near-Miss Entity Abstention):</strong><br>' +
                            '"Không tìm thấy trong tài liệu hiện có. Tài liệu nội bộ chỉ có thông tin về dự án <em>SkyAlliance-Cloud</em>, không có dự án nào mang tên <em>Dự án SkyNet-Alliance</em>. Hệ thống từ chối cung cấp dữ liệu suy đoán."' +
                            '</div>';
@@ -5915,13 +5937,13 @@ lora = LoraConfig(r=16, lora_alpha=32, lora_dropout=0.05, target_modules="all-li
       isCiteTampered = true;
       var respEl = document.getElementById('modelRespContent');
       respEl.innerHTML = '<span id="resp-s1" class="source-span active" onclick="highlightCitation(1)">Theo Bộ luật Lao động 2019, thời gian thử việc không được tính để tính số ngày nghỉ hằng năm nếu người lao động không tiếp tục làm việc sau thử việc <span class="cite-chip">[1]</span>.</span> ' +
-                         '<span id="resp-s2" class="source-span" onclick="highlightCitation(2)" style="background:rgba(220,38,38,0.15); border-bottom:2px dashed var(--danger);">Tại Alliance, nhân viên mới trong thời gian thử việc được cấp 45 ngày phép đặc cách hưởng 200% lương <span class="cite-chip" style="background:var(--danger); color:#fff;">[2 - FAKE]</span>.</span> ' +
+                         '<span id="resp-s2" class="source-span" onclick="highlightCitation(2)" style="background:var(--danger-bg); border-bottom:2px dashed var(--danger);">Tại Alliance, nhân viên mới trong thời gian thử việc được cấp 45 ngày phép đặc cách hưởng 200% lương <span class="cite-chip" style="background:var(--danger); color:#fff;">[2 - FAKE]</span>.</span> ' +
                          '<span id="resp-s3" class="source-span" onclick="highlightCitation(3)">Sau khi ký hợp đồng chính thức, nhân viên có quyền nghỉ 12 ngày phép năm và được cộng dồn theo thâm niên <span class="cite-chip">[3]</span>.</span>';
 
       var banner = document.getElementById('citeVerifyBanner');
       if (banner) {
         banner.style.display = 'block';
-        banner.style.background = 'rgba(217,119,6,0.12)';
+        banner.style.background = 'var(--warn-bg)';
         banner.style.borderLeft = '4px solid var(--warn)';
         banner.style.color = 'var(--ink)';
         banner.innerHTML = '⚠️ <strong>ĐÃ GIẢ MẠO TRÍCH DẪN [2]:</strong> Nội dung câu 2 đã bị can thiệp thành chuỗi không có trong chunk tài liệu. Bấm <strong>"▶ Chạy verify()"</strong> để kiểm chứng phản xạ của bộ lọc code B.4.6!';
@@ -5934,7 +5956,7 @@ lora = LoraConfig(r=16, lora_alpha=32, lora_dropout=0.05, target_modules="all-li
       banner.style.display = 'block';
 
       if (currentCiteScenario === 2 || currentCiteScenario === 3) {
-        banner.style.background = 'rgba(16,185,129,0.12)';
+        banner.style.background = 'var(--ok-bg)';
         banner.style.borderLeft = '4px solid var(--success)';
         banner.style.color = 'var(--ink)';
         banner.innerHTML = '✓ <strong>XÁC MINH verify(): PASS (100%)</strong>. Model đã chủ động từ chối (Abstain) chính xác. Không có trích dẫn rác hoặc phát ngôn không có căn cứ.';
@@ -5942,7 +5964,7 @@ lora = LoraConfig(r=16, lora_alpha=32, lora_dropout=0.05, target_modules="all-li
       }
 
       if (isCiteTampered) {
-        banner.style.background = 'rgba(220,38,38,0.12)';
+        banner.style.background = 'var(--danger-bg)';
         banner.style.borderLeft = '4px solid var(--danger)';
         banner.style.color = 'var(--danger)';
         banner.innerHTML = '🚨 <strong>verify() BẮT ĐƯỢC 1 LỖI TRÍCH DẪN KHÔNG HỢP LỆ:</strong><br>' +
@@ -5952,11 +5974,11 @@ lora = LoraConfig(r=16, lora_alpha=32, lora_dropout=0.05, target_modules="all-li
         var auditRows = document.getElementById('citeAuditRows');
         if (auditRows) {
           auditRows.innerHTML = '<tr id="audit-row-1"><td>Thời gian thử việc không tính nghỉ hằng năm nếu không ký tiếp...</td><td><code>"2. Thời gian thử việc nếu người lao động tiếp tục làm việc..."</code></td><td>bo-luat-lao-dong-2019.md <span class="tag-verif docs">Offset: 1420-1585</span></td><td><span class="badge-spec" style="color:var(--success); border-color:var(--success);">✓ PASS (Khớp chunk)</span></td></tr>' +
-                                '<tr id="audit-row-2" style="background:rgba(220,38,38,0.08);"><td>Nhân viên thử việc được cấp 45 ngày phép đặc cách hưởng 200% lương...</td><td><code style="color:var(--danger);">"được cấp 45 ngày phép đặc cách..."</code></td><td>alliance-chinh-sach-nhan-su-2024.md</td><td><span class="badge-spec" style="color:var(--danger); border-color:var(--danger);">✗ FAIL (Không có trong chunk)</span></td></tr>' +
+                                '<tr id="audit-row-2" style="background:var(--danger-bg);"><td>Nhân viên thử việc được cấp 45 ngày phép đặc cách hưởng 200% lương...</td><td><code style="color:var(--danger);">"được cấp 45 ngày phép đặc cách..."</code></td><td>alliance-chinh-sach-nhan-su-2024.md</td><td><span class="badge-spec" style="color:var(--danger); border-color:var(--danger);">✗ FAIL (Không có trong chunk)</span></td></tr>' +
                                 '<tr id="audit-row-3"><td>Ký hợp đồng chính thức được 12 ngày phép năm...</td><td><code>"Sau khi hoàn thành thử việc và ký hợp đồng... 12 ngày nghỉ phép"</code></td><td>alliance-chinh-sach-nhan-su-2024.md <span class="tag-verif docs">Offset: 2920-3015</span></td><td><span class="badge-spec" style="color:var(--success); border-color:var(--success);">✓ PASS (Khớp chunk)</span></td></tr>';
         }
       } else {
-        banner.style.background = 'rgba(16,185,129,0.12)';
+        banner.style.background = 'var(--ok-bg)';
         banner.style.borderLeft = '4px solid var(--success)';
         banner.style.color = 'var(--ink)';
         banner.innerHTML = '✓ <strong>verify() KIỂM TRA THÀNH CÔNG (100% PASS):</strong><br>' +
